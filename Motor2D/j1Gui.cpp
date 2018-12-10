@@ -10,6 +10,7 @@
 #include "j1Window.h"
 //Gui Elements
 #include "GUIImage.h"
+#include "GUIText.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -207,23 +208,21 @@ GUIImage* j1Gui::AddGUIImage(const SDL_Rect & section, const iPoint& position)
 	GUIImage* ret = nullptr;
 	ret = new GUIImage(section, position);
 	elements.PushBack(ret);
-	// adds index
 	ret->index = elements.Count();
 
 	return ret;
 }
 
-//GUIText* j1Gui::AddGUIText(const iPoint& position, const char* text, SDL_Color color)
-//{
-//	GUIText* ret = nullptr;
-//	ret = new GUIText(position, text, color);
-//	elements.PushBack(ret);
-//	// adds index
-//	ret->index = elements.Count();
-//
-//	return ret;
-//}
-//
+GUIText* j1Gui::AddGUIText(const iPoint& position, const char* text, SDL_Color color = WHITE)
+{
+	GUIText* ret = nullptr;
+	ret = new GUIText(position, text, color);
+	elements.PushBack(ret);
+	ret->index = elements.Count();
+
+	return ret;
+}
+
 //GUIButton* j1Gui::AddGUIButton(SDL_Texture* clickTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text, TextPos targetTextPos, SDL_Texture* onMouseTex)
 //{
 //	GUIButton* ret = nullptr;
@@ -262,26 +261,7 @@ bool GUIElement::CleanUp()
 	return true;
 }
 
-//Text
-
-//GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color) : GUIElement(position)
-//{
-//	if (text != nullptr)
-//	{
-//		texture = App->font->Print(text, color, NULL);
-//	}
-//}
-//
-//bool GUIText::PostUpdate()
-//{
-//	if (texture != nullptr)
-//		App->render->BlitGUIUnscaled(texture, localPos.x, localPos.y, NULL);
-//
-//	return true;
-//}
-
 // GUIButton relative ============================================
-
 //GUIButton::GUIButton(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text, GUI_ADJUST targetPos, SDL_Texture* hoverTex)
 //	: clicked_texture(click_texture), unclicked_texture(unclick_texture), hover_texture(hoverTex), GUIImage(unclick_texture, rect, position, text, targetPos, hoverTex) {}
 //

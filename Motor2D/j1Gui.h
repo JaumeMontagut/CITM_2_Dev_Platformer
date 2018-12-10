@@ -9,11 +9,12 @@
 
 #define CURSOR_WIDTH 2
 
-#define WHITE (SDL_Color){255,255,255}
-#define BLUE (SDL_Color){0,0,255}
+#define WHITE {255,255,255}
+#define BLUE {0,0,255}
 
-class GUIImage;
 struct SDL_Texture;
+class GUIImage;
+class GUIText;
 
 enum class MOUSE_STATE
 {
@@ -79,24 +80,6 @@ enum class GUI_ADJUST
 	//OUT_DOWN_MIDDLE,
 	//OUT_DOWN_RIGHT
 };
-
-//class GUIText : public GUIElement
-//{
-//public:
-//
-//	GUIText() {}
-//	GUIText(const iPoint& position, const char* text, SDL_Color color);
-//
-//public:
-//
-//	bool PreUpdate() { return true; }
-//	bool PostUpdate();
-//
-//private:
-//	SDL_Texture* texture = nullptr;
-//
-//};
-//
 //class GUIButton : public GUIImage//public GUIelement
 //{
 //public:
@@ -166,7 +149,7 @@ public:
 	// TODO 2: Create the factory methods
 	//Create GUI Objects
 	GUIImage* AddGUIImage(const SDL_Rect & section, const iPoint& position);
-	//GUIText* AddGUIText(const iPoint& position, const char* text, SDL_Color color);
+	GUIText* AddGUIText(const iPoint& position, const char* text, SDL_Color color);
 	//GUIButton* AddGUIButton(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr);
 	//GUICheckBox* AddGUICheckBox(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr, SDL_Texture* checkTex = nullptr);
 
