@@ -284,11 +284,11 @@ bool GUIBanner::PreUpdate()
 
 bool GUIBanner::PostUpdate()
 {
-	App->render->BlitGUIUnscaled(image_texture, position.x, position.y, &section);
+	App->render->BlitGUI(image_texture, position.x, position.y, &section);
 	if (onMouse_texture != nullptr && guiState == MouseState::HOVER) // if the banner has declared a on hover texture and mouse is hovering it
-		App->render->BlitGUIUnscaled(onMouse_texture, position.x, position.y, NULL);
+		App->render->BlitGUI(onMouse_texture, position.x, position.y, NULL);
 	if (text_texture != nullptr) // text always on top
-		App->render->BlitGUIUnscaled(text_texture, textPosition.x, textPosition.y, NULL);
+		App->render->BlitGUI(text_texture, textPosition.x, textPosition.y, NULL);
 
 	return true;
 }
@@ -345,7 +345,7 @@ GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color) : GU
 bool GUIText::PostUpdate()
 {
 	if (texture != nullptr)
-		App->render->BlitGUIUnscaled(texture, position.x, position.y, NULL);
+		App->render->BlitGUI(texture, position.x, position.y, NULL);
 
 	return true;
 }
@@ -399,7 +399,7 @@ bool GUICheckBox::PostUpdate()
 	GUIBanner::PostUpdate(); // GUIButton doesnt had postupdate yet, if we need it, call parent of button(guibanner) on button postupdate, and here the button
 
 	if (active && checkTexture != nullptr)
-		App->render->BlitGUIUnscaled(checkTexture, position.x, position.y, NULL);
+		App->render->BlitGUI(checkTexture, position.x, position.y, NULL);
 
 	return true;
 }

@@ -257,15 +257,15 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	return ret;
 }
 
-bool j1Render::BlitGUIUnscaled(SDL_Texture* texture, int x, int y, const SDL_Rect* section) const
+bool j1Render::BlitGUI(SDL_Texture* texture, int x, int y, const SDL_Rect* section, int scale) const
 {
 	BROFILER_CATEGORY("Render BlitUnscaled", Profiler::Color::Azure);
 
 	bool ret = true;
 
 	SDL_Rect rect;
-	rect.x = x;
-	rect.y = y;
+	rect.x = x; //* scale; // CAREFULL with this
+	rect.y = y; //* scale;
 
 	if (section != NULL)
 	{
@@ -276,6 +276,9 @@ bool j1Render::BlitGUIUnscaled(SDL_Texture* texture, int x, int y, const SDL_Rec
 	{
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
+
+	rect.w *= scale;
+	rect.h *= scale;
 
 	if (SDL_RenderCopy(renderer, texture, section, &rect) != 0)
 	{
