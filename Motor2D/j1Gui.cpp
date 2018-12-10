@@ -21,21 +21,40 @@ j1Gui::~j1Gui()
 // Called before render is available
 bool j1Gui::Awake(pugi::xml_node& conf)
 {
-	LOG("Loading GUI atlas");
+	//LOG("Loading GUI atlas");
 	bool ret = true;
 
-	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
+	gui_config_filename.create(conf.child("gui_config_filename").attribute("path").as_string(""));
+	gui_node = LoadConfig(gui_config_doc);
+
+	atlas_file_name = gui_node.child("atlas").attribute("file").as_string("");
 	// button textures || if we put all of them on an atlas, is needed a fast code adaptation, we must think it good
-	buttonup_filename = conf.child("button_up").attribute("file").as_string("");
-	buttondown_filename = conf.child("button_down").attribute("file").as_string("");
-	buttonhighlight_filename = conf.child("button_hover").attribute("file").as_string("");
+	buttonup_filename = gui_node.child("button_up").attribute("file").as_string("");
+	buttondown_filename = gui_node.child("button_down").attribute("file").as_string("");
+	buttonhighlight_filename = gui_node.child("button_hover").attribute("file").as_string("");
 	// checkbox textures
-	checkbox_up_filename = conf.child("checkbox_up").attribute("file").as_string("");
-	checkbox_down_filename = conf.child("checkbox_down").attribute("file").as_string("");
-	checkbox_highlight_filename = conf.child("checkbox_highlight").attribute("file").as_string("");
-	checkbox_check_filename = conf.child("checkbox_check").attribute("file").as_string("");
+	checkbox_up_filename = gui_node.child("checkbox_up").attribute("file").as_string("");
+	checkbox_down_filename = gui_node.child("checkbox_down").attribute("file").as_string("");
+	checkbox_highlight_filename = gui_node.child("checkbox_highlight").attribute("file").as_string("");
+	checkbox_check_filename = gui_node.child("checkbox_check").attribute("file").as_string("");
 	//checkbox_check_locked_filename = conf.child("checkbox_check_locked").attribute("file").as_string("");
 
+
+	return ret;
+}
+
+pugi::xml_node j1Gui::LoadConfig(pugi::xml_document& config_file) const
+{
+	pugi::xml_node ret;
+
+	pugi::xml_parse_result result = config_file.load_file(gui_config_filename.GetString());
+
+	if (result == NULL) {
+		LOG("Could not load map xml file config.xml. pugi error: %s", result.description());
+	}
+	else {
+		ret = gui_config_doc.child("gui_config");
+	}
 
 	return ret;
 }

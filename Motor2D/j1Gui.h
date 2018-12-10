@@ -180,6 +180,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	//
+	pugi::xml_node LoadConfig(pugi::xml_document& gui_config_doc) const;
+
 	// TODO 2: Create the factory methods
 	// Gui creation functions
 	GUIBanner* AddGUIBanner(SDL_Texture* texture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, TextPos targetTextPos = TextPos::CENTERED);
@@ -202,6 +205,10 @@ public:
 	SDL_Texture* checkbox_check_texture = nullptr;
 
 private:
+
+	pugi::xml_document gui_config_doc;
+	pugi::xml_node gui_node;
+	p2SString gui_config_filename;
 
 	SDL_Texture* atlas = nullptr;
 	p2SString atlas_file_name;
