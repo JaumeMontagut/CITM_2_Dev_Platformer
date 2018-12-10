@@ -74,15 +74,15 @@ bool j1Gui::PreUpdate()
 		y *= App->win->GetScale();
 		/*LOG("mouse pos x:%i y:%i", x, y);
 		LOG("button pos x:%i y:%i", e->boundaries.x, e->boundaries.y);*/
-		if (e->CheckBoundariesXY(x, y))
-		{
-			e->SetMouseState(GUIElement::MOUSE_EVENT::ENTER);
-		}
-		else
-		{
-			if (e->guiState != GUIElement::MOUSE_STATE::EXIT && e->guiState != GUIElement::MOUSE_STATE::CLICK)
-				e->SetMouseState(GUIElement::MOUSE_EVENT::EXIT);
-		}
+		//if (e->CheckBoundariesXY(x, y))
+		//{
+		//	e->SetMouseState(GUIElement::MOUSE_EVENT::ENTER);
+		//}
+		//else
+		//{
+		//	if (e->guiState != GUIElement::MOUSE_STATE::EXIT && e->guiState != GUIElement::MOUSE_STATE::CLICK)
+		//		e->SetMouseState(GUIElement::MOUSE_EVENT::EXIT);
+		//}
 		// ------------------------------------------------------
 
 		// call elements preupdate ------------------------------
@@ -148,7 +148,7 @@ bool j1Gui::CleanUp()
 }
 
 // const getter for atlas
-const SDL_Texture* j1Gui::GetAtlas() const
+SDL_Texture* j1Gui::GetAtlas() const
 {
 	return atlas;
 }
@@ -163,10 +163,10 @@ void GUIElement::OnMouseHover()
 }
 
 // UIelements constructions
-GUIImage* j1Gui::AddGUIImage(SDL_Texture* texture, const iPoint& position)
+GUIImage* j1Gui::AddGUIImage(const SDL_Rect & section, const iPoint& position)
 {
 	GUIImage* ret = nullptr;
-	ret = new GUIImage(texture, position, index);
+	ret = new GUIImage(section, position);
 	elements.PushBack(ret);
 	// adds index
 	ret->index = elements.Count();
@@ -298,11 +298,12 @@ bool GUIElement::CleanUp()
 
 //Image
 
-GUIImage::GUIImage(SDL_Texture * texture, const iPoint & position)
+GUIImage::GUIImage(const SDL_Rect & section, const iPoint & position) : section(section), GUIElement(position)
 {
 }
 
 bool GUIImage::PostUpdate()
 {
-	return false;
+	App->render->BlitGUIUnscaled(App->gui->GetAtlas(), localPos.x, localPos.y, &section);
+	return true;
 }

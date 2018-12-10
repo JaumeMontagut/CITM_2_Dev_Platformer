@@ -66,12 +66,19 @@ typedef struct SDL_Rect
     int x, y;
     int w, h;
 
+	SDL_Rect();
 	SDL_Rect(int x, int y, int w, int h);
 	int GetTop() const;
 	int GetBottom() const;
 	int GetLeft() const;
 	int GetRight() const;
 } SDL_Rect;
+
+/**
+*  \brief Creates a rectangle with position x and y, width w and height h
+*/
+SDL_FORCE_INLINE SDL_Rect::SDL_Rect(){
+}
 
 /**
 *  \brief Creates a rectangle with position x and y, width w and height h

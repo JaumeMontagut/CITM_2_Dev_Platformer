@@ -9,8 +9,6 @@
 #define WHITE (SDL_Color){255,255,255}
 #define BLUE (SDL_Color){0,0,255}
 
-// TODO 1: Create your structure of classes
-
 // maybe we need a structures of predefined elements somewhere on xml and creates the guielements using it with simple gui methods
 class GUIElement
 {
@@ -83,7 +81,7 @@ class GUIImage : public GUIElement // image class that supports optional text
 public:
 	SDL_Rect section;// rect of the target "atlas" texture
 public:
-	GUIImage(SDL_Texture* texture, const iPoint& position);
+	GUIImage(const SDL_Rect & section, const iPoint& position);
 	bool PostUpdate();
 };
 
@@ -168,12 +166,12 @@ public:
 	bool CleanUp();
 
 	//Create GUI Objects
-	GUIImage* AddGUIImage(SDL_Texture* texture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED);
+	GUIImage* AddGUIImage(const SDL_Rect & section, const iPoint& position);
 	//GUIText* AddGUIText(const iPoint& position, const char* text, SDL_Color color);
 	//GUIButton* AddGUIButton(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr);
 	//GUICheckBox* AddGUICheckBox(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr, SDL_Texture* checkTex = nullptr);
 
-	const SDL_Texture* GetAtlas() const;
+	SDL_Texture* GetAtlas() const;
 
 public:
 	// TODO: maybe adds a structure to pack all needed textures for specific button type
