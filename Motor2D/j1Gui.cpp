@@ -6,8 +6,10 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Gui.h"
-
+#include "j1Audio.h"
 #include "j1Window.h"
+//Gui Elements
+#include "GUIImage.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -84,31 +86,38 @@ bool j1Gui::PreUpdate()
 {
 	for (int i = 0; i < elements.Count(); ++i)
 	{
-		GUIElement* e = *elements.At(i);
-
-		// check and updates mouse state -----------------------
-		int x, y = 0;
-		App->input->GetMousePosition(x, y);
-		x *= App->win->GetScale(); // workaround to get correct mouse pos
-		y *= App->win->GetScale();
-		/*LOG("mouse pos x:%i y:%i", x, y);
-		LOG("button pos x:%i y:%i", e->boundaries.x, e->boundaries.y);*/
-		//if (e->CheckBoundariesXY(x, y))
-		//{
-		//	e->SetMouseState(GUIElement::MOUSE_EVENT::ENTER);
-		//}
-		//else
-		//{
-		//	if (e->guiState != GUIElement::MOUSE_STATE::EXIT && e->guiState != GUIElement::MOUSE_STATE::CLICK)
-		//		e->SetMouseState(GUIElement::MOUSE_EVENT::EXIT);
-		//}
-		// ------------------------------------------------------
-
-		// call elements preupdate ------------------------------
-		e->PreUpdate();
+		GUIElement* elem = *elements.At(i);
+		//Check and updates mouse state -----------------------
+		int mouse_x, mouse_y = 0;
+		App->input->GetMousePosition(mouse_x, mouse_y);
+		mouse_x *= (int)App->win->GetScale();
+		mouse_y *= (int)App->win->GetScale();
+		SetState(elem, mouse_x, mouse_y);
+		elem->PreUpdate();
+		elem->OnMouseHover();
 	}
 
 	return true;
+}
+
+void j1Gui::SetState(GUIElement * elem, int mouse_x, int mouse_y)
+{
+	if (elem->CheckBounds(mouse_x, mouse_y)) {
+		if (elem->state == MOUSE_STATE::M_OUT) {
+			elem->state == MOUSE_STATE::M_ENTER;
+		}
+		else {
+			elem->state == MOUSE_STATE::M_IN;
+		}
+	}
+	else {
+		if (elem->state == MOUSE_STATE::M_IN || elem->state == MOUSE_STATE::M_ENTER) {
+			elem->state == MOUSE_STATE::M_EXIT;
+		}
+		else {
+			elem->state == MOUSE_STATE::M_OUT;
+		}
+	}
 }
 
 //void GUIElement::SetMouseState(MOUSE_EVENT event)
@@ -172,6 +181,9 @@ SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
+
+//GUIElement methods --------------------------------------------------------------------------------------------
+
 bool GUIElement::CheckBounds(int x, int y)
 {
 	return (x > bounds.x && x < (bounds.x + bounds.w) && y > bounds.y && y < (bounds.y + bounds.h));
@@ -179,6 +191,14 @@ bool GUIElement::CheckBounds(int x, int y)
 
 void GUIElement::OnMouseHover()
 {
+	if (state == MOUSE_STATE::M_ENTER) {
+		App->audio->PlayFx(hoverSFX);
+		//Change texture
+
+	}
+	else if (state == MOUSE_STATE::M_EXIT) {
+		//Change texture
+	}
 }
 
 // UIelements constructions
@@ -314,13 +334,3 @@ bool GUIElement::CleanUp()
 //
 //	return true;
 //}
-
-//Image
-
-GUIImage::GUIImage(const SDL_Rect & section, const iPoint & position) : section(section), GUIElement(position)
-{
-}
-
-bool GUIImage::PostUpdate() {
-	return App->render->BlitGUI(App->gui->GetAtlas(), localPos.x, localPos.y, &section);
-}

@@ -81,6 +81,18 @@
     <ClCompile Include="j1Fonts.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
+    <ClCompile Include="GUIImage.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIButton.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIText.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
+    <ClCompile Include="GUICheckbox.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -186,6 +198,18 @@
     <ClInclude Include="j1Fonts.h">
       <Filter>Modules</Filter>
     </ClInclude>
+    <ClInclude Include="GUIImage.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIButton.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIText.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUICheckbox.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">
@@ -205,6 +229,9 @@
     </Filter>
     <Filter Include="Tools">
       <UniqueIdentifier>{a8bfab6a-5472-4969-943e-861a8b493f08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElements">
+      <UniqueIdentifier>{b4462ac4-c4af-4155-89c0-9822940d2c66}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

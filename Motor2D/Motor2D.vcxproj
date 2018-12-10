@@ -76,6 +76,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GUIButton.cpp" />
+    <ClCompile Include="GUICheckbox.cpp" />
+    <ClCompile Include="GUIImage.cpp" />
+    <ClCompile Include="GUIText.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1FadeToBlack.cpp" />
     <ClCompile Include="j1Fonts.cpp" />
@@ -106,6 +110,10 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GUIButton.h" />
+    <ClInclude Include="GUICheckbox.h" />
+    <ClInclude Include="GUIImage.h" />
+    <ClInclude Include="GUIText.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1FadeToBlack.h" />
     <ClInclude Include="j1Fonts.h" />
