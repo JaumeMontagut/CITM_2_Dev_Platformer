@@ -133,12 +133,14 @@ bool j1Render::PostUpdate()
 
 	SDL_Color color = { 255, 255, 255, 255 };
 
-	uint borderWidth = DEFAULT_BORDER_WIDTH * zoomedOutSize;
+	int borderWidth = DEFAULT_BORDER_WIDTH * zoomedOutSize;
+	uint uScreenWidth, uScreenHeight;
+	int screenWidth, screenHeight;
+	App->win->GetWindowSize(uScreenWidth, uScreenHeight);
+	screenWidth = (int)uScreenWidth;
+	screenHeight = (int)uScreenHeight;
 
-	uint screenWidth, screenHeight;
-	App->win->GetWindowSize(screenWidth, screenHeight);
-
-	SDL_Rect rectUp = { 0, -(int)borderWidth, screenWidth, borderWidth };
+	SDL_Rect rectUp = { 0, -borderWidth, screenWidth, borderWidth };
 	DrawQuad(rectUp, color.r, color.g, color.b, color.a, true, false);
 	SDL_Rect rectDown = { 0, screenHeight, screenWidth, borderWidth };
 	DrawQuad(rectDown, color.r, color.g, color.b, color.a, true, false);
