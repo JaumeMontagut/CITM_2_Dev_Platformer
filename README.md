@@ -100,6 +100,7 @@ Jaume Montagut Guix
 - F5 ​Save the current state
 - F6 ​Load the previous state (even across levels)
 - F7 Show navigation layer
+- F8 Toggle on / off UI bounds debug
 - F9​ See paths and colliders
 - F10​ God Mode
   - You can go through colliders, you don't fall

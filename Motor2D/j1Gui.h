@@ -63,6 +63,7 @@ public:
 
 	void SetState(int x, int y);
 	bool CheckBounds(int x, int y);
+	void DrawOutline();
 };
 
 enum class GUI_ADJUST
@@ -179,7 +180,7 @@ private:
 	p2SString checkbox_highlight_filename;
 	p2SString checkbox_check_filename;
 	//p2SString checkbox_check_locked_filename;
-
+	bool debugGUI = false;
 	p2DynArray<GUIElement*> guiElems = NULL;
 };
 

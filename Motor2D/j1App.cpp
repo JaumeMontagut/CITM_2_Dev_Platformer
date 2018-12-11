@@ -42,8 +42,6 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	font = new j1Fonts();
 	gui = new j1Gui();
 
-
-
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
 	AddModule(input);//Input is the first module to update beacause other modules use the input during their update
@@ -52,15 +50,13 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	AddModule(map);
 	AddModule(pathfinding);
-
 	AddModule(font);
-	AddModule(gui);
-
 	AddModule(scene);
 	AddModule(object);
 	AddModule(particles);
 	AddModule(fade_to_black);
 	AddModule(collision);//Collision is the penultimate module to update because it calcules all the overlaping collisions and resolves them just before rendering
+	AddModule(gui);
 	AddModule(render);// render last to swap buffer
 
 	PERF_PEEK(ptimer);

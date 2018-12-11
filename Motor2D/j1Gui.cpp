@@ -8,6 +8,7 @@
 #include "j1Gui.h"
 #include "j1Audio.h"
 #include "j1Window.h"
+#include "j1Input.h"
 //Gui Elements
 #include "GUIImage.h"
 #include "GUIText.h"
@@ -142,6 +143,10 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
+		debugGUI = !debugGUI;
+	}
+
 	for (int i = 0; i < guiElems.Count(); ++i)
 	{
 		GUIElement* elem = *guiElems.At(i);
@@ -185,6 +190,13 @@ bool j1Gui::PostUpdate()
 		e->PostUpdate();
 	}
 
+	if (debugGUI) {
+		for (int i = 0; i < guiElems.Count(); ++i) {
+			GUIElement* e = *guiElems.At(i);
+			e->DrawOutline();
+		}
+	}
+
 	return true;
 }
 
@@ -215,6 +227,11 @@ SDL_Texture* j1Gui::GetAtlas() const
 bool GUIElement::CheckBounds(int x, int y)
 {
 	return (x > bounds.x && x < (bounds.x + bounds.w) && y > bounds.y && y < (bounds.y + bounds.h));
+}
+
+void GUIElement::DrawOutline()
+{
+	App->render->DrawQuad(bounds, 255, 255, 255, 255, false, false);
 }
 
 // UIelements constructions
