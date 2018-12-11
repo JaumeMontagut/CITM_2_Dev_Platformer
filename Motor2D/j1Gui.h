@@ -63,6 +63,7 @@ public:
 	virtual bool CleanUp();
 
 	void SetState(int x, int y);
+	void SetFamily(GUIElement * parent);
 	bool CheckBounds(int x, int y);
 	void DrawOutline();
 	iPoint GetGlobalPos();
@@ -121,10 +122,10 @@ public:
 	pugi::xml_node LoadConfig(pugi::xml_document& gui_config_doc) const;
 
 	//Create GUI Objects
-	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section);
-	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE);
-	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u);
-	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, const SDL_Rect * check_section = nullptr, uint clickSFX = 0u);
+	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent = nullptr);
+	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE, GUIElement * parent = nullptr);
+	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u, GUIElement * parent = nullptr);
+	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, const SDL_Rect * check_section = nullptr, uint clickSFX = 0u, GUIElement * parent = nullptr);
 
 	SDL_Texture* GetAtlas() const;
 
@@ -147,6 +148,7 @@ public:
 	ButtonTemplates buttonType1;
 	CheckboxTemplates checkboxType1;
 
+	GUIElement * guiScreen = nullptr;
 	bool debugGUI = false;
 
 private:

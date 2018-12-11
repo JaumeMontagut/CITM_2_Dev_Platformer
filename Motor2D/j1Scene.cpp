@@ -84,6 +84,9 @@ bool j1Scene::Start()
 	// loads music
 	App->audio->PlayMusic(App->map->data.properties.music_name.GetString(), 0.0f);
 
+	//Screen, needs to be created first because it's the parent as default
+	//App->gui->guiScreen = App->gui->CreateImage({ 0, 0 }, NULL);
+
 	// GUI elements creation example ---------------------------------------------------
 
 	//Image example---------------------------------------------------------------------------------------------------------

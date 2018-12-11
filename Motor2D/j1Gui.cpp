@@ -245,38 +245,41 @@ iPoint GUIElement::GetGlobalPos()
 }
 
 // UIelements constructions
-GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section)
+GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent)
 {
-	GUIImage* ret = nullptr;
-	ret = new GUIImage(position, section);
-	guiElems.PushBack(ret);
-	return ret;
+	GUIImage* guiElem = nullptr;
+	guiElem = new GUIImage(position, section);
+	guiElems.PushBack(guiElem);
+	guiElem->SetFamily(parent);
+	return guiElem;
 }
 
-GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color color)
+GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color color, GUIElement * parent)
 {
-	GUIText* ret = nullptr;
-	ret = new GUIText(position, text, color);
-	guiElems.PushBack(ret);
-	return ret;
+	GUIText* guiElem = nullptr;
+	guiElem = new GUIText(position, text, color);
+	guiElems.PushBack(guiElem);
+	guiElem->SetFamily(parent);
+	return guiElem;
 }
 
-GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx)
+GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx, GUIElement * parent)
 {
-	GUIButton* ret = nullptr;
-	ret = new GUIButton(position, bounds, clickFunction, text, out_section, in_section, click_section);
-	guiElems.PushBack(ret);
-	return ret;
+	GUIButton* guiElem = nullptr;
+	guiElem = new GUIButton(position, bounds, clickFunction, text, out_section, in_section, click_section);
+	guiElems.PushBack(guiElem);
+	guiElem->SetFamily(parent);
+	return guiElem;
 }
 
-GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, const SDL_Rect * check_section, uint clickSfx)
+GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, const SDL_Rect * check_section, uint clickSfx, GUIElement * parent)
 {
-	GUICheckbox* ret = nullptr;
-	ret = new GUICheckbox(position, bounds, boolPtr, text, out_section, in_section, click_section, check_section, clickSfx);
-	guiElems.PushBack(ret);
-	return ret;
+	GUICheckbox* guiElem = nullptr;
+	guiElem = new GUICheckbox(position, bounds, boolPtr, text, out_section, in_section, click_section, check_section, clickSfx);
+	guiElems.PushBack(guiElem);
+	guiElem->SetFamily(parent);
+	return guiElem;
 }
-
 
 // class Gui ---------------------------------------------------
 
@@ -293,4 +296,12 @@ bool GUIElement::PostUpdate()
 bool GUIElement::CleanUp()
 {
 	return true;
+}
+
+void GUIElement::SetFamily(GUIElement* parent) {
+	//if (parent == nullptr) {
+	//	parent = App->gui->guiScreen;
+	//}
+	//this->parent = parent;
+	//parent->childs.add(this);
 }
