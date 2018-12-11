@@ -9,6 +9,19 @@
 #define WHITE (SDL_Color){255,255,255}
 #define BLUE (SDL_Color){0,0,255}
 
+struct ButtonTemplates
+{
+	SDL_Rect sectionUp;
+	SDL_Rect sectionHover;
+	SDL_Rect sectionDown;
+	SDL_Rect sectionDisabled;
+};
+
+struct CheckboxTemplates : public ButtonTemplates
+{
+	SDL_Rect sectionCheck;
+};
+
 // maybe we need a structures of predefined elements somewhere on xml and creates the guielements using it with simple gui methods
 class GUIElement
 {
@@ -35,7 +48,7 @@ public:
 	GUIElement* parent;
 	p2List<GUIElement*> childs;
 	//Hovering control
-	SDL_Rect bounds = SDL_Rect(0, 0, 0, 0); // stores "general" boundaries for mouse checking
+	SDL_Rect bounds;// = SDL_Rect(0, 0, 0, 0); // stores "general" boundaries for mouse checking
 	MOUSE_STATE guiState = MOUSE_STATE::M_OUT;
 	uint hoverSFX;
 
@@ -175,6 +188,9 @@ public:
 
 	SDL_Texture* GetAtlas() const;
 
+private:
+	bool LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& node);
+
 public:
 	// TODO: maybe adds a structure to pack all needed textures for specific button type
 	// general buttons textures
@@ -186,6 +202,10 @@ public:
 	SDL_Texture* checkbox_down_texture = nullptr;
 	SDL_Texture* checkbox_highlight_texture = nullptr;
 	SDL_Texture* checkbox_check_texture = nullptr;
+
+	// TEMPLATIZED element types
+	ButtonTemplates buttonType1;
+	CheckboxTemplates checkboxType1;
 
 private:
 
@@ -210,6 +230,7 @@ private:
 	p2DynArray<GUIElement*> elements = NULL;
 	//GUIelement* elements[10] = { nullptr };
 	//p2List<GUIelement*> elements;
+
 
 };
 
