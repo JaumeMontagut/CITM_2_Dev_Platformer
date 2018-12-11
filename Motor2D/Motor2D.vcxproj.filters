@@ -93,6 +93,9 @@
     <ClCompile Include="GUICheckbox.cpp">
       <Filter>GUIElements</Filter>
     </ClCompile>
+    <ClCompile Include="ObjCollectible.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -209,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="GUICheckbox.h">
       <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjCollectible.h">
+      <Filter>Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

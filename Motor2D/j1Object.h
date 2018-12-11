@@ -16,6 +16,8 @@ class ObjTrigger;
 class ObjEnemyFlying;
 class ObjEnemyLand;
 class ObjDoor;
+class ObjPizza;
+class ObjNutCoins;
 
 struct Collider;
 enum COLLIDER_TYPE;
@@ -129,6 +131,8 @@ public:
 	ObjEnemyFlying * AddObjEnemyFlying(fPoint position);//, int objectID);
 	ObjEnemyLand * AddObjEnemyLand(fPoint position);//, int objectID);
 	ObjDoor* AddObjDoor(fPoint position, int objectID);
+	ObjPizza* AddObjPizza(fPoint position, int objectID);
+	//ObjNutCoins* AddObjNutCoins(fPoint position);
 	bool DeleteObject(GameObject * object);
 
 public:
@@ -145,6 +149,8 @@ public:
 	ObjPlayer * player = nullptr;
 	// sfx id
 	uint impactBoxSFX = 0u;
+	uint pickPizzaSFX = 0u;
+	uint pickNutCoinSFX = 0u;
 	// marked box for load method pointer
 	ObjBox* object_box_markedOnLoad = nullptr;
 	uint tileSize = 0u;

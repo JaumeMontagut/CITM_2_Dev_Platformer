@@ -16,6 +16,7 @@
 #include "ObjEnemyFlying.h"
 #include "ObjEnemyLand.h"
 #include "ObjDoor.h"
+#include "ObjCollectible.h"
 
 // Profiler ---
 #include "Brofiler/Brofiler.h"
@@ -55,6 +56,11 @@ bool j1Object::Start() {
 
 	// load general sfx for objects
 	impactBoxSFX = App->audio->LoadFx(object_node.child("projectile").find_child_by_attribute("name", "impact").attribute("value").as_string());
+	pickPizzaSFX = App->audio->LoadFx(object_node.child("pizza").child("sfx").text().as_string());
+	pickNutCoinSFX = App->audio->LoadFx(object_node.child("nutCoin").child("sfx").text().as_string());
+
+	// testing add pizza
+	AddObjPizza({ 400,200 }, 2);
 
 	return true;
 }
@@ -248,6 +254,15 @@ ObjDoor * j1Object::AddObjDoor(fPoint position, int objectID) {
 	ObjDoor * ret = nullptr;
 	if (index != -1) {
 		objects[index] = ret = new ObjDoor(position, index, object_node.child("door"), objectID);
+	}
+	return ret;
+}
+
+ObjPizza* j1Object::AddObjPizza(fPoint position, int objectID) {
+	int index = FindEmptyPosition();
+	ObjPizza* ret = nullptr;
+	if (index != -1) {
+		objects[index] = ret = new ObjPizza(position, index, object_node.child("pizza"), pickPizzaSFX, objectID);
 	}
 	return ret;
 }
