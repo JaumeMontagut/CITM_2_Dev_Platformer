@@ -5,6 +5,7 @@
 #include "p2Point.h"
 //#include "p2Animation.h"
 #include "PugiXml/src/pugixml.hpp"
+#include "ObjPlayer.h"
 
 struct Collider;
 
@@ -58,6 +59,9 @@ private:
 	float wave = -1.0f;
 	bool going_up = true;
 	int original_y = 0;
+
+	// lives to increase when picked up
+	int increaseLivesValue = 0;
 };
 
 class ObjNutCoins : public ObjCollectible
@@ -76,6 +80,9 @@ private:
 	float wave = -1.0f;
 	bool going_up = true;
 	int original_y = 0;
+
+	// score to increase when picked up
+	uint score = 0u;
 };
 
 #endif

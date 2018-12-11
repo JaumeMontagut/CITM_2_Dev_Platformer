@@ -89,6 +89,8 @@ ObjPizza::ObjPizza(fPoint& position,  int index, pugi::xml_node& node, uint pick
 	waveUp = node.child("wave").attribute("up").as_float(1.0f);
 	waveDown = node.child("wave").attribute("down").as_float(-1.0f);
 	waveAmplitude = node.child("wave").attribute("amplitude").as_float(20.0f);
+	// increase lives value
+	increaseLivesValue = node.attribute("lives").as_int(0);
 }
 
 ObjNutCoins::ObjNutCoins(fPoint& position, int index, pugi::xml_node& node, uint picksfx, int objectID)
@@ -99,6 +101,8 @@ ObjNutCoins::ObjNutCoins(fPoint& position, int index, pugi::xml_node& node, uint
 	waveUp = node.child("wave").attribute("up").as_float(1.0f);
 	waveDown = node.child("wave").attribute("down").as_float(-1.0f);
 	waveAmplitude = node.child("wave").attribute("amplitude").as_float(20.0f);
+	// increase score value
+	score = node.attribute("score").as_int(0);
 }
 
 // ------------------------------------------------------------------------------------------------
@@ -131,8 +135,7 @@ void ObjPizza::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_PLAYER)
 	{
-		// TODO: call to increment one life to player entity
-		// .. code here ..
+		App->object->player->lives += increaseLivesValue;
 		App->object->DeleteObject(this);
 	}
 }
@@ -164,8 +167,7 @@ void ObjNutCoins::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_PLAYER)
 	{
-		// TODO: call to increment player score
-		// ...
+		App->object->player->score += score;
 		App->object->DeleteObject(this);
 	}
 }

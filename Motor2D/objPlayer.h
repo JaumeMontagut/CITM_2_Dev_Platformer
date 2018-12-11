@@ -35,6 +35,11 @@ public:
 	void DestroyProjectile();
 	void Die();
 
+	//// score and lives
+	//void IncreaseScore(uint increaseAmount);
+	//void IncreaseLives(int increaseAmount);
+	
+
 private:
 	void ToggleGodMode();
 	void StandardControls();
@@ -85,6 +90,10 @@ public:
 	j1Timer recoveryTimer;
 	float recoveryTime = 0.0f;//Time it takes for the player to move again after shooting
 	float angle = 0.0f;
+
+	// score and lives
+	int lives = 5;
+	uint score = 0u;
 
 private:
 	//Position swap
