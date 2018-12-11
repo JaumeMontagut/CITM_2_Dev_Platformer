@@ -13,6 +13,7 @@
 #include "GUIImage.h"
 #include "GUIText.h"
 #include "GUIButton.h"
+#include "GUICheckbox.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -226,12 +227,21 @@ SDL_Texture* j1Gui::GetAtlas() const
 
 bool GUIElement::CheckBounds(int x, int y)
 {
-	return (x > bounds.x && x < (bounds.x + bounds.w) && y > bounds.y && y < (bounds.y + bounds.h));
+	iPoint globalPos = GetGlobalPos();
+	return (x > globalPos.x + bounds.x && x < (globalPos.x + bounds.x + bounds.w) && y > globalPos.y + bounds.y && y < (globalPos.y + bounds.y + bounds.h));
 }
 
 void GUIElement::DrawOutline()
 {
 	App->render->DrawQuad(bounds, 255, 255, 255, 255, false, false);
+}
+
+iPoint GUIElement::GetGlobalPos()
+{
+	if (parent != nullptr) {
+		return localPos + parent->GetGlobalPos();
+	}
+	return localPos;
 }
 
 // UIelements constructions
@@ -251,7 +261,7 @@ GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color c
 	return ret;
 }
 
-GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section)
+GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx)
 {
 	GUIButton* ret = nullptr;
 	ret = new GUIButton(position, bounds, clickFunction, text, out_section, in_section, click_section);
@@ -259,15 +269,13 @@ GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds,
 	return ret;
 }
 
-//GUICheckBox* j1Gui::AddGUICheckBox(SDL_Texture* clickTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text, TextPos targetTextPos, SDL_Texture* onMouseTex, SDL_Texture* checkTex)
-//{
-//	GUICheckBox* ret = nullptr;
-//	ret = new GUICheckBox(clickTexture, unclickTexture, rect, position, text, targetTextPos, onMouseTex, checkTex);
-//	elements.PushBack(ret);
-//	ret->index = elements.Count();
-//
-//	return ret;
-//}
+GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, const SDL_Rect * check_section, uint clickSfx)
+{
+	GUICheckbox* ret = nullptr;
+	ret = new GUICheckbox(position, bounds, boolPtr, text, out_section, in_section, click_section, check_section, clickSfx);
+	guiElems.PushBack(ret);
+	return ret;
+}
 
 
 // class Gui ---------------------------------------------------
@@ -286,34 +294,3 @@ bool GUIElement::CleanUp()
 {
 	return true;
 }
-
-// CHECKBOX relative =============================================
-
-//GUICheckBox::GUICheckBox(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text, GUI_ADJUST targetPos, SDL_Texture* hoverTex, SDL_Texture* checkTex)
-//	: checkTexture(checkTex), GUIButton(click_texture, unclick_texture, rect, position, text, targetPos, hoverTex)
-//{
-//
-//}
-
-//bool GUICheckBox::PreUpdate()
-//{
-//	GUIButton::PreUpdate(); // calls overrided preUpdate from parent too
-//
-//	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP && guiState == MOUSE_STATE::DONTCARE)
-//	{
-//		active = !active;
-//	}
-//
-//	return true;
-//}
-//
-//bool GUICheckBox::PostUpdate()
-//{
-//	//GUIBanner::PostUpdate(); // GUIButton doesnt had postupdate yet, if we need it, call parent of button(guibanner) on button postupdate, and here the button
-//	//Instead of calling the update of the parent, make an image and use its own update
-//
-//	if (active && checkTexture != nullptr)
-//		App->render->BlitGUIUnscaled(checkTexture, localPos.x, localPos.y, NULL);
-//
-//	return true;
-//}

@@ -77,12 +77,15 @@ public:
 
 	bool exitGameLoop = false;
 
+public:
+	//TODO: put back to private once testing is over
+	bool debug = false;
+
 private:
 
 	Collider * colliders[MAX_COLLIDERS];
 	bool matrix[COLLIDER_MAX][COLLIDER_MAX];
 	ColorRGB colliderColor[COLLIDER_MAX];
-	bool debug = false;
 };
 
 #endif // __J1COLLISION_H__

@@ -16,6 +16,7 @@ struct SDL_Texture;
 class GUIImage;
 class GUIText;
 class GUIButton;
+class GUICheckbox;
 
 enum class MOUSE_STATE
 {
@@ -47,7 +48,7 @@ public:
 	bool draggable = false;
 	//Position
 	iPoint localPos = { 0, 0 };
-	iPoint globalPos = { 0, 0 };//We also store the global position to avoid recalculating it, adding the parent's one
+	//iPoint globalPos = { 0, 0 };//We also store the global position to avoid recalculating it, adding the parent's one
 	//Tree structure
 	GUIElement* parent;
 	p2List<GUIElement*> childs;
@@ -64,6 +65,7 @@ public:
 	void SetState(int x, int y);
 	bool CheckBounds(int x, int y);
 	void DrawOutline();
+	iPoint GetGlobalPos();
 };
 
 enum class GUI_ADJUST
@@ -91,23 +93,6 @@ enum class GUI_ADJUST
 	//OUT_DOWN_MIDDLE,
 	//OUT_DOWN_RIGHT
 };
-
-//class GUICheckBox : public GUIButton
-//{
-//public:
-//
-//	GUICheckBox(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetPos = GUI_ADJUST::CENTERED, SDL_Texture* hoverTex = nullptr, SDL_Texture* checkTex = nullptr);
-//
-//	bool PreUpdate();
-//	bool PostUpdate();
-//
-//private:
-//
-//	bool active = false;
-//	SDL_Texture* checkTexture = nullptr;
-//};
-
-
 
 // ---------------------------------------------------
 class j1Gui : public j1Module
@@ -138,8 +123,8 @@ public:
 	//Create GUI Objects
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section);
 	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE);
-	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr);
-	//GUICheckBox* AddGUICheckBox(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr, SDL_Texture* checkTex = nullptr);
+	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u);
+	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, const SDL_Rect * check_section = nullptr, uint clickSFX = 0u);
 
 	SDL_Texture* GetAtlas() const;
 
@@ -162,6 +147,8 @@ public:
 	ButtonTemplates buttonType1;
 	CheckboxTemplates checkboxType1;
 
+	bool debugGUI = false;
+
 private:
 	pugi::xml_document gui_config_doc;
 	pugi::xml_node gui_node;
@@ -180,7 +167,6 @@ private:
 	p2SString checkbox_highlight_filename;
 	p2SString checkbox_check_filename;
 	//p2SString checkbox_check_locked_filename;
-	bool debugGUI = false;
 	p2DynArray<GUIElement*> guiElems = NULL;
 };
 
