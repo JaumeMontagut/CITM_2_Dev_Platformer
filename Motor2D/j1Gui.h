@@ -135,11 +135,10 @@ public:
 	bool CleanUp();
 	pugi::xml_node LoadConfig(pugi::xml_document& gui_config_doc) const;
 
-	// TODO 2: Create the factory methods
 	//Create GUI Objects
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section);
 	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE);
-	//GUIButton* AddGUIButton(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr);
+	GUIButton* CreateButton(const iPoint & position, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr);
 	//GUICheckBox* AddGUICheckBox(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr, SDL_Texture* checkTex = nullptr);
 
 	SDL_Texture* GetAtlas() const;
@@ -164,7 +163,6 @@ public:
 	CheckboxTemplates checkboxType1;
 
 private:
-
 	pugi::xml_document gui_config_doc;
 	pugi::xml_node gui_node;
 	p2SString gui_config_filename;
@@ -183,11 +181,10 @@ private:
 	p2SString checkbox_check_filename;
 	//p2SString checkbox_check_locked_filename;
 
-	p2DynArray<GUIElement*> elements = NULL;
-	//GUIelement* elements[10] = { nullptr };
-	//p2List<GUIelement*> elements;
-
-
+	p2DynArray<GUIElement*> guiElems = NULL;
 };
+
+//Button methods
+void SayHelloButton();
 
 #endif // __j1GUI_H__

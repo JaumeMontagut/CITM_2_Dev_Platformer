@@ -142,9 +142,9 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
-	for (int i = 0; i < elements.Count(); ++i)
+	for (int i = 0; i < guiElems.Count(); ++i)
 	{
-		GUIElement* elem = *elements.At(i);
+		GUIElement* elem = *guiElems.At(i);
 		//Check and updates mouse state -----------------------
 		int mouse_x, mouse_y = 0;
 		App->input->GetMousePosition(mouse_x, mouse_y);
@@ -208,9 +208,9 @@ void j1Gui::SetState(GUIElement * elem, int mouse_x, int mouse_y)
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
-	for (int i = 0; i < elements.Count(); ++i)
+	for (int i = 0; i < guiElems.Count(); ++i)
 	{
-		GUIElement* e = *elements.At(i);
+		GUIElement* e = *guiElems.At(i);
 		e->PostUpdate();
 	}
 
@@ -227,7 +227,7 @@ bool j1Gui::CleanUp()
 	App->tex->UnloadTexture(buttondown_texture);
 	App->tex->UnloadTexture(buttonhighlight_texture);
 
-	elements.Clear(); // dynarray clears itselfs when destructor
+	guiElems.Clear(); // dynarray clears itselfs when destructor
 
 	return true;
 }
@@ -236,6 +236,11 @@ bool j1Gui::CleanUp()
 SDL_Texture* j1Gui::GetAtlas() const
 {
 	return atlas;
+}
+
+void SayHelloButton()
+{
+	LOG("I'm a button and I say hello");
 }
 
 
@@ -251,7 +256,7 @@ GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section)
 {
 	GUIImage* ret = nullptr;
 	ret = new GUIImage(position, section);
-	elements.PushBack(ret);
+	guiElems.PushBack(ret);
 	return ret;
 }
 
@@ -259,20 +264,18 @@ GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color c
 {
 	GUIText* ret = nullptr;
 	ret = new GUIText(position, text, color);
-	elements.PushBack(ret);
+	guiElems.PushBack(ret);
 	return ret;
 }
 
-//GUIButton* j1Gui::AddGUIButton(SDL_Texture* clickTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text, TextPos targetTextPos, SDL_Texture* onMouseTex)
-//{
-//	GUIButton* ret = nullptr;
-//	ret = new GUIButton(clickTexture, unclickTexture, rect, position, text, targetTextPos, onMouseTex);
-//	elements.PushBack(ret);
-//	ret->index = elements.Count();
-//
-//	return ret;
-//}
-//
+GUIButton* j1Gui::CreateButton(const iPoint & position, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section)
+{
+	GUIButton* ret = nullptr;
+	ret = new GUIButton(position, clickFunction, text, out_section, in_section, click_section);
+	guiElems.PushBack(ret);
+	return ret;
+}
+
 //GUICheckBox* j1Gui::AddGUICheckBox(SDL_Texture* clickTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text, TextPos targetTextPos, SDL_Texture* onMouseTex, SDL_Texture* checkTex)
 //{
 //	GUICheckBox* ret = nullptr;
