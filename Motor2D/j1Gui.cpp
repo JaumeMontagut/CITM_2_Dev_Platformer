@@ -160,49 +160,21 @@ bool j1Gui::PreUpdate()
 void GUIElement::SetState(int x, int y) {
 	if (CheckBounds(x, y)) {
 		if (state == MOUSE_STATE::M_OUT) {
-			state == MOUSE_STATE::M_ENTER;
+			state = MOUSE_STATE::M_ENTER;
 		}
 		else {
-			state == MOUSE_STATE::M_IN;
+			state = MOUSE_STATE::M_IN;
 		}
 	}
 	else {
 		if (state == MOUSE_STATE::M_IN || state == MOUSE_STATE::M_ENTER) {
-			state == MOUSE_STATE::M_EXIT;
+			state = MOUSE_STATE::M_EXIT;
 		}
 		else {
-			state == MOUSE_STATE::M_OUT;
+			state = MOUSE_STATE::M_OUT;
 		}
 	}
 }
-
-//void GUIElement::SetMouseState(MOUSE_EVENT event)
-//{
-//	switch (event)
-//	{
-//	case MOUSE_EVENT::ENTER:
-//		if (guiState == MOUSE_STATE::ENTER)
-//		{
-//			LOG("Mouse is hovering");
-//			guiState = MOUSE_STATE::HOVER;
-//		}
-//		else if (guiState == MOUSE_STATE::DONTCARE || guiState == MOUSE_STATE::EXIT)
-//		{
-//			LOG("Mouse entered on boundaries");
-//			guiState = MOUSE_STATE::ENTER;
-//		}
-//		break;
-//	case MOUSE_EVENT::EXIT:
-//		LOG("Mouse Exit");
-//		guiState = MOUSE_STATE::EXIT;
-//		break;
-//	case MOUSE_EVENT::FAILED:
-//		break;
-//	default:
-//		LOG("unknown mouse event");
-//		break;
-//	}
-//}
 
 // Called after all Updates
 bool j1Gui::PostUpdate()
@@ -267,10 +239,10 @@ GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color c
 	return ret;
 }
 
-GUIButton* j1Gui::CreateButton(const iPoint & position, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section)
+GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section)
 {
 	GUIButton* ret = nullptr;
-	ret = new GUIButton(position, clickFunction, text, out_section, in_section, click_section);
+	ret = new GUIButton(position, bounds, clickFunction, text, out_section, in_section, click_section);
 	guiElems.PushBack(ret);
 	return ret;
 }

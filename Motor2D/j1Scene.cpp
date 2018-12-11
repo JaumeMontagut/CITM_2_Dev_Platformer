@@ -84,16 +84,16 @@ bool j1Scene::Start()
 	App->audio->PlayMusic(App->map->data.properties.music_name.GetString(), 0.0f);
 
 	// GUI elements creation example ---------------------------------------------------
-	App->gui->CreateImage(iPoint(20, 60), SDL_Rect(485, 829, 328, 103));
-	App->gui->CreateImage(iPoint(360, 160), SDL_Rect(485, 829, 328, 103));
-	App->gui->CreateImage(iPoint(360, 60), SDL_Rect(485, 829, 328, 103));
-	SDL_Color textColor = { 255,13,255,255 };
-	App->gui->CreateText({ 640,360 }, "<- Banner without text, this is a ONLY TEXT element", textColor);
+	//App->gui->CreateImage(iPoint(20, 60), SDL_Rect(485, 829, 328, 103));
+	//App->gui->CreateImage(iPoint(360, 160), SDL_Rect(485, 829, 328, 103));
+	//App->gui->CreateImage(iPoint(360, 60), SDL_Rect(485, 829, 328, 103));
+	//SDL_Color textColor = { 255,13,255,255 };
+	//App->gui->CreateText({ 640,360 }, "<- Banner without text, this is a ONLY TEXT element", textColor);
 	SDL_Rect outRect = { 417, 173, 218, 57 };
 	SDL_Rect inRect = { 6, 117, 218, 57 };
 	SDL_Rect clickRect = { 648, 173, 218, 57 };
 	const char * string = "hello button";
-	App->gui->CreateButton(iPoint(0, 0), &SayHelloButton, string, &outRect, &inRect, &clickRect);
+	App->gui->CreateButton(iPoint(0, 0), { 0, 0, 100, 100 }, &SayHelloButton, string, &outRect, &inRect, &clickRect);
 	// checkbox
 	//App->gui->AddGUICheckBox(App->gui->checkbox_down_texture, App->gui->checkbox_up_texture, { 0,0, 32,32 }, { 60,360 }, "this is a checkbox", GUI_ADJUST::RIGHT, App->gui->checkbox_highlight_texture, App->gui->checkbox_check_texture);
 	//App->gui->AddGUICheckBox(App->gui->checkbox_down_texture, App->gui->checkbox_up_texture, { 0,0, 32,32 }, { 60,390 }, "this is another checkbox", GUI_ADJUST::RIGHT, App->gui->checkbox_highlight_texture, App->gui->checkbox_check_texture);

@@ -137,7 +137,7 @@ public:
 	//Create GUI Objects
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section);
 	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE);
-	GUIButton* CreateButton(const iPoint & position, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr);
+	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr);
 	//GUICheckBox* AddGUICheckBox(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr, SDL_Texture* checkTex = nullptr);
 
 	SDL_Texture* GetAtlas() const;

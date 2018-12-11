@@ -22,7 +22,7 @@ public:
 	//Constructors
 	//Leave text as nullptr to not have text
 	//Leave out_section as nullptr to not have image
-	GUIButton(const iPoint & position, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr);
+	GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr);
 	//TODO: Add parameters for the sfx
 
 	bool PreUpdate() override;
