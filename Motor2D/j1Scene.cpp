@@ -41,8 +41,8 @@ bool j1Scene::Awake(pugi::xml_node& node)
 
 	uint width, height;
 	App->win->GetWindowSize(width, height);
-	horizontalScreenDivision = (1.0f / node.child("camera").child("horizontal_screen_divisions").text().as_float()) * width;
-	verticalScreenDivision = (1.0f / node.child("camera").child("vertical_screen_division").text().as_float()) * height;
+	horizontalScreenDivision = (float)width / node.child("camera").child("horizontal_screen_divisions").text().as_float();
+	verticalScreenDivision = (float)height / node.child("camera").child("vertical_screen_division").text().as_float();
 
 	return ret;
 }

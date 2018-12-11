@@ -150,29 +150,28 @@ bool j1Gui::PreUpdate()
 		App->input->GetMousePosition(mouse_x, mouse_y);
 		mouse_x *= (int)App->win->GetScale();
 		mouse_y *= (int)App->win->GetScale();
-		SetState(elem, mouse_x, mouse_y);
+		elem->SetState(mouse_x, mouse_y);
 		elem->PreUpdate();
 	}
 
 	return true;
 }
 
-void j1Gui::SetState(GUIElement * elem, int mouse_x, int mouse_y)
-{
-	if (elem->CheckBounds(mouse_x, mouse_y)) {
-		if (elem->state == MOUSE_STATE::M_OUT) {
-			elem->state == MOUSE_STATE::M_ENTER;
+void GUIElement::SetState(int x, int y) {
+	if (CheckBounds(x, y)) {
+		if (state == MOUSE_STATE::M_OUT) {
+			state == MOUSE_STATE::M_ENTER;
 		}
 		else {
-			elem->state == MOUSE_STATE::M_IN;
+			state == MOUSE_STATE::M_IN;
 		}
 	}
 	else {
-		if (elem->state == MOUSE_STATE::M_IN || elem->state == MOUSE_STATE::M_ENTER) {
-			elem->state == MOUSE_STATE::M_EXIT;
+		if (state == MOUSE_STATE::M_IN || state == MOUSE_STATE::M_ENTER) {
+			state == MOUSE_STATE::M_EXIT;
 		}
 		else {
-			elem->state == MOUSE_STATE::M_OUT;
+			state == MOUSE_STATE::M_OUT;
 		}
 	}
 }

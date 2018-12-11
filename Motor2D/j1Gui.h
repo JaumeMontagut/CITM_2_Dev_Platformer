@@ -61,6 +61,7 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 
+	void SetState(int x, int y);
 	bool CheckBounds(int x, int y);
 };
 
@@ -125,8 +126,6 @@ public:
 
 	// Called before all Updates
 	bool PreUpdate();
-
-	void SetState(GUIElement * elem, int mouse_x, int mouse_y);
 
 	// Called after all Updates
 	bool PostUpdate();

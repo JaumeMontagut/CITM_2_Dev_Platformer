@@ -5,6 +5,10 @@
 #include "SDL/include/SDL_mouse.h"
 #include "j1Audio.h"
 
+//GUIButton::GUIButton(GUITemplate, text) {
+//
+//}
+
 GUIButton::GUIButton(const iPoint & position, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section) : clickFunction(clickFunction), GUIElement(position) {
 	if (out_section != nullptr) {
 		this->outSection = new SDL_Rect(out_section->x, out_section->y, out_section->w, out_section->h);
@@ -13,7 +17,7 @@ GUIButton::GUIButton(const iPoint & position, void(*clickFunction)(), const char
 		App->gui->CreateImage(position, *out_section);//TODO: Take into account the adjustment
 	}
 	if (text != nullptr) {
-		App->gui->CreateText(position, text);//TODO: Take into account the adjustment
+		App->gui->CreateText(position, text/*,(GUIElement)this*/);//TODO: Take into account the adjustment
 	}
 }
 

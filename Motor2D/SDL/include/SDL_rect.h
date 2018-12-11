@@ -75,7 +75,7 @@ typedef struct SDL_Rect
 } SDL_Rect;
 
 /**
-*  \brief Creates a rectangle with position x and y, width w and height h
+*  \brief Creates a rectangle
 */
 SDL_FORCE_INLINE SDL_Rect::SDL_Rect(){
 }
