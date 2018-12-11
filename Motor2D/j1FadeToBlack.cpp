@@ -7,6 +7,7 @@
 #include "j1Render.h"
 #include "j1Map.h"
 #include "j1Scene.h"
+#include "ObjPlayer.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 #include "Brofiler/Brofiler.h"
@@ -45,7 +46,13 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 	if (current_step == fade_step::fade_to_black) {
 		fadePerCent = MIN(1.0F, ((float)now * 2.0F) / (float)total_time);
 		if (now >= total_time * 0.5F)
-		{
+		{ 
+			// '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+			// NOTE: BECAUSE we always pass throught fade to black (when dies, swap scene, etc)
+			// before we reset data, saves temporaly current score and player lives
+			uint score = App->object->player->score;
+			int lives = App->object->player->lives;
+			// .................................................................................
 			//Change scenes
 			App->scene->Disable();
 			if (App->map->Reset())
@@ -56,6 +63,13 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 				}
 				if (App->map->Load(lvl_to_load)) {
 					App->scene->Enable();
+
+					// restores lives and score for player data
+					if (App->object->player != nullptr)
+					{
+						App->object->player->lives = lives;
+						App->object->player->score = score;
+					}
 				}
 			}
 			App->transition = true;

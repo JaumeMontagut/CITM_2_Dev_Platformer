@@ -9,24 +9,23 @@
 	<fonts />
 	<gui />
 	<scene>
-		<camera x="-773.825806" y="-200.412384" />
+		<camera x="-817.085754" y="-200.021988" />
 		<current_level name="test_level.tmx" />
 	</scene>
 	<object>
+		<Player x="407.584076" y="280" velocity_x="0" velocity_y="0" lives="7" score="20" flip_direction="false" />
 		<Box x="872" y="280" velocity_x="0" velocity_y="0" id="21" />
 		<Box x="716.5" y="280" velocity_x="0" velocity_y="0" id="35" />
 		<Box x="983" y="280" velocity_x="0" velocity_y="0" id="45" />
 		<Box x="466" y="280" velocity_x="0" velocity_y="0" id="66" />
 		<Box x="316.25" y="280" velocity_x="0" velocity_y="0" id="70" />
-		<FlyingEnemy x="424" y="104" velocity_x="0" velocity_y="0" flip_direction="false" />
-		<FlyingEnemy x="376" y="120" velocity_x="0" velocity_y="0" flip_direction="false" />
-		<pizza x="420" y="212" id="69" />
-		<Player x="387.720154" y="280" velocity_x="0" velocity_y="0" flip_direction="false" />
+		<FlyingEnemy x="408" y="104" velocity_x="0" velocity_y="0" flip_direction="false" />
+		<FlyingEnemy x="376" y="104" velocity_x="0" velocity_y="0" flip_direction="false" />
 	</object>
 	<Particles />
 	<FadeToBlack />
 	<Collision />
 	<renderer>
-		<camera x="-773" y="-200" />
+		<camera x="-817" y="-200" />
 	</renderer>
 </game_state>
