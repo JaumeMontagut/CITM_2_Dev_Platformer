@@ -252,8 +252,6 @@ GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section)
 	GUIImage* ret = nullptr;
 	ret = new GUIImage(position, section);
 	elements.PushBack(ret);
-	ret->index = elements.Count();
-
 	return ret;
 }
 
@@ -262,8 +260,6 @@ GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color c
 	GUIText* ret = nullptr;
 	ret = new GUIText(position, text, color);
 	elements.PushBack(ret);
-	ret->index = elements.Count();
-
 	return ret;
 }
 

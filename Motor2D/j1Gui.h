@@ -43,8 +43,6 @@ struct CheckboxTemplates : public ButtonTemplates
 class GUIElement
 {
 public:
-
-	int index = -1; // stores the position of this element on dynarray elements gui
 	bool visible = true;
 	bool draggable = false;
 	//Position
