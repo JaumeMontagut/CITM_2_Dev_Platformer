@@ -20,14 +20,9 @@ private:
 //Methods
 public:
 	//Constructors
-	//Only button (invisible)
-	GUIButton(const iPoint & position);
-	//Butttons that create a child image
-	GUIButton(const iPoint & position, const SDL_Rect * out_tex, const SDL_Rect * in_tex, const SDL_Rect * click_tex);
-	//Buttons that create a child text
-	GUIButton(const iPoint & position, const char * text);
-	//Button that creates a child image and text
-	GUIButton(const iPoint & position, const char * text, const SDL_Rect * out_tex = nullptr, const SDL_Rect * in_tex = nullptr, const SDL_Rect * click_tex = nullptr);
+	//Leave text as nullptr to not have text
+	//Leave out_section as nullptr to not have image
+	GUIButton(const iPoint & position, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr);
 	//TODO: Add parameters for the sfx
 
 	bool PreUpdate() override;

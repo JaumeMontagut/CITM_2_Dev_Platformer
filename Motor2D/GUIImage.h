@@ -10,7 +10,7 @@ class GUIImage : public GUIElement // image class that supports optional text
 public:
 	SDL_Rect section;// rect of the target "atlas" texture
 public:
-	GUIImage(const SDL_Rect & section, const iPoint& position);
+	GUIImage(const iPoint & position, const SDL_Rect & section);
 	bool PostUpdate();
 };
 

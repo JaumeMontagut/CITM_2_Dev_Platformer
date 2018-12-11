@@ -3,7 +3,7 @@
 #include "j1Render.h"
 #include "j1App.h"
 
-GUIImage::GUIImage(const SDL_Rect & section, const iPoint & position) : section(section), GUIElement(position)
+GUIImage::GUIImage(const iPoint & position, const SDL_Rect & section) : section(section), GUIElement(position)
 {
 }
 

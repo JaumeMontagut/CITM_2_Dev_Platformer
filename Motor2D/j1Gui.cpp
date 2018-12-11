@@ -247,17 +247,17 @@ bool GUIElement::CheckBounds(int x, int y)
 }
 
 // UIelements constructions
-GUIImage* j1Gui::AddGUIImage(const SDL_Rect & section, const iPoint& position)
+GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section)
 {
 	GUIImage* ret = nullptr;
-	ret = new GUIImage(section, position);
+	ret = new GUIImage(position, section);
 	elements.PushBack(ret);
 	ret->index = elements.Count();
 
 	return ret;
 }
 
-GUIText* j1Gui::AddGUIText(const iPoint& position, const char* text, SDL_Color color = WHITE)
+GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color color)
 {
 	GUIText* ret = nullptr;
 	ret = new GUIText(position, text, color);

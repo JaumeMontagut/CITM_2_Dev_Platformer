@@ -139,8 +139,8 @@ public:
 
 	// TODO 2: Create the factory methods
 	//Create GUI Objects
-	GUIImage* AddGUIImage(const SDL_Rect & section, const iPoint& position);
-	GUIText* AddGUIText(const iPoint& position, const char* text, SDL_Color color);
+	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section);
+	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE);
 	//GUIButton* AddGUIButton(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr);
 	//GUICheckBox* AddGUICheckBox(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr, SDL_Texture* checkTex = nullptr);
 
