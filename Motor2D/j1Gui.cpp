@@ -96,7 +96,6 @@ bool j1Gui::PreUpdate()
 		mouse_y *= (int)App->win->GetScale();
 		SetState(elem, mouse_x, mouse_y);
 		elem->PreUpdate();
-		elem->OnMouseHover();
 	}
 
 	return true;
@@ -189,18 +188,6 @@ SDL_Texture* j1Gui::GetAtlas() const
 bool GUIElement::CheckBounds(int x, int y)
 {
 	return (x > bounds.x && x < (bounds.x + bounds.w) && y > bounds.y && y < (bounds.y + bounds.h));
-}
-
-void GUIElement::OnMouseHover()
-{
-	if (state == MOUSE_STATE::M_ENTER) {
-		App->audio->PlayFx(hoverSFX);
-		//Change texture
-
-	}
-	else if (state == MOUSE_STATE::M_EXIT) {
-		//Change texture
-	}
 }
 
 // UIelements constructions

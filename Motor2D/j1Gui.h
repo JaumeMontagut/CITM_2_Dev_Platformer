@@ -43,8 +43,6 @@ public:
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
 	MOUSE_STATE state = MOUSE_STATE::M_OUT;
-	uint hoverSFX;
-
 
 public:
 	GUIElement(const iPoint& position);
@@ -52,7 +50,6 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 
-	virtual void OnMouseHover();
 	bool CheckBounds(int x, int y);
 };
 
