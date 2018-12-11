@@ -32,17 +32,73 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	gui_node = LoadConfig(gui_config_doc);
 
 	atlas_file_name = gui_node.child("atlas").attribute("file").as_string("");
-	// button textures || if we put all of them on an atlas, is needed a fast code adaptation, we must think it good
-	buttonup_filename = gui_node.child("button_up").attribute("file").as_string("");
-	buttondown_filename = gui_node.child("button_down").attribute("file").as_string("");
-	buttonhighlight_filename = gui_node.child("button_hover").attribute("file").as_string("");
-	// checkbox textures
-	checkbox_up_filename = gui_node.child("checkbox_up").attribute("file").as_string("");
-	checkbox_down_filename = gui_node.child("checkbox_down").attribute("file").as_string("");
-	checkbox_highlight_filename = gui_node.child("checkbox_highlight").attribute("file").as_string("");
-	checkbox_check_filename = gui_node.child("checkbox_check").attribute("file").as_string("");
-	//checkbox_check_locked_filename = conf.child("checkbox_check_locked").attribute("file").as_string("");
 
+	if (!LoadElementTemplate(buttonType1, gui_node.child("gui_element_templates").child("buttons").child("button_type_1")))
+		ret = false;
+	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
+		ret = false;
+
+	//// button textures || if we put all of them on an atlas, is needed a fast code adaptation, we must think it good
+	//buttonup_filename = gui_node.child("button_up").attribute("file").as_string("");
+	//buttondown_filename = gui_node.child("button_down").attribute("file").as_string("");
+	//buttonhighlight_filename = gui_node.child("button_hover").attribute("file").as_string("");
+	//// checkbox textures
+	//checkbox_up_filename = gui_node.child("checkbox_up").attribute("file").as_string("");
+	//checkbox_down_filename = gui_node.child("checkbox_down").attribute("file").as_string("");
+	//checkbox_highlight_filename = gui_node.child("checkbox_highlight").attribute("file").as_string("");
+	//checkbox_check_filename = gui_node.child("checkbox_check").attribute("file").as_string("");
+	////checkbox_check_locked_filename = conf.child("checkbox_check_locked").attribute("file").as_string("");
+
+
+	return ret;
+}
+
+bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& node)
+{
+	bool ret = false;
+	
+	if (!node.empty())
+	{
+		if (node.child("up"))
+		{
+			templateType.sectionUp.x = node.child("up").attribute("x").as_int(0);
+			templateType.sectionUp.y = node.child("up").attribute("y").as_int(0);
+			templateType.sectionUp.w = node.child("up").attribute("w").as_int(0);
+			templateType.sectionUp.h = node.child("up").attribute("h").as_int(0);
+		}
+		if (node.child("hover"))
+		{
+			templateType.sectionHover.x = node.child("hover").attribute("x").as_int(0);
+			templateType.sectionHover.y = node.child("hover").attribute("y").as_int(0);
+			templateType.sectionHover.w = node.child("hover").attribute("w").as_int(0);
+			templateType.sectionHover.h = node.child("hover").attribute("h").as_int(0);
+		}
+		if (node.child("down"))
+		{
+			templateType.sectionDown.x = node.child("down").attribute("x").as_int(0);
+			templateType.sectionDown.y = node.child("down").attribute("y").as_int(0);
+			templateType.sectionDown.w = node.child("down").attribute("w").as_int(0);
+			templateType.sectionDown.h = node.child("down").attribute("h").as_int(0);
+		}
+		if (node.child("disabled"))
+		{
+			templateType.sectionDisabled.x = node.child("disabled").attribute("x").as_int(0);
+			templateType.sectionDisabled.y = node.child("disabled").attribute("y").as_int(0);
+			templateType.sectionDisabled.w = node.child("disabled").attribute("w").as_int(0);
+			templateType.sectionDisabled.h = node.child("disabled").attribute("h").as_int(0);
+		}
+		if (node.child("check"))
+		{
+			CheckboxTemplates* link = &(CheckboxTemplates&)templateType;
+			link->sectionCheck.x = node.child("check").attribute("x").as_int(0);
+			link->sectionCheck.y = node.child("check").attribute("y").as_int(0);
+			link->sectionCheck.w = node.child("check").attribute("w").as_int(0);
+			link->sectionCheck.h = node.child("check").attribute("h").as_int(0);
+		}
+	
+		ret = true;
+	}
+	
 
 	return ret;
 }

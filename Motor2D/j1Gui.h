@@ -26,6 +26,19 @@ enum class MOUSE_STATE
 	MAX
 };
 
+struct ButtonTemplates
+{
+	SDL_Rect sectionUp;
+	SDL_Rect sectionHover;
+	SDL_Rect sectionDown;
+	SDL_Rect sectionDisabled;
+};
+
+struct CheckboxTemplates : public ButtonTemplates
+{
+	SDL_Rect sectionCheck;
+};
+
 // maybe we need a structures of predefined elements somewhere on xml and creates the guielements using it with simple gui methods
 class GUIElement
 {
@@ -133,6 +146,9 @@ public:
 
 	SDL_Texture* GetAtlas() const;
 
+private:
+	bool LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& node);
+
 public:
 	// TODO: maybe adds a structure to pack all needed textures for specific button type
 	// general buttons textures
@@ -144,6 +160,10 @@ public:
 	SDL_Texture* checkbox_down_texture = nullptr;
 	SDL_Texture* checkbox_highlight_texture = nullptr;
 	SDL_Texture* checkbox_check_texture = nullptr;
+
+	// TEMPLATIZED element types
+	ButtonTemplates buttonType1;
+	CheckboxTemplates checkboxType1;
 
 private:
 
@@ -168,6 +188,7 @@ private:
 	p2DynArray<GUIElement*> elements = NULL;
 	//GUIelement* elements[10] = { nullptr };
 	//p2List<GUIelement*> elements;
+
 
 };
 

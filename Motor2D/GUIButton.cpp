@@ -15,6 +15,7 @@ bool GUIButton::CleanUp() {
 	RELEASE(outSection);
 	RELEASE(inSection);
 	RELEASE(clickSection);
+	return true;
 }
 
 bool GUIButton::PreUpdate()
