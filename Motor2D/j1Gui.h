@@ -15,6 +15,7 @@
 struct SDL_Texture;
 class GUIImage;
 class GUIText;
+class GUIButton;
 
 enum class MOUSE_STATE
 {
@@ -80,27 +81,7 @@ enum class GUI_ADJUST
 	//OUT_DOWN_MIDDLE,
 	//OUT_DOWN_RIGHT
 };
-//class GUIButton : public GUIImage//public GUIelement
-//{
-//public:
-//
-//	// maybe we need more different possibilites constructors
-//	//GUIButton();
-//	GUIButton(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetPos = GUI_ADJUST::CENTERED, SDL_Texture* hoverTex = nullptr);
-//
-//	bool PreUpdate();
-//
-//private:
-//
-//protected:
-//	SDL_Texture* clicked_texture = nullptr;
-//	SDL_Texture* unclicked_texture = nullptr;
-//	SDL_Texture* hover_texture = nullptr;
-//	//Animation on guiState::HOVER
-//	// 
-//
-//};
-//
+
 //class GUICheckBox : public GUIButton
 //{
 //public:

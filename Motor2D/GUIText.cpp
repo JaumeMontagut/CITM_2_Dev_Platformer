@@ -13,8 +13,9 @@ GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color) : GU
 
 bool GUIText::PostUpdate()
 {
-	if (texture != nullptr)
-		App->render->BlitGUI(texture, localPos.x, localPos.y, NULL);
+	if (texture != nullptr) {
+		return App->render->BlitGUI(texture, localPos.x, localPos.y, NULL);
+	}
 
-	return true;
+	return false;
 }

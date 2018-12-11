@@ -261,7 +261,7 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 
 bool j1Render::BlitGUI(SDL_Texture* texture, int x, int y, const SDL_Rect* section, int scale) const
 {
-	BROFILER_CATEGORY("Render BlitUnscaled", Profiler::Color::Azure);
+	BROFILER_CATEGORY("Render BlitGUI", Profiler::Color::Azure);
 
 	bool ret = true;
 

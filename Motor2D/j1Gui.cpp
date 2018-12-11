@@ -11,6 +11,7 @@
 //Gui Elements
 #include "GUIImage.h"
 #include "GUIText.h"
+#include "GUIButton.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -260,29 +261,6 @@ bool GUIElement::CleanUp()
 {
 	return true;
 }
-
-// GUIButton relative ============================================
-//GUIButton::GUIButton(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text, GUI_ADJUST targetPos, SDL_Texture* hoverTex)
-//	: clicked_texture(click_texture), unclicked_texture(unclick_texture), hover_texture(hoverTex), GUIImage(unclick_texture, rect, position, text, targetPos, hoverTex) {}
-//
-//bool GUIButton::PreUpdate()
-//{
-//	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN && guiState == MOUSE_STATE::HOVER)
-//	{
-//		image_texture = clicked_texture;
-//		LOG("button clicked");
-//		guiState = MOUSE_STATE::CLICK;
-//	}
-//	else if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP && guiState == MOUSE_STATE::CLICK) // always unclick
-//	{
-//		image_texture = unclicked_texture;
-//		LOG("button unclicked");
-//		guiState = MOUSE_STATE::DONTCARE;
-//	}
-//
-//	return true;
-//}
-// ===============================================================
 
 // CHECKBOX relative =============================================
 

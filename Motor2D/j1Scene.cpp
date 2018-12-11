@@ -84,15 +84,11 @@ bool j1Scene::Start()
 	App->audio->PlayMusic(App->map->data.properties.music_name.GetString(), 0.0f);
 
 	// GUI elements creation example ---------------------------------------------------
-	// method thats adds a banner and optional text embedded
-	SDL_Color whiteColor = { 255,13,255,255 };
 	App->gui->AddGUIImage(SDL_Rect(485, 829, 328, 103), iPoint(20, 60));
 	App->gui->AddGUIImage(SDL_Rect(485, 829, 328, 103), iPoint(360, 160));
 	App->gui->AddGUIImage(SDL_Rect(485, 829, 328, 103), iPoint(360, 60));
-	// only banner
-	//App->gui->AddGUIImage(nullptr, { 485, 829, 328, 103 }, { 300, 280 });
-	// only text
-	//App->gui->AddGUIText({ 640,360 }, "<- Banner without text, this is a ONLY TEXT element", whiteColor);
+	SDL_Color textColor = { 255,13,255,255 };
+	App->gui->AddGUIText({ 640,360 }, "<- Banner without text, this is a ONLY TEXT element", textColor);
 	// buttons
 	//uint width, height = 0;
 	//App->win->GetWindowSize(width, height);
