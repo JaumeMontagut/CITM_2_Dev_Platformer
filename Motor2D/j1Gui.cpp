@@ -6,8 +6,12 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Gui.h"
-
+#include "j1Audio.h"
 #include "j1Window.h"
+//Gui Elements
+#include "GUIImage.h"
+#include "GUIText.h"
+#include "GUIButton.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -140,31 +144,38 @@ bool j1Gui::PreUpdate()
 {
 	for (int i = 0; i < elements.Count(); ++i)
 	{
-		GUIElement* e = *elements.At(i);
-
-		// check and updates mouse state -----------------------
-		int x, y = 0;
-		App->input->GetMousePosition(x, y);
-		x *= App->win->GetScale(); // workaround to get correct mouse pos
-		y *= App->win->GetScale();
-		/*LOG("mouse pos x:%i y:%i", x, y);
-		LOG("button pos x:%i y:%i", e->boundaries.x, e->boundaries.y);*/
-		//if (e->CheckBoundariesXY(x, y))
-		//{
-		//	e->SetMouseState(GUIElement::MOUSE_EVENT::ENTER);
-		//}
-		//else
-		//{
-		//	if (e->guiState != GUIElement::MOUSE_STATE::EXIT && e->guiState != GUIElement::MOUSE_STATE::CLICK)
-		//		e->SetMouseState(GUIElement::MOUSE_EVENT::EXIT);
-		//}
-		// ------------------------------------------------------
-
-		// call elements preupdate ------------------------------
-		e->PreUpdate();
+		GUIElement* elem = *elements.At(i);
+		//Check and updates mouse state -----------------------
+		int mouse_x, mouse_y = 0;
+		App->input->GetMousePosition(mouse_x, mouse_y);
+		mouse_x *= (int)App->win->GetScale();
+		mouse_y *= (int)App->win->GetScale();
+		SetState(elem, mouse_x, mouse_y);
+		elem->PreUpdate();
+		elem->OnMouseHover();
 	}
 
 	return true;
+}
+
+void j1Gui::SetState(GUIElement * elem, int mouse_x, int mouse_y)
+{
+	if (elem->CheckBounds(mouse_x, mouse_y)) {
+		if (elem->state == MOUSE_STATE::M_OUT) {
+			elem->state == MOUSE_STATE::M_ENTER;
+		}
+		else {
+			elem->state == MOUSE_STATE::M_IN;
+		}
+	}
+	else {
+		if (elem->state == MOUSE_STATE::M_IN || elem->state == MOUSE_STATE::M_ENTER) {
+			elem->state == MOUSE_STATE::M_EXIT;
+		}
+		else {
+			elem->state == MOUSE_STATE::M_OUT;
+		}
+	}
 }
 
 //void GUIElement::SetMouseState(MOUSE_EVENT event)
@@ -228,6 +239,9 @@ SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
+
+//GUIElement methods --------------------------------------------------------------------------------------------
+
 bool GUIElement::CheckBounds(int x, int y)
 {
 	return (x > bounds.x && x < (bounds.x + bounds.w) && y > bounds.y && y < (bounds.y + bounds.h));
@@ -235,6 +249,14 @@ bool GUIElement::CheckBounds(int x, int y)
 
 void GUIElement::OnMouseHover()
 {
+	if (state == MOUSE_STATE::M_ENTER) {
+		App->audio->PlayFx(hoverSFX);
+		//Change texture
+
+	}
+	else if (state == MOUSE_STATE::M_EXIT) {
+		//Change texture
+	}
 }
 
 // UIelements constructions
@@ -243,23 +265,21 @@ GUIImage* j1Gui::AddGUIImage(const SDL_Rect & section, const iPoint& position)
 	GUIImage* ret = nullptr;
 	ret = new GUIImage(section, position);
 	elements.PushBack(ret);
-	// adds index
 	ret->index = elements.Count();
 
 	return ret;
 }
 
-//GUIText* j1Gui::AddGUIText(const iPoint& position, const char* text, SDL_Color color)
-//{
-//	GUIText* ret = nullptr;
-//	ret = new GUIText(position, text, color);
-//	elements.PushBack(ret);
-//	// adds index
-//	ret->index = elements.Count();
-//
-//	return ret;
-//}
-//
+GUIText* j1Gui::AddGUIText(const iPoint& position, const char* text, SDL_Color color = WHITE)
+{
+	GUIText* ret = nullptr;
+	ret = new GUIText(position, text, color);
+	elements.PushBack(ret);
+	ret->index = elements.Count();
+
+	return ret;
+}
+
 //GUIButton* j1Gui::AddGUIButton(SDL_Texture* clickTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text, TextPos targetTextPos, SDL_Texture* onMouseTex)
 //{
 //	GUIButton* ret = nullptr;
@@ -298,48 +318,6 @@ bool GUIElement::CleanUp()
 	return true;
 }
 
-//Text
-
-//GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color) : GUIElement(position)
-//{
-//	if (text != nullptr)
-//	{
-//		texture = App->font->Print(text, color, NULL);
-//	}
-//}
-//
-//bool GUIText::PostUpdate()
-//{
-//	if (texture != nullptr)
-//		App->render->BlitGUIUnscaled(texture, localPos.x, localPos.y, NULL);
-//
-//	return true;
-//}
-
-// GUIButton relative ============================================
-
-//GUIButton::GUIButton(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text, GUI_ADJUST targetPos, SDL_Texture* hoverTex)
-//	: clicked_texture(click_texture), unclicked_texture(unclick_texture), hover_texture(hoverTex), GUIImage(unclick_texture, rect, position, text, targetPos, hoverTex) {}
-//
-//bool GUIButton::PreUpdate()
-//{
-//	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN && guiState == MOUSE_STATE::HOVER)
-//	{
-//		image_texture = clicked_texture;
-//		LOG("button clicked");
-//		guiState = MOUSE_STATE::CLICK;
-//	}
-//	else if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP && guiState == MOUSE_STATE::CLICK) // always unclick
-//	{
-//		image_texture = unclicked_texture;
-//		LOG("button unclicked");
-//		guiState = MOUSE_STATE::DONTCARE;
-//	}
-//
-//	return true;
-//}
-// ===============================================================
-
 // CHECKBOX relative =============================================
 
 //GUICheckBox::GUICheckBox(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text, GUI_ADJUST targetPos, SDL_Texture* hoverTex, SDL_Texture* checkTex)
@@ -370,13 +348,3 @@ bool GUIElement::CleanUp()
 //
 //	return true;
 //}
-
-//Image
-
-GUIImage::GUIImage(const SDL_Rect & section, const iPoint & position) : section(section), GUIElement(position)
-{
-}
-
-bool GUIImage::PostUpdate() {
-	return App->render->BlitGUI(App->gui->GetAtlas(), localPos.x, localPos.y, &section);
-}

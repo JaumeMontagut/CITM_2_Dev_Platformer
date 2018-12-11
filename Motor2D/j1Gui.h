@@ -3,11 +3,28 @@
 
 #include "j1Module.h"
 #include "p2DynArray.h"
+#include "p2Point.h"
+#include "p2List.h"
+#include "SDL/include/SDL_rect.h"
 
 #define CURSOR_WIDTH 2
 
-#define WHITE (SDL_Color){255,255,255}
-#define BLUE (SDL_Color){0,0,255}
+#define WHITE {255,255,255}
+#define BLUE {0,0,255}
+
+struct SDL_Texture;
+class GUIImage;
+class GUIText;
+class GUIButton;
+
+enum class MOUSE_STATE
+{
+	M_OUT = 0,
+	M_ENTER,
+	M_IN,//Same as hover
+	M_EXIT,
+	MAX
+};
 
 struct ButtonTemplates
 {
@@ -27,29 +44,18 @@ class GUIElement
 {
 public:
 
-	enum class MOUSE_STATE
-	{
-		M_OUT = 0,
-		M_ENTER,
-		M_IN,//Same as hover
-		M_EXIT,
-		MAX
-	};
-
-public:
-
 	int index = -1; // stores the position of this element on dynarray elements gui
 	bool visible = true;
 	bool draggable = false;
 	//Position
-	iPoint localPos = iPoint(0, 0);
-	iPoint globalPos = iPoint(0, 0);//We also store the global position to avoid recalculating it, adding the parent's one
+	iPoint localPos = { 0, 0 };
+	iPoint globalPos = { 0, 0 };//We also store the global position to avoid recalculating it, adding the parent's one
 	//Tree structure
 	GUIElement* parent;
 	p2List<GUIElement*> childs;
 	//Hovering control
-	SDL_Rect bounds;// = SDL_Rect(0, 0, 0, 0); // stores "general" boundaries for mouse checking
-	MOUSE_STATE guiState = MOUSE_STATE::M_OUT;
+	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
+	MOUSE_STATE state = MOUSE_STATE::M_OUT;
 	uint hoverSFX;
 
 
@@ -89,53 +95,6 @@ enum class GUI_ADJUST
 	//OUT_DOWN_RIGHT
 };
 
-class GUIImage : public GUIElement // image class that supports optional text
-{
-public:
-	SDL_Rect section;// rect of the target "atlas" texture
-public:
-	GUIImage(const SDL_Rect & section, const iPoint& position);
-	bool PostUpdate();
-};
-
-//class GUIText : public GUIElement
-//{
-//public:
-//
-//	GUIText() {}
-//	GUIText(const iPoint& position, const char* text, SDL_Color color);
-//
-//public:
-//
-//	bool PreUpdate() { return true; }
-//	bool PostUpdate();
-//
-//private:
-//	SDL_Texture* texture = nullptr;
-//
-//};
-//
-//class GUIButton : public GUIImage//public GUIelement
-//{
-//public:
-//
-//	// maybe we need more different possibilites constructors
-//	//GUIButton();
-//	GUIButton(SDL_Texture* click_texture, SDL_Texture* unclick_texture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetPos = GUI_ADJUST::CENTERED, SDL_Texture* hoverTex = nullptr);
-//
-//	bool PreUpdate();
-//
-//private:
-//
-//protected:
-//	SDL_Texture* clicked_texture = nullptr;
-//	SDL_Texture* unclicked_texture = nullptr;
-//	SDL_Texture* hover_texture = nullptr;
-//	//Animation on guiState::HOVER
-//	// 
-//
-//};
-//
 //class GUICheckBox : public GUIButton
 //{
 //public:
@@ -172,6 +131,8 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	void SetState(GUIElement * elem, int mouse_x, int mouse_y);
+
 	// Called after all Updates
 	bool PostUpdate();
 
@@ -182,7 +143,7 @@ public:
 	// TODO 2: Create the factory methods
 	//Create GUI Objects
 	GUIImage* AddGUIImage(const SDL_Rect & section, const iPoint& position);
-	//GUIText* AddGUIText(const iPoint& position, const char* text, SDL_Color color);
+	GUIText* AddGUIText(const iPoint& position, const char* text, SDL_Color color);
 	//GUIButton* AddGUIButton(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr);
 	//GUICheckBox* AddGUICheckBox(SDL_Texture* clickedTexture, SDL_Texture* unclickTexture, const SDL_Rect& rect, const iPoint& position, const char* text = nullptr, GUI_ADJUST targetTextPos = GUI_ADJUST::CENTERED, SDL_Texture* onMouseTex = nullptr, SDL_Texture* checkTex = nullptr);
 
