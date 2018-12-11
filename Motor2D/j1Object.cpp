@@ -61,6 +61,7 @@ bool j1Object::Start() {
 
 	// testing add pizza
 	AddObjPizza({ 400,200 }, 2);
+	AddObjNutCoins({ 440,200 }, 3);
 
 	return true;
 }
@@ -263,6 +264,15 @@ ObjPizza* j1Object::AddObjPizza(fPoint position, int objectID) {
 	ObjPizza* ret = nullptr;
 	if (index != -1) {
 		objects[index] = ret = new ObjPizza(position, index, object_node.child("pizza"), pickPizzaSFX, objectID);
+	}
+	return ret;
+}
+
+ObjNutCoins* j1Object::AddObjNutCoins(fPoint position, int objectID) {
+	int index = FindEmptyPosition();
+	ObjNutCoins* ret = nullptr;
+	if (index != -1) {
+		objects[index] = ret = new ObjNutCoins(position, index, object_node.child("nutCoin"), pickNutCoinSFX, objectID);
 	}
 	return ret;
 }

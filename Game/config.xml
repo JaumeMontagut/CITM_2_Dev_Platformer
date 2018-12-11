@@ -259,11 +259,13 @@
     
 	<pizza>
 		<sprite x="73" y="261" w="16" h="16"/>
+		<wave up="6.0" down="9.0" amplitude="6.0"/>
 		<sfx>todefine</sfx>
 	</pizza>
 	
 	<nutCoin>
-		<sprite x="0" y="0" w="0" h="0"/>
+		<sprite x="94" y="261" w="16" h="16"/>
+		<wave up="9.0" down="9.0" amplitude="2.0"/>
 		<sfx>todefine</sfx>
 	</nutCoin>
 	

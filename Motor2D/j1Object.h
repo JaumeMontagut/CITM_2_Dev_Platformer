@@ -132,7 +132,7 @@ public:
 	ObjEnemyLand * AddObjEnemyLand(fPoint position);//, int objectID);
 	ObjDoor* AddObjDoor(fPoint position, int objectID);
 	ObjPizza* AddObjPizza(fPoint position, int objectID);
-	//ObjNutCoins* AddObjNutCoins(fPoint position);
+	ObjNutCoins* AddObjNutCoins(fPoint position, int objectID);
 	bool DeleteObject(GameObject * object);
 
 public:

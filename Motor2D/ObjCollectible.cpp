@@ -12,11 +12,7 @@
 ObjCollectible::ObjCollectible(fPoint &position, int index, pugi::xml_node& node, uint pickfx, int objectID) : 
 	pickSFX(pickfx), GameObject(position, index, objectID) 
 {
-	/*velocity = fPoint(0.0f, 0.0f); 
-	acceleration = fPoint(0.0f, 0.0f);*/
-
-	//col = App->collision->AddCollider(colRect, COLLIDER_TYPE::COLLIDER_BOX, this);
-
+	// sprite section of texture rect -----
 	spriteRect.x = node.child("sprite").attribute("x").as_int(0);
 	spriteRect.y = node.child("sprite").attribute("y").as_int(0);
 	spriteRect.w = node.child("sprite").attribute("w").as_int(0);
@@ -38,7 +34,6 @@ bool ObjCollectible::Update(float dt)
 
 bool ObjCollectible::PostUpdate()
 {
-
 	App->render->Blit(App->object->robotTilesetTex, (int)position.x, (int)position.y, &spriteRect);
 
 	return true;
@@ -79,8 +74,6 @@ bool ObjCollectible::Save(pugi::xml_node& node) const
 
 	collectibleNode.append_attribute("x") = position.x;
 	collectibleNode.append_attribute("y") = position.y;
-	collectibleNode.append_attribute("velocity_x") = velocity.x;
-	collectibleNode.append_attribute("velocity_y") = velocity.y;
 	collectibleNode.append_attribute("id") = objectID;
 
 	return true;
@@ -88,36 +81,48 @@ bool ObjCollectible::Save(pugi::xml_node& node) const
 
 // childs constructors ----------------------------------------------------------------------------
 
-ObjPizza::ObjPizza(fPoint& position,  int index, pugi::xml_node& object_node, uint picksfx, int objectID) 
-	: ObjCollectible(position, index, object_node, picksfx, objectID) 
+ObjPizza::ObjPizza(fPoint& position,  int index, pugi::xml_node& node, uint picksfx, int objectID) 
+	: ObjCollectible(position, index, node, picksfx, objectID) 
 {
 	original_y = position.y;
+	// movement waves values
+	waveUp = node.child("wave").attribute("up").as_float(1.0f);
+	waveDown = node.child("wave").attribute("down").as_float(-1.0f);
+	waveAmplitude = node.child("wave").attribute("amplitude").as_float(20.0f);
 }
 
-ObjNutCoins::ObjNutCoins(fPoint& position, SDL_Rect& spriteRect, SDL_Rect& colRect, int index, pugi::xml_node& object_node, uint picksfx, int objectID)
-	: ObjCollectible(position, index, object_node, picksfx, objectID) {}
+ObjNutCoins::ObjNutCoins(fPoint& position, int index, pugi::xml_node& node, uint picksfx, int objectID)
+	: ObjCollectible(position, index, node, picksfx, objectID) 
+{
+	original_y = position.y;
+	// movement waves values
+	waveUp = node.child("wave").attribute("up").as_float(1.0f);
+	waveDown = node.child("wave").attribute("down").as_float(-1.0f);
+	waveAmplitude = node.child("wave").attribute("amplitude").as_float(20.0f);
+}
 
 // ------------------------------------------------------------------------------------------------
 
 bool ObjPizza::Update(float dt)
 {
-
 	if (going_up)
 	{
 		if (wave > 1.0f)
 			going_up = false;
 		else
-			wave += 6.f * dt;
+			wave += waveUp * dt;
 	}
 	else
 	{
 		if (wave < -1.0f)
 			going_up = true;
 		else
-			wave -= 9.f * dt;
+			wave -= waveDown * dt;
 	}
 
-	position.y = original_y + int(6.0f * sinf(wave));
+	position.y = original_y + int(waveAmplitude * sinf(wave));
+
+	col->SetPos((int)position.x, (int)position.y);
 
 	return true;
 }
@@ -130,6 +135,29 @@ void ObjPizza::OnCollision(Collider* c1, Collider* c2)
 		// .. code here ..
 		App->object->DeleteObject(this);
 	}
+}
+
+bool ObjNutCoins::Update(float dt)
+{
+	if (going_up)
+	{
+		if (wave > 1.0f)
+			going_up = false;
+		else
+			wave += waveUp * dt;
+	}
+	else
+	{
+		if (wave < -1.0f)
+			going_up = true;
+		else
+			wave -= waveDown * dt;
+	}
+
+	position.y = original_y + int(waveAmplitude * sinf(wave));
+
+	col->SetPos((int)position.x, (int)position.y);
+	return true;
 }
 
 void ObjNutCoins::OnCollision(Collider* c1, Collider* c2)

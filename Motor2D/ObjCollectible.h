@@ -33,11 +33,15 @@ protected:
 
 	SDL_Rect spriteRect;
 	uint pickSFX = 0u;
-	
+
+protected:
+	//
+
 };
 
 // ------------------------------------------------------------------------------------
-
+// for now the two collectibles casually shares its movement pattern, but maybe we need other collectible movements
+// for that is why not fits on collectible parent class for now and "repeats movement vars" for two child classes pizza and nut
 class ObjPizza : public ObjCollectible
 {
 public:
@@ -47,20 +51,31 @@ public:
 	void OnCollision(Collider * c1, Collider * c2) override;
 
 private:
+	// movement
+	float waveUp = 0.0f;
+	float waveDown = 0.0f;
+	float waveAmplitude = 0.0f;
 	float wave = -1.0f;
 	bool going_up = true;
 	int original_y = 0;
-	iPoint original_pos;
-
 };
 
 class ObjNutCoins : public ObjCollectible
 {
 public:
-	ObjNutCoins(fPoint& position, SDL_Rect& spriteRect ,SDL_Rect& colRect, int index, pugi::xml_node& object_node, uint picksfx, int objectID);
+	ObjNutCoins(fPoint& position, int index, pugi::xml_node& object_node, uint picksfx, int objectID);
 
+	bool Update(float dt);
 	void OnCollision(Collider* c1, Collider* c2) override;
-
+	
+private:
+	// movement
+	float waveUp = 0.0f;
+	float waveDown = 0.0f;
+	float waveAmplitude = 0.0f;
+	float wave = -1.0f;
+	bool going_up = true;
+	int original_y = 0;
 };
 
 #endif
