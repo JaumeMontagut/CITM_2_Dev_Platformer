@@ -216,6 +216,9 @@
     <ClInclude Include="ObjCollectible.h">
       <Filter>Objects</Filter>
     </ClInclude>
+    <ClInclude Include="ButtonFunctions.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Modules">

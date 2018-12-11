@@ -209,11 +209,6 @@ SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-void SayHelloButton()
-{
-	LOG("I'm a button and I say hello");
-}
-
 
 //GUIElement methods --------------------------------------------------------------------------------------------
 

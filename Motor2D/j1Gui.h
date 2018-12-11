@@ -183,7 +183,4 @@ private:
 	p2DynArray<GUIElement*> guiElems = NULL;
 };
 
-//Button methods
-void SayHelloButton();
-
 #endif // __j1GUI_H__

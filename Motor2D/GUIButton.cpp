@@ -55,7 +55,7 @@ bool GUIButton::PreUpdate()
 		}
 		App->audio->PlayFx(clickSfx);
 	}
-	else if (state == MOUSE_STATE::M_ENTER) {
+	else if (state == MOUSE_STATE::M_ENTER || ((state == MOUSE_STATE::M_ENTER || state == MOUSE_STATE::M_IN) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP)) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
