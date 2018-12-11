@@ -57,29 +57,29 @@ bool ObjCollectible::OnDestroy()
 	return true;
 }
 
-bool ObjCollectible::Load(pugi::xml_node& node)
-{
-
-	return true;
-}
+//bool ObjCollectible::Load(pugi::xml_node& node)
+//{
+//
+//	return true;
+//}
 
 void ObjCollectible::OnCollision(Collider* c1, Collider* c2)
 {}
 
-bool ObjCollectible::Save(pugi::xml_node& node) const
-{
-	LOG("Saving obj collectible");
+//bool ObjCollectible::Save(pugi::xml_node& node) const
+//{
+//	LOG("Saving obj collectible");
+//
+//	pugi::xml_node collectibleNode = node.append_child("Collectible");
+//
+//	collectibleNode.append_attribute("x") = position.x;
+//	collectibleNode.append_attribute("y") = position.y;
+//	collectibleNode.append_attribute("id") = objectID;
+//
+//	return true;
+//}
 
-	pugi::xml_node collectibleNode = node.append_child("Collectible");
-
-	collectibleNode.append_attribute("x") = position.x;
-	collectibleNode.append_attribute("y") = position.y;
-	collectibleNode.append_attribute("id") = objectID;
-
-	return true;
-}
-
-// childs constructors ----------------------------------------------------------------------------
+// childs constructors ===========================================================
 
 ObjPizza::ObjPizza(fPoint& position,  int index, pugi::xml_node& node, uint picksfx, int objectID) 
 	: ObjCollectible(position, index, node, picksfx, objectID) 
@@ -105,7 +105,8 @@ ObjNutCoins::ObjNutCoins(fPoint& position, int index, pugi::xml_node& node, uint
 	score = node.attribute("score").as_int(0);
 }
 
-// ------------------------------------------------------------------------------------------------
+// ================================================================================
+// PIZZA COLLECTABLE
 
 bool ObjPizza::Update(float dt)
 {
@@ -140,6 +141,21 @@ void ObjPizza::OnCollision(Collider* c1, Collider* c2)
 	}
 }
 
+bool ObjPizza::Save(pugi::xml_node& node) const
+{
+	LOG("Saving obj pizza");
+
+	pugi::xml_node collectibleNode = node.append_child("pizza");
+
+	collectibleNode.append_attribute("x") = (int)position.x;
+	collectibleNode.append_attribute("y") = original_y;
+	collectibleNode.append_attribute("id") = objectID;
+
+	return true;
+}
+// ===================================================================================
+// NUT COIN COLLECTABLE
+
 bool ObjNutCoins::Update(float dt)
 {
 	if (going_up)
@@ -170,4 +186,17 @@ void ObjNutCoins::OnCollision(Collider* c1, Collider* c2)
 		App->object->player->score += score;
 		App->object->DeleteObject(this);
 	}
+}
+
+bool ObjNutCoins::Save(pugi::xml_node& node) const
+{
+	LOG("Saving obj nutcoin");
+
+	pugi::xml_node collectibleNode = node.append_child("nutCoin");
+
+	collectibleNode.append_attribute("x") = (int)position.x;
+	collectibleNode.append_attribute("y") = original_y;
+	collectibleNode.append_attribute("id") = objectID;
+
+	return true;
 }

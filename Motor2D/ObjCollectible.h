@@ -22,8 +22,8 @@ public:
 	bool OnTriggerEnter();
 	bool OnTriggerExit();
 
-	bool Load(pugi::xml_node& loadNode);
-	bool Save(pugi::xml_node& saveNode) const;
+	//bool Load(pugi::xml_node& loadNode);
+	//bool Save(pugi::xml_node& saveNode) const;
 
 public:
 	/*Animation inactiveAnim;
@@ -51,6 +51,8 @@ public:
 	bool Update(float dt);
 	void OnCollision(Collider * c1, Collider * c2) override;
 
+	bool Save(pugi::xml_node& saveNode) const;
+
 private:
 	// movement
 	float waveUp = 0.0f;
@@ -71,6 +73,8 @@ public:
 
 	bool Update(float dt);
 	void OnCollision(Collider* c1, Collider* c2) override;
+
+	bool Save(pugi::xml_node& saveNode) const;
 	
 private:
 	// movement

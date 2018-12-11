@@ -6,8 +6,10 @@
 	<audio />
 	<map />
 	<pathfinding />
+	<fonts />
+	<gui />
 	<scene>
-		<camera x="-793.539001" y="-200.270401" />
+		<camera x="-773.825806" y="-200.412384" />
 		<current_level name="test_level.tmx" />
 	</scene>
 	<object>
@@ -16,14 +18,15 @@
 		<Box x="983" y="280" velocity_x="0" velocity_y="0" id="45" />
 		<Box x="466" y="280" velocity_x="0" velocity_y="0" id="66" />
 		<Box x="316.25" y="280" velocity_x="0" velocity_y="0" id="70" />
-		<FlyingEnemy x="432" y="184" velocity_x="0" velocity_y="0" flip_direction="true" />
-		<FlyingEnemy x="384" y="216" velocity_x="0" velocity_y="0" flip_direction="true" />
-		<Player x="401.279968" y="280" velocity_x="0" velocity_y="0" flip_direction="false" />
+		<FlyingEnemy x="424" y="104" velocity_x="0" velocity_y="0" flip_direction="false" />
+		<FlyingEnemy x="376" y="120" velocity_x="0" velocity_y="0" flip_direction="false" />
+		<pizza x="420" y="212" id="69" />
+		<Player x="387.720154" y="280" velocity_x="0" velocity_y="0" flip_direction="false" />
 	</object>
 	<Particles />
 	<FadeToBlack />
 	<Collision />
 	<renderer>
-		<camera x="-793" y="-200" />
+		<camera x="-773" y="-200" />
 	</renderer>
 </game_state>

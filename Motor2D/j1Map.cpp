@@ -702,6 +702,12 @@ bool j1Map::LoadGameObjects(pugi::xml_node& node)
 					else if (gameobject_name == "landEnemy") {
 						App->object->AddObjEnemyLand({ object.attribute("x").as_float(), object.attribute("y").as_float() });
 					}
+					else if (gameobject_name == "pizza") {
+						App->object->AddObjPizza({ object.attribute("x").as_float(), object.attribute("y").as_float() }, object.attribute("id").as_int());
+					}
+					else if (gameobject_name == "nutCoin") {
+						App->object->AddObjNutCoins({ object.attribute("x").as_float(), object.attribute("y").as_float() }, object.attribute("id").as_int());
+					}
 				}
 			}
 

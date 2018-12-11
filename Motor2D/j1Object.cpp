@@ -59,10 +59,6 @@ bool j1Object::Start() {
 	pickPizzaSFX = App->audio->LoadFx(object_node.child("pizza").child("sfx").text().as_string());
 	pickNutCoinSFX = App->audio->LoadFx(object_node.child("nutCoin").child("sfx").text().as_string());
 
-	// testing add pizza
-	AddObjPizza({ 400,200 }, 2);
-	AddObjNutCoins({ 440,200 }, 3);
-
 	return true;
 }
 
@@ -338,6 +334,18 @@ bool j1Object::Load(pugi::xml_node& node)
 		//	le->MarkObject(true);
 		//	player->SetSwapObject(le);
 		//}
+	}
+
+	// pizza collectables ---
+	for (pugi::xml_node pizza = node.child("pizza"); pizza; pizza = pizza.next_sibling("pizza"))
+	{
+		App->object->AddObjPizza({ pizza.attribute("x").as_float(), pizza.attribute("y").as_float() }, pizza.attribute("id").as_int());
+	}
+
+	// nut coins collectables ---
+	for (pugi::xml_node nutCoin = node.child("nutCoin"); nutCoin; nutCoin = nutCoin.next_sibling("nutCoin"))
+	{
+		App->object->AddObjNutCoins({ nutCoin.attribute("x").as_float(), nutCoin.attribute("y").as_float() }, nutCoin.attribute("id").as_int());
 	}
 
 	// and load the rest of data
