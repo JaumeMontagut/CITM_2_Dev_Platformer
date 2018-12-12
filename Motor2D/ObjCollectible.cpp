@@ -9,7 +9,7 @@
 #include "p2Log.h"
 #include "j1Audio.h"
 
-ObjCollectible::ObjCollectible(fPoint &position, int index, pugi::xml_node& node, uint pickfx, int objectID) : 
+ObjCollectible::ObjCollectible(fPoint &position, int index, pugi::xml_node& node, const uint* pickfx, int objectID) : 
 	pickSFX(pickfx), GameObject(position, index, objectID) 
 {
 	// sprite section of texture rect -----
@@ -51,7 +51,7 @@ bool ObjCollectible::OnTriggerExit()
 
 bool ObjCollectible::OnDestroy()
 {
-	App->audio->PlayFx(pickSFX);
+	App->audio->PlayFx(*pickSFX);
 	App->collision->DeleteCollider(col);
 
 	return true;
@@ -81,7 +81,7 @@ void ObjCollectible::OnCollision(Collider* c1, Collider* c2)
 
 // childs constructors ===========================================================
 
-ObjPizza::ObjPizza(fPoint& position,  int index, pugi::xml_node& node, uint picksfx, int objectID) 
+ObjPizza::ObjPizza(fPoint& position,  int index, pugi::xml_node& node, const uint* picksfx, int objectID) 
 	: ObjCollectible(position, index, node, picksfx, objectID) 
 {
 	original_y = position.y;
@@ -93,7 +93,7 @@ ObjPizza::ObjPizza(fPoint& position,  int index, pugi::xml_node& node, uint pick
 	increaseLivesValue = node.attribute("lives").as_int(0);
 }
 
-ObjNutCoins::ObjNutCoins(fPoint& position, int index, pugi::xml_node& node, uint picksfx, int objectID)
+ObjNutCoins::ObjNutCoins(fPoint& position, int index, pugi::xml_node& node, const uint* picksfx, int objectID)
 	: ObjCollectible(position, index, node, picksfx, objectID) 
 {
 	original_y = position.y;

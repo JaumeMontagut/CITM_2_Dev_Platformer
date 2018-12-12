@@ -120,6 +120,8 @@ bool j1Object::CleanUp() {
 	App->tex->UnloadTexture(laserTurnOffTex);
 	// unload sfx
 	App->audio->UnloadDesiredSFX(impactBoxSFX); // unload a desired sfx
+	App->audio->UnloadDesiredSFX(pickPizzaSFX);
+	App->audio->UnloadDesiredSFX(pickNutCoinSFX);
 	//App->audio->UnloadSFX(); // unload all sfx on audio sfx list
 
 	// "disable" the module
@@ -259,7 +261,7 @@ ObjPizza* j1Object::AddObjPizza(fPoint position, int objectID) {
 	int index = FindEmptyPosition();
 	ObjPizza* ret = nullptr;
 	if (index != -1) {
-		objects[index] = ret = new ObjPizza(position, index, object_node.child("pizza"), pickPizzaSFX, objectID);
+		objects[index] = ret = new ObjPizza(position, index, object_node.child("pizza"), &pickPizzaSFX, objectID);
 	}
 	return ret;
 }
@@ -268,7 +270,7 @@ ObjNutCoins* j1Object::AddObjNutCoins(fPoint position, int objectID) {
 	int index = FindEmptyPosition();
 	ObjNutCoins* ret = nullptr;
 	if (index != -1) {
-		objects[index] = ret = new ObjNutCoins(position, index, object_node.child("nutCoin"), pickNutCoinSFX, objectID);
+		objects[index] = ret = new ObjNutCoins(position, index, object_node.child("nutCoin"), &pickNutCoinSFX, objectID);
 	}
 	return ret;
 }

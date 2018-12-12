@@ -11,7 +11,7 @@ struct Collider;
 
 class ObjCollectible : public GameObject {
 public:
-	ObjCollectible(fPoint &position, int index, pugi::xml_node& object_node, uint pickfx,int objectID = -1);
+	ObjCollectible(fPoint &position, int index, pugi::xml_node& object_node, const uint* pickfx,int objectID = -1);
 	bool PreUpdate() override;
 	bool Update(float dt) override;
 	bool PostUpdate() override;
@@ -33,7 +33,7 @@ public:
 protected:
 
 	SDL_Rect spriteRect;
-	uint pickSFX = 0u;
+	const uint* pickSFX = nullptr;
 
 protected:
 	//
@@ -46,7 +46,7 @@ protected:
 class ObjPizza : public ObjCollectible
 {
 public:
-	ObjPizza(fPoint& position, int index, pugi::xml_node& object_node, uint picksfx, int objectID);
+	ObjPizza(fPoint& position, int index, pugi::xml_node& object_node, const uint* picksfx, int objectID);
 
 	bool Update(float dt);
 	void OnCollision(Collider * c1, Collider * c2) override;
@@ -69,7 +69,7 @@ private:
 class ObjNutCoins : public ObjCollectible
 {
 public:
-	ObjNutCoins(fPoint& position, int index, pugi::xml_node& object_node, uint picksfx, int objectID);
+	ObjNutCoins(fPoint& position, int index, pugi::xml_node& object_node, const uint* picksfx, int objectID);
 
 	bool Update(float dt);
 	void OnCollision(Collider* c1, Collider* c2) override;

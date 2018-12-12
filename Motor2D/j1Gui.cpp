@@ -125,18 +125,18 @@ pugi::xml_node j1Gui::LoadConfig(pugi::xml_document& config_file) const
 bool j1Gui::Start()
 {
 	atlas = App->tex->LoadTexture(atlas_file_name.GetString());
-	// buttons
-	buttonup_texture = App->tex->LoadTexture(buttonup_filename.GetString());
-	buttondown_texture = App->tex->LoadTexture(buttondown_filename.GetString());
-	buttonhighlight_texture = App->tex->LoadTexture(buttonhighlight_filename.GetString());
-	// sets blend mode additive to highlight texture
-	SDL_SetTextureBlendMode(buttonhighlight_texture, SDL_BLENDMODE_ADD);
-	// checkbox
-	checkbox_up_texture = App->tex->LoadTexture(checkbox_up_filename.GetString());
-	checkbox_down_texture = App->tex->LoadTexture(checkbox_down_filename.GetString());
-	checkbox_highlight_texture = App->tex->LoadTexture(checkbox_highlight_filename.GetString());
-	checkbox_check_texture = App->tex->LoadTexture(checkbox_check_filename.GetString());
-	SDL_SetTextureBlendMode(checkbox_highlight_texture, SDL_BLENDMODE_ADD);
+	//// buttons
+	//buttonup_texture = App->tex->LoadTexture(buttonup_filename.GetString());
+	//buttondown_texture = App->tex->LoadTexture(buttondown_filename.GetString());
+	//buttonhighlight_texture = App->tex->LoadTexture(buttonhighlight_filename.GetString());
+	//// sets blend mode additive to highlight texture
+	//SDL_SetTextureBlendMode(buttonhighlight_texture, SDL_BLENDMODE_ADD);
+	//// checkbox
+	//checkbox_up_texture = App->tex->LoadTexture(checkbox_up_filename.GetString());
+	//checkbox_down_texture = App->tex->LoadTexture(checkbox_down_filename.GetString());
+	//checkbox_highlight_texture = App->tex->LoadTexture(checkbox_highlight_filename.GetString());
+	//checkbox_check_texture = App->tex->LoadTexture(checkbox_check_filename.GetString());
+	//SDL_SetTextureBlendMode(checkbox_highlight_texture, SDL_BLENDMODE_ADD);
 
 	return true;
 }

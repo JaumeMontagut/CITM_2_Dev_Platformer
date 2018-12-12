@@ -260,13 +260,13 @@
 	<pizza lives="1">
 		<sprite x="73" y="261" w="16" h="16"/>
 		<wave up="6.0" down="9.0" amplitude="6.0"/>
-		<sfx>todefine</sfx>
+		<sfx>pizza.wav</sfx>
 	</pizza>
 	
 	<nutCoin score="10">
 		<sprite x="94" y="261" w="16" h="16"/>
 		<wave up="9.0" down="9.0" amplitude="2.0"/>
-		<sfx>todefine</sfx>
+		<sfx>nutCoin.wav</sfx>
 	</nutCoin>
 	
   </object>
