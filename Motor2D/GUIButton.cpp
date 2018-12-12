@@ -16,10 +16,10 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*cli
 		this->outSection = new SDL_Rect(out_section->x, out_section->y, out_section->w, out_section->h);
 		childImage = App->gui->CreateImage(position, *out_section);//TODO: Take into account the adjustment
 	}
-	if (inSection != nullptr) {
+	if (in_section != nullptr) {
 		this->inSection = new SDL_Rect(in_section->x, in_section->y, in_section->w, in_section->h);
 	}
-	if (clickSection != nullptr) {
+	if (click_section != nullptr) {
 		this->clickSection = new SDL_Rect(click_section->x, click_section->y, click_section->w, click_section->h);
 	}
 	//Child text

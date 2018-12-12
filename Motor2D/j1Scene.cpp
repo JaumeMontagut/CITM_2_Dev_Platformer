@@ -91,27 +91,30 @@ bool j1Scene::Start()
 
 	//Image example---------------------------------------------------------------------------------------------------------
 	//App->gui->CreateImage(iPoint(20, 60), SDL_Rect(485, 829, 328, 103));
-	//App->gui->CreateImage(iPoint(360, 160), SDL_Rect(485, 829, 328, 103));
-	//App->gui->CreateImage(iPoint(360, 60), SDL_Rect(485, 829, 328, 103));
+	App->gui->CreateImage(iPoint(0, 0), SDL_Rect(344, 0, 512, 385));
+	App->gui->CreateImage(iPoint(320, 60), SDL_Rect(133, 0, 210, 256));
 
 	//Text example----------------------------------------------------------------------------------------------------------
 	//SDL_Color textColor = { 255,13,255,255 };
 	//App->gui->CreateText({ 640,360 }, "<- Banner without text, this is a ONLY TEXT element", textColor);
 
 	//Button example--------------------------------------------------------------------------------------------------------
-	//SDL_Rect outRect = { 417, 173, 218, 57 };
-	//SDL_Rect inRect = { 6, 117, 218, 57 };
-	//SDL_Rect clickRect = { 648, 173, 218, 57 };
-	//const char * string = "hello button";
-	//App->gui->CreateButton({ 0, 0 }, { 0, 0, 100, 100 }, &SayHelloButton, string, &outRect, &inRect, &clickRect);
+	/*SDL_Rect outRect = { 417, 173, 218, 57 };
+	SDL_Rect inRect = { 6, 117, 218, 57 };
+	SDL_Rect clickRect = { 648, 173, 218, 57 };*/
+	const SDL_Rect outRect = { 0, 0, 120, 40 };
+	const SDL_Rect inRect = { 0, 40, 120, 40 };
+	const SDL_Rect clickRect = { 0, 80, 120, 40 };
+	const char * string = "hello button";
+	App->gui->CreateButton({ 410, 100 }, { 0, 0, 100, 100 }, &SayHelloButton, string, &outRect, &inRect, &clickRect);
 
 	//Checkbox--------------------------------------------------------------------------------------------------------------
-	SDL_Rect outRect = { 417, 173, 218, 57 };
+	/*SDL_Rect outRect = { 417, 173, 218, 57 };
 	SDL_Rect inRect = { 6, 117, 218, 57 };
 	SDL_Rect clickRect = { 648, 173, 218, 57 };
 	SDL_Rect checkRect = { 936, 402, 26, 21 };
 	const char * string = "hello checkbox";
-	App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outRect, &inRect, &clickRect, &checkRect);
+	App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outRect, &inRect, &clickRect, &checkRect);*/
 
 	return true;
 }
