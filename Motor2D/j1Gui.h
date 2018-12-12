@@ -17,6 +17,7 @@ class GUIImage;
 class GUIText;
 class GUIButton;
 class GUICheckbox;
+struct _TTF_Font;
 
 enum class MOUSE_STATE
 {
@@ -29,15 +30,27 @@ enum class MOUSE_STATE
 
 struct ButtonTemplates
 {
+	// sections of atlas texture
 	SDL_Rect sectionUp;
 	SDL_Rect sectionHover;
 	SDL_Rect sectionDown;
 	SDL_Rect sectionDisabled;
+	// extra data
+	SDL_Rect bounds;
+	p2SString fontPath;
+	_TTF_Font* font = nullptr;
+	int fontSize = 0;
+	SDL_Color fontColor;
+	uint* clickSfx = nullptr;
+	uint* hoverSfx = nullptr;
+
 };
 
 struct CheckboxTemplates : public ButtonTemplates
 {
-	SDL_Rect sectionCheck;
+	SDL_Rect sectionUpCheck;
+	SDL_Rect sectionHoverCheck;
+	SDL_Rect sectionDownCheck;
 };
 
 // maybe we need a structures of predefined elements somewhere on xml and creates the guielements using it with simple gui methods

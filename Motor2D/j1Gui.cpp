@@ -89,13 +89,50 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			templateType.sectionDisabled.w = node.child("disabled").attribute("w").as_int(0);
 			templateType.sectionDisabled.h = node.child("disabled").attribute("h").as_int(0);
 		}
-		if (node.child("check"))
+		if (node.child("bounds"))
+		{
+			templateType.bounds = { node.child("bounds").attribute("x").as_int(0) ,node.child("bounds").attribute("y").as_int(0),
+									node.child("bounds").attribute("w").as_int(0),node.child("bounds").attribute("h").as_int(0) };
+		}
+		else
+			templateType.bounds = { 0,0,0,0 };
+
+		
+		// if we pass a checkbox element
+		if (node.child("upCheck"))
 		{
 			CheckboxTemplates* link = &(CheckboxTemplates&)templateType;
-			link->sectionCheck.x = node.child("check").attribute("x").as_int(0);
-			link->sectionCheck.y = node.child("check").attribute("y").as_int(0);
-			link->sectionCheck.w = node.child("check").attribute("w").as_int(0);
-			link->sectionCheck.h = node.child("check").attribute("h").as_int(0);
+			link->sectionUpCheck.x = node.child("upCheck").attribute("x").as_int(0);
+			link->sectionUpCheck.y = node.child("upCheck").attribute("y").as_int(0);
+			link->sectionUpCheck.w = node.child("upCheck").attribute("w").as_int(0);
+			link->sectionUpCheck.h = node.child("upCheck").attribute("h").as_int(0);
+		}
+		if (node.child("hoverCheck"))
+		{
+			CheckboxTemplates* link = &(CheckboxTemplates&)templateType;
+			link->sectionHoverCheck.x = node.child("hoverCheck").attribute("x").as_int(0);
+			link->sectionHoverCheck.y = node.child("hoverCheck").attribute("y").as_int(0);
+			link->sectionHoverCheck.w = node.child("hoverCheck").attribute("w").as_int(0);
+			link->sectionHoverCheck.h = node.child("hoverCheck").attribute("h").as_int(0);
+		}
+		if (node.child("downCheck"))
+		{
+			CheckboxTemplates* link = &(CheckboxTemplates&)templateType;
+			link->sectionDownCheck.x = node.child("downCheck").attribute("x").as_int(0);
+			link->sectionDownCheck.y = node.child("downCheck").attribute("y").as_int(0);
+			link->sectionDownCheck.w = node.child("downCheck").attribute("w").as_int(0);
+			link->sectionDownCheck.h = node.child("downCheck").attribute("h").as_int(0);
+		}
+
+		// extra data
+
+		if (node.child("font"))
+		{
+			p2SString fontName = node.child("font").attribute("name").as_string();
+			if (fontName.GetString() != "default")
+			{
+
+			}
 		}
 	
 		ret = true;
