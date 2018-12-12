@@ -80,6 +80,7 @@
     <ClCompile Include="GUICheckbox.cpp" />
     <ClCompile Include="GUIImage.cpp" />
     <ClCompile Include="GUIText.cpp" />
+    <ClCompile Include="GUIInputText.cpp" />
     <ClCompile Include="j1Collision.cpp" />
     <ClCompile Include="j1FadeToBlack.cpp" />
     <ClCompile Include="j1Fonts.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="GUICheckbox.h" />
     <ClInclude Include="GUIImage.h" />
     <ClInclude Include="GUIText.h" />
+    <ClInclude Include="GUIInputText.h" />
     <ClInclude Include="j1Collision.h" />
     <ClInclude Include="j1FadeToBlack.h" />
     <ClInclude Include="j1Fonts.h" />

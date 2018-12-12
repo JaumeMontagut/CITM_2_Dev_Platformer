@@ -14,6 +14,7 @@
 #include "GUIText.h"
 #include "GUIButton.h"
 #include "GUICheckbox.h"
+#include "GUIInputText.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -329,6 +330,15 @@ GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color c
 {
 	GUIText* guiElem = nullptr;
 	guiElem = new GUIText(position, text, color);
+	guiElems.PushBack(guiElem);
+	guiElem->SetFamily(parent);
+	return guiElem;
+}
+
+GUIInputText* j1Gui::CreateInputText(const iPoint& position, const SDL_Rect &bounds, const char* text, SDL_Color color, uint size, GUIElement * parent)
+{
+	GUIInputText* guiElem = nullptr;
+	guiElem = new GUIInputText(position, bounds, text, color, size);
 	guiElems.PushBack(guiElem);
 	guiElem->SetFamily(parent);
 	return guiElem;

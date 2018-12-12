@@ -11,12 +11,14 @@
 
 #define WHITE {255,255,255}
 #define BLUE {0,0,255}
+#define DEFAULT_TEXT_SIZE 12
 
 struct SDL_Texture;
 class GUIImage;
 class GUIText;
 class GUIButton;
 class GUICheckbox;
+class GUIInputText;
 struct _TTF_Font;
 
 enum class MOUSE_STATE
@@ -146,6 +148,7 @@ public:
 	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE, GUIElement * parent = nullptr);
 	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u, GUIElement * parent = nullptr);
 	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, const SDL_Rect * check_section = nullptr, uint clickSFX = 0u, GUIElement * parent = nullptr);
+	GUIInputText* CreateInputText(const iPoint & position, const SDL_Rect & bounds, const char* text = nullptr, SDL_Color color = WHITE, uint size = DEFAULT_TEXT_SIZE, GUIElement * parent = nullptr);
 
 	SDL_Texture* GetAtlas() const;
 

@@ -96,6 +96,9 @@
     <ClCompile Include="ObjCollectible.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
+    <ClCompile Include="GUIInputText.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="ButtonFunctions.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIInputText.h">
+      <Filter>GUIElements</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
