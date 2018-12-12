@@ -3,24 +3,19 @@
 #include "j1Fonts.h"
 #include "j1Render.h"
 
-GUIInputText::GUIInputText(const iPoint& position, const SDL_Rect &bounds, const char* text, SDL_Color color, uint size) : GUIElement(position)
+GUIInputText::GUIInputText(const iPoint& position, const SDL_Rect &bounds, const char* text, SDL_Color color, uint size, const SDL_Rect * outSection = nullptr, const SDL_Rect * inSection = nullptr, GUIElement * parent = nullptr) : GUIElement(position)
 {
 	if (text != nullptr)
 	{
-		texture = App->font->Print(text, color, NULL);
+		childText = App->gui->CreateText(position, text, color, this);
 	}
+
+	//if () {
+
+	//}
 }
 
 bool GUIInputText::PreUpdate()
 {
 	return true;
-}
-
-bool GUIInputText::PostUpdate()
-{
-	if (texture != nullptr) {
-		return App->render->BlitGUI(texture, localPos.x, localPos.y, NULL);
-	}
-
-	return false;
 }
