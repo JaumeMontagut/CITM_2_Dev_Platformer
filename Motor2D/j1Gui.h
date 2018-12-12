@@ -70,7 +70,7 @@ public:
 	iPoint localPos = { 0, 0 };
 	//iPoint globalPos = { 0, 0 };//We also store the global position to avoid recalculating it, adding the parent's one
 	//Tree structure
-	GUIElement* parent;
+	GUIElement* parent = nullptr;
 	p2List<GUIElement*> childs;
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
