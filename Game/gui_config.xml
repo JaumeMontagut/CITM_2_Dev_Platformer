@@ -10,13 +10,16 @@
 				<hover x="0" y="0" w="0" h="0"/>
 				<down x="0" y="0" w="0" h="0"/>
 				<bounds x="0" y="0" w="0" h="0"/>
-				<font name="default" size="12" path="fonts/digiffiti.ttf"/>
+				<font name="digiffiti" size="12" path="fonts/digiffiti.ttf"/>
 				<font_color r="255" g="255" b="255" a="0"/>
 			</button_type_1>
 			<button_type_2>
 				<up x="0" y="0" w="0" h="0"/>
 				<hover x="0" y="0" w="0" h="0"/>
 				<down x="0" y="0" w="0" h="0"/>
+				<bounds x="0" y="0" w="0" h="0"/>
+				<font name="digiffiti" size="12" path="fonts/digiffiti.ttf"/>
+				<font_color r="255" g="255" b="255" a="0"/>
 			</button_type_2>
 		</buttons>
 		<checkboxes>

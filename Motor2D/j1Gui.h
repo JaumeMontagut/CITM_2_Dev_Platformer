@@ -166,6 +166,7 @@ public:
 
 	// TEMPLATIZED element types
 	ButtonTemplates buttonType1;
+	ButtonTemplates buttonType2;
 	CheckboxTemplates checkboxType1;
 	p2List<GUIFonts> fonts;
 

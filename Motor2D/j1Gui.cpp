@@ -37,6 +37,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	if (!LoadElementTemplate(buttonType1, gui_node.child("gui_element_templates").child("buttons").child("button_type_1")))
 		ret = false;
+	if (!LoadElementTemplate(buttonType2, gui_node.child("gui_element_templates").child("buttons").child("button_type_2")))
+		ret = false;
 	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
 		ret = false;
 
@@ -135,10 +137,11 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 
 			while (item != NULL)
 			{
-				if (item->data.fontName.GetString() == fontName.GetString())
+				if (item->data.fontName == fontName)
 				{
 					if(item->data.size == fontSize)
 					{
+						LOG("Font coincidence");
 						templateType.font = item->data.font;
 						break;
 					}
@@ -224,6 +227,9 @@ bool j1Gui::PreUpdate()
 		elem->SetState(mouse_x, mouse_y);
 		elem->PreUpdate();
 	}
+
+	for(int i = 0; i < fonts.Count(); ++i)
+		LOG("fonts count: %i, name:%s", i + 1, fonts.At(i)->data.fontName.GetString());
 
 	return true;
 }
