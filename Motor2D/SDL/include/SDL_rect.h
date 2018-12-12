@@ -68,6 +68,7 @@ typedef struct SDL_Rect
 
 	SDL_Rect();
 	SDL_Rect(int x, int y, int w, int h);
+	void Set(int x, int y, int w, int h);
 	int GetTop() const;
 	int GetBottom() const;
 	int GetLeft() const;
@@ -84,6 +85,16 @@ SDL_FORCE_INLINE SDL_Rect::SDL_Rect(){
 *  \brief Creates a rectangle with position x and y, width w and height h
 */
 SDL_FORCE_INLINE SDL_Rect::SDL_Rect(int x, int y, int w, int h) : x(x), y(y), w(w), h(h) {
+}
+
+/**
+*  \brief Sets all the properties of a rect in a single method
+*/
+SDL_FORCE_INLINE void SDL_Rect::Set(int x, int y, int w, int h) {
+	this->x = x;
+	this->y = y;
+	this->w = w;
+	this->h = h;
 }
 
 /**

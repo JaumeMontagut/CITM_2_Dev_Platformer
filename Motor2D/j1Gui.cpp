@@ -304,7 +304,7 @@ bool GUIElement::CheckBounds(int x, int y)
 
 void GUIElement::DrawOutline()
 {
-	App->render->DrawQuad(bounds, 255, 255, 255, 255, false, false);
+	App->render->DrawQuad(localPos + bounds, 255, 255, 255, 255, false, false);
 }
 
 iPoint GUIElement::GetGlobalPos()

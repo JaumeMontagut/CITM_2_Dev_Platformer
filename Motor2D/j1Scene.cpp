@@ -102,25 +102,15 @@ bool j1Scene::Start()
 	/*SDL_Rect outRect = { 417, 173, 218, 57 };
 	SDL_Rect inRect = { 6, 117, 218, 57 };
 	SDL_Rect clickRect = { 648, 173, 218, 57 };*/
-	SDL_Rect outRect = { 0, 0, 120, 40 };
-	SDL_Rect inRect = { 0, 40, 120, 40 };
-	SDL_Rect clickRect = { 0, 80, 120, 40 };
+	SDL_Rect outRect ( 0, 0, 120, 40 );
+	SDL_Rect inRect ( 0, 40, 120, 40 );
+	SDL_Rect clickRect ( 0, 80, 120, 40 );
 	const char * string = "hello button";
-	App->gui->CreateButton({ 410, 100 }, { 0, 0, 100, 100 }, &SayHelloButton, string, &outRect, &inRect, &clickRect);
-	//
-	outRect.x = 67;
-	outRect.y = 125;
-	outRect.w = 12;
-	outRect.h = 13;
-	inRect.x = 67;
-	inRect.y = 141;
-	inRect.w = 12;
-	inRect.h = 13;
-	clickRect.x = 67;
-	clickRect.y = 157;
-	clickRect.w = 12;
-	clickRect.h = 13;
-	App->gui->CreateButton({ 700, 80 }, { 0, 0, 100, 100 }, &SayHelloButton, nullptr, &outRect, &inRect, &clickRect);
+	App->gui->CreateButton({ 410, 100 }, SDL_Rect(0, 0, 100, 100), &SayHelloButton, string, &outRect, &inRect, &clickRect);
+	outRect.Set(67, 125, 12, 13);
+	inRect.Set(67, 141, 12, 13);
+	clickRect.Set(67, 1587, 12, 13);
+	App->gui->CreateButton({ 700, 80 }, SDL_Rect(0, 0, 100, 100), &SayHelloButton, nullptr, &outRect, &inRect, &clickRect);
 
 	////Checkbox--------------------------------------------------------------------------------------------------------------
 	//SDL_Rect outRect = { 417, 173, 218, 57 };

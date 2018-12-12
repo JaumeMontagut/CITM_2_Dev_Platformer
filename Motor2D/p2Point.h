@@ -7,6 +7,7 @@
 
 #include "p2Defs.h"
 #include <math.h>
+#include "SDL/include/SDL_rect.h"
 
 template<class TYPE>
 class p2Point
@@ -99,6 +100,14 @@ public:
 		x /= num;
 		y /= num;
 		return (*this);
+	}
+
+	const SDL_Rect operator + (SDL_Rect rect) {
+		return SDL_Rect(x + rect.x, y + rect.y, rect.w, rect.h);
+	}
+
+	const SDL_Rect operator += (SDL_Rect rect) {
+		return SDL_Rect(x += rect.x, y += rect.y, rect.w, rect.h);
 	}
 
 	bool operator ==(const p2Point& v) const
