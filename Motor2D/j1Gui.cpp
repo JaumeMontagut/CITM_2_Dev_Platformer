@@ -129,10 +129,38 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 		if (node.child("font"))
 		{
 			p2SString fontName = node.child("font").attribute("name").as_string();
-			if (fontName.GetString() != "default")
-			{
+			int fontSize = node.child("font").attribute("size").as_int(-1);
 
+			p2List_item<GUIFonts>* item = fonts.start;
+
+			while (item != NULL)
+			{
+				if (item->data.fontName.GetString() == fontName.GetString())
+				{
+					if(item->data.size == fontSize)
+					{
+						templateType.font = item->data.font;
+						break;
+					}
+				}
+				item = item->next;
 			}
+			// if not found the same font and same size, loads new font
+			if (templateType.font == nullptr && fontSize != -1)
+			{
+				templateType.font = App->font->Load(node.child("font").attribute("path").as_string(), fontSize);
+				if (templateType.font != nullptr)
+				{
+					GUIFonts newFont;// = new GUIFonts();
+					newFont.font = templateType.font;
+					newFont.fontName.create(fontName.GetString());
+					newFont.size = fontSize;
+					fonts.add(newFont);
+				}
+				else
+					LOG("failed to load new gui font");
+			}
+
 		}
 	
 		ret = true;
@@ -244,9 +272,9 @@ bool j1Gui::CleanUp()
 	LOG("Freeing GUI");
 
 	App->tex->UnloadTexture(atlas);
-	App->tex->UnloadTexture(buttonup_texture);
+	/*App->tex->UnloadTexture(buttonup_texture);
 	App->tex->UnloadTexture(buttondown_texture);
-	App->tex->UnloadTexture(buttonhighlight_texture);
+	App->tex->UnloadTexture(buttonhighlight_texture);*/
 
 	guiElems.Clear(); // dynarray clears itselfs when destructor
 

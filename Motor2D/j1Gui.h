@@ -28,6 +28,13 @@ enum class MOUSE_STATE
 	MAX
 };
 
+struct GUIFonts
+{
+	_TTF_Font* font = nullptr;
+	int size = -1;
+	p2SString fontName;
+};
+
 struct ButtonTemplates
 {
 	// sections of atlas texture
@@ -148,21 +155,24 @@ private:
 public:
 	// TODO: maybe adds a structure to pack all needed textures for specific button type
 	// general buttons textures
-	SDL_Texture* buttonup_texture = nullptr;
-	SDL_Texture* buttondown_texture = nullptr;
-	SDL_Texture* buttonhighlight_texture = nullptr;
-	// general checkboxes textures
-	SDL_Texture* checkbox_up_texture = nullptr;
-	SDL_Texture* checkbox_down_texture = nullptr;
-	SDL_Texture* checkbox_highlight_texture = nullptr;
-	SDL_Texture* checkbox_check_texture = nullptr;
+	//SDL_Texture* buttonup_texture = nullptr;
+	//SDL_Texture* buttondown_texture = nullptr;
+	//SDL_Texture* buttonhighlight_texture = nullptr;
+	//// general checkboxes textures
+	//SDL_Texture* checkbox_up_texture = nullptr;
+	//SDL_Texture* checkbox_down_texture = nullptr;
+	//SDL_Texture* checkbox_highlight_texture = nullptr;
+	//SDL_Texture* checkbox_check_texture = nullptr;
 
 	// TEMPLATIZED element types
 	ButtonTemplates buttonType1;
 	CheckboxTemplates checkboxType1;
+	p2List<GUIFonts> fonts;
 
 	GUIElement * guiScreen = nullptr;
 	bool debugGUI = false;
+
+
 
 private:
 	pugi::xml_document gui_config_doc;
