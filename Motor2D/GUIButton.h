@@ -13,7 +13,6 @@ private:
 	void(*clickFunction)() = nullptr;	//A pointer to the function that's going to be called when we click the button
 	uint clickSfx = 0u;
 	uint hoverSfx = 0u;
-	bool hoverSfxPlayed = false; // prevents play fx again when button is clicked and "unclicked" on top of it
 	//Child image
 	GUIImage * childImage = nullptr;
 	SDL_Rect * outSection = nullptr;	//The sprite of the image when the mouse isn't inside the bounds

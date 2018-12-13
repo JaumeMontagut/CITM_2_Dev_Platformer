@@ -65,13 +65,16 @@ bool GUIButton::PreUpdate()
 		}
 		App->audio->PlayFx(clickSfx);
 	}
-	else if (state == MOUSE_STATE::M_ENTER || (state == MOUSE_STATE::M_IN && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP)) {
+	else if (state == MOUSE_STATE::M_ENTER) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
-		if(!hoverSfxPlayed)
-			App->audio->PlayFx(hoverSfx);
-		hoverSfxPlayed = true;
+		App->audio->PlayFx(hoverSfx);
+	}
+	else if ((state == MOUSE_STATE::M_ENTER || state == MOUSE_STATE::M_IN) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
+		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
+			childImage->section = *inSection;
+		}
 	}
 	else if (state == MOUSE_STATE::M_EXIT) {
 		if (outSection != nullptr  && childImage != nullptr && &childImage->section != outSection) {
