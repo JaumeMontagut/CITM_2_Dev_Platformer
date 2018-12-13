@@ -7,12 +7,13 @@
 #include "j1Audio.h"
 #include "p2Log.h"
 #include "j1Render.h"
+#include "j1Fonts.h"
 
 GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, const SDL_Rect * checkSection, uint clickSfx) : boolPtr(boolPtr), clickSfx(clickSfx), GUIElement(position) {
 	//Create child image
 	if (out_section != nullptr) {
 		this->outSection = new SDL_Rect(out_section->x, out_section->y, out_section->w, out_section->h);
-		childImage = App->gui->CreateImage(position, *out_section);//TODO: Take into account the adjustment
+		childImage = App->gui->CreateImage(position, *out_section, this);
 	}
 	if (out_section != nullptr) {
 		this->inSection = new SDL_Rect(in_section->x, in_section->y, in_section->w, in_section->h);
@@ -25,7 +26,7 @@ GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool 
 	}
 	//Create child Text
 	if (text != nullptr) {
-		App->gui->CreateText(position, text/*,(GUIElement)this*/);//TODO: Take into account the adjustment
+		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Get even another parameter with the font
 	}
 	this->bounds = bounds;
 }
