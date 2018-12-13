@@ -29,6 +29,20 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*cli
 	this->bounds = bounds;
 }
 
+GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void(*clickFunction)(), const char* text) : clickFunction(clickFunction), GUIElement(position)
+{
+	outSection = &templateType.sectionUp;
+	childImage = App->gui->CreateImage(position, *outSection);
+	inSection = &templateType.sectionHover;
+	clickSection = &templateType.sectionDown;
+
+	if (text != nullptr)
+		App->gui->CreateText(position, text);
+
+	bounds = templateType.bounds;
+
+}
+
 bool GUIButton::CleanUp() {
 	RELEASE(outSection);
 	RELEASE(inSection);

@@ -385,6 +385,18 @@ GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds,
 	return guiElem;
 }
 
+GUIButton* j1Gui::CreateButton(ButtonTemplates& templateType, const iPoint& position, void(*clickFunction)(), const char* text, GUIElement* parent)
+{
+	GUIButton* guiElem = nullptr;
+
+	guiElem = new GUIButton(position, templateType, clickFunction, text);
+	guiElems.PushBack(guiElem);
+	guiElem->SetFamily(parent);
+
+	return guiElem;
+
+}
+
 GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, const SDL_Rect * check_section, uint clickSfx, GUIElement * parent)
 {
 	GUICheckbox* guiElem = nullptr;

@@ -6,20 +6,20 @@
 	<gui_element_templates>
 		<buttons>
 			<button_type_1>
-				<up x="13" y="0" w="0" h="0"/>
-				<hover x="0" y="0" w="0" h="0"/>
-				<down x="0" y="0" w="0" h="0"/>
-				<bounds x="0" y="0" w="0" h="0"/>
+				<up x="0" y="0" w="120" h="40"/>
+				<hover x="0" y="40" w="120" h="40"/>
+				<down x="0" y="80" w="120" h="40"/>
+				<bounds x="0" y="0" w="240" h="80"/>
 				<font name="digiffiti" size="12" path="fonts/digiffiti.ttf"/>
 				<font_color r="255" g="255" b="255" a="0"/>
 			</button_type_1>
 			<button_type_2>
-				<up x="0" y="0" w="0" h="0"/>
-				<hover x="0" y="0" w="0" h="0"/>
-				<down x="0" y="0" w="0" h="0"/>
-				<bounds x="0" y="0" w="0" h="0"/>
-				<font name="digiffiti" size="12" path="fonts/digiffiti.ttf"/>
-				<font_color r="255" g="255" b="255" a="0"/>
+				<up x="67" y="125" w="12" h="13"/>
+				<hover x="67" y="141" w="12" h="13"/>
+				<down x="67" y="157" w="12" h="13"/>
+				<bounds x="0" y="0" w="32" h="32"/>
+				<!--<font name="digiffiti" size="12" path="fonts/digiffiti.ttf"/>-->
+				<!--<font_color r="255" g="255" b="255" a="0"/>-->
 			</button_type_2>
 		</buttons>
 		<checkboxes>
