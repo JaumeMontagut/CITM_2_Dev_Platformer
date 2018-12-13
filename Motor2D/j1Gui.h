@@ -30,6 +30,7 @@ enum class MOUSE_STATE
 	MAX
 };
 
+// helper structure to manage fonts for guielements
 struct GUIFonts
 {
 	_TTF_Font* font = nullptr;
@@ -142,6 +143,8 @@ public:
 	// Called before quitting
 	bool CleanUp();
 	pugi::xml_node LoadConfig(pugi::xml_document& gui_config_doc) const;
+	_TTF_Font* CheckGUIFont(p2SString fontName, int fontSize) const; // utility to check if a specific font with specific size are already loaded on guifonts list
+	_TTF_Font* LoadGUIFont(const char* fontName, p2SString fontPath, int fontSize);
 
 	//Create GUI Objects
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent = nullptr);

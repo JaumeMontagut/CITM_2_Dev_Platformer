@@ -134,35 +134,12 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			p2SString fontName = node.child("font").attribute("name").as_string();
 			int fontSize = node.child("font").attribute("size").as_int(-1);
 
-			p2List_item<GUIFonts>* item = fonts.start;
+			templateType.font = CheckGUIFont(fontName, fontSize);
 
-			while (item != NULL)
+			// if we doesnt have the same font with same size loaded
+			if (templateType.font == nullptr)
 			{
-				if (item->data.fontName == fontName)
-				{
-					if(item->data.size == fontSize)
-					{
-						LOG("Font coincidence");
-						templateType.font = item->data.font;
-						break;
-					}
-				}
-				item = item->next;
-			}
-			// if not found the same font and same size, loads new font
-			if (templateType.font == nullptr && fontSize != -1)
-			{
-				templateType.font = App->font->Load(node.child("font").attribute("path").as_string(), fontSize);
-				if (templateType.font != nullptr)
-				{
-					GUIFonts newFont;// = new GUIFonts();
-					newFont.font = templateType.font;
-					newFont.fontName.create(fontName.GetString());
-					newFont.size = fontSize;
-					fonts.add(newFont);
-				}
-				else
-					LOG("failed to load new gui font");
+				templateType.font = LoadGUIFont(fontName.GetString(), node.child("font").attribute("path").as_string(), fontSize);
 			}
 
 		}
@@ -170,6 +147,60 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 		ret = true;
 	}
 	
+
+	return ret;
+}
+
+_TTF_Font* j1Gui::LoadGUIFont(const char* fontName, p2SString path, int fontSize)
+{
+	_TTF_Font* ret = nullptr;
+
+	// prevention
+	if (fontSize < 0)
+	{
+		LOG("invalid font size, font not loaded");
+		return ret;
+	}
+
+	ret = App->font->Load(path.GetString(), fontSize);
+
+	if (ret != NULL) // if succesful load
+	{
+		// create new guifont
+		GUIFonts newFont;
+		newFont.font = ret;
+		newFont.fontName.create(fontName);
+		newFont.size = fontSize;
+		fonts.add(newFont);
+	}
+	else
+	{
+		LOG("failed to load new gui font");
+	}
+
+	return ret;
+	
+}
+
+_TTF_Font* j1Gui::CheckGUIFont(p2SString fontName, int fontSize) const// check if we have a specific font+size loaded on guifonts list
+{
+	_TTF_Font* ret = nullptr;
+
+	p2List_item<GUIFonts>* item = fonts.start;
+
+	while (item != NULL)
+	{
+		if (item->data.fontName == fontName)
+		{
+			if (item->data.size == fontSize)
+			{
+				LOG("Font coincidence");
+				ret = item->data.font;
+				break;
+			}
+		}
+		item = item->next;
+	}
 
 	return ret;
 }
@@ -284,6 +315,7 @@ bool j1Gui::CleanUp()
 	App->tex->UnloadTexture(buttonhighlight_texture);*/
 
 	guiElems.Clear(); // dynarray clears itselfs when destructor
+	fonts.clear(); // free all guifonts
 
 	return true;
 }
