@@ -60,6 +60,7 @@ struct ButtonTemplates
 	SDL_Color fontColor;
 	uint clickSfx = 0u;
 	uint hoverSfx = 0u;
+	int downOffset = 0; // used for text/image displacement on y coord.
 
 };
 

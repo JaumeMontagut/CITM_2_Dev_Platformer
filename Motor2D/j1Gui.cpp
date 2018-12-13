@@ -87,6 +87,8 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			templateType.sectionDown.y = node.child("down").attribute("y").as_int(0);
 			templateType.sectionDown.w = node.child("down").attribute("w").as_int(0);
 			templateType.sectionDown.h = node.child("down").attribute("h").as_int(0);
+			// sets offset too
+			templateType.downOffset = node.child("down").attribute("offset").as_int(0);
 		}
 		if (node.child("disabled"))
 		{
