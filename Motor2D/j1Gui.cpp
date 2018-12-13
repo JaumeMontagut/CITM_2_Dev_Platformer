@@ -356,6 +356,15 @@ bool j1Gui::CleanUp()
 	guiElems.Clear(); // dynarray clears itselfs when destructor
 	fonts.clear(); // free all guifonts
 
+	// unload only gui sfx (just in case)
+	p2List_item<GUISfx>* item = sfx.start;
+	while (item != NULL)
+	{
+		App->audio->UnloadDesiredSFX(item->data.fx);
+		item = item->next;
+	}
+	sfx.clear();
+
 	return true;
 }
 
