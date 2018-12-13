@@ -80,7 +80,6 @@ bool GUIButton::PreUpdate()
 		if (outSection != nullptr  && childImage != nullptr && &childImage->section != outSection) {
 			childImage->section = *outSection;
 		}
-		hoverSfxPlayed = false;
 	}
 
 	return true;

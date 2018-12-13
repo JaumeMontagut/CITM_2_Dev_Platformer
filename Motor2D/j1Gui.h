@@ -156,6 +156,7 @@ public:
 	void LoadGUISfx(pugi::xml_node& node);
 
 	//Create GUI Objects
+	GUIElement* CreateScreen();
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent = nullptr);
 	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE, _TTF_Font* font = nullptr, GUIElement * parent = nullptr);
 	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u, GUIElement * parent = nullptr);

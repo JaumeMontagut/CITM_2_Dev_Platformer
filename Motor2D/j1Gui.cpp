@@ -329,19 +329,19 @@ void GUIElement::SetState(int x, int y) {
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
-	for (int i = 0; i < guiElems.Count(); ++i)
-	{
-		GUIElement* e = *guiElems.At(i);
-		e->PostUpdate();
-	}
-
-	if (debugGUI) {
-		for (int i = 0; i < guiElems.Count(); ++i) {
-			GUIElement* e = *guiElems.At(i);
-			e->DrawOutline();
+	//Iteration
+	p2List<GUIElement*> elemsToDraw;
+	//1. Get the first element
+	elemsToDraw.add(guiScreen);
+	//2. Draw every element in the list and add their childs
+	//   They will end up in a generational order (first gen first, second gen second, etc.)
+	for (p2List_item<GUIElement*>* iterator = elemsToDraw.start; iterator != nullptr; iterator = iterator->next) {
+		iterator->data->PostUpdate();
+		iterator->data->DrawOutline();
+		for (p2List_item<GUIElement*>* childIterator = iterator->data->childs.start; childIterator != nullptr; childIterator = childIterator->next) {
+			elemsToDraw.add(childIterator->data);
 		}
 	}
-
 	return true;
 }
 
@@ -387,15 +387,36 @@ bool GUIElement::CheckBounds(int x, int y)
 
 void GUIElement::DrawOutline()
 {
-	App->render->DrawQuad(localPos + bounds, 255, 255, 255, 255, false, false);
+	if (App->gui->debugGUI) {
+		App->render->DrawQuad(localPos + bounds, 255, 255, 255, 255, false, false);
+	}
 }
 
 iPoint GUIElement::GetGlobalPos()
 {
-	if (parent != nullptr) {
-		return localPos + parent->GetGlobalPos();
+	//Iteration
+	iPoint globalPos (0,0);
+	GUIElement * iterator = this;
+	for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
+		globalPos += iterator->localPos;
 	}
-	return localPos;
+	return globalPos;
+
+
+	//Recursive
+	//if (parent != nullptr) {
+	//	return localPos + parent->GetGlobalPos();
+	//}
+	//return localPos;
+}
+
+GUIElement * j1Gui::CreateScreen()
+{
+	GUIElement* guiElem = nullptr;
+	guiElem = new GUIElement(iPoint(0,0));
+	guiElems.PushBack(guiElem);
+	//Doesn't have to set family because it's the first element
+	return guiElem;
 }
 
 // UIelements constructions
@@ -474,9 +495,12 @@ bool GUIElement::CleanUp()
 }
 
 void GUIElement::SetFamily(GUIElement* parent) {
-	//if (parent == nullptr) {
-	//	parent = App->gui->guiScreen;
-	//}
-	//this->parent = parent;
-	//parent->childs.add(this);
+	//If no parent was detected, set it to be directly a child of the screen
+	if (parent == nullptr) {
+		this->parent = App->gui->guiScreen;
+	}
+	else {
+		this->parent = parent;
+	}
+	this->parent->childs.add(this);
 }
