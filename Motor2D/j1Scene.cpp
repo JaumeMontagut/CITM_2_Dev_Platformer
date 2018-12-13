@@ -106,8 +106,11 @@ bool j1Scene::Start()
 	App->gui->CreateButton({ 410, 100 }, SDL_Rect(0, 0, 100, 100), &SayHelloButton, string, &outRect, &inRect, &clickRect); */
 
 	// templatized button example, wip
-	App->gui->CreateButton(App->gui->buttonType1, { 410, 120 }, &SayHelloButton, "Templatized button");
+	App->gui->CreateButton(App->gui->buttonType1, { 410, 120 }, &SayHelloButton, "TEMPLATIZED button");
 	App->gui->CreateButton(App->gui->buttonType1, { 410, 220 }, &SayHelloButton, "Templatized button 2");
+	App->gui->CreateButton(App->gui->buttonType1, { 410, 320 }, &SayHelloButton, "button");
+	App->gui->CreateButton(App->gui->buttonType1, { 410, 420 }, &SayHelloButton, "PLAY");
+
 
 	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton);
 

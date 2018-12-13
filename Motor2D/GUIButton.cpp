@@ -36,8 +36,10 @@ GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void
 	inSection = &templateType.sectionHover;
 	clickSection = &templateType.sectionDown;
 
+	// set desired font color
+	
 	if (text != nullptr)
-		App->gui->CreateText(position, text);
+		App->gui->CreateText(position, text, templateType.fontColor, templateType.font);
 
 	bounds = templateType.bounds;
 

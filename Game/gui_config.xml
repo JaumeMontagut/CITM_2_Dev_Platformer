@@ -10,7 +10,7 @@
 				<hover x="0" y="40" w="120" h="40"/>
 				<down x="0" y="80" w="120" h="40"/>
 				<bounds x="0" y="0" w="240" h="80"/>
-				<font name="digiffiti" size="12" path="fonts/digiffiti.ttf"/>
+				<font name="digiffiti" size="32" path="fonts/digiffiti.ttf"/>
 				<font_color r="255" g="255" b="255" a="0"/>
 			</button_type_1>
 			<button_type_2>

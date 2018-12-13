@@ -127,7 +127,9 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			link->sectionDownCheck.h = node.child("downCheck").attribute("h").as_int(0);
 		}
 
-		// extra data
+		// extra data ==========================
+
+		// font relative  ---
 
 		if (node.child("font"))
 		{
@@ -143,7 +145,18 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			}
 
 		}
-	
+
+		// font color
+		
+		if (node.child("font_color"))
+		{
+			pugi::xml_node colorNode = node.child("font_color");
+			SDL_Color fontColor = { colorNode.attribute("r").as_int(), colorNode.attribute("g").as_int(),
+									colorNode.attribute("b").as_int(), colorNode.attribute("a").as_int() };
+			templateType.fontColor = fontColor;
+		}
+		// ======================================
+
 		ret = true;
 	}
 	
@@ -358,10 +371,10 @@ GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section, G
 	return guiElem;
 }
 
-GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color color, GUIElement * parent)
+GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color color, _TTF_Font* font, GUIElement * parent)
 {
 	GUIText* guiElem = nullptr;
-	guiElem = new GUIText(position, text, color);
+	guiElem = new GUIText(position, text, color, font);
 	guiElems.PushBack(guiElem);
 	guiElem->SetFamily(parent);
 	return guiElem;

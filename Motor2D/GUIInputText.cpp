@@ -7,7 +7,7 @@ GUIInputText::GUIInputText(const iPoint& position, const SDL_Rect &bounds, const
 {
 	if (text != nullptr)
 	{
-		childText = App->gui->CreateText(position, text, color, this);
+		childText = App->gui->CreateText(position, text, color,nullptr, this);
 	}
 
 	//if () {

@@ -148,7 +148,7 @@ public:
 
 	//Create GUI Objects
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent = nullptr);
-	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE, GUIElement * parent = nullptr);
+	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE, _TTF_Font* font = nullptr, GUIElement * parent = nullptr);
 	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u, GUIElement * parent = nullptr);
 	GUIButton* CreateButton(ButtonTemplates& templateType, const iPoint& position, void(*clickFunction)() = nullptr, const char* text = nullptr, GUIElement* parent = nullptr);
 	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, const SDL_Rect * check_section = nullptr, uint clickSFX = 0u, GUIElement * parent = nullptr);
