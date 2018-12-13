@@ -3,6 +3,10 @@
 	<fonts>
 	
 	</fonts>
+	<general_sfx>
+		<sfx name="standardClick" path="UI/click.wav"/>
+		<sfx name="standardHover" path="UI/mouse_enter.wav"/>
+	</general_sfx>
 	<gui_element_templates>
 		<buttons>
 			<button_type_1>
@@ -12,6 +16,7 @@
 				<bounds x="0" y="0" w="240" h="80"/>
 				<font name="digiffiti" size="32" path="fonts/digiffiti.ttf"/>
 				<font_color r="255" g="83" b="13" a="0"/>
+				<sfx click="standardClick" hover="standardHover"/>
 			</button_type_1>
 			<button_type_2>
 				<up x="67" y="125" w="12" h="13"/>

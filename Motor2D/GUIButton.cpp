@@ -36,7 +36,9 @@ GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void
 	inSection = &templateType.sectionHover;
 	clickSection = &templateType.sectionDown;
 
-	// set desired font color
+	// assigns sfx
+	clickSfx = templateType.clickSfx;
+	hoverSfx = templateType.hoverSfx;
 	
 	if (text != nullptr)
 		App->gui->CreateText(position, text, templateType.fontColor, templateType.font);
@@ -67,6 +69,7 @@ bool GUIButton::PreUpdate()
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
+		App->audio->PlayFx(hoverSfx);
 	}
 	else if (state == MOUSE_STATE::M_EXIT) {
 		if (outSection != nullptr  && childImage != nullptr && &childImage->section != outSection) {

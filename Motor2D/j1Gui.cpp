@@ -36,6 +36,9 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = gui_node.child("atlas").attribute("file").as_string("");
 
+	// load general sfx from gui_config.xml
+	LoadGUISfx(gui_node);
+
 	if (!LoadElementTemplate(buttonType1, gui_node.child("gui_element_templates").child("buttons").child("button_type_1")))
 		ret = false;
 	if (!LoadElementTemplate(buttonType2, gui_node.child("gui_element_templates").child("buttons").child("button_type_2")))
@@ -43,19 +46,19 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
 		ret = false;
 
-	//// button textures || if we put all of them on an atlas, is needed a fast code adaptation, we must think it good
-	//buttonup_filename = gui_node.child("button_up").attribute("file").as_string("");
-	//buttondown_filename = gui_node.child("button_down").attribute("file").as_string("");
-	//buttonhighlight_filename = gui_node.child("button_hover").attribute("file").as_string("");
-	//// checkbox textures
-	//checkbox_up_filename = gui_node.child("checkbox_up").attribute("file").as_string("");
-	//checkbox_down_filename = gui_node.child("checkbox_down").attribute("file").as_string("");
-	//checkbox_highlight_filename = gui_node.child("checkbox_highlight").attribute("file").as_string("");
-	//checkbox_check_filename = gui_node.child("checkbox_check").attribute("file").as_string("");
-	////checkbox_check_locked_filename = conf.child("checkbox_check_locked").attribute("file").as_string("");
-
 
 	return ret;
+}
+
+void j1Gui::LoadGUISfx(pugi::xml_node& node)
+{
+	for (pugi::xml_node sfx_node = node.child("general_sfx").child("sfx"); sfx_node; sfx_node = sfx_node.next_sibling("sfx"))
+	{
+		GUISfx fx;
+		fx.fx = App->audio->LoadFx(sfx_node.attribute("path").as_string());
+		fx.fx_name.create(sfx_node.attribute("name").as_string());
+		sfx.add(fx);
+	}
 }
 
 bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& node)
@@ -156,6 +159,29 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			templateType.fontColor = fontColor;
 		}
 		// ======================================
+
+		// SFX
+		// checks if any desired sfx are loaded on guisfx list and associates to a template
+		if (node.child("sfx"))
+		{
+			p2SString clickSfxName = node.child("sfx").attribute("click").as_string();
+			p2SString hoverSfxName = node.child("sfx").attribute("hover").as_string();
+
+			p2List_item<GUISfx>* item = sfx.start;
+			while (item != NULL)
+			{
+				if (clickSfxName == item->data.fx_name)
+				{
+					templateType.clickSfx = item->data.fx;
+				}
+				if (hoverSfxName == item->data.fx_name)
+				{
+					templateType.hoverSfx = item->data.fx;
+				}
+
+				item = item->next;
+			}
+		}
 
 		ret = true;
 	}
