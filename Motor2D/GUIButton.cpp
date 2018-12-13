@@ -5,16 +5,13 @@
 #include "SDL/include/SDL_mouse.h"
 #include "j1Audio.h"
 #include "p2Log.h"
-
-//GUIButton::GUIButton(GUITemplate, text) {
-//
-//}
+#include "j1Fonts.h"
 
 GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) : clickFunction(clickFunction), clickSfx(clickSfx), GUIElement(position) {
 	//Child image
 	if (out_section != nullptr) {
 		this->outSection = new SDL_Rect(out_section->x, out_section->y, out_section->w, out_section->h);
-		childImage = App->gui->CreateImage(position, *out_section);//TODO: Take into account the adjustment
+		childImage = App->gui->CreateImage(position, *out_section, this);//TODO: Take into account the adjustment
 	}
 	if (in_section != nullptr) {
 		this->inSection = new SDL_Rect(in_section->x, in_section->y, in_section->w, in_section->h);
@@ -24,7 +21,7 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*cli
 	}
 	//Child text
 	if (text != nullptr) {
-		App->gui->CreateText(position, text/*,(GUIElement)this*/);//TODO: Take into account the adjustment
+		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Take into account the adjustment
 	}
 	this->bounds = bounds;
 }
@@ -32,7 +29,7 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*cli
 GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void(*clickFunction)(), const char* text) : clickFunction(clickFunction), GUIElement(position)
 {
 	outSection = &templateType.sectionUp;
-	childImage = App->gui->CreateImage(position, *outSection);
+	childImage = App->gui->CreateImage(position, *outSection, this);
 	inSection = &templateType.sectionHover;
 	clickSection = &templateType.sectionDown;
 
@@ -41,10 +38,9 @@ GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void
 	hoverSfx = templateType.hoverSfx;
 	
 	if (text != nullptr)
-		App->gui->CreateText(position, text, templateType.fontColor, templateType.font);
+		App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
 
 	bounds = templateType.bounds;
-
 }
 
 bool GUIButton::CleanUp() {
