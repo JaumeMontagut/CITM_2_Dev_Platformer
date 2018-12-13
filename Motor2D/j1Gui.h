@@ -98,6 +98,7 @@ public:
 	bool CheckBounds(int x, int y);
 	void DrawOutline();
 	iPoint GetGlobalPos();
+	bool IsVisible();
 };
 
 enum class GUI_ADJUST
