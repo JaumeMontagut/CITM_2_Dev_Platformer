@@ -336,13 +336,15 @@ bool j1Gui::PostUpdate()
 	//2. Draw every element in the list and add their childs
 	//   They will end up in a generational order (first gen first, second gen second, etc.)
 	for (p2List_item<GUIElement*>* iterator = elemsToDraw.start; iterator != nullptr; iterator = iterator->next) {
-		if (iterator->data->IsVisible()) {
+		if (iterator->data->visible) {
 			iterator->data->PostUpdate();
 			iterator->data->DrawOutline();
+			//If the object is not visible we simply don't get their children to draw them
+			for (p2List_item<GUIElement*>* childIterator = iterator->data->childs.start; childIterator != nullptr; childIterator = childIterator->next) {
+				elemsToDraw.add(childIterator->data);
+			}
 		}
-		for (p2List_item<GUIElement*>* childIterator = iterator->data->childs.start; childIterator != nullptr; childIterator = childIterator->next) {
-			elemsToDraw.add(childIterator->data);
-		}
+
 	}
 	return true;
 }
@@ -409,16 +411,6 @@ iPoint GUIElement::GetGlobalPos()
 	//	return localPos + parent->GetGlobalPos();
 	//}
 	//return localPos;
-}
-
-bool GUIElement::IsVisible()
-{
-	//Iteration
-	bool isVisible = true;
-	for (GUIElement * iterator = this; iterator != nullptr && isVisible == true; iterator = iterator->parent) {
-		isVisible = isVisible && iterator->visible;
-	}
-	return isVisible;
 }
 
 GUIElement * j1Gui::CreateScreen()
