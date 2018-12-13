@@ -69,12 +69,15 @@ bool GUIButton::PreUpdate()
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
-		App->audio->PlayFx(hoverSfx);
+		if(!hoverSfxPlayed)
+			App->audio->PlayFx(hoverSfx);
+		hoverSfxPlayed = true;
 	}
 	else if (state == MOUSE_STATE::M_EXIT) {
 		if (outSection != nullptr  && childImage != nullptr && &childImage->section != outSection) {
 			childImage->section = *outSection;
 		}
+		hoverSfxPlayed = false;
 	}
 
 	return true;
