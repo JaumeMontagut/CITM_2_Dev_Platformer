@@ -112,7 +112,7 @@ bool j1Scene::Start()
 	App->gui->CreateButton(App->gui->buttonType1, { 410, 420 }, &SayHelloButton, "PLAY");
 
 
-	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton);
+	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton, "blablabla");
 
 	////Checkbox--------------------------------------------------------------------------------------------------------------
 	//SDL_Rect outRect = { 417, 173, 218, 57 };
