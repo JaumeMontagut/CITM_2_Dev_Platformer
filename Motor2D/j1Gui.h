@@ -6,6 +6,8 @@
 #include "p2Point.h"
 #include "p2List.h"
 #include "SDL/include/SDL_rect.h"
+#include "p2SString.h"
+#include <map>
 
 #define CURSOR_WIDTH 2
 
@@ -164,6 +166,10 @@ public:
 	_TTF_Font* CheckGUIFont(p2SString fontName, int fontSize) const; // utility to check if a specific font with specific size are already loaded on guifonts list
 	_TTF_Font* LoadGUIFont(const char* fontName, p2SString fontPath, int fontSize);
 	void LoadGUISfx(pugi::xml_node& node);
+	void FillFunctionsList();
+	//Returns a pointer to the function with the specified name
+	//Used for the button functions
+	void(*GetButtonFunction(p2SString functionName))();
 
 	// load all gui elements required for current scene
 	bool LoadGUI(p2SString gui_xml_path);
@@ -178,8 +184,8 @@ public:
 	GUIElement* CreateScreen();
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent = nullptr);
 	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE, _TTF_Font* font = nullptr, GUIElement * parent = nullptr);
-	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u, GUIElement * parent = nullptr);
-	GUIButton* CreateButton(ButtonTemplates& templateType, const iPoint& position, void(*clickFunction)() = nullptr, const char* text = nullptr, GUIElement* parent = nullptr);
+	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, p2SString functionName = "\0", const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u, GUIElement * parent = nullptr);
+	GUIButton* CreateButton(ButtonTemplates& templateType, const iPoint& position, p2SString functionName = "\0", const char* text = nullptr, GUIElement* parent = nullptr);
 	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * outUncheckSection = nullptr, const SDL_Rect * inUncheckSection = nullptr, const SDL_Rect * clickUncheckSection = nullptr, const SDL_Rect * outCheckSection = nullptr, const SDL_Rect * inCheckSection = nullptr, const SDL_Rect * clickCheckSection = nullptr, uint clickSFX = 0u, GUIElement * parent = nullptr);
 	GUIInputText* CreateInputText(const iPoint & position, const SDL_Rect & bounds, const char* text = nullptr, SDL_Color color = WHITE, uint size = DEFAULT_TEXT_SIZE, GUIElement * parent = nullptr);
 
@@ -232,6 +238,7 @@ private:
 	p2SString checkbox_check_filename;
 	//p2SString checkbox_check_locked_filename;
 	p2DynArray<GUIElement*> guiElems = NULL;
+	std::map<std::string, void(*)()> functionMap;
 };
 
 #endif // __j1GUI_H__

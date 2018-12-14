@@ -8,7 +8,8 @@
 #include "j1Fonts.h"
 #include "GUIText.h"
 
-GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) : clickFunction(clickFunction), clickSfx(clickSfx), GUIElement(position) {
+GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, p2SString functionName, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) :
+	clickSfx(clickSfx), GUIElement(position) {
 	//Child image
 	if (out_section != nullptr) {
 		this->outSection = new SDL_Rect(out_section->x, out_section->y, out_section->w, out_section->h);
@@ -24,11 +25,11 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*cli
 	if (text != nullptr) {
 		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Take into account the adjustment
 	}
+	clickFunction = App->gui->GetButtonFunction(functionName);
 	this->bounds = bounds;
 }
 
-GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void(*clickFunction)(), const char* text) :
-	clickFunction(clickFunction),
+GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, p2SString functionName, const char* text) :
 	outSection(&templateType.sectionUp),
 	inSection(&templateType.sectionHover),
 	clickSection(&templateType.sectionDown),
@@ -44,6 +45,7 @@ GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void
 	if (text != nullptr) {
 		childText = App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
 	}
+	clickFunction = App->gui->GetButtonFunction(functionName);
 }
 
 bool GUIButton::CleanUp() {

@@ -10,6 +10,8 @@
 #include "j1Window.h"
 #include "j1Input.h"
 #include "Brofiler/Brofiler.h"
+#include "ButtonFunctions.h"
+#include <map>
 //Gui Elements
 #include "GUIImage.h"
 #include "GUIText.h"
@@ -47,6 +49,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
 		ret = false;
 
+	FillFunctionsList();
 
 	return ret;
 }
@@ -195,9 +198,23 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 
 		ret = true;
 	}
-	
-
 	return ret;
+}
+
+void j1Gui::FillFunctionsList()
+{
+	functionMap["SayHelloButton"] = &SayHelloButton;
+	//functionMap["PlayGame"] = &PlayGame;
+	//functionMap["ContinueGame"] = &ContinueGame;
+	//functionMap["ExitGame"] = &ExitGame;
+	//functionMap["ResumeGame"] = &ResumeGame;
+	//functionMap["OpenMainMenu"] = &OpenMainMenu;
+	//functionMap["OpenSettings"] = &OpenSettings;
+	//functionMap["OpenCredits"] = &OpenCredits;
+}
+
+void (*j1Gui::GetButtonFunction(p2SString functionName))() {
+	return functionMap[functionName.GetString()];
 }
 
 _TTF_Font* j1Gui::LoadGUIFont(const char* fontName, p2SString path, int fontSize)
@@ -321,9 +338,9 @@ bool j1Gui::PreUpdate()
 		}
 	}
 
-	for (int i = 0; i < fonts.Count(); ++i) {
-		LOG("fonts count: %i, name:%s", i + 1, fonts.At(i)->data.fontName.GetString());
-	}
+	//for (int i = 0; i < fonts.Count(); ++i) {
+	//	LOG("fonts count: %i, name:%s", i + 1, fonts.At(i)->data.fontName.GetString());
+	//}
 
 	return true;
 }
@@ -494,20 +511,20 @@ GUIInputText* j1Gui::CreateInputText(const iPoint& position, const SDL_Rect &bou
 return guiElem;
 }
 
-GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx, GUIElement * parent)
+GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, p2SString functionName, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx, GUIElement * parent)
 {
 	GUIButton* guiElem = nullptr;
-	guiElem = new GUIButton(position, bounds, clickFunction, text, out_section, in_section, click_section);
+	guiElem = new GUIButton(position, bounds, functionName, text, out_section, in_section, click_section);
 	guiElems.PushBack(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;
 }
 
-GUIButton* j1Gui::CreateButton(ButtonTemplates& templateType, const iPoint& position, void(*clickFunction)(), const char* text, GUIElement* parent)
+GUIButton* j1Gui::CreateButton(ButtonTemplates& templateType, const iPoint& position, p2SString functionName, const char* text, GUIElement* parent)
 {
 	GUIButton* guiElem = nullptr;
 
-	guiElem = new GUIButton(position, templateType, clickFunction, text);
+	guiElem = new GUIButton(position, templateType, functionName, text);
 	guiElems.PushBack(guiElem);
 	guiElem->SetParent(parent);
 

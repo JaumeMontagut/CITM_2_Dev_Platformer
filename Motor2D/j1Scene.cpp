@@ -15,7 +15,6 @@
 #include "ObjPlayer.h"
 #include "j1Pathfinding.h"
 #include "Brofiler/Brofiler.h"
-#include "ButtonFunctions.h"
 
 #include "j1Particles.h"
 #include "j1Gui.h"
