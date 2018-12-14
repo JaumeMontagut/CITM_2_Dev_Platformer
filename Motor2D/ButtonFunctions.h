@@ -1,7 +1,11 @@
 #ifndef _BUTTON_FUNCTIONS_H_
 #define _BUTTON_FUNCTIONS_H_
+//Important: Don't include this file (only has to be included on Gui)
 
 #include "p2Log.h"
+#include "j1App.h"
+#include "j1Map.h"
+#include "j1FadeToBlack.h"
 
 //Steps to create a function that's going to be called on button press
 //In the tmx (Tiled), in the object 
@@ -21,19 +25,29 @@ void SayHelloButton()
 }
 
 void PlayGame() {
-
+	// Load level 001 (It's the second one since the first one is the main menu screen)
+	p2List_item<Levels*>* levelData = App->map->data.levels.start->next;
+	App->fade_to_black->FadeToBlack(levelData->data->name.GetString(), 1.0f);
 }
 
 void ContinueGame() {
-
+	if (!App->fade_to_black->IsFading()) {
+		App->LoadGame("savegame.xml");
+	}
 }
 
 void ExitGame() {
-
+	App->requestExit = true;
 }
 
 void ResumeGame() {
+	App->pause = false;
+	App->transition = true;
+}
 
+void OpenInGameMenu() {
+	App->pause = true;
+	//TODO: Open InGame menu
 }
 
 void OpenMainMenu() {

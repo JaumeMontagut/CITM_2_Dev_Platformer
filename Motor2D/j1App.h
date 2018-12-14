@@ -109,10 +109,10 @@ public:
 	bool prepareToLoad = false;
 	bool readyToLoad = false;
 	bool want_to_load = false;
-
 	bool vsync = false;
-
 	bool transition = false;
+	bool requestExit = false;
+	bool pause = false;
 
 private:
 
@@ -140,7 +140,7 @@ private:
 	uint32				last_sec_frame_count = 0;
 	uint32				prev_last_sec_frame_count = 0;
 	uint32				capTime = 0;
-	uint32				framerateCap = 0;
+	float				framerateCap = 0.0f;
 	float				dt = 0.0f;
 	bool				capFrames = true;
 };

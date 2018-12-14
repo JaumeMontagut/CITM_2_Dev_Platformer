@@ -285,8 +285,8 @@ void j1Scene::CameraLogic(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
-		// Load the first level of the list -------------------------
-		p2List_item<Levels*>* levelData = App->map->data.levels.start;
+		// Load level 001 (It's the second one since the first one is the main menu screen)
+		p2List_item<Levels*>* levelData = App->map->data.levels.start->next;
 		App->fade_to_black->FadeToBlack(levelData->data->name.GetString(), 1.0f);
 	}
 

@@ -99,7 +99,7 @@ bool j1App::Awake()
 		app_config = config.child("app");
 		title.create(app_config.child("title").child_value());
 		organization.create(app_config.child("organization").child_value());
-		framerateCap = app_config.attribute("framerate_cap").as_int();
+		framerateCap = app_config.attribute("framerate_cap").as_float();
 		capTime = 1000 / app_config.attribute("framerate_cap").as_int();
 	}
 
@@ -165,6 +165,9 @@ bool j1App::Update()
 	if(ret == true)
 		ret = PostUpdate();
 
+	if (ret == true)
+		ret = !requestExit;
+
 	FinishUpdate();
 	return ret;
 }
@@ -191,12 +194,17 @@ void j1App::PrepareUpdate()
 {
 	frame_count++;
 	last_sec_frame_count++;
-	if (transition) {
-		dt = 1.0f / (float)framerateCap;
-		transition = false;
+	if (pause) {
+		dt = 0.0f;
 	}
 	else {
-		dt = frame_time.ReadSec();
+		if (transition) {
+			dt = 1.0f / framerateCap;
+			transition = false;
+		}
+		else {
+			dt = frame_time.ReadSec();
+		}
 	}
 
 	frame_time.Start();
