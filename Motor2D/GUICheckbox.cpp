@@ -9,66 +9,78 @@
 #include "j1Render.h"
 #include "j1Fonts.h"
 
-GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, const SDL_Rect * checkSection, uint clickSfx) : boolPtr(boolPtr), clickSfx(clickSfx), GUIElement(position) {
+GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * outUncheckSection, const SDL_Rect * inUncheckSection, const SDL_Rect * clickUncheckSection, const SDL_Rect * outCheckSection, const SDL_Rect * inCheckSection, const SDL_Rect * clickCheckSection, uint clickSfx) : boolPtr(boolPtr), clickSfx(clickSfx), GUIElement(position) {
 	//Create child image
-	if (out_section != nullptr) {
-		this->outSection = new SDL_Rect(out_section->x, out_section->y, out_section->w, out_section->h);
-		childImage = App->gui->CreateImage(position, *out_section, this);
+	if (outUncheckSection != nullptr) {
+		sections[(uint)CB_STATES::CB_OUT][(uint)CHECK::UNCHECKED] = new SDL_Rect(outUncheckSection->x, outUncheckSection->y, outUncheckSection->w, outUncheckSection->h);
+		childImage = App->gui->CreateImage(position, *outUncheckSection, this);
 	}
-	if (out_section != nullptr) {
-		this->inSection = new SDL_Rect(in_section->x, in_section->y, in_section->w, in_section->h);
+	if (inUncheckSection != nullptr) {
+		sections[(uint)CB_STATES::CB_IN][(uint)CHECK::UNCHECKED] = new SDL_Rect(inUncheckSection->x, inUncheckSection->y, inUncheckSection->w, inUncheckSection->h);
 	}
-	if (out_section != nullptr) {
-		this->clickSection = new SDL_Rect(click_section->x, click_section->y, click_section->w, click_section->h);
+	if (clickUncheckSection != nullptr) {
+		sections[(uint)CB_STATES::CB_CLICK][(uint)CHECK::UNCHECKED] = new SDL_Rect(clickUncheckSection->x, clickUncheckSection->y, clickUncheckSection->w, clickUncheckSection->h);
 	}
-	if (out_section != nullptr) {
-		this->checkSection = new SDL_Rect(checkSection->x, checkSection->y, checkSection->w, checkSection->h);
+	if (outCheckSection != nullptr) {
+		sections[(uint)CB_STATES::CB_OUT][(uint)CHECK::CHECKED] = new SDL_Rect(outCheckSection->x, outCheckSection->y, outCheckSection->w, outCheckSection->h);
+	}
+	if (inCheckSection != nullptr) {
+		sections[(uint)CB_STATES::CB_IN][(uint)CHECK::CHECKED] = new SDL_Rect(inCheckSection->x, inCheckSection->y, inCheckSection->w, inCheckSection->h);
+	}
+	if (clickCheckSection != nullptr) {
+		sections[(uint)CB_STATES::CB_CLICK][(uint)CHECK::CHECKED] = new SDL_Rect(clickCheckSection->x, clickCheckSection->y, clickCheckSection->w, clickCheckSection->h);
 	}
 	//Create child Text
 	if (text != nullptr) {
 		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Get even another parameter with the font
 	}
+	if (boolPtr == nullptr) {
+		LOG("Error while associating checkbox with a bool, crash incoming");
+	}
+	if (childImage == nullptr) {
+		LOG("Error while creating checkbox image, crash incoming");
+	}
+	assert(boolPtr != nullptr || childImage != nullptr);
+
 	this->bounds = bounds;
 }
 
 bool GUICheckbox::PreUpdate()
 {
 	if ((state == MOUSE_STATE::M_ENTER || state == MOUSE_STATE::M_IN) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
-		if (clickSection != nullptr && childImage != nullptr && &childImage->section != clickSection) {
-			childImage->section = *clickSection;
-		}
-		if (boolPtr != nullptr) {
-			*boolPtr = !(*boolPtr);
-		}
+		*boolPtr = !(*boolPtr);
+		SetSection(CB_STATES::CB_CLICK);
 		App->audio->PlayFx(clickSfx);
 	}
 	else if (state == MOUSE_STATE::M_ENTER || (state == MOUSE_STATE::M_IN && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP)) {
-		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
-			childImage->section = *inSection;
-		}
+		SetSection(CB_STATES::CB_IN);
 	}
 	else if (state == MOUSE_STATE::M_EXIT) {
-		if (outSection != nullptr  && childImage != nullptr && &childImage->section != outSection) {
-			childImage->section = *outSection;
-		}
+		SetSection(CB_STATES::CB_OUT);
 	}
 	return true;
-}
-
-bool GUICheckbox::PostUpdate()
-{
-	if (boolPtr != nullptr && *boolPtr && checkSection != nullptr) {
-		return App->render->BlitGUI(App->gui->GetAtlas(), localPos.x, localPos.y, checkSection);
-	}
-	return false;
 }
 
 bool GUICheckbox::CleanUp()
 {
-	RELEASE(outSection);
-	RELEASE(inSection);
-	RELEASE(clickSection);
-	RELEASE(checkSection);
-
+	for (int i = 0; i < (uint)CB_STATES::CB_MAX; ++i) {
+		for (int j = 0; j < (uint)CHECK::MAX; ++j) {
+			RELEASE(sections[i][j]);
+		}
+	}
 	return true;
+}
+
+void GUICheckbox::SetSection(CB_STATES state)
+{
+	if (*boolPtr) {
+		if (sections[(uint)state][(uint)CHECK::CHECKED] != nullptr  && &childImage->section != sections[(uint)state][(uint)CHECK::CHECKED]) {
+			childImage->section = *sections[(uint)state][(uint)CHECK::CHECKED];
+		}
+	}
+	else {
+		if (sections[(uint)state][(uint)CHECK::UNCHECKED] != nullptr  && &childImage->section != sections[(uint)state][(uint)CHECK::UNCHECKED]) {
+			childImage->section = *sections[(uint)state][(uint)CHECK::UNCHECKED];
+		}
+	}
 }

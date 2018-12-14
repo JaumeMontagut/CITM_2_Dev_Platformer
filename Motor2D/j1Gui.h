@@ -75,17 +75,19 @@ struct CheckboxTemplates : public ButtonTemplates
 class GUIElement
 {
 public:
-	bool visible = true;
-	bool draggable = false;
 	//Position
 	iPoint localPos = { 0, 0 };
-	//iPoint globalPos = { 0, 0 };//We also store the global position to avoid recalculating it, adding the parent's one
+//protected:
+	//General invormation
+	MOUSE_STATE state = MOUSE_STATE::M_OUT;
+	bool active = true;
+	bool interactable = false;
+	bool draggable = false;
 	//Tree structure
-	GUIElement* parent = nullptr;
+	GUIElement * parent = nullptr;
 	p2List<GUIElement*> childs;
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
-	MOUSE_STATE state = MOUSE_STATE::M_OUT;
 	int ObjectID = -1; // associated with object id from basic property from tiled
 
 public:
@@ -95,10 +97,16 @@ public:
 	virtual bool CleanUp();
 
 	void SetState(int x, int y);
-	void SetFamily(GUIElement * parent);
+	void SetParent(GUIElement * parent);
 	bool CheckBounds(int x, int y);
 	void DrawOutline();
 	iPoint GetGlobalPos();
+	void SetActive(bool active);
+	bool IsActive();
+	//Tree structure getters (we don't want other modules making changes to the tree structure, we just want them to be able to see them)
+	//All changes to the tree structure should be made via the SetParent() method
+	p2List<GUIElement*>* GetChilds();
+	GUIElement* GetParent();
 };
 
 enum class GUI_ADJUST
@@ -170,7 +178,7 @@ public:
 	GUIText* CreateText(const iPoint& position, const char* text, SDL_Color color = WHITE, _TTF_Font* font = nullptr, GUIElement * parent = nullptr);
 	GUIButton* CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)() = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, uint clickSfx = 0u, GUIElement * parent = nullptr);
 	GUIButton* CreateButton(ButtonTemplates& templateType, const iPoint& position, void(*clickFunction)() = nullptr, const char* text = nullptr, GUIElement* parent = nullptr);
-	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * out_section = nullptr, const SDL_Rect * in_section = nullptr, const SDL_Rect * click_section = nullptr, const SDL_Rect * check_section = nullptr, uint clickSFX = 0u, GUIElement * parent = nullptr);
+	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * outUncheckSection = nullptr, const SDL_Rect * inUncheckSection = nullptr, const SDL_Rect * clickUncheckSection = nullptr, const SDL_Rect * outCheckSection = nullptr, const SDL_Rect * inCheckSection = nullptr, const SDL_Rect * clickCheckSection = nullptr, uint clickSFX = 0u, GUIElement * parent = nullptr);
 	GUIInputText* CreateInputText(const iPoint & position, const SDL_Rect & bounds, const char* text = nullptr, SDL_Color color = WHITE, uint size = DEFAULT_TEXT_SIZE, GUIElement * parent = nullptr);
 
 	SDL_Texture* GetAtlas() const;

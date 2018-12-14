@@ -19,3 +19,8 @@ bool GUIText::PostUpdate()
 
 	return false;
 }
+
+void GUIText::SetText(SDL_Texture * texture)
+{
+
+}
