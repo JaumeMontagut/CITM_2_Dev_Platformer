@@ -75,18 +75,19 @@ struct CheckboxTemplates : public ButtonTemplates
 class GUIElement
 {
 public:
-	bool visible = true;
-	bool draggable = false;
 	//Position
 	iPoint localPos = { 0, 0 };
-	//iPoint globalPos = { 0, 0 };//We also store the global position to avoid recalculating it, adding the parent's one
+protected:
+	//General invormation
+	MOUSE_STATE state = MOUSE_STATE::M_OUT;
+	bool active = true;
+	bool interactable = false;
+	bool draggable = false;
 	//Tree structure
-	GUIElement* parent = nullptr;
+	GUIElement * parent = nullptr;
 	p2List<GUIElement*> childs;
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
-	MOUSE_STATE state = MOUSE_STATE::M_OUT;
-
 public:
 	GUIElement(const iPoint& position);
 	virtual bool PreUpdate();
@@ -94,10 +95,16 @@ public:
 	virtual bool CleanUp();
 
 	void SetState(int x, int y);
-	void SetFamily(GUIElement * parent);
+	void SetParent(GUIElement * parent);
 	bool CheckBounds(int x, int y);
 	void DrawOutline();
 	iPoint GetGlobalPos();
+	void SetActive(bool active);
+	bool IsActive();
+	//Tree structure getters (we don't want other modules making changes to the tree structure, we just want them to be able to see them)
+	//All changes to the tree structure should be made via the SetParent() method
+	p2List<GUIElement*>* GetChilds();
+	GUIElement* GetParent();
 };
 
 enum class GUI_ADJUST

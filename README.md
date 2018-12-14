@@ -68,6 +68,7 @@ sauer2: https://opengameart.org/content/oldschool-win-and-die-jump-and-run-sound
 - Get all entities directly from each map xml
 - When you swap with an object you also exchange velocities.
 - 13 levels!
+- Added gui element templates on an xml to easlily create similar elements.
 
 ## Important notes.
 - First enemies appear in level 007. Use Enter to go to the next level.

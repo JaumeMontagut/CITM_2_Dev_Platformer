@@ -13,11 +13,10 @@ public:
 
 public:
 	bool PostUpdate();
+	void SetText(SDL_Texture * texture);
 
 private:
 	SDL_Texture* texture = nullptr;
-	//TODO: Add _TTF_ * font
-	//TODO: Add uint size
 };
 
 

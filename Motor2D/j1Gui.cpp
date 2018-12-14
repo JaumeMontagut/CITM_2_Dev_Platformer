@@ -289,20 +289,32 @@ bool j1Gui::PreUpdate()
 		debugGUI = !debugGUI;
 	}
 
-	for (int i = 0; i < guiElems.Count(); ++i)
-	{
-		GUIElement* elem = *guiElems.At(i);
-		//Check and updates mouse state -----------------------
-		int mouse_x, mouse_y = 0;
-		App->input->GetMousePosition(mouse_x, mouse_y);
-		mouse_x *= (int)App->win->GetScale();
-		mouse_y *= (int)App->win->GetScale();
-		elem->SetState(mouse_x, mouse_y);
-		elem->PreUpdate();
+	//Check and updates mouse state -----------------------
+	int mouse_x, mouse_y = 0;
+	App->input->GetMousePosition(mouse_x, mouse_y);
+	mouse_x *= (int)App->win->GetScale();
+	mouse_y *= (int)App->win->GetScale();
+
+	//Iteration
+	p2List<GUIElement*> elems;
+	//1. Get the first element
+	elems.add(guiScreen);
+	//2. Draw every element in the list and add their childs
+	//   They will end up in a generational order (first gen first, second gen second, etc.)
+	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
+		if (iterator->data->IsActive()) {
+			iterator->data->SetState(mouse_x, mouse_y);
+			iterator->data->PreUpdate();
+			//If the object is not visible we simply don't get their children to draw them
+			for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
+				elems.add(childIterator->data);
+			}
+		}
 	}
 
-	for(int i = 0; i < fonts.Count(); ++i)
+	for (int i = 0; i < fonts.Count(); ++i) {
 		LOG("fonts count: %i, name:%s", i + 1, fonts.At(i)->data.fontName.GetString());
+	}
 
 	return true;
 }
@@ -336,15 +348,14 @@ bool j1Gui::PostUpdate()
 	//2. Draw every element in the list and add their childs
 	//   They will end up in a generational order (first gen first, second gen second, etc.)
 	for (p2List_item<GUIElement*>* iterator = elemsToDraw.start; iterator != nullptr; iterator = iterator->next) {
-		if (iterator->data->visible) {
+		if (iterator->data->IsActive()) {
 			iterator->data->PostUpdate();
 			iterator->data->DrawOutline();
 			//If the object is not visible we simply don't get their children to draw them
-			for (p2List_item<GUIElement*>* childIterator = iterator->data->childs.start; childIterator != nullptr; childIterator = childIterator->next) {
+			for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
 				elemsToDraw.add(childIterator->data);
 			}
 		}
-
 	}
 	return true;
 }
@@ -413,6 +424,29 @@ iPoint GUIElement::GetGlobalPos()
 	//return localPos;
 }
 
+void GUIElement::SetActive(bool active)
+{
+	if (active == false) {
+		state == MOUSE_STATE::M_OUT;//When it is deactivated, it loses focus
+	}
+	this->active = active;
+}
+
+bool GUIElement::IsActive()
+{
+	return active;
+}
+
+p2List<GUIElement*>* GUIElement::GetChilds()
+{
+	return &childs;
+}
+
+GUIElement * GUIElement::GetParent()
+{
+	return parent;
+}
+
 GUIElement * j1Gui::CreateScreen()
 {
 	GUIElement* guiElem = nullptr;
@@ -428,7 +462,7 @@ GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section, G
 	GUIImage* guiElem = nullptr;
 	guiElem = new GUIImage(position, section);
 	guiElems.PushBack(guiElem);
-	guiElem->SetFamily(parent);
+	guiElem->SetParent(parent);
 	return guiElem;
 }
 
@@ -437,7 +471,7 @@ GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color c
 	GUIText* guiElem = nullptr;
 	guiElem = new GUIText(position, text, color, font);
 	guiElems.PushBack(guiElem);
-	guiElem->SetFamily(parent);
+	guiElem->SetParent(parent);
 	return guiElem;
 }
 
@@ -455,7 +489,7 @@ GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds,
 	GUIButton* guiElem = nullptr;
 	guiElem = new GUIButton(position, bounds, clickFunction, text, out_section, in_section, click_section);
 	guiElems.PushBack(guiElem);
-	guiElem->SetFamily(parent);
+	guiElem->SetParent(parent);
 	return guiElem;
 }
 
@@ -465,7 +499,7 @@ GUIButton* j1Gui::CreateButton(ButtonTemplates& templateType, const iPoint& posi
 
 	guiElem = new GUIButton(position, templateType, clickFunction, text);
 	guiElems.PushBack(guiElem);
-	guiElem->SetFamily(parent);
+	guiElem->SetParent(parent);
 
 	return guiElem;
 
@@ -476,7 +510,7 @@ GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bou
 	GUICheckbox* guiElem = nullptr;
 	guiElem = new GUICheckbox(position, bounds, boolPtr, text, out_section, in_section, click_section, check_section, clickSfx);
 	guiElems.PushBack(guiElem);
-	guiElem->SetFamily(parent);
+	guiElem->SetParent(parent);
 	return guiElem;
 }
 
@@ -497,7 +531,7 @@ bool GUIElement::CleanUp()
 	return true;
 }
 
-void GUIElement::SetFamily(GUIElement* parent) {
+void GUIElement::SetParent(GUIElement* parent) {
 	//If no parent was detected, set it to be directly a child of the screen
 	if (parent == nullptr) {
 		this->parent = App->gui->guiScreen;
