@@ -711,11 +711,21 @@ bool j1Gui::AssociateParentsID()
 	bool ret = true;
 
 	// search and set family to each gui objet who wants it
+	// REMEMBER: each gui element created by parent call the object id is -1, skip this, the parent is already set
 
-	/*for (int i = 0; i < guiElems.Count(); ++i)
+	//LOG("count: %i", guiElems.Count());
+	
+	for (int i = 0; i < guiElems.Count(); ++i)
 	{
+		if (guiElems[i]->ObjectID == -1)
+			continue;
+
+		LOG("id %i", guiElems[i]->ObjectID);
 		for (int j = 0; j < guiElems.Count(); ++j)
 		{
+			if (guiElems[j]->ObjectID == -1)
+				continue;
+
 			if (guiElems[i]->ParentID == guiElems[j]->ObjectID)
 			{
 				guiElems[i]->SetParent(guiElems[j]);
@@ -723,8 +733,7 @@ bool j1Gui::AssociateParentsID()
 				LOG("parent id: %i", guiElems[i]->ParentID);
 			}
 		}
-	}*/
-
+	}
 
 	return ret;
 }
