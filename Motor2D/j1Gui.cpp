@@ -663,20 +663,48 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	// TODO
 	// ---
 
-
 	newButton = new GUIButton(position, *templatePtr, nullptr, text.GetString());
-	// adds id
+	// adds object id
 	newButton->ObjectID = object_tiled_id;
 
 	// assign the rest of extra properties
 	newButton->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
-	//newButton->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
+	newButton->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
 	newButton->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
+	newButton->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+	// ... if we are more needed properties for something
+	// ...
 	
 	// adds parent
+	// parents are added when all gui objects are loaded
+	// scene calls AssociateParentsID and links them
 	newButton->SetParent(nullptr);
+	
 	// adds button element to list
 	guiElems.PushBack(newButton);
 
 	return true;
+}
+
+bool j1Gui::AssociateParentsID()
+{
+	bool ret = true;
+
+	// search and set family to each gui objet who wants it
+
+	/*for (int i = 0; i < guiElems.Count(); ++i)
+	{
+		for (int j = 0; j < guiElems.Count(); ++j)
+		{
+			if (guiElems[i]->ParentID == guiElems[j]->ObjectID)
+			{
+				guiElems[i]->SetParent(guiElems[j]);
+				LOG("parent found and linked");
+				LOG("parent id: %i", guiElems[i]->ParentID);
+			}
+		}
+	}*/
+
+
+	return ret;
 }

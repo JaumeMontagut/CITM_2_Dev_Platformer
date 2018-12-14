@@ -23,7 +23,7 @@
   <object id="84" name="button" type="templateType2" x="728" y="139" width="38" height="37">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="associated_function_ptr"/>
+    <property name="function" type="int" value="0"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffffffff"/>
     <property name="parentID" value="75"/>

@@ -89,6 +89,7 @@ public:
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
 	int ObjectID = -1; // associated with object id from basic property from tiled
+	int ParentID = -1; // sets the parent of object tmx id
 
 public:
 	GUIElement(const iPoint& position);
@@ -167,6 +168,7 @@ public:
 	// load all gui elements required for current scene
 	bool LoadGUI(p2SString gui_xml_path);
 	// ---
+	bool AssociateParentsID();
 	bool LoadGUIButton(pugi::xml_node & node);
 	/*bool LoadGUILabel(pugi::xml_node & node);
 	bool LoadGUIImage(pugi::xml_node & node);

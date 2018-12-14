@@ -90,9 +90,15 @@ bool j1Scene::Start()
 	// Load all gui elements associated with this map
 	if (App->map->data.properties.gui_xml_path != nullptr)
 	{
+		// Load all elements
 		if (!App->gui->LoadGUI(App->map->data.properties.gui_xml_path))
 		{
 			LOG("GUI elements cannot be loaded, path or gui map xml not found or error");
+		}
+		// set parents
+		if (!App->gui->AssociateParentsID())
+		{
+			LOG("failed to establish a family");
 		}
 	}
 
