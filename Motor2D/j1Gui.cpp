@@ -9,6 +9,7 @@
 #include "j1Audio.h"
 #include "j1Window.h"
 #include "j1Input.h"
+#include "Brofiler/Brofiler.h"
 //Gui Elements
 #include "GUIImage.h"
 #include "GUIText.h"
@@ -285,6 +286,7 @@ bool j1Gui::Start()
 // Update all guis
 bool j1Gui::PreUpdate()
 {
+	BROFILER_CATEGORY("GUI", Profiler::Color::DarkOliveGreen);
 	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
 		debugGUI = !debugGUI;
 	}
@@ -341,6 +343,7 @@ void GUIElement::SetState(int x, int y) {
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
+	BROFILER_CATEGORY("GUI", Profiler::Color::DarkOliveGreen);
 	//Iteration
 	p2List<GUIElement*> elemsToDraw;
 	//1. Get the first element
