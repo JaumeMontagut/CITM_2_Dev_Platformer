@@ -6,6 +6,7 @@
 #include "j1Audio.h"
 #include "p2Log.h"
 #include "j1Fonts.h"
+#include "GUIText.h"
 
 GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) : clickFunction(clickFunction), clickSfx(clickSfx), GUIElement(position) {
 	//Child image
@@ -26,21 +27,23 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, void(*cli
 	this->bounds = bounds;
 }
 
-GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void(*clickFunction)(), const char* text) : clickFunction(clickFunction), GUIElement(position)
+GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, void(*clickFunction)(), const char* text) :
+	clickFunction(clickFunction),
+	outSection(&templateType.sectionUp),
+	inSection(&templateType.sectionHover),
+	clickSection(&templateType.sectionDown),
+	moveTextDown(templateType.moveTextDown),
+	clickSfx(templateType.clickSfx),
+	hoverSfx(templateType.hoverSfx),
+	GUIElement(position)
 {
-	outSection = &templateType.sectionUp;
-	childImage = App->gui->CreateImage(position, *outSection, this);
-	inSection = &templateType.sectionHover;
-	clickSection = &templateType.sectionDown;
-
-	// assigns sfx
-	clickSfx = templateType.clickSfx;
-	hoverSfx = templateType.hoverSfx;
-	
-	if (text != nullptr)
-		App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
-
 	bounds = templateType.bounds;
+	if (outSection != nullptr) {
+		childImage = App->gui->CreateImage(position, *outSection, this);
+	}	
+	if (text != nullptr) {
+		childText = App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
+	}
 }
 
 bool GUIButton::CleanUp() {
@@ -55,6 +58,10 @@ bool GUIButton::PreUpdate()
 	if ((state == MOUSE_STATE::M_ENTER || state == MOUSE_STATE::M_IN) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
 		if (clickSection != nullptr && childImage != nullptr && &childImage->section != clickSection) {
 			childImage->section = *clickSection;
+		}
+		if (childText != nullptr) {
+			childText->localPos.y += moveTextDown;
+			textMoved = true;
 		}
 		if (clickFunction != nullptr) {
 			clickFunction();//Call function pointer
@@ -71,12 +78,22 @@ bool GUIButton::PreUpdate()
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
+		if (textMoved && childText != nullptr) {
+			childText->localPos.y -= moveTextDown;
+			textMoved = false;
+		}
 	}
 	else if (state == MOUSE_STATE::M_EXIT) {
 		if (outSection != nullptr  && childImage != nullptr && &childImage->section != outSection) {
 			childImage->section = *outSection;
 		}
+		if (textMoved && childText != nullptr) {
+			childText->localPos.y -= moveTextDown;
+			textMoved = false;
+		}
 	}
+
+
 
 	return true;
 }

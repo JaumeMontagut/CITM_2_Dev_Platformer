@@ -89,7 +89,7 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			templateType.sectionDown.w = node.child("down").attribute("w").as_int(0);
 			templateType.sectionDown.h = node.child("down").attribute("h").as_int(0);
 			// sets offset too
-			templateType.downOffset = node.child("down").attribute("offset").as_int(0);
+			templateType.moveTextDown = node.child("down").attribute("offset").as_int(0);
 		}
 		if (node.child("disabled"))
 		{
@@ -103,8 +103,15 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			templateType.bounds = { node.child("bounds").attribute("x").as_int(0) ,node.child("bounds").attribute("y").as_int(0),
 									node.child("bounds").attribute("w").as_int(0),node.child("bounds").attribute("h").as_int(0) };
 		}
-		else
+		else {
 			templateType.bounds = { 0,0,0,0 };
+		}
+		if (node.child("move_text_down")) {
+			templateType.moveTextDown = node.child("move_text_down").attribute("amount").as_int(0);
+		}
+		else {
+			templateType.moveTextDown = 0;
+		}
 
 		
 		// if we pass a checkbox element

@@ -15,6 +15,10 @@ private:
 	uint hoverSfx = 0u;
 	//Child image
 	GUIImage * childImage = nullptr;
+	GUIText * childText = nullptr;
+	int moveTextDown = 0;//The amount of pixels the text will move down when the button is clicked
+	bool textMoved = false;
+	//Sections
 	SDL_Rect * outSection = nullptr;	//The sprite of the image when the mouse isn't inside the bounds
 	SDL_Rect * inSection = nullptr;		//The sprite of the child image when the mouse is inside the bounds
 	SDL_Rect * clickSection = nullptr;	//The sprite of the child image when the mouse is inside the bounds and clicks the button

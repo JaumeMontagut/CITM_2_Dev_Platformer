@@ -17,6 +17,7 @@
 				<font name="digiffiti" size="32" path="fonts/digiffiti.ttf"/>
 				<font_color r="255" g="83" b="13" a="0"/>
 				<sfx click="standardClick" hover="standardHover"/>
+        <move_text_down amount ="20"/>
 			</button_type_1>
 			<button_type_2>
 				<up x="67" y="125" w="12" h="13"/>
@@ -29,6 +30,7 @@
 					 And prints with other color -->
 				<font name="digiffiti" size="32" path="fonts/digiffiti.ttf"/>
 				<font_color r="255" g="255" b="255" a="0"/>
+        <move_text_down amount ="20"/>
 			</button_type_2>
 		</buttons>
 		<checkboxes>
