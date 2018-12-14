@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="71">
  <properties>
-  <property name="associated_gui_xml" value="gui_template_main_menu_idea_example.xml"/>
+  <property name="associated_gui_xml" value="maps/gui_template_main_menu_idea_example.tmx"/>
   <property name="background_music" value="song21.ogg"/>
   <property name="testValue" type="int" value="2"/>
  </properties>
