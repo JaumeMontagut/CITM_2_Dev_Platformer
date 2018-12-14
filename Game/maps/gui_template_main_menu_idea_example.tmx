@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="87">
- <objectgroup name="GUI objects">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="87">
+ <objectgroup id="1" name="GUI objects">
   <object id="71" name="button" type="templateType1" x="472.5" y="177" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="associated_function_ptr"/>
+    <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
@@ -23,7 +23,7 @@
   <object id="84" name="button" type="templateType2" x="728" y="139" width="38" height="37">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" type="int" value="0"/>
+    <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffffffff"/>
     <property name="parentID" value="75"/>
@@ -34,7 +34,7 @@
   <object id="85" name="button" type="templateType1" x="472" y="264" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="associated_function_ptr"/>
+    <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
@@ -45,7 +45,7 @@
   <object id="86" name="button" type="templateType1" x="472.5" y="353" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="associated_function_ptr"/>
+    <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>

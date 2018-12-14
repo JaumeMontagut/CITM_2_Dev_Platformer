@@ -616,7 +616,7 @@ bool j1Gui::LoadGUI(p2SString gui_xml_path)
 			}
 			else if (gui_element_type == "image")
 			{
-
+				//TODO: Support image types from the tmx too
 			}
 		}
 	}
@@ -682,12 +682,8 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	{
 		text = propertiesNode.find_child_by_attribute("name", "text").attribute("value").as_string("");
 	}
-
-	// search for link to a function ---
-	// TODO
-	// ---
-
-	newButton = new GUIButton(position, *templatePtr, nullptr, text.GetString());
+	p2SString functionName(propertiesNode.find_child_by_attribute("name", "function").attribute("value").as_string("\0"));
+	newButton = new GUIButton(position, *templatePtr, functionName, text.GetString());
 	// adds object id
 	newButton->ObjectID = object_tiled_id;
 
