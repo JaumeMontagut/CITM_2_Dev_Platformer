@@ -30,6 +30,10 @@ struct Properties
 	{
 		return draw;
 	}
+
+	// =========
+	// associated GUI xml path
+	p2SString gui_xml_path = nullptr;
 };
 
 struct PlayerData

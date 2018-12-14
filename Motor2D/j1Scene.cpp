@@ -86,12 +86,23 @@ bool j1Scene::Start()
 
 	//Screen, needs to be created first because it's the parent as default
 	App->gui->guiScreen = App->gui->CreateScreen();
+
+	// Load all gui elements associated with this map
+	if (App->map->data.properties.gui_xml_path != nullptr)
+	{
+		if (!App->gui->LoadGUI(App->map->data.properties.gui_xml_path))
+		{
+			LOG("GUI elements cannot be loaded, path or gui map xml not found or error");
+		}
+	}
+
+
 	// GUI elements creation example ---------------------------------------------------
 
 	//Image example---------------------------------------------------------------------------------------------------------
 	//App->gui->CreateImage(iPoint(20, 60), SDL_Rect(485, 829, 328, 103));
-	App->gui->CreateImage(iPoint(0, 0), SDL_Rect(344, 0, 512, 385));
-	App->gui->CreateImage(iPoint(320, 60), SDL_Rect(133, 0, 210, 256));
+	/*App->gui->CreateImage(iPoint(0, 0), SDL_Rect(344, 0, 512, 385));
+	App->gui->CreateImage(iPoint(320, 60), SDL_Rect(133, 0, 210, 256));*/
 
 	//Text example----------------------------------------------------------------------------------------------------------
 	//SDL_Color textColor = { 255,13,255,255 };
@@ -105,13 +116,13 @@ bool j1Scene::Start()
 	App->gui->CreateButton({ 410, 100 }, SDL_Rect(0, 0, 100, 100), &SayHelloButton, string, &outRect, &inRect, &clickRect); */
 
 	// templatized button example, wip
-	App->gui->CreateButton(App->gui->buttonType1, { 410, 120 }, &SayHelloButton, "TEMPLATIZED button");
+	/*App->gui->CreateButton(App->gui->buttonType1, { 410, 120 }, &SayHelloButton, "TEMPLATIZED button");
 	App->gui->CreateButton(App->gui->buttonType1, { 410, 220 }, &SayHelloButton, "Templatized button 2");
 	App->gui->CreateButton(App->gui->buttonType1, { 410, 320 }, &SayHelloButton, "button");
 	App->gui->CreateButton(App->gui->buttonType1, { 410, 420 }, &SayHelloButton, "PLAY");
 
 
-	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton, "blablabla");
+	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton, "blablabla");*/
 
 	////Checkbox--------------------------------------------------------------------------------------------------------------
 	//SDL_Rect outUncheckRect (16,125,16,16);

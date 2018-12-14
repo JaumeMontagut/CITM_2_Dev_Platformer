@@ -479,9 +479,9 @@ GUIInputText* j1Gui::CreateInputText(const iPoint& position, const SDL_Rect &bou
 {
 	GUIInputText* guiElem = nullptr;
 	//guiElem = new GUIInputText(position, bounds, text, color, size);
-	//guiElems.PushBack(guiElem);
-	//guiElem->SetFamily(parent);
-	return guiElem;
+//guiElems.PushBack(guiElem);
+//guiElem->SetFamily(parent);
+return guiElem;
 }
 
 GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, void(*clickFunction)(), const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx, GUIElement * parent)
@@ -544,4 +544,102 @@ void GUIElement::SetParent(GUIElement* parent) {
 		this->parent = parent;
 	}
 	this->parent->childs.add(this);
+}
+
+// =================================================================================
+
+bool j1Gui::LoadGUI(p2SString gui_xml_path)
+{
+	bool ret = true;
+
+	pugi::xml_document gui_xml_doc;
+	pugi::xml_parse_result result = gui_xml_doc.load_file(gui_xml_path.GetString());
+
+	// fast prevention
+	if (result == NULL)
+	{
+		LOG("Could not load gui map xml file config.xml. pugi error: %s", result.description());
+		//return false;
+		ret = false;
+	}
+
+	pugi::xml_node gui_tmx_node = gui_xml_doc.child("map");
+
+	// travel all possible object groups (for if we decide at end add more layer objects for different gui templates)
+
+	for (pugi::xml_node objectGroup = gui_tmx_node.child("objectgroup"); objectGroup && ret; objectGroup = objectGroup.next_sibling("objectgroup"))
+	{
+		//p2SString tmp = objectGroup.attribute("name").as_string();
+
+		// iterate all objects
+		for (pugi::xml_node object = objectGroup.child("object"); object; object = object.next_sibling("object"))
+		{
+			// detects gui element type desired to load
+			p2SString gui_element_type = object.attribute("name").as_string();
+
+			// different loaders for buttons, images, checkboxes, etc
+			if (gui_element_type == "button")
+			{
+				// loads a button with desired parameters
+				if (!LoadGUIButton(object))//.child("properties")))
+				{
+					LOG("failed to load gui element button");
+				}
+
+			}
+			else if (gui_element_type == "image")
+			{
+
+			}
+		}
+	}
+
+
+	return ret;
+}
+
+bool j1Gui::LoadGUIButton(pugi::xml_node& node)
+{
+	bool ret = true;
+
+	p2SString stringComparer = node.attribute("type").as_string();
+
+	// check type of templatetype (if's for now) TODO: if we have time improve this with some enum and improved template creation
+	// maybe adds a list of templates with enum and some assert for prevention
+	// maybe adds complete template import directly from tmx, but we use for now the templates method currently in use
+
+	ButtonTemplates* templatePtr = nullptr;
+
+	if (stringComparer == "templateType1")
+	{
+		LOG("meec");
+		templatePtr = &buttonType1;
+	}
+	else if (stringComparer == "templateType2")
+	{
+		templatePtr = &buttonType2;
+	}
+	// and so on
+	// ...
+
+	// -----------------
+
+	// assigns all extra flags and creates gui button element
+
+	GUIButton* newButton = nullptr;
+
+	// gets position
+	iPoint position;
+	position.x = node.attribute("x").as_int(0);
+	position.y = node.attribute("y").as_int(0);
+	/* maybe on next upgrade we get the boundaries directly here, but for now included on templatetype on gui_config.xml */
+
+
+	newButton = new GUIButton(position, *templatePtr, nullptr, "blabla");
+	newButton->SetFamily(nullptr);
+	guiElems.PushBack(newButton);
+	//GUIElement* parent;
+	
+
+	return true;
 }

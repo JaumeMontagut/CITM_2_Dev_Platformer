@@ -40,7 +40,7 @@
     <property name="text" value="Hello button"/>
    </properties>
   </object>
-  <object id="84" name="button" type="templateType1" x="728" y="139" width="38" height="37">
+  <object id="84" name="button" type="templateType2" x="728" y="139" width="38" height="37">
    <properties>
     <property name="draggable" type="bool" value="false"/>
     <property name="function" value="associated_function_ptr"/>

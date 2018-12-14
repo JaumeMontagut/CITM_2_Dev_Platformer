@@ -162,6 +162,14 @@ public:
 	_TTF_Font* LoadGUIFont(const char* fontName, p2SString fontPath, int fontSize);
 	void LoadGUISfx(pugi::xml_node& node);
 
+	// load all gui elements required for current scene
+	bool LoadGUI(p2SString gui_xml_path);
+	// ---
+	bool LoadGUIButton(pugi::xml_node & node);
+	/*bool LoadGUILabel(pugi::xml_node & node);
+	bool LoadGUIImage(pugi::xml_node & node);
+	bool LoadGUICheckbox(pugi::xml_node & node);*/
+	
 	//Create GUI Objects
 	GUIElement* CreateScreen();
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent = nullptr);
