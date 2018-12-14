@@ -507,3 +507,12 @@ void GUIElement::SetFamily(GUIElement* parent) {
 	}
 	this->parent->childs.add(this);
 }
+
+// =================================================================================
+
+bool j1Gui::LoadGUI(p2SString gui_xml_path)
+{
+	bool ret = false;
+
+	return ret;
+}

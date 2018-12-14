@@ -84,6 +84,15 @@ bool j1Scene::Start()
 	// loads music
 	App->audio->PlayMusic(App->map->data.properties.music_name.GetString(), 0.0f);
 
+	// Load all gui elements associated with this map
+	if (App->map->data.properties.gui_xml_path != nullptr)
+	{
+		if (!App->gui->LoadGUI(App->map->data.properties.gui_xml_path))
+		{
+			LOG("GUI elements cannot be loaded, path or gui map xml not found or error");
+		}
+	}
+
 	//Screen, needs to be created first because it's the parent as default
 	App->gui->guiScreen = App->gui->CreateScreen();
 	// GUI elements creation example ---------------------------------------------------

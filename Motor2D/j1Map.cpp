@@ -658,6 +658,9 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 		properties.parallaxSpeed = propertiesNode.find_child_by_attribute("name", "parallaxSpeed").attribute("value").as_float(1.0F);
 		properties.music_name = propertiesNode.find_child_by_attribute("name", "background_music").attribute("value").as_string();
 		//properties.fx_name = propertiesNode.find_child_by_attribute("name", "background_music").attribute("value").as_string();
+		
+		// associated gui xml with this map ----
+		properties.gui_xml_path = propertiesNode.find_child_by_attribute("name", "associated_gui_xml").attribute("value").as_string();
 	}
 
 	return ret;

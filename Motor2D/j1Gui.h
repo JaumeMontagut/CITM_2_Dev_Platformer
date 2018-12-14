@@ -155,6 +155,9 @@ public:
 	_TTF_Font* LoadGUIFont(const char* fontName, p2SString fontPath, int fontSize);
 	void LoadGUISfx(pugi::xml_node& node);
 
+	// load all gui elements required for current scene
+	bool LoadGUI(p2SString gui_xml_path);
+
 	//Create GUI Objects
 	GUIElement* CreateScreen();
 	GUIImage* CreateImage(const iPoint& position, const SDL_Rect & section, GUIElement * parent = nullptr);
