@@ -86,6 +86,7 @@ public:
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
 	MOUSE_STATE state = MOUSE_STATE::M_OUT;
+	int ObjectID = -1; // associated with object id from basic property from tiled
 
 public:
 	GUIElement(const iPoint& position);
