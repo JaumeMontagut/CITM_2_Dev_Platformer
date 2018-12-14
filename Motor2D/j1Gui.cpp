@@ -505,10 +505,10 @@ GUIButton* j1Gui::CreateButton(ButtonTemplates& templateType, const iPoint& posi
 
 }
 
-GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, const SDL_Rect * check_section, uint clickSfx, GUIElement * parent)
+GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * outUncheckSection, const SDL_Rect * inUncheckSection, const SDL_Rect * clickUncheckSection, const SDL_Rect * outCheckSection, const SDL_Rect * inCheckSection, const SDL_Rect * clickCheckSection, uint clickSfx, GUIElement * parent)
 {
 	GUICheckbox* guiElem = nullptr;
-	guiElem = new GUICheckbox(position, bounds, boolPtr, text, out_section, in_section, click_section, check_section, clickSfx);
+	guiElem = new GUICheckbox(position, bounds, boolPtr, text, outUncheckSection, inUncheckSection, clickUncheckSection, outCheckSection, inCheckSection, clickCheckSection, clickSfx);
 	guiElems.PushBack(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;
@@ -532,6 +532,10 @@ bool GUIElement::CleanUp()
 }
 
 void GUIElement::SetParent(GUIElement* parent) {
+	if (App->gui->guiScreen == nullptr) {
+		LOG("Error, screen was not created, please create all GUIElements after the GUIScreen has been created");
+	}
+	assert(App->gui->guiScreen != nullptr);
 	//If no parent was detected, set it to be directly a child of the screen
 	if (parent == nullptr) {
 		this->parent = App->gui->guiScreen;

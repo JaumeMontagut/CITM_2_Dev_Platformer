@@ -114,12 +114,14 @@ bool j1Scene::Start()
 	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton, "blablabla");
 
 	////Checkbox--------------------------------------------------------------------------------------------------------------
-	//SDL_Rect outRect = { 417, 173, 218, 57 };
-	//SDL_Rect inRect = { 6, 117, 218, 57 };
-	//SDL_Rect clickRect = { 648, 173, 218, 57 };
-	//SDL_Rect checkRect = { 936, 402, 26, 21 };
+	//SDL_Rect outUncheckRect (16,125,16,16);
+	//SDL_Rect inUncheckRect (0, 125, 16, 16);
+	//SDL_Rect clickUncheckRect (32, 125, 16, 16);
+	//SDL_Rect outCheckRect (16, 141, 16, 16);
+	//SDL_Rect inCheckRect (0, 141, 16, 16);
+	//SDL_Rect clickCheckRect (32, 141, 16, 16);
 	//const char * string = "hello checkbox";
-	//App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outRect, &inRect, &clickRect, &checkRect);
+	//App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outUncheckRect, &inUncheckRect, &clickUncheckRect, &outCheckRect, &inCheckRect, &clickCheckRect);
 
 	return true;
 }
