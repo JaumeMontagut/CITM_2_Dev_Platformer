@@ -636,7 +636,7 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 
 
 	newButton = new GUIButton(position, *templatePtr, nullptr, "blabla");
-	newButton->SetFamily(nullptr);
+	newButton->SetParent(nullptr);
 	guiElems.PushBack(newButton);
 	//GUIElement* parent;
 	
