@@ -629,6 +629,11 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	{
 		templatePtr = &buttonType2;
 	}
+	else
+	{
+		LOG("templatetype not found, failed");
+		return false;
+	}
 	// and so on
 	// ...
 
@@ -643,13 +648,42 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	position.x = node.attribute("x").as_int(0);
 	position.y = node.attribute("y").as_int(0);
 	/* maybe on next upgrade we get the boundaries directly here, but for now included on templatetype on gui_config.xml */
-
-
-	newButton = new GUIButton(position, *templatePtr, nullptr, "blabla");
-	newButton->SetParent(nullptr);
-	guiElems.PushBack(newButton);
-	//GUIElement* parent;
 	
+	// stores object id
+	int object_tiled_id = node.attribute("id").as_int(-1); // id to search and set family
+
+	// acces to extra properties
+	// stores string text
+	p2SString text;
+	pugi::xml_node propertiesNode = node.child("properties");
+	if (propertiesNode == NULL)
+	{
+		LOG("properties not found");
+		ret = false;
+	}
+	else
+	{
+		text = propertiesNode.find_child_by_attribute("name", "text").attribute("value").as_string("");
+	}
+
+	// search for link to a function ---
+	// TODO
+	// ---
+
+
+	newButton = new GUIButton(position, *templatePtr, nullptr, text.GetString());
+	// adds id
+	newButton->ObjectID = object_tiled_id;
+
+	// assign the rest of extra properties
+	newButton->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
+	//newButton->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
+	newButton->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
+	
+	// adds parent
+	newButton->SetParent(nullptr);
+	// adds button element to list
+	guiElems.PushBack(newButton);
 
 	return true;
 }

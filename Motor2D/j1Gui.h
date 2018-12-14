@@ -77,7 +77,7 @@ class GUIElement
 public:
 	//Position
 	iPoint localPos = { 0, 0 };
-protected:
+//protected:
 	//General invormation
 	MOUSE_STATE state = MOUSE_STATE::M_OUT;
 	bool active = true;
@@ -88,6 +88,8 @@ protected:
 	p2List<GUIElement*> childs;
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
+	int ObjectID = -1; // associated with object id from basic property from tiled
+
 public:
 	GUIElement(const iPoint& position);
 	virtual bool PreUpdate();
