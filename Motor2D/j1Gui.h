@@ -159,8 +159,7 @@ public:
 
 	void GetGenerationalList(p2List<GUIElement *> &elems);
 
-	void GetNextGUIElement(GUIElement * focusedElement);
-
+	void GetNextGUIElement(GUIElement * &focusedElement);
 	void GetTopGUIElement(GUIElement * &focusedElement);
 
 	// Called after all Updates

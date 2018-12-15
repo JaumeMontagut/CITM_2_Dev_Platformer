@@ -99,6 +99,9 @@
     <ClCompile Include="GUIInputText.cpp">
       <Filter>GUIElements</Filter>
     </ClCompile>
+    <ClCompile Include="GUISlider.cpp">
+      <Filter>GUIElements</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -223,6 +226,9 @@
       <Filter>Tools</Filter>
     </ClInclude>
     <ClInclude Include="GUIInputText.h">
+      <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="GUISlider.h">
       <Filter>GUIElements</Filter>
     </ClInclude>
   </ItemGroup>

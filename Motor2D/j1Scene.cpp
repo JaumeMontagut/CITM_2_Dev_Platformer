@@ -18,6 +18,7 @@
 
 #include "j1Particles.h"
 #include "j1Gui.h"
+#include "GUISlider.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -141,6 +142,10 @@ bool j1Scene::Start()
 	//SDL_Rect clickCheckRect (32, 141, 16, 16);
 	//const char * string = "hello checkbox";
 	//App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outUncheckRect, &inUncheckRect, &clickUncheckRect, &outCheckRect, &inCheckRect, &clickCheckRect);
+
+	SDL_Rect boxRect();
+	SDL_Rect thumbRect();
+
 
 	return true;
 }

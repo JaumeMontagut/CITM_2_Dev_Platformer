@@ -350,10 +350,6 @@ bool j1Gui::PreUpdate()
 			else {
 				//Searches to the right
 				GetNextGUIElement(focusedElement);
-				//If it doesn't find one, goes to the one most near to the top
-				if (focusedElement == nullptr) {
-					GetTopGUIElement(focusedElement);
-				}
 			}
 		}
 	}
@@ -380,7 +376,7 @@ void j1Gui::GetGenerationalList(p2List<GUIElement *> &elems)
 	}
 }
 
-void j1Gui::GetNextGUIElement(GUIElement * focusedElement)
+void j1Gui::GetNextGUIElement(GUIElement * &focusedElement)
 {
 	//The screen is divided into rows
 	//The function checks if there is another element, more to the right in that row
@@ -395,7 +391,7 @@ void j1Gui::GetNextGUIElement(GUIElement * focusedElement)
 	//1. Find in which row is the focusedElement
 	int currRow = 0;
 	for (; currRow <= rows; currRow++) {
-		if (focusedElement->localPos.y >= currRow * screenDivision && focusedElement->localPos.y < (currRow + 1) * screenDivision) {
+		if (focusedElement->GetGlobalPos().y >= currRow * screenDivision && focusedElement->GetGlobalPos().y < (currRow + 1) * screenDivision) {
 			break;
 		}
 	}
@@ -410,19 +406,24 @@ void j1Gui::GetNextGUIElement(GUIElement * focusedElement)
 	for (; currRow <= rows || iterator != nullptr || nextElement == nullptr; currRow++) {
 		for (; iterator != nullptr; iterator = iterator->next) {
 			if (!iterator->data->interactable || iterator->data == focusedElement ||
-			   (iterator->data->localPos.y < screenDivision * currRow && iterator->data->localPos.y >= screenDivision * (currRow + 1))) {
+			   (iterator->data->GetGlobalPos().y < screenDivision * currRow && iterator->data->GetGlobalPos().y >= screenDivision * (currRow + 1))) {
 				continue;
 			}
 			//Searches the next element to the right
-			if (iterator->data->localPos.x >= focusedElement->localPos.x && nextElement == nullptr) {
+			if (iterator->data->GetGlobalPos().x >= focusedElement->GetGlobalPos().x && nextElement == nullptr) {
 				nextElement = iterator->data;
 			}
-			else if (iterator->data->localPos.x >= focusedElement->localPos.x && iterator->data->localPos.x < nextElement->localPos.x) {
+			else if (iterator->data->GetGlobalPos().x >= focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < nextElement->GetGlobalPos().x) {
 				nextElement = iterator->data;
 			}
 		}
 	}
 	focusedElement = nextElement;
+
+	//If it doesn't find one, goes to the one most near to the top
+	if (focusedElement == nullptr) {
+		GetTopGUIElement(focusedElement);
+	}
 }
 
 void j1Gui::GetTopGUIElement(GUIElement * &focusedElement)
@@ -431,7 +432,7 @@ void j1Gui::GetTopGUIElement(GUIElement * &focusedElement)
 		if (!iterator->data->interactable) {
 			continue;
 		}
-		if (focusedElement == nullptr || (iterator->data->localPos.x <= focusedElement->localPos.x && iterator->data->localPos.y <= focusedElement->localPos.y)) {
+		if (focusedElement == nullptr || (iterator->data->GetGlobalPos().x <= focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().y <= focusedElement->GetGlobalPos().y)) {
 			focusedElement = iterator->data;
 		}
 	}
@@ -516,7 +517,7 @@ SDL_Texture* j1Gui::GetAtlas() const
 bool GUIElement::CheckBounds(int x, int y)
 {
 	SDL_Rect globalBounds = GetGlobalPos() + bounds;
-	return (x > globalBounds.x && x < globalBounds.x + globalBounds.w && y > globalBounds.y && y < globalBounds.y + bounds.h);
+	return (x > globalBounds.x && x < globalBounds.x + globalBounds.w && y > globalBounds.y && y < globalBounds.y + globalBounds.h);
 }
 
 void GUIElement::DrawOutline()
