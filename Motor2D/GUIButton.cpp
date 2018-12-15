@@ -26,6 +26,7 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, p2SString
 		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Take into account the adjustment
 	}
 	clickFunction = App->gui->GetButtonFunction(functionName);
+	interactable = true;
 	this->bounds = bounds;
 }
 
@@ -46,6 +47,7 @@ GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, p2SS
 		childText = App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
 	}
 	clickFunction = App->gui->GetButtonFunction(functionName);
+	interactable = true;
 }
 
 bool GUIButton::CleanUp() {

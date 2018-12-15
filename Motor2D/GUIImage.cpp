@@ -5,6 +5,7 @@
 
 GUIImage::GUIImage(const iPoint & position, const SDL_Rect & section) : section(section), GUIElement(position)
 {
+	interactable = false;
 }
 
 bool GUIImage::PostUpdate() {

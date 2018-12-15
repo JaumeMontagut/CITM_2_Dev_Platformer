@@ -13,6 +13,7 @@ GUIInputText::GUIInputText(const iPoint& position, const SDL_Rect &bounds, const
 	//if () {
 
 	//}
+	interactable = true;
 }
 
 bool GUIInputText::PreUpdate()

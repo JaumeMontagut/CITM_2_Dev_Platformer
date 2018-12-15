@@ -99,7 +99,7 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 
-	void SetState(int x, int y);
+	void SetFocus(bool focus);
 	void SetParent(GUIElement * parent);
 	bool CheckBounds(int x, int y);
 	void DrawOutline();

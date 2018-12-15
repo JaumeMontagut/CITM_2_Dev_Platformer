@@ -42,6 +42,8 @@ GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool 
 	}
 	assert(boolPtr != nullptr || childImage != nullptr);
 
+	interactable = true;
+
 	this->bounds = bounds;
 }
 

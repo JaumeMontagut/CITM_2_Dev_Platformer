@@ -9,6 +9,7 @@ GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color, _TTF
 	{
 		texture = App->font->Print(text, color, font);
 	}
+	interactable = false;
 }
 
 bool GUIText::PostUpdate()

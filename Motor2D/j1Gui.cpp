@@ -316,25 +316,33 @@ bool j1Gui::PreUpdate()
 	}
 
 	//Check and updates mouse state -----------------------
-	int mouse_x, mouse_y = 0;
-	App->input->GetMousePosition(mouse_x, mouse_y);
-	mouse_x *= (int)App->win->GetScale();
-	mouse_y *= (int)App->win->GetScale();
+	int mouseX, mouseY = 0;
+	App->input->GetMousePosition(mouseX, mouseY);
+	mouseX *= (int)App->win->GetScale();
+	mouseY *= (int)App->win->GetScale();
 
 	//Iteration
 	p2List<GUIElement*> elems;
-	//1. Get the first element
+	//1. Get the first element (guiScreen)
 	elems.add(guiScreen);
-	//2. Draw every element in the list and add their childs
-	//   They will end up in a generational order (first gen first, second gen second, etc.)
+	//2. Go through all the elements in the tree in a generational order
+	GUIElement * elementInFocus = nullptr;
 	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
-		if (iterator->data->IsActive()) {
-			iterator->data->SetState(mouse_x, mouse_y);
-			iterator->data->PreUpdate();
-			//If the object is not visible we simply don't get their children to draw them
-			for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
-				elems.add(childIterator->data);
-			}
+		//3. Find which is the lowest element in the tree with the mouse above it
+		if (iterator->data->CheckBounds(mouseX, mouseY) && iterator->data->interactable) {
+			elementInFocus = iterator->data;
+		}
+		for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
+			elems.add(childIterator->data);
+		}
+	}
+	//4. Set the state of all the elements
+	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
+		if (iterator->data == elementInFocus) {
+			iterator->data->SetFocus(true);
+		}
+		else {
+			iterator->data->SetFocus(false);
 		}
 	}
 
@@ -345,8 +353,8 @@ bool j1Gui::PreUpdate()
 	return true;
 }
 
-void GUIElement::SetState(int x, int y) {
-	if (CheckBounds(x, y)) {
+void GUIElement::SetFocus(bool focus) {
+	if (focus) {
 		if (state == FOCUS::OUT_OF_FOCUS) {
 			state = FOCUS::GET_FOCUS;
 		}
@@ -423,8 +431,8 @@ SDL_Texture* j1Gui::GetAtlas() const
 
 bool GUIElement::CheckBounds(int x, int y)
 {
-	iPoint globalPos = GetGlobalPos();
-	return (x > globalPos.x + bounds.x && x < (globalPos.x + bounds.x + bounds.w) && y > globalPos.y + bounds.y && y < (globalPos.y + bounds.y + bounds.h));
+	SDL_Rect globalBounds = GetGlobalPos() + bounds;
+	return (x > globalBounds.x && x < globalBounds.x + globalBounds.w && y > globalBounds.y && y < globalBounds.y + bounds.h);
 }
 
 void GUIElement::DrawOutline()
