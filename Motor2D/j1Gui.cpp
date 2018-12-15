@@ -666,7 +666,7 @@ bool j1Gui::LoadGUIImage(pugi::xml_node& node)
 		newImage->ObjectID = object_tiled_id;
 		newImage->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
 
-		newImage->SetParent(nullptr);
+		//newImage->SetParent(nullptr);
 		guiElems.PushBack(newImage);
 
 	}
@@ -748,7 +748,7 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	// adds default parent (screen)
 	// default parent are added when all gui objects are loaded
 	// scene calls AssociateParentsID and links them
-	newButton->SetParent(nullptr);
+	//newButton->SetParent(nullptr);
 	
 	// adds button element to list
 	guiElems.PushBack(newButton);
@@ -763,7 +763,51 @@ bool j1Gui::AssociateParentsID()
 	// search and set family to each gui objet who wants it
 	// REMEMBER: each gui element created by parent call the object id is -1, skip this, the parent is already set
 	
+	LOG("count: %i", guiElems.Count());
+
+	
+	p2List<GUIElement*> e;
+
+	// filter
 	for (int i = 0; i < guiElems.Count(); ++i)
+	{
+		if (guiElems[i]->ObjectID == -1)
+			continue;
+
+		e.add(guiElems[i]);
+	}
+
+	LOG("real count %i", e.Count());
+
+	p2List_item<GUIElement*>* itemC1 = e.start;
+	//p2List_item<GUIElement*>* itemC2 = e.start;
+
+	for(;itemC1; itemC1=itemC1->next)
+	{
+		LOG("%i", itemC1->data->ObjectID);
+		for (p2List_item<GUIElement*>* itemC2 = e.start; itemC2 != itemC1; itemC2 = itemC2->next)
+		{
+			if (itemC1->data->ObjectID == itemC2->data->ObjectID)
+			{
+				itemC1->data->SetParent(itemC2->data);
+			}
+
+			//// 
+			//if (itemC2 == e.end)
+			//{
+			//	itemC1->data->SetParent(nullptr);
+			//}
+		}
+	}
+
+	for (itemC1 = e.start; itemC1; itemC1 = itemC1->next)
+	{
+		if (itemC1->data->parent == nullptr)
+			itemC1->data->SetParent(nullptr);
+	}
+
+
+	/*for (int i = 0; i < guiElems.Count(); ++i)
 	{
 		if (guiElems[i]->ObjectID == -1)
 			continue;
@@ -781,7 +825,7 @@ bool j1Gui::AssociateParentsID()
 				LOG("parent id: %i", guiElems[i]->ParentID);
 			}
 		}
-	}
+	}*/
 
 	return ret;
 }

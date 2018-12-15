@@ -106,8 +106,8 @@ bool j1Scene::Start()
 
 	//Image example---------------------------------------------------------------------------------------------------------
 	//App->gui->CreateImage(iPoint(20, 60), SDL_Rect(485, 829, 328, 103));
-	/*App->gui->CreateImage(iPoint(0, 0), SDL_Rect(344, 0, 512, 385));
-	App->gui->CreateImage(iPoint(320, 60), SDL_Rect(133, 0, 210, 256));*/
+	/*App->gui->CreateImage(iPoint(0, 0), SDL_Rect(344, 0, 512, 385));*/
+	//GUIImage* blablaImage = App->gui->CreateImage(iPoint(320, 60), SDL_Rect(133, 0, 210, 256));
 
 	//Text example----------------------------------------------------------------------------------------------------------
 	//SDL_Color textColor = { 255,13,255,255 };
@@ -121,10 +121,13 @@ bool j1Scene::Start()
 	App->gui->CreateButton({ 410, 100 }, SDL_Rect(0, 0, 100, 100), &SayHelloButton, string, &outRect, &inRect, &clickRect); */
 
 	// templatized button example, wip
-	/*App->gui->CreateButton(App->gui->buttonType1, { 410, 120 }, &SayHelloButton, "TEMPLATIZED button");
-	App->gui->CreateButton(App->gui->buttonType1, { 410, 220 }, &SayHelloButton, "Templatized button 2");
-	App->gui->CreateButton(App->gui->buttonType1, { 410, 320 }, &SayHelloButton, "button");
-	App->gui->CreateButton(App->gui->buttonType1, { 410, 420 }, &SayHelloButton, "PLAY");
+	//GUIElement* e = nullptr;
+	//e = (GUIElement*)App->gui->CreateButton(App->gui->buttonType1, { 410, 120 }, nullptr, "TEMPLATIZED button");// ,(GUIElement*)blablaImage);
+	//e->SetParent((GUIElement*)blablaImage);
+	
+	/*App->gui->CreateButton(App->gui->buttonType1, { 410, 220 }, nullptr, "Templatized button 2", blablaImage);
+	App->gui->CreateButton(App->gui->buttonType1, { 410, 320 }, nullptr, "button", blablaImage);
+	App->gui->CreateButton(App->gui->buttonType1, { 410, 420 }, nullptr, "PLAY", blablaImage);
 
 
 	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton, "blablabla");*/
