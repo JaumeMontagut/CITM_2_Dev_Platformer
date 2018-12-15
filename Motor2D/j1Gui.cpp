@@ -378,42 +378,25 @@ void j1Gui::GetGenerationalList(p2List<GUIElement *> &elems)
 
 void j1Gui::GetNextGUIElement(GUIElement * &focusedElement)
 {
-	//The screen is divided into rows
-	//The function checks if there is another element, more to the right in that row
-	//If it doesn't find it, it goes to the next row
-	//Until it runs out of elements or reaches the end of the screen
-
-	int rows = 8;
-	uint screenW, screenH;
-	App->win->GetWindowSize(screenW, screenH);
-	int screenDivision = (int)screenH / rows;
-
-	//1. Find in which row is the focusedElement
-	int currRow = 0;
-	for (; currRow <= rows; currRow++) {
-		if (focusedElement->GetGlobalPos().y >= currRow * screenDivision && focusedElement->GetGlobalPos().y < (currRow + 1) * screenDivision) {
-			break;
-		}
-	}
-	if (currRow > rows) {
-		focusedElement = nullptr;//Then it will find the top left object
-		return;
-	}
-
-	//2. Iterate through the rows
+	//- Traverses the list
+	//- If it finds an element that's lower than the focuse, it gets it
+	//- If it finds another element that's in the same position, it get the one that's most on the left
 	GUIElement * nextElement = nullptr;
-	p2List_item<GUIElement*>* iterator = guiElems.start;
-	for (; currRow <= rows || iterator != nullptr || nextElement == nullptr; currRow++) {
-		for (; iterator != nullptr; iterator = iterator->next) {
-			if (!iterator->data->interactable || iterator->data == focusedElement ||
-			   (iterator->data->GetGlobalPos().y < screenDivision * currRow && iterator->data->GetGlobalPos().y >= screenDivision * (currRow + 1))) {
-				continue;
+	for (p2List_item<GUIElement*>* iterator = guiElems.start; iterator != nullptr; iterator = iterator->next) {
+		if (!iterator->data->interactable || iterator->data == focusedElement) {
+			continue;
+		}
+		//Searches the next element to the right
+		if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && nextElement == nullptr) {
+			nextElement = iterator->data;
+		}
+		else if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && iterator->data->GetGlobalPos().y <= nextElement->GetGlobalPos().y) {
+			if (iterator->data->GetGlobalPos().y == nextElement->GetGlobalPos().y) {
+				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < nextElement->GetGlobalPos().x) {
+					nextElement = iterator->data;
+				}
 			}
-			//Searches the next element to the right
-			if (iterator->data->GetGlobalPos().x >= focusedElement->GetGlobalPos().x && nextElement == nullptr) {
-				nextElement = iterator->data;
-			}
-			else if (iterator->data->GetGlobalPos().x >= focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < nextElement->GetGlobalPos().x) {
+			else {
 				nextElement = iterator->data;
 			}
 		}
