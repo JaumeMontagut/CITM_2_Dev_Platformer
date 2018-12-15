@@ -785,8 +785,7 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	 {
 		 // gets new font path
 		 p2SString fontPath = propertiesNode.find_child_by_attribute("name", "fontPath").attribute("value").as_string("");
-		//font = LoadGUIFont(fontName, )
-		 LOG("");
+		 font = LoadGUIFont(fontName.GetString(), fontPath, fontSize);
 	 }
 	 // ------------------
 	 // creates new label with custom data
