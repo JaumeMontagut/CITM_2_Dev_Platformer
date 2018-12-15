@@ -629,8 +629,29 @@ bool j1Gui::LoadGUI(p2SString gui_xml_path)
 				}
 
 			}
+			else if (gui_element_type == "label")
+			{
+				if (!LoadGUILabel(object))
+				{
+					LOG("failed to create gui element label");
+				}
+			}
 		}
 	}
+
+
+	return ret;
+}
+
+bool j1Gui::LoadGUILabel(pugi::xml_node& node)
+{
+	bool ret = true;
+
+	GUIText* newText = nullptr;
+
+	iPoint position;
+	position.x = node.attribute("x").as_int();
+	position.y = node.attribute("y").as_int();
 
 
 	return ret;
