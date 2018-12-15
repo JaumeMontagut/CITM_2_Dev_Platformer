@@ -112,7 +112,7 @@
    <properties>
     <property name="bool_functionPtr" value="SayHelloButton"/>
     <property name="draggable" type="bool" value="false"/>
-    <property name="interactable" type="bool" value="true"/>
+    <property name="interactable" type="bool" value="false"/>
     <property name="parentID" value="75"/>
     <property name="text" value="tmx checkbox"/>
     <property name="visible" type="bool" value="true"/>

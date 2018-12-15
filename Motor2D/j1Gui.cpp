@@ -390,9 +390,9 @@ void j1Gui::GetNextGUIElement(GUIElement * &focusedElement)
 		if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && nextElement == nullptr) {
 			nextElement = iterator->data;
 		}
-		else if (iterator->data->GetGlobalPos().y >= focusedElement->GetGlobalPos().y && iterator->data->GetGlobalPos().y <= nextElement->GetGlobalPos().y) {
+		else if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && iterator->data->GetGlobalPos().y <= nextElement->GetGlobalPos().y) {
 			if (iterator->data->GetGlobalPos().y == nextElement->GetGlobalPos().y) {
-				if (iterator->data->GetGlobalPos().x >= focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x > nextElement->GetGlobalPos().x) {
+				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < nextElement->GetGlobalPos().x) {
 					nextElement = iterator->data;
 				}
 			}
