@@ -321,6 +321,8 @@ bool j1Gui::PreUpdate()
 	mouse_x *= (int)App->win->GetScale();
 	mouse_y *= (int)App->win->GetScale();
 
+	LOG("mouse x:%i y:%i", mouse_x, mouse_y);
+
 	//Iteration
 	p2List<GUIElement*> elems;
 	//1. Get the first element
@@ -785,9 +787,9 @@ bool j1Gui::AssociateParentsID()
 	for(;itemC1; itemC1=itemC1->next)
 	{
 		LOG("%i", itemC1->data->ObjectID);
-		for (p2List_item<GUIElement*>* itemC2 = e.start; itemC2 != itemC1; itemC2 = itemC2->next)
+		for (p2List_item<GUIElement*>* itemC2 = e.start; itemC2; itemC2 = itemC2->next)
 		{
-			if (itemC1->data->ObjectID == itemC2->data->ObjectID)
+			if (itemC1->data->ParentID == itemC2->data->ObjectID)
 			{
 				itemC1->data->SetParent(itemC2->data);
 			}
