@@ -157,6 +157,12 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	void GetGenerationalList(p2List<GUIElement *> &elems);
+
+	void GetNextGUIElement(GUIElement * focusedElement);
+
+	void GetTopGUIElement(GUIElement * &focusedElement);
+
 	// Called after all Updates
 	bool PostUpdate();
 
@@ -239,6 +245,8 @@ private:
 	//p2SString checkbox_check_locked_filename;
 	p2List<GUIElement*> guiElems;
 	std::map<std::string, void(*)()> functionMap;
+	iPoint lastMousePos = { 0, 0 };
+	GUIElement * focusedElement = nullptr;
 };
 
 #endif // __j1GUI_H__
