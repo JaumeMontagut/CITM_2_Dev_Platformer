@@ -699,8 +699,8 @@ bool j1Gui::LoadGUIImage(pugi::xml_node& node)
 		newImage->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
 		newImage->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
 		newImage->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
-		newImage->ObjectID = object_tiled_id;
-		newImage->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+		newImage->objectID = object_tiled_id;
+		newImage->parentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
 
 		//newImage->SetParent(nullptr);
 		guiElems.PushBack(newImage);
@@ -713,82 +713,24 @@ bool j1Gui::LoadGUIImage(pugi::xml_node& node)
 
 bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 {
-	bool ret = true;
-
-	p2SString stringComparer = node.attribute("type").as_string();
-
-	// check type of templatetype (if's for now) TODO: if we have time improve this with some enum and improved template creation
-	// maybe adds a list of templates with enum and some assert for prevention
-	// maybe adds complete template import directly from tmx, but we use for now the templates method currently in use
-
-	ButtonTemplates* templatePtr = nullptr;
-
-	if (stringComparer == "templateType1")
-	{
-		LOG("meec");
-		templatePtr = &buttonType1;
-	}
-	else if (stringComparer == "templateType2")
-	{
-		templatePtr = &buttonType2;
-	}
-	else
-	{
-		LOG("templatetype not found, failed");
-		return false;
-	}
-	// and so on
-	// ...
-
-	// -----------------
-
-	// assigns all extra flags and creates gui button element
-
-	GUIButton* newButton = nullptr;
-
-	// gets position
-	iPoint position;
-	position.x = node.attribute("x").as_int(0);
-	position.y = node.attribute("y").as_int(0);
-	/* maybe on next upgrade we get the boundaries directly here, but for now included on templatetype on gui_config.xml */
-	
-	// stores object id
-	int object_tiled_id = node.attribute("id").as_int(-1); // id to search and set family
-
-	// acces to extra properties
-	// stores string text
-	p2SString text;
-	pugi::xml_node propertiesNode = node.child("properties");
-	if (propertiesNode == NULL)
-	{
-		LOG("properties not found");
-		ret = false;
-	}
-	else
-	{
-		text = propertiesNode.find_child_by_attribute("name", "text").attribute("value").as_string("");
-	}
-	p2SString functionName(propertiesNode.find_child_by_attribute("name", "function").attribute("value").as_string("\0"));
-	newButton = new GUIButton(position, *templatePtr, functionName, text.GetString());
-	// adds object id
-	newButton->ObjectID = object_tiled_id;
-
-	// assign the rest of extra properties
-	newButton->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
-	newButton->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
-	newButton->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
-	newButton->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
-	// ... if we are more needed properties for something
-	// ...
-	
-	// adds default parent (screen)
-	// default parent are added when all gui objects are loaded
-	// scene calls AssociateParentsID and links them
-	//newButton->SetParent(nullptr);
-	
-	// adds button element to list
-	guiElems.PushBack(newButton);
-
+	//- Get all the properties from the tmx (no additional template xml)
+	//- Get the bounds from the xml
+	//bool ret = true;
+	//GUIButton* newButton = nullptr;
+	//newButton = new GUIButton(
+	//	iPoint(node.attribute("x").as_int(0) , node.attribute("y").as_int(0)),
+	//	SDL_Rect(node.child("properties").find_child_by_attribute("name", "bounds_x").attribute("value").as_int(0),
+	//			 node.child("properties").find_child_by_attribute("name", "bounds_y").attribute("value").as_int(0),
+	//			 node.child("properties").find_child_by_attribute("name", "bounds_w").attribute("value").as_int(0),
+	//			 node.child("properties").find_child_by_attribute("name", "bounds_h").attribute("value").as_int(0)),
+	//	node.child("properties").find_child_by_attribute("name", "text").attribute("value").as_string("\0"));
+	//newButton->objectID = node.attribute("id").as_int(-1);
+	//newButton->clickFunction = App->gui->GetButtonFunction(node.child("properties").find_child_by_attribute("name", "function").attribute("value").as_string("\0"));
+	//newButton->draggable = node.child("properties").find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
+	//newButton->interactable = node.child("properties").find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
+	//newButton->active = node.child("properties").find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
+	//newButton->parentID = node.child("properties").find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+	//guiElems.PushBack(newButton);
 	return true;
 }
 
@@ -807,7 +749,7 @@ bool j1Gui::AssociateParentsID()
 	// filter
 	for (int i = 0; i < guiElems.Count(); ++i)
 	{
-		if (guiElems[i]->ObjectID == -1)
+		if (guiElems[i]->objectID == -1)
 			continue;
 
 		e.add(guiElems[i]);
@@ -820,10 +762,10 @@ bool j1Gui::AssociateParentsID()
 
 	for(;itemC1; itemC1=itemC1->next)
 	{
-		LOG("%i", itemC1->data->ObjectID);
+		LOG("%i", itemC1->data->objectID);
 		for (p2List_item<GUIElement*>* itemC2 = e.start; itemC2; itemC2 = itemC2->next)
 		{
-			if (itemC1->data->ParentID == itemC2->data->ObjectID)
+			if (itemC1->data->parentID == itemC2->data->objectID)
 			{
 				itemC1->data->SetParent(itemC2->data);
 			}

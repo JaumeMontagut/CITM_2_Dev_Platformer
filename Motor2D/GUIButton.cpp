@@ -8,7 +8,7 @@
 #include "j1Fonts.h"
 #include "GUIText.h"
 
-GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, p2SString functionName, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) :
+GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) :
 	clickSfx(clickSfx), GUIElement(position) {
 	//Child image
 	if (out_section != nullptr) {
@@ -25,7 +25,6 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, p2SString
 	if (text != nullptr) {
 		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Take into account the adjustment
 	}
-	clickFunction = App->gui->GetButtonFunction(functionName);
 	this->bounds = bounds;
 }
 

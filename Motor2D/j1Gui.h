@@ -90,8 +90,8 @@ public:
 	p2List<GUIElement*> childs;
 	//Hovering control
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
-	int ObjectID = -1; // associated with object id from basic property from tiled
-	int ParentID = -1; // sets the parent of object tmx id
+	int objectID = -1; // associated with object id from basic property from tiled
+	int parentID = -1; // sets the parent of object tmx id
 
 public:
 	GUIElement(const iPoint& position);
