@@ -765,17 +765,10 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 
 	if (ret)
 	{
-		//uint32 pixel = SDL_MapRGBA(SDL_GetWindowPixelFormat(App->win->window),),
-		int colorHexValue = propertiesNode.find_child_by_attribute("name", "color").attribute("value").hash_value();
-		// converts #AARRGGBB to sdl color
-		color.r = ((colorHexValue >> 16) & 0xFF) / 255.0;  // Extract the RR byte
-		color.g = ((colorHexValue >> 8) & 0xFF) / 255.0;   // Extract the GG byte
-		color.b = ((colorHexValue) & 0xFF) / 255.0;        // Extract the BB byte
-
-	/*	int number = strtol(colorHexValue.GetString(), nullptr, 16); */
-		LOG("");
-
-		
+		color.a = propertiesNode.find_child_by_attribute("name", "color_a").attribute("value").as_int();
+		color.r = propertiesNode.find_child_by_attribute("name", "color_r").attribute("value").as_int();
+		color.b = propertiesNode.find_child_by_attribute("name", "color_b").attribute("value").as_int();
+		color.g = propertiesNode.find_child_by_attribute("name", "color_g").attribute("value").as_int();
 	}
 	// TODO: loads desired color
 	// ...
