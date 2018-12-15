@@ -316,27 +316,52 @@ bool j1Gui::PreUpdate()
 	}
 
 	//Check and updates mouse state -----------------------
-	int mouse_x, mouse_y = 0;
-	App->input->GetMousePosition(mouse_x, mouse_y);
-	mouse_x *= (int)App->win->GetScale();
-	mouse_y *= (int)App->win->GetScale();
+	int mouseX, mouseY = 0;
+	App->input->GetMousePosition(mouseX, mouseY);
+	mouseX *= (int)App->win->GetScale();
+	mouseY *= (int)App->win->GetScale();
 
-	//Iteration
-	p2List<GUIElement*> elems;
-	//1. Get the first element
-	elems.add(guiScreen);
-	//2. Draw every element in the list and add their childs
-	//   They will end up in a generational order (first gen first, second gen second, etc.)
-	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
-		if (iterator->data->IsActive()) {
-			iterator->data->SetState(mouse_x, mouse_y);
-			iterator->data->PreUpdate();
-			//If the object is not visible we simply don't get their children to draw them
-			for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
-				elems.add(childIterator->data);
-			}
-		}
-	}
+	////Iteration
+	//p2List<GUIElement*> elems;
+	////1. Get the first element (guiScreen)
+	//elems.add(guiScreen);
+	////2. Go through all the elements in the tree in a generational order
+	//GUIElement * elementInFocus = nullptr;
+	//for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
+	//	//3. Find which is the lowest element in the tree with the mouse above it
+	//	if (iterator->data->CheckBounds(mouseX, mouseY)) {
+	//		elementInFocus = iterator->data;
+	//	}
+
+	//	for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
+	//		elems.add(childIterator->data);
+	//	}
+	//}
+	////4. Set the state of all the elements
+	//for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
+	//	if (iterator->data == elementInFocus) {
+	//		iterator->data->SetFocus(true);
+	//	}
+	//	else {
+	//		iterator->data->SetFocus(false);
+	//	}
+
+	//	for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
+	//		elems.add(childIterator->data);
+	//	}
+	//}
+
+	//for (int i = 0; i < guiElems.Count(); ++i) {
+	//	//TODO: Only select the elements that are capable of receiving focus
+	//	if (guiElems[i] != nullptr) {
+	//		if (guiElems[i] == elementInFocus) {
+	//			guiElems[i]->SetFocus(true);
+	//		}
+	//		else {
+	//			guiElems[i]->SetFocus(false);
+	//		}
+	//	}
+	//}
 
 	//for (int i = 0; i < fonts.Count(); ++i) {
 	//	LOG("fonts count: %i, name:%s", i + 1, fonts.At(i)->data.fontName.GetString());
@@ -345,21 +370,21 @@ bool j1Gui::PreUpdate()
 	return true;
 }
 
-void GUIElement::SetState(int x, int y) {
-	if (CheckBounds(x, y)) {
-		if (state == MOUSE_STATE::M_OUT) {
-			state = MOUSE_STATE::M_ENTER;
+void GUIElement::SetFocus(bool focus) {
+	if (focus) {
+		if (state == FOCUS::OUT_OF_FOCUS) {
+			state = FOCUS::GET_FOCUS;
 		}
 		else {
-			state = MOUSE_STATE::M_IN;
+			state = FOCUS::ON_FOCUS;
 		}
 	}
 	else {
-		if (state == MOUSE_STATE::M_IN || state == MOUSE_STATE::M_ENTER) {
-			state = MOUSE_STATE::M_EXIT;
+		if (state == FOCUS::ON_FOCUS || state == FOCUS::GET_FOCUS) {
+			state = FOCUS::LOSE_FOCUS;
 		}
 		else {
-			state = MOUSE_STATE::M_OUT;
+			state = FOCUS::OUT_OF_FOCUS;
 		}
 	}
 }
@@ -431,11 +456,7 @@ void GUIElement::DrawOutline()
 {
 	if (App->gui->debugGUI) {
 		//Iteration
-		iPoint globalPos(0, 0);
-		for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
-			globalPos += iterator->localPos;
-		}
-		App->render->DrawQuad(globalPos + bounds, 255, 255, 255, 255, false, false);
+		App->render->DrawQuad(GetGlobalPos() + bounds, 255, 255, 255, 255, false, false);
 	}
 }
 
@@ -459,7 +480,7 @@ iPoint GUIElement::GetGlobalPos()
 void GUIElement::SetActive(bool active)
 {
 	if (active == false) {
-		state == MOUSE_STATE::M_OUT;//When it is deactivated, it loses focus
+		state == FOCUS::OUT_OF_FOCUS;//When it is deactivated, it loses focus
 	}
 	this->active = active;
 }

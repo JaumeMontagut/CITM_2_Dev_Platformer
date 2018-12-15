@@ -23,12 +23,12 @@ class GUICheckbox;
 class GUIInputText;
 struct _TTF_Font;
 
-enum class MOUSE_STATE
+enum class FOCUS
 {
-	M_OUT = 0,
-	M_ENTER,
-	M_IN,//Same as hover
-	M_EXIT,
+	OUT_OF_FOCUS = 0,
+	GET_FOCUS,
+	ON_FOCUS,//Same as hover
+	LOSE_FOCUS,
 	MAX
 };
 
@@ -81,7 +81,7 @@ public:
 	iPoint localPos = { 0, 0 };
 //protected:
 	//General invormation
-	MOUSE_STATE state = MOUSE_STATE::M_OUT;
+	FOCUS state = FOCUS::OUT_OF_FOCUS;
 	bool active = true;
 	bool interactable = false;
 	bool draggable = false;
@@ -99,7 +99,7 @@ public:
 	virtual bool PostUpdate();
 	virtual bool CleanUp();
 
-	void SetState(int x, int y);
+	void SetFocus(bool focus);
 	void SetParent(GUIElement * parent);
 	bool CheckBounds(int x, int y);
 	void DrawOutline();

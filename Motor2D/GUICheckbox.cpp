@@ -47,15 +47,15 @@ GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool 
 
 bool GUICheckbox::PreUpdate()
 {
-	if ((state == MOUSE_STATE::M_ENTER || state == MOUSE_STATE::M_IN) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
 		*boolPtr = !(*boolPtr);
 		SetSection(CB_STATES::CB_CLICK);
 		App->audio->PlayFx(clickSfx);
 	}
-	else if (state == MOUSE_STATE::M_ENTER || (state == MOUSE_STATE::M_IN && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP)) {
+	else if (state == FOCUS::GET_FOCUS || (state == FOCUS::ON_FOCUS && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP)) {
 		SetSection(CB_STATES::CB_IN);
 	}
-	else if (state == MOUSE_STATE::M_EXIT) {
+	else if (state == FOCUS::LOSE_FOCUS) {
 		SetSection(CB_STATES::CB_OUT);
 	}
 	return true;

@@ -57,7 +57,7 @@ bool GUIButton::CleanUp() {
 
 bool GUIButton::PreUpdate()
 {
-	if ((state == MOUSE_STATE::M_ENTER || state == MOUSE_STATE::M_IN) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
 		if (clickSection != nullptr && childImage != nullptr && &childImage->section != clickSection) {
 			childImage->section = *clickSection;
 		}
@@ -70,13 +70,13 @@ bool GUIButton::PreUpdate()
 		}
 		App->audio->PlayFx(clickSfx);
 	}
-	else if (state == MOUSE_STATE::M_ENTER) {
+	else if (state == FOCUS::GET_FOCUS) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
 		App->audio->PlayFx(hoverSfx);
 	}
-	else if ((state == MOUSE_STATE::M_ENTER || state == MOUSE_STATE::M_IN) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
+	else if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
@@ -85,7 +85,7 @@ bool GUIButton::PreUpdate()
 			textMoved = false;
 		}
 	}
-	else if (state == MOUSE_STATE::M_EXIT) {
+	else if (state == FOCUS::LOSE_FOCUS) {
 		if (outSection != nullptr  && childImage != nullptr && &childImage->section != outSection) {
 			childImage->section = *outSection;
 		}

@@ -8,13 +8,15 @@ class GUISlider : public GUIElement {
 	//Variables
 private:
 	GUIImage * childBox;
-	GUIImage * childDrag;
-	int minX = 0, maxX = 0;
-	int fixedY;
+	GUIImage * childThumb;
+	//Slider limits
+	bool limitX = false;
+	bool limitY = false;
+	float * multiplier = nullptr;
 
 	//Methods
 private:
 	bool PreUpdate() override;
 };
 
-#endif // !
+#endif
