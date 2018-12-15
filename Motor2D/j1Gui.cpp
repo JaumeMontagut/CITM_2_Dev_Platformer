@@ -315,30 +315,50 @@ bool j1Gui::PreUpdate()
 		debugGUI = !debugGUI;
 	}
 
-	//Check and updates mouse state -----------------------
-	int mouseX, mouseY = 0;
-	App->input->GetMousePosition(mouseX, mouseY);
-	mouseX *= (int)App->win->GetScale();
-	mouseY *= (int)App->win->GetScale();
-
-	//Iteration
+	//- Get mouse position
+	iPoint mousePos;
+	App->input->GetMousePosition(mousePos.x, mousePos.y);
+	mousePos *= (int)App->win->GetScale();
+	//- Sort a list with the elements in a generational order
 	p2List<GUIElement*> elems;
-	//1. Get the first element (guiScreen)
 	elems.add(guiScreen);
-	//2. Go through all the elements in the tree in a generational order
-	GUIElement * elementInFocus = nullptr;
-	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
-		//3. Find which is the lowest element in the tree with the mouse above it
-		if (iterator->data->CheckBounds(mouseX, mouseY) && iterator->data->interactable) {
-			elementInFocus = iterator->data;
+	GetGenerationalList(elems);
+	//- Check if the mouse has been moved
+	if (mousePos != lastMousePos) {
+		//- Force focus with the mouse
+		p2List_item<GUIElement*>* iterator = elems.end;
+		for (; iterator != nullptr; iterator = iterator->prev) {
+			//- Find which is the last element with the mouse above it
+			if (iterator->data->CheckBounds(mousePos.x, mousePos.y) && iterator->data->interactable) {
+				focusedElement = iterator->data;
+				break;
+			}
 		}
-		for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
-			elems.add(childIterator->data);
+		//- If it goes through all the list and it doesn't find any element with the mouse above it
+		if (iterator == nullptr) {
+			focusedElement = nullptr;
 		}
 	}
-	//4. Set the state of all the elements
+	else {
+		//Check if the tab has been pressed
+		if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN) {
+			//If no object has focus, give it to the one nearest to the top left
+			if (focusedElement == nullptr) {
+				GetTopGUIElement(focusedElement);
+			}
+			else {
+				//Searches to the right
+				GetNextGUIElement(focusedElement);
+				//If it doesn't find one, goes to the one most near to the top
+				if (focusedElement == nullptr) {
+					GetTopGUIElement(focusedElement);
+				}
+			}
+		}
+	}
+	//- Set the state of all the elements
 	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
-		if (iterator->data == elementInFocus) {
+		if (iterator->data == focusedElement) {
 			iterator->data->SetFocus(true);
 		}
 		else {
@@ -347,11 +367,73 @@ bool j1Gui::PreUpdate()
 		iterator->data->PreUpdate();
 	}
 
-	//for (int i = 0; i < fonts.Count(); ++i) {
-	//	LOG("fonts count: %i, name:%s", i + 1, fonts.At(i)->data.fontName.GetString());
-	//}
-
 	return true;
+}
+
+void j1Gui::GetGenerationalList(p2List<GUIElement *> &elems)
+{
+	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
+		for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
+			elems.add(childIterator->data);
+		}
+	}
+}
+
+void j1Gui::GetNextGUIElement(GUIElement * focusedElement)
+{
+	//The screen is divided into rows
+	//The function checks if there is another element, more to the right in that row
+	//If it doesn't find it, it goes to the next row
+	//Until it runs out of elements or reaches the end of the screen
+
+	int rows = 8;
+	uint screenW, screenH;
+	App->win->GetWindowSize(screenW, screenH);
+	int screenDivision = (int)screenH / rows;
+
+	//1. Find in which row is the focusedElement
+	int currRow = 0;
+	for (; currRow <= rows; currRow++) {
+		if (focusedElement->localPos.y >= currRow * screenDivision && focusedElement->localPos.y < (currRow + 1) * screenDivision) {
+			break;
+		}
+	}
+	if (currRow == rows + 1) {
+		focusedElement = nullptr;//Then it will find the top left object
+		return;
+	}
+
+	//2. Iterate through the rows
+	GUIElement * nextElement = nullptr;
+	p2List_item<GUIElement*>* iterator = guiElems.start;
+	for (; currRow <= rows || iterator != nullptr || nextElement == nullptr; currRow++) {
+		for (; iterator != nullptr; iterator = iterator->next) {
+			if (!iterator->data->interactable || iterator->data == focusedElement ||
+			   (iterator->data->localPos.y < screenDivision * currRow && iterator->data->localPos.y >= screenDivision * (currRow + 1))) {
+				continue;
+			}
+			//Searches the next element to the right
+			if (iterator->data->localPos.x >= focusedElement->localPos.x && nextElement == nullptr) {
+				nextElement = iterator->data;
+			}
+			else if (iterator->data->localPos.x >= focusedElement->localPos.x && iterator->data->localPos.x < nextElement->localPos.x) {
+				nextElement = iterator->data;
+			}
+		}
+	}
+	focusedElement = nextElement;
+}
+
+void j1Gui::GetTopGUIElement(GUIElement * &focusedElement)
+{
+	for (p2List_item<GUIElement*>* iterator = guiElems.start; iterator != nullptr; iterator = iterator->next) {
+		if (!iterator->data->interactable) {
+			continue;
+		}
+		if (focusedElement == nullptr || (iterator->data->localPos.x <= focusedElement->localPos.x && iterator->data->localPos.y <= focusedElement->localPos.y)) {
+			focusedElement = iterator->data;
+		}
+	}
 }
 
 void GUIElement::SetFocus(bool focus) {
