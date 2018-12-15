@@ -432,7 +432,7 @@ void j1Gui::GetTopGUIElement(GUIElement * &focusedElement)
 		if (!iterator->data->interactable) {
 			continue;
 		}
-		if (focusedElement == nullptr || (iterator->data->GetGlobalPos().x <= focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().y <= focusedElement->GetGlobalPos().y)) {
+		if (focusedElement == nullptr || iterator->data->GetGlobalPos().y <= focusedElement->GetGlobalPos().y) {
 			focusedElement = iterator->data;
 		}
 	}
