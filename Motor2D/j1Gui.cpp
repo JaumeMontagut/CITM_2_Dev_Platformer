@@ -338,6 +338,7 @@ bool j1Gui::PreUpdate()
 		if (iterator == nullptr) {
 			focusedElement = nullptr;
 		}
+		lastMousePos = mousePos;
 	}
 	else {
 		//Check if the tab has been pressed
@@ -398,7 +399,7 @@ void j1Gui::GetNextGUIElement(GUIElement * focusedElement)
 			break;
 		}
 	}
-	if (currRow == rows + 1) {
+	if (currRow > rows) {
 		focusedElement = nullptr;//Then it will find the top left object
 		return;
 	}
