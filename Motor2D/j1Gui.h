@@ -237,7 +237,7 @@ private:
 	p2SString checkbox_highlight_filename;
 	p2SString checkbox_check_filename;
 	//p2SString checkbox_check_locked_filename;
-	p2DynArray<GUIElement*> guiElems = NULL;
+	p2List<GUIElement*> guiElems;
 	std::map<std::string, void(*)()> functionMap;
 };
 

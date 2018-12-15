@@ -397,7 +397,7 @@ bool j1Gui::CleanUp()
 	App->tex->UnloadTexture(buttondown_texture);
 	App->tex->UnloadTexture(buttonhighlight_texture);*/
 
-	guiElems.Clear(); // dynarray clears itselfs when destructor
+	guiElems.clear();
 	fonts.clear(); // free all guifonts
 
 	// unload only gui sfx (just in case)
@@ -483,7 +483,7 @@ GUIElement * j1Gui::CreateScreen()
 {
 	GUIElement* guiElem = nullptr;
 	guiElem = new GUIElement(iPoint(0,0));
-	guiElems.PushBack(guiElem);
+	guiElems.add(guiElem);
 	//Doesn't have to set family because it's the first element
 	return guiElem;
 }
@@ -493,7 +493,7 @@ GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section, G
 {
 	GUIImage* guiElem = nullptr;
 	guiElem = new GUIImage(position, section);
-	guiElems.PushBack(guiElem);
+	guiElems.add(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;
 }
@@ -502,7 +502,7 @@ GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color c
 {
 	GUIText* guiElem = nullptr;
 	guiElem = new GUIText(position, text, color, font);
-	guiElems.PushBack(guiElem);
+	guiElems.add(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;
 }
@@ -520,7 +520,7 @@ GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds,
 {
 	GUIButton* guiElem = nullptr;
 	guiElem = new GUIButton(position, bounds, functionName, text, out_section, in_section, click_section);
-	guiElems.PushBack(guiElem);
+	guiElems.add(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;
 }
@@ -530,7 +530,7 @@ GUIButton* j1Gui::CreateButton(ButtonTemplates& templateType, const iPoint& posi
 	GUIButton* guiElem = nullptr;
 
 	guiElem = new GUIButton(position, templateType, functionName, text);
-	guiElems.PushBack(guiElem);
+	guiElems.add(guiElem);
 	guiElem->SetParent(parent);
 
 	return guiElem;
@@ -541,7 +541,7 @@ GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bou
 {
 	GUICheckbox* guiElem = nullptr;
 	guiElem = new GUICheckbox(position, bounds, boolPtr, text, outUncheckSection, inUncheckSection, clickUncheckSection, outCheckSection, inCheckSection, clickCheckSection, clickSfx);
-	guiElems.PushBack(guiElem);
+	guiElems.add(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;
 }
@@ -695,7 +695,7 @@ bool j1Gui::LoadGUIImage(pugi::xml_node& node)
 		newImage->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
 
 		//newImage->SetParent(nullptr);
-		guiElems.PushBack(newImage);
+		guiElems.add(newImage);
 
 	}
 
@@ -779,7 +779,7 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	//newButton->SetParent(nullptr);
 	
 	// adds button element to list
-	guiElems.PushBack(newButton);
+	guiElems.add(newButton);
 
 	return true;
 }
@@ -797,12 +797,12 @@ bool j1Gui::AssociateParentsID()
 	p2List<GUIElement*> e;
 
 	// filter
-	for (int i = 0; i < guiElems.Count(); ++i)
+	for (p2List_item<GUIElement*>* iterator = guiElems.start; iterator != nullptr; iterator = iterator->next)
 	{
-		if (guiElems[i]->ObjectID == -1)
+		if (iterator->data->ObjectID == -1)
 			continue;
 
-		e.add(guiElems[i]);
+		e.add(iterator->data);
 	}
 
 	LOG("real count %i", e.Count());
