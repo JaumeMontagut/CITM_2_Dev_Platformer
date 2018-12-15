@@ -176,9 +176,9 @@ public:
 	// ---
 	bool AssociateParentsID();
 	bool LoadGUIButton(pugi::xml_node & node);
-	/*bool LoadGUILabel(pugi::xml_node & node);
+	bool LoadGUILabel(pugi::xml_node & node);
 	bool LoadGUIImage(pugi::xml_node & node);
-	bool LoadGUICheckbox(pugi::xml_node & node);*/
+	//bool LoadGUICheckbox(pugi::xml_node & node);
 	
 	//Create GUI Objects
 	GUIElement* CreateScreen();

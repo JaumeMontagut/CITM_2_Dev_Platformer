@@ -7,17 +7,21 @@
     <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
-    <property name="parentID" value="75"/>
+    <property name="parentID" value="84"/>
     <property name="text" value="Hello gui tmx"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
   <object id="75" name="image" x="410" y="127" width="374" height="509">
    <properties>
-    <property name="section_rect_h" type="int" value="0"/>
-    <property name="section_rect_w" type="int" value="0"/>
-    <property name="section_rect_x" type="int" value="0"/>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="parentID" type="int" value="-1"/>
+    <property name="section_rect_h" type="int" value="256"/>
+    <property name="section_rect_w" type="int" value="210"/>
+    <property name="section_rect_x" type="int" value="133"/>
     <property name="section_rect_y" type="int" value="0"/>
+    <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
   <object id="84" name="button" type="templateType2" x="728" y="139" width="38" height="37">

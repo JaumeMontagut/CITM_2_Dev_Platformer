@@ -616,13 +616,63 @@ bool j1Gui::LoadGUI(p2SString gui_xml_path)
 			}
 			else if (gui_element_type == "image")
 			{
-				//TODO: Support image types from the tmx too
+				if (!LoadGUIImage(object))
+				{
+					LOG("failed to load gui element image");
+				}
+
 			}
 		}
 	}
 
 
 	return ret;
+}
+
+bool j1Gui::LoadGUIImage(pugi::xml_node& node)
+{
+	bool ret = true;
+
+	GUIImage* newImage = nullptr;
+
+	iPoint position;
+	position.x = node.attribute("x").as_int();
+	position.y = node.attribute("y").as_int();
+
+	// stores object id
+	int object_tiled_id = node.attribute("id").as_int(-1); // id to search and set family
+
+	// acces to extra properties
+	pugi::xml_node propertiesNode = node.child("properties");
+	if (propertiesNode == NULL)
+	{
+		LOG("properties not found");
+		ret = false;
+	}
+	else
+	{
+		SDL_Rect section;
+		section.x = propertiesNode.find_child_by_attribute("name", "section_rect_x").attribute("value").as_int();
+		section.y = propertiesNode.find_child_by_attribute("name", "section_rect_y").attribute("value").as_int();
+		section.w = propertiesNode.find_child_by_attribute("name", "section_rect_w").attribute("value").as_int();
+		section.h = propertiesNode.find_child_by_attribute("name", "section_rect_h").attribute("value").as_int();
+
+		newImage = new GUIImage(position, section);
+
+		// assign the rest of extra properties
+		newImage->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
+		newImage->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
+		newImage->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
+		newImage->ObjectID = object_tiled_id;
+		newImage->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+
+		newImage->SetParent(nullptr);
+		guiElems.PushBack(newImage);
+
+	}
+
+	return ret;
+
 }
 
 bool j1Gui::LoadGUIButton(pugi::xml_node& node)
@@ -695,8 +745,8 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	// ... if we are more needed properties for something
 	// ...
 	
-	// adds parent
-	// parents are added when all gui objects are loaded
+	// adds default parent (screen)
+	// default parent are added when all gui objects are loaded
 	// scene calls AssociateParentsID and links them
 	newButton->SetParent(nullptr);
 	
@@ -712,8 +762,6 @@ bool j1Gui::AssociateParentsID()
 
 	// search and set family to each gui objet who wants it
 	// REMEMBER: each gui element created by parent call the object id is -1, skip this, the parent is already set
-
-	//LOG("count: %i", guiElems.Count());
 	
 	for (int i = 0; i < guiElems.Count(); ++i)
 	{
@@ -721,7 +769,7 @@ bool j1Gui::AssociateParentsID()
 			continue;
 
 		LOG("id %i", guiElems[i]->ObjectID);
-		for (int j = 0; j < guiElems.Count(); ++j)
+		for (int j = 0; j < guiElems.Count() && j != i; ++j)
 		{
 			if (guiElems[j]->ObjectID == -1)
 				continue;
