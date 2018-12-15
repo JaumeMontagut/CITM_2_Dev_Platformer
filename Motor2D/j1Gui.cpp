@@ -657,12 +657,64 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	bool ret = true;
 
 	GUIText* newText = nullptr;
-	//newText = new GUIText(iPoint...
 
 	iPoint position;
 	position.x = node.attribute("x").as_int();
 	position.y = node.attribute("y").as_int();
-	//Set parent and object id
+	
+	// stores object id
+	int object_tiled_id = node.attribute("id").as_int(-1); // id to search and set family
+
+	// acces to extra properties
+	// stores string text
+	p2SString text;
+	pugi::xml_node propertiesNode = node.child("properties");
+	if (propertiesNode == NULL)
+	{
+		LOG("properties not found");
+		ret = false;
+	}
+	else
+	{
+		text = propertiesNode.find_child_by_attribute("name", "text").attribute("value").as_string("");
+	}
+
+	SDL_Color color = WHITE;
+	// TODO: loads desired color
+	// ...
+
+	// font logic -------
+	// gets font name
+	p2SString fontName = propertiesNode.find_child_by_attribute("name", "fontName").attribute("value").as_string("");
+	int fontSize = propertiesNode.find_child_by_attribute("name", "fontSize").attribute("value").as_int(12);
+
+	// check if we have any font with same characteristics
+	 _TTF_Font* font = CheckGUIFont(fontName, fontSize);
+	 // if font not found, loads it
+	 if (font == nullptr)
+	 {
+		 // gets new font path
+		 p2SString fontPath = propertiesNode.find_child_by_attribute("name", "fontPath").attribute("value").as_string("");
+		//font = LoadGUIFont(fontName, )
+		 LOG("");
+	 }
+	 // ------------------
+	 // creates new label with custom data
+	newText = new GUIText(position, text.GetString(), color, font);
+
+	// extra properties ---
+	if (ret) // while everything is ok
+	{
+		newText->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
+		newText->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
+		newText->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
+		newText->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+
+		// adds previous object id too
+		newText->ObjectID = object_tiled_id;
+	}
+	// adds it to gui elements list
+	guiElems.add(newText);
 	
 
 	return ret;
