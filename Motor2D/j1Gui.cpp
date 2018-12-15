@@ -344,6 +344,7 @@ bool j1Gui::PreUpdate()
 		else {
 			iterator->data->SetFocus(false);
 		}
+		iterator->data->PreUpdate();
 	}
 
 	//for (int i = 0; i < fonts.Count(); ++i) {
