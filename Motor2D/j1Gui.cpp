@@ -763,6 +763,14 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	}
 
 	SDL_Color color = WHITE;
+
+	if (ret)
+	{
+		color.a = propertiesNode.find_child_by_attribute("name", "color_a").attribute("value").as_int();
+		color.r = propertiesNode.find_child_by_attribute("name", "color_r").attribute("value").as_int();
+		color.b = propertiesNode.find_child_by_attribute("name", "color_b").attribute("value").as_int();
+		color.g = propertiesNode.find_child_by_attribute("name", "color_g").attribute("value").as_int();
+	}
 	// TODO: loads desired color
 	// ...
 
