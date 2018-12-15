@@ -648,11 +648,13 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	bool ret = true;
 
 	GUIText* newText = nullptr;
+	//newText = new GUIText(iPoint...
 
 	iPoint position;
 	position.x = node.attribute("x").as_int();
 	position.y = node.attribute("y").as_int();
-
+	//Set parent and object id
+	
 
 	return ret;
 }
@@ -788,72 +790,26 @@ bool j1Gui::AssociateParentsID()
 {
 	bool ret = true;
 
-	// search and set family to each gui objet who wants it
-	// REMEMBER: each gui element created by parent call the object id is -1, skip this, the parent is already set
-	
-	LOG("count: %i", guiElems.Count());
-
-	
-	p2List<GUIElement*> e;
-
-	// filter
-	for (p2List_item<GUIElement*>* iterator = guiElems.start; iterator != nullptr; iterator = iterator->next)
-	{
-		if (iterator->data->ObjectID == -1)
+	for (p2List_item<GUIElement*>* iterator = guiElems.start; iterator != nullptr; iterator = iterator->next) {
+		//If the object id is -1, it means that the object has been created in another's object constructor, like the button who creates a text and an image
+		if (iterator->data->ObjectID == -1) {
 			continue;
-
-		e.add(iterator->data);
-	}
-
-	LOG("real count %i", e.Count());
-
-	p2List_item<GUIElement*>* itemC1 = e.start;
-	//p2List_item<GUIElement*>* itemC2 = e.start;
-
-	for(;itemC1; itemC1=itemC1->next)
-	{
-		LOG("%i", itemC1->data->ObjectID);
-		for (p2List_item<GUIElement*>* itemC2 = e.start; itemC2; itemC2 = itemC2->next)
-		{
-			if (itemC1->data->ParentID == itemC2->data->ObjectID)
-			{
-				itemC1->data->SetParent(itemC2->data);
-			}
-
-			//// 
-			//if (itemC2 == e.end)
-			//{
-			//	itemC1->data->SetParent(nullptr);
-			//}
 		}
-	}
-
-	for (itemC1 = e.start; itemC1; itemC1 = itemC1->next)
-	{
-		if (itemC1->data->parent == nullptr)
-			itemC1->data->SetParent(nullptr);
-	}
-
-
-	/*for (int i = 0; i < guiElems.Count(); ++i)
-	{
-		if (guiElems[i]->ObjectID == -1)
-			continue;
-
-		LOG("id %i", guiElems[i]->ObjectID);
-		for (int j = 0; j < guiElems.Count() && j != i; ++j)
-		{
-			if (guiElems[j]->ObjectID == -1)
+		//Set the parent
+		for (p2List_item<GUIElement*>* parentIterator = guiElems.start; parentIterator != nullptr; parentIterator = parentIterator->next) {
+			if (parentIterator->data->ObjectID == -1) {
 				continue;
-
-			if (guiElems[i]->ParentID == guiElems[j]->ObjectID)
-			{
-				guiElems[i]->SetParent(guiElems[j]);
-				LOG("parent found and linked");
-				LOG("parent id: %i", guiElems[i]->ParentID);
+			}
+			if (iterator->data->ParentID == parentIterator->data->ObjectID) {
+				iterator->data->SetParent(parentIterator->data);
+				break;
 			}
 		}
-	}*/
+		//If it goes through all the objects and doesn't set its parent, set it to the default
+		if (iterator->data->parent == nullptr) {
+			iterator->data->SetParent(guiScreen);
+		}
+	}
 
 	return ret;
 }
