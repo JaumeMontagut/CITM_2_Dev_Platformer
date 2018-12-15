@@ -347,19 +347,19 @@ bool j1Gui::PreUpdate()
 
 void GUIElement::SetState(int x, int y) {
 	if (CheckBounds(x, y)) {
-		if (state == MOUSE_STATE::M_OUT) {
-			state = MOUSE_STATE::M_ENTER;
+		if (state == FOCUS::OUT_OF_FOCUS) {
+			state = FOCUS::GET_FOCUS;
 		}
 		else {
-			state = MOUSE_STATE::M_IN;
+			state = FOCUS::ON_FOCUS;
 		}
 	}
 	else {
-		if (state == MOUSE_STATE::M_IN || state == MOUSE_STATE::M_ENTER) {
-			state = MOUSE_STATE::M_EXIT;
+		if (state == FOCUS::ON_FOCUS || state == FOCUS::GET_FOCUS) {
+			state = FOCUS::LOSE_FOCUS;
 		}
 		else {
-			state = MOUSE_STATE::M_OUT;
+			state = FOCUS::OUT_OF_FOCUS;
 		}
 	}
 }
@@ -459,7 +459,7 @@ iPoint GUIElement::GetGlobalPos()
 void GUIElement::SetActive(bool active)
 {
 	if (active == false) {
-		state == MOUSE_STATE::M_OUT;//When it is deactivated, it loses focus
+		state == FOCUS::OUT_OF_FOCUS;//When it is deactivated, it loses focus
 	}
 	this->active = active;
 }
