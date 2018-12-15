@@ -78,7 +78,7 @@
     <property name="draggable" type="bool" value="false"/>
     <property name="fontName" value="digiffiti"/>
     <property name="fontPath" value="fonts/digiffiti.ttf"/>
-    <property name="fontSize" type="int" value="32"/>
+    <property name="fontSize" type="int" value="48"/>
     <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="parentID" value="-1"/>
