@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="87">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="91">
  <objectgroup name="GUI objects">
   <object id="71" name="button" type="templateType1" x="472.5" y="177" width="240" height="80">
    <properties>
@@ -54,6 +54,17 @@
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
     <property name="text" value="importer"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="88" name="button" type="templateType1" x="473.5" y="516" width="240" height="80">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="parentID" value="-1"/>
+    <property name="text" value="not parented to panel"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>

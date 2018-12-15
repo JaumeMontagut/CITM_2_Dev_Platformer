@@ -14,7 +14,13 @@ GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color, _TTF
 bool GUIText::PostUpdate()
 {
 	if (texture != nullptr) {
-		return App->render->BlitGUI(texture, localPos.x, localPos.y, NULL);
+		//Iteration
+		iPoint globalPos(0, 0);
+		for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
+			globalPos += iterator->localPos;
+		}
+
+		return App->render->BlitGUI(texture, globalPos.x, globalPos.y, NULL);
 	}
 
 	return false;

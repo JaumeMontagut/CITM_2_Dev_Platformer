@@ -321,8 +321,6 @@ bool j1Gui::PreUpdate()
 	mouse_x *= (int)App->win->GetScale();
 	mouse_y *= (int)App->win->GetScale();
 
-	LOG("mouse x:%i y:%i", mouse_x, mouse_y);
-
 	//Iteration
 	p2List<GUIElement*> elems;
 	//1. Get the first element
@@ -432,7 +430,12 @@ bool GUIElement::CheckBounds(int x, int y)
 void GUIElement::DrawOutline()
 {
 	if (App->gui->debugGUI) {
-		App->render->DrawQuad(localPos + bounds, 255, 255, 255, 255, false, false);
+		//Iteration
+		iPoint globalPos(0, 0);
+		for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
+			globalPos += iterator->localPos;
+		}
+		App->render->DrawQuad(globalPos + bounds, 255, 255, 255, 255, false, false);
 	}
 }
 
@@ -446,7 +449,7 @@ iPoint GUIElement::GetGlobalPos()
 	return globalPos;
 
 
-	//Recursive
+	////Recursive
 	//if (parent != nullptr) {
 	//	return localPos + parent->GetGlobalPos();
 	//}
@@ -568,9 +571,11 @@ void GUIElement::SetParent(GUIElement* parent) {
 	//If no parent was detected, set it to be directly a child of the screen
 	if (parent == nullptr) {
 		this->parent = App->gui->guiScreen;
+		this->localPos -= this->parent->localPos;
 	}
 	else {
 		this->parent = parent;
+		this->localPos -= parent->localPos;
 	}
 	this->parent->childs.add(this);
 }

@@ -8,5 +8,12 @@ GUIImage::GUIImage(const iPoint & position, const SDL_Rect & section) : section(
 }
 
 bool GUIImage::PostUpdate() {
-	return App->render->BlitGUI(App->gui->GetAtlas(), localPos.x, localPos.y, &section, 2);
+
+	//Iteration
+	iPoint globalPos(0, 0);
+	for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
+		globalPos += iterator->localPos;
+	}
+
+	return App->render->BlitGUI(App->gui->GetAtlas(), globalPos.x, globalPos.y, &section, 2);
 }
