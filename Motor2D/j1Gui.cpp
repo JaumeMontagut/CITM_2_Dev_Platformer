@@ -622,6 +622,15 @@ GUICheckbox* j1Gui::CreateCheckbox(const iPoint & position, const SDL_Rect & bou
 	return guiElem;
 }
 
+GUICheckbox* j1Gui::CreateCheckbox(const iPoint& position, CheckboxTemplates& templateType, const char* text, bool* boolPtr, GUIElement* parent)
+{
+	GUICheckbox* guiElem = nullptr;
+	guiElem = new GUICheckbox(position, templateType, text, boolPtr);
+	guiElems.add(guiElem);
+	guiElem->SetParent(parent);
+	return guiElem;
+}
+
 // class Gui ---------------------------------------------------
 
 GUIElement::GUIElement(const iPoint& position) : localPos(position) {}

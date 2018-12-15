@@ -134,14 +134,16 @@ bool j1Scene::Start()
 	App->gui->CreateButton(App->gui->buttonType2, { 700, 80 }, &SayHelloButton, "blablabla");*/
 
 	////Checkbox--------------------------------------------------------------------------------------------------------------
-	//SDL_Rect outUncheckRect (16,125,16,16);
-	//SDL_Rect inUncheckRect (0, 125, 16, 16);
-	//SDL_Rect clickUncheckRect (32, 125, 16, 16);
-	//SDL_Rect outCheckRect (16, 141, 16, 16);
-	//SDL_Rect inCheckRect (0, 141, 16, 16);
-	//SDL_Rect clickCheckRect (32, 141, 16, 16);
-	//const char * string = "hello checkbox";
-	//App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outUncheckRect, &inUncheckRect, &clickUncheckRect, &outCheckRect, &inCheckRect, &clickCheckRect);
+	/*SDL_Rect outUncheckRect (16,125,16,16);
+	SDL_Rect inUncheckRect (0, 125, 16, 16);
+	SDL_Rect clickUncheckRect (32, 125, 16, 16);
+	SDL_Rect outCheckRect (16, 141, 16, 16);
+	SDL_Rect inCheckRect (0, 141, 16, 16);
+	SDL_Rect clickCheckRect (32, 141, 16, 16);
+	const char * string = "hello checkbox";
+	App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outUncheckRect, &inUncheckRect, &clickUncheckRect, &outCheckRect, &inCheckRect, &clickCheckRect);*/
+
+	App->gui->CreateCheckbox({ 0,0 }, App->gui->checkboxType1, "blabla check", &App->collision->debug);
 
 	SDL_Rect boxRect();
 	SDL_Rect thumbRect();

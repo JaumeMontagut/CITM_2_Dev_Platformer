@@ -47,6 +47,42 @@ GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool 
 	this->bounds = bounds;
 }
 
+GUICheckbox::GUICheckbox(const iPoint& position, CheckboxTemplates& templateType, const char* text, bool* boolPtr) : 
+	boolPtr(boolPtr),
+	clickSfx(templateType.clickSfx),
+	hoverSfx(templateType.hoverSfx),
+	GUIElement(position)
+{
+	// set sections rects
+	sections[(uint)CB_STATES::CB_OUT][(uint)CHECK::UNCHECKED] = &templateType.sectionUp;
+	sections[(uint)CB_STATES::CB_OUT][(uint)CHECK::CHECKED] = &templateType.sectionUpCheck;
+	sections[(uint)CB_STATES::CB_IN][(uint)CHECK::UNCHECKED] = &templateType.sectionHover;
+	sections[(uint)CB_STATES::CB_IN][(uint)CHECK::CHECKED] = &templateType.sectionHoverCheck;
+	sections[(uint)CB_STATES::CB_CLICK][(uint)CHECK::UNCHECKED] = &templateType.sectionDown;
+	sections[(uint)CB_STATES::CB_CLICK][(uint)CHECK::CHECKED] = &templateType.sectionDownCheck;
+
+	// add child image
+	if(sections[(uint)CB_STATES::CB_OUT][(uint)CHECK::UNCHECKED] != nullptr)
+		childImage = App->gui->CreateImage(position, templateType.sectionUp, this);
+
+	//Create child Text
+	if (text != nullptr) {
+		App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
+	}
+	if (boolPtr == nullptr) {
+		LOG("Error while associating checkbox with a bool, crash incoming");
+	}
+	if (childImage == nullptr) {
+		LOG("Error while creating checkbox image, crash incoming");
+	}
+	assert(boolPtr != nullptr || childImage != nullptr);
+
+	interactable = true;
+
+	bounds = templateType.bounds;
+
+}
+
 bool GUICheckbox::PreUpdate()
 {
 	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {

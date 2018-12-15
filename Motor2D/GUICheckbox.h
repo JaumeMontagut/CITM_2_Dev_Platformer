@@ -23,6 +23,7 @@ public:
 	//Constructors
 	//Constructor for GUICheckbox. Leave text as nullptr to not have text and leave out_section as nullptr to not have image.
 	GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * outUncheckSection = nullptr, const SDL_Rect * inUncheckSection = nullptr, const SDL_Rect * clickUncheckSection = nullptr, const SDL_Rect * outCheckSection = nullptr, const SDL_Rect * inCheckSection = nullptr, const SDL_Rect * clickCheckSection = nullptr, uint clickSFX = 0u);
+	GUICheckbox(const iPoint& position, CheckboxTemplates& templateType, const char* text = nullptr, bool* boolPtr = nullptr);
 
 	bool PreUpdate();
 	bool CleanUp();
@@ -36,6 +37,7 @@ private:
 	bool *boolPtr = nullptr;//A pointer to the bool that's going to be changed
 	GUIImage* childImage;
 	uint clickSfx = 0u;
+	uint hoverSfx = 0u;
 	//Sprites
 	SDL_Rect * sections[(uint)CB_STATES::CB_MAX][(uint)CHECK::MAX];
 };

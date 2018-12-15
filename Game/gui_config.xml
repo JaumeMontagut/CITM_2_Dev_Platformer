@@ -35,12 +35,16 @@
 		</buttons>
 		<checkboxes>
 			<checkbox_type_1>
-				<up x="0" y="0" w="0" h="0"/>
-				<hover x="0" y="0" w="0" h="0"/>
-				<down x="0" y="0" w="0" h="0"/>
-				<upCheck x="11" y="21" w="0" h="0"/>
-				<hoverCheck x="11" y="21" w="0" h="0"/>
-				<downCheck x="11" y="21" w="0" h="0"/>
+				<up x="16" y="125" w="16" h="16"/>
+				<hover x="0" y="125" w="16" h="16"/>
+				<down x="32" y="125" w="16" h="0"/>
+				<upCheck x="16" y="141" w="16" h="16"/>
+				<hoverCheck x="0" y="141" w="16" h="16"/>
+				<downCheck x="32" y="141" w="16" h="16"/>
+				<bounds x="0" y="0" w="32" h="32"/>
+				<font name="digiffiti" size="32" path="fonts/digiffiti.ttf"/>
+				<font_color r="255" g="255" b="255" a="0"/>
+				<sfx click="standardClick" hover="standardHover"/>
 			</checkbox_type_1>
 		</checkboxes>
 		<windows>
