@@ -143,7 +143,7 @@ bool j1Scene::Start()
 	const char * string = "hello checkbox";
 	App->gui->CreateCheckbox({ 0, 0 }, { 0, 0, 100, 100 }, &App->collision->debug, string, &outUncheckRect, &inUncheckRect, &clickUncheckRect, &outCheckRect, &inCheckRect, &clickCheckRect);*/
 
-	App->gui->CreateCheckbox({ 0,0 }, App->gui->checkboxType1, "blabla check", &App->collision->debug);
+	//App->gui->CreateCheckbox({ 0,0 }, App->gui->checkboxType1, "blabla check", &App->collision->debug);
 
 	SDL_Rect boxRect();
 	SDL_Rect thumbRect();

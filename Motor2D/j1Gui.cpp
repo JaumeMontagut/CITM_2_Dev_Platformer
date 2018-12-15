@@ -390,9 +390,9 @@ void j1Gui::GetNextGUIElement(GUIElement * &focusedElement)
 		if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && nextElement == nullptr) {
 			nextElement = iterator->data;
 		}
-		else if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && iterator->data->GetGlobalPos().y <= nextElement->GetGlobalPos().y) {
+		else if (iterator->data->GetGlobalPos().y >= focusedElement->GetGlobalPos().y && iterator->data->GetGlobalPos().y <= nextElement->GetGlobalPos().y) {
 			if (iterator->data->GetGlobalPos().y == nextElement->GetGlobalPos().y) {
-				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < nextElement->GetGlobalPos().x) {
+				if (iterator->data->GetGlobalPos().x >= focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x > nextElement->GetGlobalPos().x) {
 					nextElement = iterator->data;
 				}
 			}
@@ -721,8 +721,90 @@ bool j1Gui::LoadGUI(p2SString gui_xml_path)
 					LOG("failed to create gui element label");
 				}
 			}
+			else if (gui_element_type == "checkbox")
+			{
+				if (!LoadGUICheckbox(object))
+				{
+					LOG("failed to create gui element checkbox");
+				}
+			}
 		}
 	}
+
+
+	return ret;
+}
+
+bool j1Gui::LoadGUICheckbox(pugi::xml_node& node)
+{
+	bool ret = true;
+
+	p2SString stringComparer = node.attribute("type").as_string();
+
+	// check type of templatetype (if's for now) TODO: if we have time improve this with some enum and improved template creation
+	// maybe adds a list of templates with enum and some assert for prevention
+	// maybe adds complete template import directly from tmx, but we use for now the templates method currently in use
+
+	CheckboxTemplates* templatePtr = nullptr;
+
+	if (stringComparer == "templateType1")
+	{
+		templatePtr = &checkboxType1;
+	}
+	/*else if (stringComparer == "templateType2")
+	{
+		templatePtr = &checkboxType2;
+	}*/
+	else
+	{
+		LOG("templatetype not found, failed");
+		return false;
+	}
+
+	GUICheckbox* newCheckbox = nullptr;
+
+	// gets position
+	iPoint position;
+	position.x = node.attribute("x").as_int(0);
+	position.y = node.attribute("y").as_int(0);
+	/* maybe on next upgrade we get the boundaries directly here, but for now included on templatetype on gui_config.xml */
+
+	// stores object id
+	int object_tiled_id = node.attribute("id").as_int(-1); // id to search and set family
+
+	// acces to extra properties
+	// stores string text
+	p2SString text;
+	pugi::xml_node propertiesNode = node.child("properties");
+	if (propertiesNode == NULL)
+	{
+		LOG("properties not found");
+		ret = false;
+	}
+	else
+	{
+		text = propertiesNode.find_child_by_attribute("name", "text").attribute("value").as_string("");
+	}
+	p2SString functionName(propertiesNode.find_child_by_attribute("name", "bool_functionPtr").attribute("value").as_string("\0"));
+	newCheckbox = new GUICheckbox(position, *templatePtr, text.GetString(), nullptr); // TODO
+	// adds object id
+	newCheckbox->ObjectID = object_tiled_id;
+
+	// assign the rest of extra properties
+	newCheckbox->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
+	newCheckbox->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
+	newCheckbox->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
+	newCheckbox->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+	// ... if we are more needed properties for something
+	// ...
+
+	// adds default parent (screen)
+	// default parent are added when all gui objects are loaded
+	// scene calls AssociateParentsID and links them
+	//newButton->SetParent(nullptr);
+
+	// adds button element to list
+	guiElems.add(newCheckbox);
 
 
 	return ret;

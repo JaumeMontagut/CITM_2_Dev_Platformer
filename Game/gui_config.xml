@@ -37,7 +37,7 @@
 			<checkbox_type_1>
 				<up x="16" y="125" w="16" h="16"/>
 				<hover x="0" y="125" w="16" h="16"/>
-				<down x="32" y="125" w="16" h="0"/>
+				<down x="32" y="125" w="16" h="16"/>
 				<upCheck x="16" y="141" w="16" h="16"/>
 				<hoverCheck x="0" y="141" w="16" h="16"/>
 				<downCheck x="32" y="141" w="16" h="16"/>
