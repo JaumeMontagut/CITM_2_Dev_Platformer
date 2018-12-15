@@ -106,6 +106,7 @@
     <ClCompile Include="ObjPlayer.cpp" />
     <ClCompile Include="ObjProjectile.cpp" />
     <ClCompile Include="ObjTrigger.cpp" />
+    <ClCompile Include="p2Dictionary.cpp" />
     <ClCompile Include="p2Log.cpp" />
     <ClCompile Include="j1Render.cpp" />
     <ClCompile Include="j1Textures.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="ObjProjectile.h" />
     <ClInclude Include="ObjTrigger.h" />
     <ClInclude Include="p2Animation.h" />
+    <ClInclude Include="p2Dictionary.h" />
     <ClInclude Include="p2DynArray.h" />
     <ClInclude Include="j1Audio.h" />
     <ClInclude Include="j1Input.h" />

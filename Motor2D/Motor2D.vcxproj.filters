@@ -102,6 +102,9 @@
     <ClCompile Include="GUISlider.cpp">
       <Filter>GUIElements</Filter>
     </ClCompile>
+    <ClCompile Include="p2Dictionary.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -230,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="GUISlider.h">
       <Filter>GUIElements</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Dictionary.h">
+      <Filter>Tools</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

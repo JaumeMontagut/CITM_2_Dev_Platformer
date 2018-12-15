@@ -321,47 +321,34 @@ bool j1Gui::PreUpdate()
 	mouseX *= (int)App->win->GetScale();
 	mouseY *= (int)App->win->GetScale();
 
-	////Iteration
-	//p2List<GUIElement*> elems;
-	////1. Get the first element (guiScreen)
-	//elems.add(guiScreen);
-	////2. Go through all the elements in the tree in a generational order
-	//GUIElement * elementInFocus = nullptr;
-	//for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
-	//	//3. Find which is the lowest element in the tree with the mouse above it
-	//	if (iterator->data->CheckBounds(mouseX, mouseY)) {
-	//		elementInFocus = iterator->data;
-	//	}
+	//Iteration
+	p2List<GUIElement*> elems;
+	//1. Get the first element (guiScreen)
+	elems.add(guiScreen);
+	//2. Go through all the elements in the tree in a generational order
+	GUIElement * elementInFocus = nullptr;
+	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
+		//3. Find which is the lowest element in the tree with the mouse above it
+		if (iterator->data->CheckBounds(mouseX, mouseY)) {
+			elementInFocus = iterator->data;
+		}
 
-	//	for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
-	//		elems.add(childIterator->data);
-	//	}
-	//}
-	////4. Set the state of all the elements
-	//for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
-	//	if (iterator->data == elementInFocus) {
-	//		iterator->data->SetFocus(true);
-	//	}
-	//	else {
-	//		iterator->data->SetFocus(false);
-	//	}
-
-	//	for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
-	//		elems.add(childIterator->data);
-	//	}
-	//}
-
-	//for (int i = 0; i < guiElems.Count(); ++i) {
-	//	//TODO: Only select the elements that are capable of receiving focus
-	//	if (guiElems[i] != nullptr) {
-	//		if (guiElems[i] == elementInFocus) {
-	//			guiElems[i]->SetFocus(true);
-	//		}
-	//		else {
-	//			guiElems[i]->SetFocus(false);
-	//		}
-	//	}
-	//}
+		for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
+			elems.add(childIterator->data);
+		}
+	}
+	//4. Set the state of all the elements
+	for (int i = 0; i < guiElems.Count(); ++i) {
+		//TODO: Only select the elements that are capable of receiving focus
+		if (guiElems[i] != nullptr) {
+			if (guiElems[i] == elementInFocus) {
+				guiElems[i]->SetFocus(true);
+			}
+			else {
+				guiElems[i]->SetFocus(false);
+			}
+		}
+	}
 
 	//for (int i = 0; i < fonts.Count(); ++i) {
 	//	LOG("fonts count: %i, name:%s", i + 1, fonts.At(i)->data.fontName.GetString());
