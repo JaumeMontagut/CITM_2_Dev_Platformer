@@ -48,17 +48,17 @@ bool GUISlider::PreUpdate()
 {
 	//Don't exit the box
 	if (childThumb != nullptr && childBox != nullptr) {
-		if (childThumb->localPos.x < childBox->localPos.x) {
-			childThumb->localPos.x = childBox->localPos.x;
+		if (childThumb->GetGlobalPos().x < childBox->GetGlobalPos().x) {
+			childThumb->SetGlobalPos({ childBox->GetGlobalPos().x, childThumb->GetGlobalPos().y });
 		}
-		else if (childThumb->localPos.x + childThumb->bounds.w > childBox->localPos.x + childBox->bounds.w) {
-			childThumb->localPos.x = childBox->localPos.x + childBox->bounds.w - childThumb->bounds.w;
+		else if (childThumb->GetGlobalPos().x + childThumb->bounds.w > childBox->GetGlobalPos().x + childBox->bounds.w) {
+			childThumb->SetGlobalPos({ childBox->GetGlobalPos().x + childBox->bounds.w - childThumb->bounds.w , childThumb->GetGlobalPos().y });
 		}
-		if (childThumb->localPos.y < childBox->localPos.y) {
-			childThumb->localPos.y = childBox->localPos.y;
+		if (childThumb->GetGlobalPos().y < childBox->GetGlobalPos().y) {
+			childThumb->SetGlobalPos({ childThumb->GetGlobalPos().x, childBox->GetGlobalPos().y });
 		}
-		else if (childThumb->localPos.y > childBox->localPos.y + childBox->bounds.h) {
-			childThumb->localPos.y = childBox->localPos.y + childBox->bounds.h;
+		else if (childThumb->GetGlobalPos().y > childBox->GetGlobalPos().y + childBox->bounds.h) {
+			childThumb->SetGlobalPos({ childThumb->GetGlobalPos().x, childBox->GetGlobalPos().y + childBox->bounds.h });
 		}
 	}
 

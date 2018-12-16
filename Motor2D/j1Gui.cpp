@@ -349,7 +349,7 @@ bool j1Gui::PreUpdate()
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
 			dragging = false;
 		}
-		focusedElement->localPos = mousePos + dragOffset - (focusedElement->GetGlobalPos() - focusedElement->localPos);
+		focusedElement->SetGlobalPos(mousePos + dragOffset);
 		
 	}
 	else {
@@ -575,6 +575,11 @@ void GUIElement::DrawOutline()
 		}
 		App->render->DrawQuad(globalPos + bounds, 255, 255, 255, 255, false, false);
 	}
+}
+
+void GUIElement::SetGlobalPos(iPoint pos)
+{
+	localPos = pos - (GetGlobalPos() - localPos);
 }
 
 iPoint GUIElement::GetGlobalPos()
