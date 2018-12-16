@@ -8,7 +8,7 @@ GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, _TT
 {
 	if (text != nullptr)
 	{
-		texture = App->font->Print(text, color, font);
+		texture = App->font->Print(text, color, (uint32)clippingRect.w, font);
 		int texWidth, textHeight;
 		SDL_QueryTexture(texture, NULL, NULL, &texWidth, &textHeight);
 		localPos.x -= texWidth * 0.5f;
@@ -34,5 +34,5 @@ bool GUIText::PostUpdate()
 
 void GUIText::SetText(const char * text)
 {
-	texture = App->font->Print(text, color, font);
+	texture = App->font->Print(text, color, (uint32)clippingRect.w,font);
 }

@@ -19,6 +19,7 @@ public:
 	SDL_Texture * texture = nullptr;
 	SDL_Color color;
 	_TTF_Font * font = nullptr;
+	SDL_Rect clippingRect;
 };
 
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="102">
- <objectgroup name="GUI objects" visible="0">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="103">
+ <objectgroup name="GUI objects">
   <object id="71" name="button" type="templateType1" x="416.833" y="223.333" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
@@ -90,8 +90,27 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="102" name="label" x="144.5" y="457.333" width="221" height="57">
+   <properties>
+    <property name="color" type="color" value="#ffff557f"/>
+    <property name="color_a" type="int" value="255"/>
+    <property name="color_b" type="int" value="127"/>
+    <property name="color_g" type="int" value="85"/>
+    <property name="color_r" type="int" value="255"/>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="fontName" value="digiffiti"/>
+    <property name="fontPath" value="fonts/digiffiti.ttf"/>
+    <property name="fontSize" type="int" value="32"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="parentID" value="75"/>
+    <property name="text">blablabla, &quot;
+&quot; blabla</property>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
- <objectgroup name="Settings">
+ <objectgroup name="Settings" visible="0">
   <object id="95" name="checkbox" type="templateType1" x="416.667" y="401.333" width="31" height="29">
    <properties>
     <property name="bool_functionPtr" value="SayHelloButton"/>

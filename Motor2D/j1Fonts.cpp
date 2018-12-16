@@ -79,10 +79,10 @@ p2SString j1Fonts::NumToString(int num) {
 }
 
 // Print text using font
-SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
+SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, uint32 size, TTF_Font* font)
 {
 	SDL_Texture* ret = NULL;
-	SDL_Surface* surface = TTF_RenderText_Blended((font) ? font : default, text, color);
+	SDL_Surface* surface = TTF_RenderText_Blended_Wrapped((font) ? font : default, text, color, size);
 
 	if (surface == NULL)
 	{
