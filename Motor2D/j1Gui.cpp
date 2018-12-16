@@ -393,7 +393,9 @@ void j1Gui::GetGenerationalList(p2List<GUIElement *> &elems)
 {
 	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
 		for (p2List_item<GUIElement*>* childIterator = iterator->data->GetChilds()->start; childIterator != nullptr; childIterator = childIterator->next) {
-			elems.add(childIterator->data);
+			if (childIterator->data->IsActive()) {
+				elems.add(childIterator->data);
+			}
 		}
 	}
 }

@@ -82,9 +82,9 @@ p2SString j1Fonts::NumToString(int num) {
 	};
 	p2SString string;
 	int nums[max];
-	//nums[thousands] = num -;
-	nums[tens] = num % 100;
-	nums[ones] = num % 10;
+	nums[thousands] = (num - (num/100) * 100) / 100;
+	nums[tens] = (num - (num / 10) * 10) / 10;
+	nums[ones] = (num - (num / 100) * 100) / 100;
 	for (int i = ones; i < max; ++i) {
 		switch (nums[i]) {
 		case 0:
