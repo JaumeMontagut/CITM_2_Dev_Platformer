@@ -217,6 +217,9 @@ void j1Gui::FillFunctionsMap()
 	functionMap["CloseSettings"] = &CloseSettings;
 	functionMap["OpenCredits"] = &OpenCredits;
 	functionMap["CloseCredits"] = &CloseCredits;
+	functionMap["ProjectGithub"] = &ProjectGithub;
+	functionMap["JaumeGithub"] = &GOJaumeGithub;
+	functionMap["JAGithub"] = &GOJAGithub;
 }
 
 void (*j1Gui::GetButtonFunction(p2SString functionName))() {

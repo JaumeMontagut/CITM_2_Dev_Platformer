@@ -77,4 +77,15 @@ void CloseCredits() {
 	App->gui->ToggleElementVisibility("ShowCredits");
 }
 
+void GOJaumeGithub() {
+	ShellExecuteA(NULL, "open", "https://github.com/JaumeMontagut", NULL , NULL , SW_SHOWNORMAL);
+}
+void GOJAGithub() {
+	ShellExecuteA(NULL, "open", "https://github.com/PeterMcP", NULL, NULL, SW_SHOWNORMAL);
+}
+
+void ProjectGithub() {
+	ShellExecuteA(NULL, "open", "https://github.com/JaumeMontagut/CITM_2_Dev_Platformer", NULL, NULL, SW_SHOWNORMAL);
+}
+
 #endif

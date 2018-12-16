@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="110">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="111">
  <objectgroup name="GUI objects" visible="0">
   <object id="71" name="button" type="templateType1" x="416.833" y="223.333" width="240" height="80">
    <properties>
@@ -145,7 +145,7 @@
     <property name="visible" type="bool" value="false"/>
    </properties>
   </object>
-  <object id="106" name="button" type="templateType1" x="152.167" y="674.333" width="240" height="80">
+  <object id="106" name="button" type="templateType1" x="395" y="673.333" width="240" height="80">
    <properties>
     <property name="disableElementID" type="int" value="103"/>
     <property name="draggable" type="bool" value="false"/>
@@ -159,31 +159,45 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="108" name="button" type="templateType1" x="434.167" y="675.333" width="240" height="80">
+  <object id="108" name="button" type="templateType1" x="395" y="572" width="240" height="80">
    <properties>
     <property name="disableElementID" type="int" value="103"/>
     <property name="draggable" type="bool" value="false"/>
     <property name="enableElementID" type="int" value="75"/>
-    <property name="function" value="CloseCredits"/>
+    <property name="function" value="JaumeGithub"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
-    <property name="object_name" value="CloseCredits"/>
+    <property name="object_name" value="JaumeGithhub"/>
     <property name="parentID" value="103"/>
     <property name="text" value="Jaume MG GitHub"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="109" name="button" type="templateType1" x="717.167" y="675.333" width="240" height="80">
+  <object id="109" name="button" type="templateType1" x="659.167" y="572" width="240" height="80">
    <properties>
     <property name="disableElementID" type="int" value="103"/>
     <property name="draggable" type="bool" value="false"/>
     <property name="enableElementID" type="int" value="75"/>
-    <property name="function" value="CloseCredits"/>
+    <property name="function" value="JAGithub"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
-    <property name="object_name" value="CloseCredits"/>
+    <property name="object_name" value="JAGithub"/>
     <property name="parentID" value="103"/>
     <property name="text" value="J.A Prieto GitHub"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="110" name="button" type="templateType1" x="132.167" y="572" width="240" height="80">
+   <properties>
+    <property name="disableElementID" type="int" value="103"/>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="enableElementID" type="int" value="75"/>
+    <property name="function" value="ProjectGithub"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="object_name" value="JaumeGithhub"/>
+    <property name="parentID" value="103"/>
+    <property name="text" value="Project Github"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>

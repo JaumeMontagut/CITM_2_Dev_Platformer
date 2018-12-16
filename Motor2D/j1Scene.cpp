@@ -249,7 +249,7 @@ bool j1Scene::Update(float dt)
 	App->map->Draw();
 
 	// scroll credits text, if we have
-	if (creditsText != nullptr && creditsText->parent->parent->active)
+	if (creditsText != nullptr && creditsText->parent->active)
 	{
 		if (creditsStartPosition == -1) // saves credits start y position to further reposition
 		{
