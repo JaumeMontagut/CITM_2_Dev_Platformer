@@ -8,15 +8,15 @@ GUISlider::GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect * thumbSection,
 	GUIElement(pos)
 {
 	if (boxSection != nullptr) {
-		childBox = App->gui->CreateImage(iPoint(0,0), *boxSection, this);
+		childBox = App->gui->CreateImage(iPoint(pos.x, pos.y), *boxSection, this);
 		SDL_Rect boxBounds(0, 0, boxSection->w * 2, boxSection->h * 2);
 		childBox->bounds = boxBounds;
 	}
 	if (thumbSection != nullptr){
-		iPoint boxCenter(0, 0);
-		if (boxSection != nullptr) {
-			boxCenter.x = boxSection->x;
-			boxCenter.y = boxSection->y;
+		iPoint boxCenter(pos.x, pos.y);
+		if (childBox != nullptr) {
+			boxCenter.x += childBox->bounds.w * 0.5f;
+			boxCenter.y += childBox->bounds.h * 0.5f;
 		}
 		childThumb = App->gui->CreateImage(boxCenter, *thumbSection, this);
 		childThumb->draggable = true;
