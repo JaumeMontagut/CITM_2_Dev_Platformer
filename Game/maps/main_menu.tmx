@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="82">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="84">
  <properties>
   <property name="associated_gui_xml" value="maps/gui_main_menu.tmx"/>
   <property name="background_music" value="song21.ogg"/>
@@ -60300,6 +60300,8 @@
    <object id="75" name="normalBox" x="400" y="275" width="16" height="16"/>
    <object id="77" name="flyingEnemy" x="428.667" y="130.167" width="16" height="16"/>
    <object id="78" name="landEnemy" x="434" y="213.667" width="16" height="24"/>
+   <object id="82" name="pizza" x="164.667" y="141.333" width="16" height="16"/>
+   <object id="83" name="nutCoin" x="447.333" y="280" width="16" height="16"/>
   </objectgroup>
  </group>
 </map>
