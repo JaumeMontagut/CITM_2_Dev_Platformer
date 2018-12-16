@@ -204,7 +204,7 @@ bool j1Scene::PreUpdate() {
 	//}
 	// // ---------------------------------
 
-	LOG("%f", testMultiplier);
+	//LOG("%f", testMultiplier);
 
 	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 		App->map->showNavLayer = !App->map->showNavLayer;
@@ -257,10 +257,22 @@ bool j1Scene::Update(float dt)
 		// sets max scroll amount
 		uint width, height = 0;
 		App->tex->GetSize(creditsText->texture, width, height);
-		if(!creditsText->localPos.y <= height)
+		float h = (float)height;
+		if (creditsText->localPos.y >= -h * 0.4f) // *0.4 because how the buttons/elements are centering currently its y offset
+		{
+			// automatic scroll
 			creditsText->localPos.y -= 1;
+			// user speed input
+			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
+			{
+				creditsText->localPos.y -= 2;
+			}
+		}
+		// always scroll down the text
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
+			creditsText->localPos.y += 3;
 	}
-	else if(creditsText != nullptr)
+	else if(creditsText != nullptr && creditsStartPosition != -1)
 	{
 		if(creditsText->localPos.y != creditsStartPosition)
 			creditsText->localPos.y = creditsStartPosition;
