@@ -54,9 +54,9 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(object);
 	AddModule(particles);
+	AddModule(gui);
 	AddModule(fade_to_black);
 	AddModule(collision);//Collision is the penultimate module to update because it calcules all the overlaping collisions and resolves them just before rendering
-	AddModule(gui);
 	AddModule(render);// render last to swap buffer
 
 	PERF_PEEK(ptimer);
