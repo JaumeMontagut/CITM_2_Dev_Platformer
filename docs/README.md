@@ -1,21 +1,6 @@
 ﻿# CITM_2_Dev_Platformer
-Swap game is a puzzle-action-platformer where the player must overcome a series of challenges using their logical and motor skills.
+Swap game is a puzzle-action-platformer where you must overcome a series of challenges using your intelligence and reflexes!
 This game was made as part of the development subject by 2 students in CITM (UPC). We've programmed the game from scratch in C++ and used free artwork.
-
-## How to play:
-### Controller:
-- Left joystick: Move
-- A: Jump
-- B: Shoot a projectile which marks objects
-- Left Joystick (holding B): Aim
-- X: Swap positions with marked object
-
-### Keyboard & Mouse:
-- A: Move left
-- D: Move right
-- Space: Jump
-- Mouse left button: Shoot a projectile which marks objects
-- Mouse right button: Swap positions with marked object
 
 ## Credits
 - Programming: Jose Antonio Prieto
@@ -23,35 +8,6 @@ This game was made as part of the development subject by 2 students in CITM (UPC
 
 - Programming: Jaume Montagut
 > _Github profile: https://github.com/JaumeMontagut_
-
-- Art from:
-
-Ollie Berzs: _https://ollieberzs.itch.io/industrial-pack_
-
-0x72: https://0x72.itch.io/16x16-robot-tileset
-
-Buch: https://opengameart.org/content/sci-fi-interior-tiles
-
-OmegaGrim: https://hyohnoo.itch.io/keyboard-controller-keys
-
-- Music from:
-  
-cynicmusic: https://opengameart.org/content/mysterious-ambience-song21
-
-benjobanjo: https://opengameart.org/content/rpg-map-screen
-
-Brandon Morris: https://opengameart.org/content/loading-screen-loop
-
-- SFX from:
-  
-Ogrebane: https://opengameart.org/content/teleport-spell
-
-Kenney: https://opengameart.org/content/63-digital-sound-effects-lasers-phasers-space-etc
-
-remaxim: https://opengameart.org/content/falling-body
-
-sauer2: https://opengameart.org/content/oldschool-win-and-die-jump-and-run-sounds
-
 
 ## Innovations:
 - Get background animations directly edited in Tiled Map Editor.
@@ -69,8 +25,15 @@ sauer2: https://opengameart.org/content/oldschool-win-and-die-jump-and-run-sound
 - When you swap with an object you also exchange velocities.
 - 13 levels!
 - Added gui element templates on an xml to easlily create similar elements.
+- Loaded elements gui elements from Tiled.
 
-## Member contributions to assignment 2
+##Release
+
+##Video
+
+[video](https://youtu.be/gLZghKCW6RY)
+
+## Member contributions
 Jose Antonio Prieto
 - Flying enemy
 - A*
@@ -92,26 +55,20 @@ Jaume Montagut Guix
 - designed some new cool levels!
 - multitude of fixes/improvements
 
-## Debug functionality:
-- F1 ​Start from the very first level
-- F2 ​Start from the beginning of the current level
-- F3 Go to the next level
-- F5 ​Save the current state
-- F6 ​Load the previous state (even across levels)
-- F7 Show navigation layer
-- F8 Toggle on / off UI bounds debug
-- F9​ See paths and colliders
-- F10​ God Mode
-  - You can go through colliders, you don't fall
-  - Move up width W and move down with S
-- Enter Go to the next level (if you are in the last one come back to the first)
-- NUMPAD 7: Zoom in
-- NUMPAD 9: Zoom out
-- NUMPAD 8: Move camera up
-- NUMPAD 5: Move camera down
-- NUMPAD 4: Move camera left
-- NUMPAD 6: Move camera right
-- NUMPAD 0: Deactivate camera debugging
+## How to play:
+### Controller:
+- Left joystick: Move
+- A: Jump
+- B: Shoot a projectile which marks objects
+- Left Joystick (holding B): Aim
+- X: Swap positions with marked object
+
+### Keyboard & Mouse:
+- A: Move left
+- D: Move right
+- Space: Jump
+- Mouse left button: Shoot a projectile which marks objects
+- Mouse right button: Swap positions with marked object
 
 ## License:
 	GNU GPLv3
@@ -135,6 +92,3 @@ Jaume Montagut Guix
 
 ## Find this project's repository in:
 https://github.com/JaumeMontagut/CITM_2_Dev_Platformer
-
-## Find this project's scrum board in:
-https://trello.com/b/TiOp7JWt
