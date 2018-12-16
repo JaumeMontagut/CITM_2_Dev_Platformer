@@ -9,7 +9,7 @@ struct SDL_Texture;
 class GUIText : public GUIElement
 {
 public:
-	GUIText(const iPoint& position, const char* text, SDL_Color color, _TTF_Font* font = nullptr);
+	GUIText(const iPoint& position, const char* text, SDL_Color color, int maxWidth = 256, _TTF_Font* font = nullptr);
 
 public:
 	bool PostUpdate();

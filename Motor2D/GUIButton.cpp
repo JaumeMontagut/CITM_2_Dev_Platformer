@@ -24,7 +24,7 @@ GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, p2SString
 	}
 	//Child text
 	if (text != nullptr) {
-		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Take into account the adjustment
+		App->gui->CreateText(position, text, WHITE, bounds.w ,App->font->default, this);//TODO: Take into account the adjustment
 	}
 	clickFunction = App->gui->GetButtonFunction(functionName);
 	interactable = true;
@@ -46,7 +46,7 @@ GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, p2SS
 	}	
 	if (text != nullptr) {
 		iPoint centerPos(bounds.x + position.x + bounds.w * 0.5f, bounds.y + position.y + bounds.h * 0.4f);
-		childText = App->gui->CreateText(centerPos, text, templateType.fontColor, templateType.font, this);
+		childText = App->gui->CreateText(centerPos, text, templateType.fontColor, bounds.w,templateType.font, this);
 	}
 	clickFunction = App->gui->GetButtonFunction(functionName);
 	interactable = true;

@@ -90,7 +90,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="102" name="label" x="144.5" y="457.333" width="221" height="57">
+  <object id="102" name="label" x="204.5" y="454.333" width="274" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>
@@ -104,8 +104,7 @@
     <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="parentID" value="75"/>
-    <property name="text">blablabla, &quot;
-&quot; blabla</property>
+    <property name="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur metus nisl, vitae porttitor nunc ullamcorper sit amet. Praesent maximus, erat eget congue pellentesque, quam nunc varius lacus, a consequat mi purus eu augue. Vestibulum ultrices sem et auctor mattis. Phasellus aliquam, metus at placerat bibendum, felis erat porta elit, a eleifend neque quam ac tortor. Fusce et justo lacinia, sollicitudin sem vitae, tempus velit. Morbi tempus, elit vel euismod maximus, lorem leo suscipit tellus, ac malesuada neque dolor eu enim. Suspendisse sed tincidunt eros. Praesent quis odio eu augue dignissim interdum. "/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>

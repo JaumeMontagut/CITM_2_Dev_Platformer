@@ -33,7 +33,7 @@ GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool 
 	}
 	//Create child Text
 	if (text != nullptr) {
-		App->gui->CreateText(position, text, WHITE, App->font->default, this);//TODO: Get even another parameter with the font
+		App->gui->CreateText(position, text, WHITE, bounds.w, App->font->default, this);//TODO: Get even another parameter with the font
 	}
 	if (boolPtr == nullptr) {
 		LOG("Error while associating checkbox with a bool, crash incoming");
@@ -68,7 +68,7 @@ GUICheckbox::GUICheckbox(const iPoint& position, CheckboxTemplates& templateType
 
 	//Create child Text
 	if (text != nullptr) {
-		App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
+		App->gui->CreateText(position, text, templateType.fontColor, bounds.w, templateType.font, this);
 	}
 	if (boolPtr == nullptr) {
 		LOG("Error while associating checkbox with a bool, crash incoming");

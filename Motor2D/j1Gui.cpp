@@ -640,10 +640,10 @@ GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section, G
 	return guiElem;
 }
 
-GUIText* j1Gui::CreateText(const iPoint& centerPos, const char* text, SDL_Color color, _TTF_Font* font, GUIElement * parent)
+GUIText* j1Gui::CreateText(const iPoint& centerPos, const char* text, SDL_Color color, int maxWidth, _TTF_Font* font, GUIElement * parent)
 {
 	GUIText* guiElem = nullptr;
-	guiElem = new GUIText(centerPos, text, color, font);
+	guiElem = new GUIText(centerPos, text, color, maxWidth, font);
 	guiElems.add(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;
@@ -940,7 +940,10 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	 }
 	 // ------------------
 	 // creates new label with custom data
-	newText = new GUIText(position, text.GetString(), color, font);
+	 // adds tiled tmx bounds to label
+	 int maxWidth = node.attribute("width").as_int();
+
+	newText = new GUIText(position, text.GetString(), color, maxWidth, font);
 
 	// extra properties ---
 	if (ret) // while everything is ok
@@ -953,8 +956,6 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 		// adds previous object id too
 		newText->ObjectID = object_tiled_id;
 
-		// adds tiled tmx bounds to label
-		newText->clippingRect.w = node.attribute("width").as_int();
 	}
 	// adds it to gui elements list
 	guiElems.add(newText);
