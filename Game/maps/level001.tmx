@@ -45198,11 +45198,10 @@
   </objectgroup>
  </group>
  <group id="11" name="GameObjects">
-  <objectgroup id="12" name="Triggers">
-   <object id="28" name="nutCoin" x="480" y="248" width="16" height="16"/>
-  </objectgroup>
+  <objectgroup id="12" name="Triggers"/>
   <objectgroup id="13" name="GameObjects">
    <object id="21" name="normalBox" x="864" y="263" width="16" height="16"/>
+   <object id="28" name="nutCoin" x="480" y="248" width="16" height="16"/>
   </objectgroup>
  </group>
 </map>
