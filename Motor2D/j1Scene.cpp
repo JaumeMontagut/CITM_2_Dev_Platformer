@@ -247,9 +247,23 @@ bool j1Scene::Update(float dt)
 	App->map->Draw();
 
 	// scroll credits text, if we have
-	if (creditsText != nullptr)
+	if (creditsText != nullptr && creditsText->parent->parent->active)
 	{
-		creditsText->localPos.y -= 2;
+		if (creditsStartPosition == -1) // saves credits start y position to further reposition
+		{
+			creditsStartPosition = creditsText->localPos.y;
+		}
+
+		// sets max scroll amount
+		uint width, height = 0;
+		App->tex->GetSize(creditsText->texture, width, height);
+		if(!creditsText->localPos.y <= height)
+			creditsText->localPos.y -= 1;
+	}
+	else if(creditsText != nullptr)
+	{
+		if(creditsText->localPos.y != creditsStartPosition)
+			creditsText->localPos.y = creditsStartPosition;
 	}
 
 	//// Debug pathfinding ------------------------------

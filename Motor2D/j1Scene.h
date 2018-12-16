@@ -51,6 +51,7 @@ public:
 	GUIText * livesText = nullptr;
 	GUIText * timeText = nullptr;
 	GUIText * creditsText = nullptr;
+	int creditsStartPosition = -1;
 
 private:
 	fPoint cameraPos = { 0,0 };
