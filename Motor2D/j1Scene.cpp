@@ -19,6 +19,7 @@
 #include "j1Particles.h"
 #include "j1Gui.h"
 #include "GUISlider.h"
+#include "GUIText.h"
 
 j1Scene::j1Scene() : j1Module()
 {
@@ -224,6 +225,12 @@ bool j1Scene::Update(float dt)
 
 	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && App->gui->ToggleElementVisibility("InGameGUI")) {
 		App->pause = !App->pause;
+	}
+
+	if (timeText != nullptr) {
+		p2SString string;
+		string.create("%.2f", App->GetGameTime());
+		timeText->SetText(string.GetString());
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && !App->fade_to_black->IsFading()) {

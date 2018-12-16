@@ -49,6 +49,7 @@ private:
 public:
 	GUIText * coinsText = nullptr;
 	GUIText * livesText = nullptr;
+	GUIText * timeText = nullptr;
 
 private:
 	fPoint cameraPos = { 0,0 };

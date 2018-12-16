@@ -250,7 +250,7 @@ void j1App::FinishUpdate()
 		prev_last_sec_frame_count = last_sec_frame_count;
 		last_sec_frame_count = 0;
 	}
-	float seconds_since_startup = startup_time.ReadSec();
+	seconds_since_startup = startup_time.ReadSec();
 	float avg_fps = float(frame_count) / seconds_since_startup;
 	uint32 last_frame_ms = frame_time.Read();
 	uint32 frames_on_last_update = prev_last_sec_frame_count;
@@ -546,4 +546,9 @@ bool j1App::GetLevelToLoadName(p2SString& level_name) const
 float j1App::GetDt()
 {
 	return dt;
+}
+
+float j1App::GetGameTime()
+{
+	return seconds_since_startup;
 }

@@ -936,6 +936,9 @@ void j1Gui::AssociateLabel(p2SString & objectName, GUIText * label) {
 	else if (objectName == "lives_label") {
 		App->scene->livesText = label;
 	}
+	else if (objectName == "time_label") {
+		App->scene->timeText = label;
+	}
 }
 
 bool j1Gui::LoadGUIImage(pugi::xml_node& node)

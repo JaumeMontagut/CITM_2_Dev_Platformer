@@ -62,6 +62,7 @@ public:
 	bool GetLevelToLoadName(p2SString& name) const;
 	
 	float GetDt();
+	float GetGameTime();
 
 private:
 
@@ -143,6 +144,7 @@ private:
 	float				framerateCap = 0.0f;
 	float				dt = 0.0f;
 	bool				capFrames = true;
+	float				seconds_since_startup = 0.0f;
 };
 
 extern j1App* App;
