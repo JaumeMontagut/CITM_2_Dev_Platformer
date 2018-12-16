@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="16" nextobjectid="73">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="16" nextobjectid="76">
  <properties>
   <property name="associated_gui_xml" value="maps/gui_ingame.tmx"/>
   <property name="background_music" value="song21.ogg"/>
@@ -60215,6 +60215,9 @@
    <object id="66" name="landEnemy" x="496" y="440" width="16" height="24"/>
    <object id="71" name="landEnemy" x="536" y="440" width="16" height="24"/>
    <object id="72" name="landEnemy" x="576" y="440" width="16" height="24"/>
+   <object id="73" name="nutCoin" x="496" y="376" width="16" height="16"/>
+   <object id="74" name="nutCoin" x="624" y="304" width="16" height="16"/>
+   <object id="75" name="nutCoin" x="696" y="224" width="16" height="16"/>
   </objectgroup>
  </group>
 </map>

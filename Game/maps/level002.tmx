@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="14" nextobjectid="40">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="14" nextobjectid="48">
  <properties>
   <property name="associated_gui_xml" value="maps/gui_ingame.tmx"/>
   <property name="background_music" value="song22.ogg"/>
@@ -60223,6 +60223,8 @@
  <group id="12" name="GameObjects">
   <objectgroup id="13" name="GameObjects">
    <object id="21" name="normalBox" x="584" y="391" width="16" height="16"/>
+   <object id="45" name="nutCoin" x="312" y="312" width="16" height="16"/>
+   <object id="47" name="nutCoin" x="632" y="272" width="16" height="16"/>
   </objectgroup>
  </group>
 </map>

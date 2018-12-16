@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="17" nextobjectid="121">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="17" nextobjectid="134">
  <properties>
   <property name="associated_gui_xml" value="maps/gui_ingame.tmx"/>
   <property name="background_music" value="song22.ogg"/>
@@ -75304,6 +75304,23 @@
    <object id="108" name="normalBox" x="996.167" y="462.333" width="16" height="16"/>
    <object id="111" name="Door" x="858.417" y="522.583" width="16" height="53"/>
    <object id="116" name="normalBox" x="644.167" y="494.333" width="16" height="16"/>
+   <object id="121" name="pizza" x="272" y="352" width="16" height="16">
+    <properties>
+     <property name="associated_gui_xml" value="maps/gui_ingame.tmx"/>
+    </properties>
+   </object>
+   <object id="122" name="nutCoin" x="216" y="312" width="16" height="16"/>
+   <object id="123" name="nutCoin" x="56" y="424" width="16" height="16"/>
+   <object id="124" name="nutCoin" x="528" y="288" width="16" height="16"/>
+   <object id="125" name="nutCoin" x="872" y="360" width="16" height="16"/>
+   <object id="126" name="nutCoin" x="1120" y="360" width="16" height="16"/>
+   <object id="127" name="nutCoin" x="1048" y="416" width="16" height="16"/>
+   <object id="128" name="nutCoin" x="1120" y="472" width="16" height="16"/>
+   <object id="129" name="nutCoin" x="1116" y="553" width="16" height="16"/>
+   <object id="130" name="nutCoin" x="968" y="464" width="16" height="16"/>
+   <object id="131" name="nutCoin" x="700" y="529" width="16" height="16"/>
+   <object id="132" name="nutCoin" x="600" y="528" width="16" height="16"/>
+   <object id="133" name="nutCoin" x="544" y="584" width="16" height="16"/>
   </objectgroup>
  </group>
 </map>
