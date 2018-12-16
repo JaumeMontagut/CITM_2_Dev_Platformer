@@ -954,7 +954,7 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 		newText->ObjectID = object_tiled_id;
 
 		// adds tiled tmx bounds to label
-		newText->clippingRect.w = node.attribute("width").as_int();
+		//newText->clippingRect.w = node.attribute("width").as_int();
 	}
 	// adds it to gui elements list
 	guiElems.add(newText);
