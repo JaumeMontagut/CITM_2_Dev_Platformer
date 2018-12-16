@@ -63,7 +63,7 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 				if (App->want_to_load) {
 					App->readyToLoad = true;
 				}
-				if (App->map->Load(lvl_to_load)) {
+				if (App->map->Load(lvl_to_load.GetString())) {
 					App->scene->Enable();
 					App->gui->Enable();
 
@@ -104,7 +104,7 @@ bool j1FadeToBlack::FadeToBlack(const char* lvlName, float time)
 		current_step = fade_step::fade_to_black;
 		total_time = (Uint32)(time * 1000.0F);
 		start_time = SDL_GetTicks();
-		lvl_to_load = lvlName;
+		lvl_to_load.create(lvlName);
 		ret = true;
 	}
 	//else if (current_step == fade_step::fade_to_black) {

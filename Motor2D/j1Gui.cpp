@@ -204,8 +204,8 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 void j1Gui::FillFunctionsList()
 {
 	functionMap["SayHelloButton"] = &SayHelloButton;
-	//functionMap["PlayGame"] = &PlayGame;
-	//functionMap["ContinueGame"] = &ContinueGame;
+	functionMap["PlayGame"] = &PlayGame;
+	functionMap["ContinueGame"] = &ContinueGame;
 	//functionMap["ExitGame"] = &ExitGame;
 	//functionMap["ResumeGame"] = &ResumeGame;
 	//functionMap["OpenMainMenu"] = &OpenMainMenu;
