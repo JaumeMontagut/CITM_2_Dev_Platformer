@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="111">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="113">
  <objectgroup name="GUI objects" visible="0">
   <object id="71" name="button" type="templateType1" x="416.833" y="223.333" width="240" height="80">
    <properties>
@@ -94,7 +94,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Credits">
+ <objectgroup name="Credits" visible="0">
   <object id="102" name="label" x="516.5" y="497.333" width="453" height="336">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
@@ -202,17 +202,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Settings" visible="0">
-  <object id="95" name="checkbox" type="templateType1" x="416.667" y="401.333" width="31" height="29">
-   <properties>
-    <property name="bool_functionPtr" value="SayHelloButton"/>
-    <property name="draggable" type="bool" value="false"/>
-    <property name="interactable" type="bool" value="false"/>
-    <property name="parentID" value="96"/>
-    <property name="text" value="tmx checkbox"/>
-    <property name="visible" type="bool" value="true"/>
-   </properties>
-  </object>
+ <objectgroup name="Settings">
   <object id="96" name="image" x="319.333" y="144.333" width="433.333" height="508.333">
    <properties>
     <property name="draggable" type="bool" value="false"/>
@@ -224,17 +214,6 @@
     <property name="section_rect_x" type="int" value="133"/>
     <property name="section_rect_y" type="int" value="0"/>
     <property name="visible" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="97" name="button" type="templateType1" x="416.167" y="224.333" width="240" height="80">
-   <properties>
-    <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="ContinueGame"/>
-    <property name="interactable" type="bool" value="true"/>
-    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
-    <property name="parentID" value="96"/>
-    <property name="text" value="blabla"/>
-    <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
   <object id="98" name="label" x="533.5" y="78.3333" width="221" height="57">
@@ -255,17 +234,6 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="99" name="button" type="templateType1" x="415.833" y="312.667" width="240" height="80">
-   <properties>
-    <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="ContinueGame"/>
-    <property name="interactable" type="bool" value="true"/>
-    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
-    <property name="parentID" value="96"/>
-    <property name="text" value="blabla2"/>
-    <property name="visible" type="bool" value="true"/>
-   </properties>
-  </object>
   <object id="100" name="button" type="templateType1" x="416.167" y="529.333" width="240" height="80">
    <properties>
     <property name="disableElementID" type="int" value="96"/>
@@ -277,6 +245,41 @@
     <property name="object_name" value="CloseSettings"/>
     <property name="parentID" value="96"/>
     <property name="text" value="RETURN"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="111" name="label" x="528" y="184" width="8" height="8">
+   <properties>
+    <property name="color" type="color" value="#ffff557f"/>
+    <property name="color_a" type="int" value="255"/>
+    <property name="color_b" type="int" value="127"/>
+    <property name="color_g" type="int" value="85"/>
+    <property name="color_r" type="int" value="255"/>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="fontName" value="digiffiti"/>
+    <property name="fontPath" value="fonts/digiffiti.ttf"/>
+    <property name="fontSize" type="int" value="48"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="parentID" value="96"/>
+    <property name="text" value="VOLUME:"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="112" name="slider" type="templateType1" x="357" y="225" width="240" height="24">
+   <properties>
+    <property name="box_h" value="6"/>
+    <property name="box_w" value="174"/>
+    <property name="box_x" value="133"/>
+    <property name="box_y" value="770"/>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="float_ptr" value="volume"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="parentID" value="96"/>
+    <property name="thumb_h" value="6"/>
+    <property name="thumb_w" value="14"/>
+    <property name="thumb_x" value="133"/>
+    <property name="thumb_y" value="776"/>
+    <property name="type" type="int" value="0"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>

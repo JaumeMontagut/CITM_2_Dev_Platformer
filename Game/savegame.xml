@@ -8,22 +8,18 @@
 	<pathfinding />
 	<fonts />
 	<scene>
-		<camera x="-1032" y="-440.49762" />
-		<current_level name="level006.tmx" />
+		<camera x="-1545.00903" y="-992.617554" />
+		<current_level name="level004.tmx" />
 	</scene>
 	<object>
-		<Box x="704" y="256" velocity_x="0" velocity_y="0" id="35" width="16" height="16" />
-		<Box x="520" y="256" velocity_x="0" velocity_y="0" id="72" width="32" height="32" />
-		<nutCoin x="512" y="184" id="76" />
-		<nutCoin x="696" y="184" id="78" />
-		<nutCoin x="376" y="184" id="79" />
-		<Player x="472" y="360" velocity_x="0" velocity_y="0" lives="0" score="0" flip_direction="false" />
+		<Player x="643" y="544" velocity_x="0" velocity_y="0" lives="6" score="20" flip_direction="false" />
+		<Box x="616" y="544" velocity_x="0" velocity_y="0" id="21" width="16" height="16" />
 	</object>
 	<Particles />
 	<gui />
 	<FadeToBlack />
 	<Collision />
 	<renderer>
-		<camera x="-1032" y="-440" />
+		<camera x="-1545" y="-992" />
 	</renderer>
 </game_state>
