@@ -216,6 +216,7 @@ void j1Gui::FillFunctionsMap()
 	functionMap["OpenSettings"] = &OpenSettings;
 	functionMap["CloseSettings"] = &CloseSettings;
 	functionMap["OpenCredits"] = &OpenCredits;
+	functionMap["CloseCredits"] = &CloseCredits;
 }
 
 void (*j1Gui::GetButtonFunction(p2SString functionName))() {

@@ -73,4 +73,8 @@ void OpenCredits() {
 	App->gui->ToggleElementVisibility("ShowCredits");
 }
 
+void CloseCredits() {
+	App->gui->ToggleElementVisibility("ShowCredits");
+}
+
 #endif
