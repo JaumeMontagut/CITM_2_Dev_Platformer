@@ -381,27 +381,43 @@ void j1Gui::GetNextGUIElement(GUIElement * &focusedElement)
 	//- Traverses the list
 	//- If it finds an element that's lower than the focuse, it gets it
 	//- If it finds another element that's in the same position, it get the one that's most on the left
-	GUIElement * nextElement = nullptr;
+	GUIElement * bestElement = nullptr;//The best element yet
 	for (p2List_item<GUIElement*>* iterator = guiElems.start; iterator != nullptr; iterator = iterator->next) {
 		if (!iterator->data->interactable || iterator->data == focusedElement) {
 			continue;
 		}
-		//Searches the next element to the right
-		if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && nextElement == nullptr) {
-			nextElement = iterator->data;
-		}
-		else if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y && iterator->data->GetGlobalPos().y <= nextElement->GetGlobalPos().y) {
-			if (iterator->data->GetGlobalPos().y == nextElement->GetGlobalPos().y) {
-				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < nextElement->GetGlobalPos().x) {
-					nextElement = iterator->data;
+		if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y) {
+			if (bestElement == nullptr) {
+				bestElement = iterator->data;
+			}
+			else if (iterator->data->GetGlobalPos().y < bestElement->GetGlobalPos().y) {
+				bestElement = iterator->data;
+			}
+			else if (iterator->data->GetGlobalPos().y == bestElement->GetGlobalPos().y) {
+				if (iterator->data->GetGlobalPos().x < bestElement->GetGlobalPos().x) {
+					bestElement = iterator->data;
 				}
 			}
-			else {
-				nextElement = iterator->data;
+		}
+		else if (iterator->data->GetGlobalPos().y == focusedElement->GetGlobalPos().y) {
+			if (bestElement == nullptr) {
+				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x) {
+					bestElement = iterator->data;
+				}
+			}
+			else if (iterator->data->GetGlobalPos().y < bestElement->GetGlobalPos().y) {
+				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x) {
+					bestElement = iterator->data;
+				}
+			}
+			else if (iterator->data->GetGlobalPos().y == bestElement->GetGlobalPos().y) {
+				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < bestElement->GetGlobalPos().x) {
+					bestElement = iterator->data;
+				}
 			}
 		}
 	}
-	focusedElement = nextElement;
+	focusedElement = bestElement;
 
 	//If it doesn't find one, goes to the one most near to the top
 	if (focusedElement == nullptr) {
