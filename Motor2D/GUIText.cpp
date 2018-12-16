@@ -3,9 +3,11 @@
 #include "j1Fonts.h"
 #include "j1Render.h"
 
-GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, _TTF_Font* font) :
+GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, int maxWidth, _TTF_Font* font) :
 	color(color), font(font), GUIElement(centerPos)
 {
+	clippingRect.w = maxWidth;
+
 	if (text != nullptr)
 	{
 		texture = App->font->Print(text, color, (uint32)clippingRect.w, font);
