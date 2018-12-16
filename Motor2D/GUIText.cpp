@@ -27,8 +27,17 @@ bool GUIText::PostUpdate()
 		for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
 			globalPos += iterator->localPos;
 		}
+		/*clippingRect.x = globalPos.x;
+		clippingRect.h = globalPos.y;
+		clippingRect.h = 256;
+		SDL_RenderSetViewport(App->render->renderer, &clippingRect);*/
 
-		return App->render->BlitGUI(texture, globalPos.x, globalPos.y, NULL);
+		App->render->BlitGUI(texture, globalPos.x, globalPos.y, NULL);
+
+		//SDL_Rect screenR = { 0,0, 1024,768 };
+		//SDL_RenderSetViewport(App->render->renderer, &screenR); // NULL
+		
+		return true;
 	}
 
 	return false;
