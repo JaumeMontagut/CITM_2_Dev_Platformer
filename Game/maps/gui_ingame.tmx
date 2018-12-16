@@ -57,19 +57,19 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="95" name="image" x="704" y="32" width="64" height="56">
+  <object id="95" name="image" x="824" y="24" width="71.1111" height="62.2222">
    <properties>
     <property name="draggable" type="bool" value="false"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="parentID" type="int" value="-1"/>
-    <property name="section_rect_h" type="int" value="256"/>
-    <property name="section_rect_w" type="int" value="210"/>
-    <property name="section_rect_x" type="int" value="133"/>
-    <property name="section_rect_y" type="int" value="0"/>
+    <property name="section_rect_h" type="int" value="26"/>
+    <property name="section_rect_w" type="int" value="28"/>
+    <property name="section_rect_x" type="int" value="31"/>
+    <property name="section_rect_y" type="int" value="159"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="96" name="label" x="776" y="32" width="224" height="57">
+  <object id="96" name="label" x="920" y="24" width="80" height="63.3333">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>
@@ -83,7 +83,7 @@
     <property name="interactable" type="bool" value="false"/>
     <property name="object_name" value="coins_label"/>
     <property name="parentID" value="-1"/>
-    <property name="text" value="label from tmx"/>
+    <property name="text" value="0"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
@@ -92,14 +92,14 @@
     <property name="draggable" type="bool" value="false"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="parentID" type="int" value="-1"/>
-    <property name="section_rect_h" type="int" value="256"/>
-    <property name="section_rect_w" type="int" value="210"/>
-    <property name="section_rect_x" type="int" value="133"/>
-    <property name="section_rect_y" type="int" value="0"/>
+    <property name="section_rect_h" type="int" value="16"/>
+    <property name="section_rect_w" type="int" value="20"/>
+    <property name="section_rect_x" type="int" value="6"/>
+    <property name="section_rect_y" type="int" value="161"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="98" name="label" x="96" y="24" width="224" height="57">
+  <object id="98" name="label" x="112" y="24" width="96" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>
@@ -111,9 +111,9 @@
     <property name="fontPath" value="fonts/digiffiti.ttf"/>
     <property name="fontSize" type="int" value="48"/>
     <property name="interactable" type="bool" value="false"/>
-    <property name="object_name" value="coins_label"/>
+    <property name="object_name" value="lives_label"/>
     <property name="parentID" value="-1"/>
-    <property name="text" value="label from tmx"/>
+    <property name="text" value="0"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>

@@ -366,11 +366,19 @@ void ObjPlayer::Die() {
 	App->fade_to_black->FadeToBlack(App->map->data.loadedLevel.GetString(), 1.0f);
 }
 
-void ObjPlayer::AddScore(int score)
+void ObjPlayer::UpdateScore(int score)
 {
 	this->score += score;
 	if (App->scene->coinsText != nullptr) {
-		App->scene->coinsText->SetText(App->font->NumToString(score).GetString());//TODO: Make a public var color in text and access it so we don't change the text color
+		App->scene->coinsText->SetText(App->font->NumToString(this->score).GetString());
+	}
+}
+
+void ObjPlayer::UpdateLives(int lives)
+{
+	this->lives += lives;
+	if (App->scene->livesText != nullptr) {
+		App->scene->livesText->SetText(App->font->NumToString(this->lives).GetString());
 	}
 }
 

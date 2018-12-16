@@ -120,7 +120,10 @@ bool j1Scene::Start()
 			LOG("failed to establish a family");
 		}
 	}
-
+	if (App->object->player != nullptr) {
+		App->object->player->UpdateLives();
+		App->object->player->UpdateScore();
+	}
 	//TODO: Make it get from the name, instead of the ID (currently name is being used to get the type of GUIElement)
 
 	// GUI elements creation example ---------------------------------------------------
@@ -218,6 +221,18 @@ bool j1Scene::Update(float dt)
 	// checks for debug input
 	DebugInput();
 	// ----------------------
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
+		//&& we're on a level or we have in game menu
+		if (App->pause) {
+			//Hide in game menu
+			App->pause = false;
+		}
+		else {
+			//Show in game menu
+			App->pause = true;
+		}
+	}
+
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && !App->fade_to_black->IsFading()) {
 		App->LoadGame("savegame.xml");
 	}
@@ -250,12 +265,7 @@ bool j1Scene::Update(float dt)
 // Called each loop iteration
 bool j1Scene::PostUpdate()
 {
-	bool ret = true;
-
-	if(App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-		ret = false;
-	
-	return ret;
+	return true;
 }
 
 // Called before quitting

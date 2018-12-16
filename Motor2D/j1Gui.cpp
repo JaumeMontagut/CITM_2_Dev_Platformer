@@ -13,6 +13,8 @@
 #include "Brofiler/Brofiler.h"
 #include "ButtonFunctions.h"
 #include <map>
+#include "j1Object.h"
+#include "ObjPlayer.h"
 //Gui Elements
 #include "GUIImage.h"
 #include "GUIText.h"
@@ -319,7 +321,6 @@ bool j1Gui::Start()
 		ret = false;
 
 	FillFunctionsList();*/
-
 	return ret;
 }
 

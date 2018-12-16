@@ -35,11 +35,8 @@ public:
 	void DestroyProjectile();
 	void Die();
 
-	void AddScore(int score);
-	//// score and lives
-	//void IncreaseScore(uint increaseAmount);
-	//void IncreaseLives(int increaseAmount);
-	
+	void UpdateScore(int score = 0);
+	void UpdateLives(int lives = 0);
 
 private:
 	void ToggleGodMode();

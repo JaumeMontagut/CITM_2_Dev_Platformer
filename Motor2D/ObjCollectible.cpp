@@ -136,7 +136,7 @@ void ObjPizza::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_PLAYER)
 	{
-		App->object->player->lives += increaseLivesValue;
+		App->object->player->UpdateLives(increaseLivesValue);
 		App->object->DeleteObject(this);
 	}
 }
@@ -183,7 +183,7 @@ void ObjNutCoins::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_PLAYER)
 	{
-		App->object->player->AddScore(score);
+		App->object->player->UpdateScore(score);
 		App->object->DeleteObject(this);
 	}
 }
