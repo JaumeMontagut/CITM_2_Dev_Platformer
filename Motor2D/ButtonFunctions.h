@@ -41,6 +41,7 @@ void ExitGame() {
 }
 
 void ResumeGame() {
+	App->gui->ToggleElementVisibility("returnGame");
 	App->pause = false;
 	App->transition = true;
 }

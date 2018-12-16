@@ -72,7 +72,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="91" name="label" x="349.5" y="64" width="221" height="57">
+  <object id="91" name="label" x="421.5" y="64" width="221" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>
@@ -91,7 +91,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup name="Settings" visible="0">
+ <objectgroup name="Settings">
   <object id="95" name="checkbox" type="templateType1" x="416.667" y="401.333" width="31" height="29">
    <properties>
     <property name="bool_functionPtr" value="SayHelloButton"/>
@@ -126,7 +126,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="98" name="label" x="374.5" y="66.3333" width="221" height="57">
+  <object id="98" name="label" x="423.5" y="63.3333" width="221" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>

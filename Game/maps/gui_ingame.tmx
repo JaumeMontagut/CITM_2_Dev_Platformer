@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="128" height="96" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="104">
- <objectgroup id="1" name="GUI objects">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="128" height="96" tilewidth="8" tileheight="8" infinite="0" nextobjectid="104">
+ <objectgroup name="GUI objects">
   <object id="71" name="button" type="templateType1" x="392" y="312" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
@@ -17,7 +17,7 @@
     <property name="draggable" type="bool" value="false"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="object_name" value="InGameGUI"/>
-    <property name="parentID" type="int" value="-1"/>
+    <property name="parentID" type="int" value="101"/>
     <property name="section_rect_h" type="int" value="216"/>
     <property name="section_rect_w" type="int" value="300"/>
     <property name="section_rect_x" type="int" value="133"/>
@@ -38,10 +38,12 @@
   </object>
   <object id="88" name="button" type="templateType1" x="536" y="504" width="240" height="80">
    <properties>
+    <property name="disableElementID" type="int" value="101"/>
     <property name="draggable" type="bool" value="false"/>
     <property name="function" value="ResumeGame"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="object_name" value="returnGame"/>
     <property name="parentID" value="75"/>
     <property name="text" value="RESUME"/>
     <property name="visible" type="bool" value="true"/>
@@ -132,7 +134,7 @@
    <properties>
     <property name="draggable" type="bool" value="false"/>
     <property name="interactable" type="bool" value="false"/>
-    <property name="object_name" value="InGameGUI"/>
+    <property name="object_name" value="InGameGUICanvas"/>
     <property name="parentID" type="int" value="-1"/>
     <property name="section_rect_h" type="int" value="385"/>
     <property name="section_rect_w" type="int" value="513"/>
