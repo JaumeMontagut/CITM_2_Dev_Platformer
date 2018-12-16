@@ -25,7 +25,6 @@ ObjBox::ObjBox(fPoint &position, SDL_Rect & colRect, int index, pugi::xml_node &
 		animTileHeight = box_node.child("big_box").child("animation").attribute("tile_height").as_uint();
 		LoadAnimation(box_node.child("big_box").child("animation").child("inactive_animation"), inactiveAnim);
 		LoadAnimation(box_node.child("big_box").child("animation").child("active_animation"), activeAnim);
-		bigbox = true;
 	}
 	
 
@@ -135,17 +134,19 @@ bool ObjBox::Save(pugi::xml_node& node) const
 	boxNode.append_attribute("velocity_x") = velocity.x;
 	boxNode.append_attribute("velocity_y") = velocity.y;
 	boxNode.append_attribute("id") = objectID;
+	boxNode.append_attribute("width") = animTileWidth;
+	boxNode.append_attribute("height") = animTileHeight;
 	if(currAnim == &activeAnim)
 		boxNode.append_attribute("isMarked") = true;
 
-	if (bigbox)
+	/*if (bigbox)
 	{
 		boxNode.append_attribute("isBig") = true;
 	}
 	else
 	{
 		boxNode.append_attribute("isBig") = false;
-	}
+	}*/
 
 
 	return true;
