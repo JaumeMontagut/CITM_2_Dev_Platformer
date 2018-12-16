@@ -70,7 +70,7 @@ void CloseSettings() {
 }
 
 void OpenCredits() {
-
+	App->gui->ToggleElementVisibility("ShowCredits");
 }
 
 #endif
