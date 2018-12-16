@@ -80,6 +80,8 @@ bool j1Scene::Start()
 		playerStartPos.x = App->map->playerData.x;
 		playerStartPos.y = App->map->playerData.y;
 		App->object->player = App->object->AddObjPlayer(playerStartPos);
+		App->object->player->UpdateLives();
+		App->object->player->UpdateScore();
 	}
 		
 

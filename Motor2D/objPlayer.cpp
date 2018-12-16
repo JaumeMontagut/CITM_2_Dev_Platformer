@@ -374,9 +374,9 @@ void ObjPlayer::UpdateScore(int score)
 	}
 }
 
-void ObjPlayer::UpdateLives(int lives)
+void ObjPlayer::UpdateLives(int live)
 {
-	this->lives += lives;
+	lives += live;
 	if (App->scene->livesText != nullptr) {
 		App->scene->livesText->SetText(App->font->NumToString(this->lives).GetString());
 	}

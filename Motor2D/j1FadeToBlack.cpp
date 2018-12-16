@@ -52,7 +52,7 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 			// NOTE: BECAUSE we always pass throught fade to black (when dies, swap scene, etc)
 			// before we reset data, saves temporaly current score and player lives
 			uint score = 0;
-			uint lives = 0;
+			int lives = 0;
 			if (App->object->player != nullptr)
 			{
 				score = App->object->player->score;
@@ -75,6 +75,8 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 					// restores lives and score for player data
 					if (App->object->player != nullptr)
 					{
+						if (lives == 0) lives = App->object->player->lives;
+						if (score == 0) score = App->object->player->score;
 						App->object->player->lives = lives;
 						App->object->player->score = score;
 						App->object->player->UpdateLives();
