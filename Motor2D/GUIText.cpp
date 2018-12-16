@@ -3,7 +3,8 @@
 #include "j1Fonts.h"
 #include "j1Render.h"
 
-GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color, _TTF_Font* font) : GUIElement(position)
+GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color, _TTF_Font* font) :
+	color(color), font(font), GUIElement(position)
 {
 	if (text != nullptr)
 	{
@@ -29,5 +30,5 @@ bool GUIText::PostUpdate()
 
 void GUIText::SetText(const char * text)
 {
-	texture = App->font->Print(text);
+	texture = App->font->Print(text, color, font);
 }
