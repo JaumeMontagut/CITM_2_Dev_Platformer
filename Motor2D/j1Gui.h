@@ -107,6 +107,7 @@ public:
 	void SetParent(GUIElement * parent);
 	bool CheckBounds(int x, int y);
 	void DrawOutline();
+	void SetGlobalPos(iPoint pos);
 	iPoint GetGlobalPos();
 	void SetActive(bool active);
 	bool IsActive();
