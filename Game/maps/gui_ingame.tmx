@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="128" height="96" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="95">
+ <objectgroup id="1" name="GUI objects">
+  <object id="71" name="button" type="templateType1" x="393" y="146" width="240" height="80">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="parentID" value="75"/>
+    <property name="text" value="Hello gui tmx"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="75" name="image" x="330.5" y="96" width="374" height="509">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="parentID" type="int" value="-1"/>
+    <property name="section_rect_h" type="int" value="256"/>
+    <property name="section_rect_w" type="int" value="210"/>
+    <property name="section_rect_x" type="int" value="133"/>
+    <property name="section_rect_y" type="int" value="0"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="84" name="button" type="templateType2" x="648.5" y="108" width="38" height="37">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffffffff"/>
+    <property name="parentID" value="75"/>
+    <property name="text" value="Hello button"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="85" name="button" type="templateType1" x="392.5" y="233" width="240" height="80">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="parentID" value="75"/>
+    <property name="text" value="ELEMENTS"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="86" name="button" type="templateType1" x="392.5" y="321" width="240" height="80">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="parentID" value="75"/>
+    <property name="text" value="importer"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="88" name="button" type="templateType1" x="394" y="485" width="240" height="80">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="parentID" value="-1"/>
+    <property name="text" value="not parented to panel"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="91" name="label" x="80" y="225" width="221" height="57">
+   <properties>
+    <property name="color" type="color" value="#ffff557f"/>
+    <property name="color_a" type="int" value="255"/>
+    <property name="color_b" type="int" value="127"/>
+    <property name="color_g" type="int" value="85"/>
+    <property name="color_r" type="int" value="255"/>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="fontName" value="digiffiti"/>
+    <property name="fontPath" value="fonts/digiffiti.ttf"/>
+    <property name="fontSize" type="int" value="48"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="parentID" value="-1"/>
+    <property name="text" value="label from tmx"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="93" name="button" type="templateType1" x="136.5" y="321" width="240" height="80">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="parentID" value="75"/>
+    <property name="text" value="ELEMENTS"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="94" name="button" type="templateType1" x="648.5" y="321" width="240" height="80">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="function" value="SayHelloButton"/>
+    <property name="interactable" type="bool" value="true"/>
+    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
+    <property name="parentID" value="75"/>
+    <property name="text" value="importer"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
