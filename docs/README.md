@@ -28,9 +28,11 @@ This game was made as part of the development subject by 2 students in CITM (UPC
 - Loaded elements gui elements from Tiled.
 
 ##Release
+Relase
+<video src="video.mp4" width="320" height="200" controls preload></video>
 
 ##Video
-
+<video src="video.mp4" width="320" height="200" controls preload></video>
 [video](https://youtu.be/gLZghKCW6RY)
 
 ## Member contributions
