@@ -246,6 +246,12 @@ bool j1Scene::Update(float dt)
 
 	App->map->Draw();
 
+	// scroll credits text, if we have
+	if (creditsText != nullptr)
+	{
+		creditsText->localPos.y -= 2;
+	}
+
 	//// Debug pathfinding ------------------------------
 	//int x, y;
 	//App->input->GetMousePosition(x, y);
