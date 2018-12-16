@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="102">
- <objectgroup name="GUI objects">
+ <objectgroup name="GUI objects" visible="0">
   <object id="71" name="button" type="templateType1" x="416.833" y="223.333" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
@@ -72,7 +72,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="91" name="label" x="421.5" y="64" width="221" height="57">
+  <object id="91" name="label" x="536.5" y="79" width="221" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>
@@ -126,7 +126,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="98" name="label" x="423.5" y="63.3333" width="221" height="57">
+  <object id="98" name="label" x="533.5" y="78.3333" width="221" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>
