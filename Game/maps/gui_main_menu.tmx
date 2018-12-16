@@ -95,7 +95,7 @@
   </object>
  </objectgroup>
  <objectgroup name="Credits">
-  <object id="102" name="label" x="456.5" y="429.333" width="274" height="57">
+  <object id="102" name="label" x="543.5" y="497.333" width="389" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="0"/>
@@ -109,7 +109,7 @@
     <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="parentID" value="104"/>
-    <property name="text" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse efficitur metus nisl, vitae porttitor nunc ullamcorper sit amet. Praesent maximus, erat eget congue pellentesque, quam nunc varius lacus, a consequat mi purus eu augue. Vestibulum ultrices sem et auctor mattis. Phasellus aliquam, metus at placerat bibendum, felis erat porta elit, a eleifend neque quam ac tortor. Fusce et justo lacinia, sollicitudin sem vitae, tempus velit. Morbi tempus, elit vel euismod maximus, lorem leo suscipit tellus, ac malesuada neque dolor eu enim. Suspendisse sed tincidunt eros. Praesent quis odio eu augue dignissim interdum. "/>
+    <property name="text" value="GNU GPLv3 -Swap Game- (Provisional name)          Copyright (C) 2018  Jaume Montagut / Jose Antonio Prieto                                             This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or       (at your option) any later version.                          This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.                          You should have received a copy of the GNU General Public License  along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.                     See the license here: https://github.com/JaumeMontagut/CITM_2_Dev_Platformer/blob/master/LICENSE"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
@@ -126,7 +126,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="105" name="label" x="584.5" y="77" width="446" height="57">
+  <object id="105" name="label" x="534.5" y="76" width="446" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>
