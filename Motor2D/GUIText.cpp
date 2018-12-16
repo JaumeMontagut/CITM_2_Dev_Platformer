@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Fonts.h"
 #include "j1Render.h"
+#include "p2Log.h"
 
 GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, int maxWidth, _TTF_Font* font) :
 	color(color), font(font), GUIElement(centerPos)
@@ -21,6 +22,10 @@ GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, int
 
 bool GUIText::PostUpdate()
 {
+	if (ObjectID == 102) {
+		LOG("102");
+	}
+
 	if (texture != nullptr) {
 		//Iteration
 		iPoint globalPos(0, 0);
