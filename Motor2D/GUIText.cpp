@@ -3,6 +3,7 @@
 #include "j1Fonts.h"
 #include "j1Render.h"
 #include "p2Log.h"
+#include "j1Textures.h"
 
 GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, int maxWidth, _TTF_Font* font) :
 	color(color), font(font), GUIElement(centerPos)
@@ -54,5 +55,6 @@ bool GUIText::PostUpdate()
 
 void GUIText::SetText(const char * text)
 {
+	App->tex->UnloadTexture(texture);
 	texture = App->font->Print(text, color, (uint32)clippingRect.w,font);
 }
