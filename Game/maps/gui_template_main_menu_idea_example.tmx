@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="96">
- <objectgroup name="GUI objects">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="95">
+ <objectgroup id="1" name="GUI objects">
   <object id="71" name="button" type="templateType1" x="472.5" y="177" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
@@ -86,7 +86,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="93" name="button" type="templateType1" x="216" y="351" width="240" height="80">
+  <object id="93" name="button" type="templateType1" x="216" y="352" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
     <property name="function" value="SayHelloButton"/>
@@ -97,7 +97,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="94" name="button" type="templateType1" x="728" y="353" width="240" height="80">
+  <object id="94" name="button" type="templateType1" x="728" y="352" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
     <property name="function" value="SayHelloButton"/>
@@ -105,16 +105,6 @@
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
     <property name="text" value="importer"/>
-    <property name="visible" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="95" name="checkbox" type="templateType1" x="291" y="491" width="31" height="29">
-   <properties>
-    <property name="bool_functionPtr" value="SayHelloButton"/>
-    <property name="draggable" type="bool" value="false"/>
-    <property name="interactable" type="bool" value="false"/>
-    <property name="parentID" value="75"/>
-    <property name="text" value="tmx checkbox"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
