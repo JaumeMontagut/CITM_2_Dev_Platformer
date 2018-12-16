@@ -4,7 +4,7 @@
   <object id="71" name="button" type="templateType1" x="381.5" y="194" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="SayHelloButton"/>
+    <property name="function" value="ContinueGame"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
@@ -38,7 +38,7 @@
   <object id="85" name="button" type="templateType1" x="381" y="281" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="SayHelloButton"/>
+    <property name="function" value="PlayGame"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
@@ -68,7 +68,7 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="91" name="label" x="174.5" y="45" width="221" height="57">
+  <object id="91" name="label" x="349.5" y="64" width="221" height="57">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="255"/>

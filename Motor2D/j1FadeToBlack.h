@@ -32,7 +32,8 @@ private:
 	float fadePerCent = 0.0F;//It will go from 0 to 1 (fade to black) and then from 1 to 0 (fade from black)
 	//j1Module* to_enable = nullptr;
 	//j1Module* to_disable = nullptr;
-	const char* lvl_to_load = nullptr;
+	//const char* lvl_to_load = nullptr;
+	p2SString lvl_to_load;
 };
 
 #endif //__MODULEFADETOBLACK_H__
