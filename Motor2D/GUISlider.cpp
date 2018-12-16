@@ -63,20 +63,17 @@ bool GUISlider::PreUpdate()
 	}
 
 	if (xPerCent != nullptr) {
-		*xPerCent = (float)(childThumb->localPos.x - childBox->localPos.x) / (float)(childBox->bounds.w - childThumb->bounds.w);
+		*xPerCent = (float)(childThumb->GetGlobalPos().x - childBox->GetGlobalPos().x) / (float)(childBox->bounds.w - childThumb->bounds.w);
 	}
 	if (yPerCent != nullptr) {
-		*yPerCent = (float)(childThumb->localPos.y - childBox->localPos.y) / (float)(childBox->bounds.h - childThumb->bounds.h);
+		*yPerCent = (float)(childThumb->GetGlobalPos().y - childBox->GetGlobalPos().y) / (float)(childBox->bounds.h - childThumb->bounds.h);
 	}
-	
-
-	//TODO: global pos instead of local pos
 
 	if (xLimit != nullptr) {
-		childThumb->localPos.x = *xLimit;
+		childThumb->SetGlobalPos({ *xLimit, childThumb->GetGlobalPos().y });
 	}
 	if (yLimit != nullptr) {
-		childThumb->localPos.y = *yLimit;
+		childThumb->SetGlobalPos({ childThumb->GetGlobalPos().x, *yLimit });
 	}
 	return false;
 }

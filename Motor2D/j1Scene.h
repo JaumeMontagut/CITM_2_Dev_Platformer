@@ -50,6 +50,7 @@ public:
 	GUIText * coinsText = nullptr;
 	GUIText * livesText = nullptr;
 	GUIText * timeText = nullptr;
+	float volumeMultiplier = 0.0f;
 
 private:
 	fPoint cameraPos = { 0,0 };

@@ -190,6 +190,7 @@ public:
 	bool LoadGUILabel(pugi::xml_node & node);
 	bool LoadGUIImage(pugi::xml_node & node);
 	bool LoadGUICheckbox(pugi::xml_node & node);
+	bool LoadGUISlider(pugi::xml_node & node);
 	//
 	//bool SetGUIElementOff(p2SString name);
 	//bool SetGUIElementOn(p2SString name);
@@ -212,6 +213,7 @@ private:
 	bool LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& node);
 	void FillFunctionsMap();
 	void AssociateLabel(p2SString & objectName, GUIText * label);
+	float * AssociateSlider(p2SString name);
 
 public:
 	// TODO: maybe adds a structure to pack all needed textures for specific button type

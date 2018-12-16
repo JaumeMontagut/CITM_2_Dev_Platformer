@@ -809,8 +809,73 @@ bool j1Gui::LoadGUI(p2SString gui_xml_path)
 					LOG("failed to create gui element checkbox");
 				}
 			}
+			else if (gui_element_type == "slider") {
+				if (!LoadGUISlider(object))
+				{
+					LOG("failed to create gui element slider");
+				}
+			}
 		}
 	}
+
+
+	return ret;
+}
+
+bool j1Gui::LoadGUISlider(pugi::xml_node& node)
+{
+	bool ret = true;
+
+	GUISlider* newSlider = nullptr;
+
+	// gets position
+	iPoint position;
+	position.x = node.attribute("x").as_int(0);
+	position.y = node.attribute("y").as_int(0);
+	/* maybe on next upgrade we get the boundaries directly here, but for now included on templatetype on gui_config.xml */
+
+	// stores object id
+	int object_tiled_id = node.attribute("id").as_int(-1); // id to search and set family
+														   // acces to extra properties
+														   // stores string text
+	p2SString text;
+	pugi::xml_node propertiesNode = node.child("properties");
+	if (propertiesNode == NULL)
+	{
+		LOG("properties not found");
+		ret = false;
+	}
+	else
+	{
+		text = propertiesNode.find_child_by_attribute("name", "text").attribute("value").as_string("");
+	}
+	SDL_Rect boxSection(
+		propertiesNode.find_child_by_attribute("name", "box_x").attribute("value").as_int(0),
+		propertiesNode.find_child_by_attribute("name", "box_y").attribute("value").as_int(0),
+		propertiesNode.find_child_by_attribute("name", "box_w").attribute("value").as_int(0),
+		propertiesNode.find_child_by_attribute("name", "box_h").attribute("value").as_int(0));
+
+	SDL_Rect thumbSection(
+		propertiesNode.find_child_by_attribute("name", "thumb_x").attribute("value").as_int(0),
+		propertiesNode.find_child_by_attribute("name", "thumb_y").attribute("value").as_int(0),
+		propertiesNode.find_child_by_attribute("name", "thumb_w").attribute("value").as_int(0),
+		propertiesNode.find_child_by_attribute("name", "thumb_h").attribute("value").as_int(0));
+
+	//type
+	//See enum (0 = horizontal, 1 = vertical, 2 = free)
+	int type = propertiesNode.find_child_by_attribute("name", "type").attribute("value").as_int(0);
+
+	p2SString floatPtrName = propertiesNode.find_child_by_attribute("name", "float_ptr").attribute("value").as_string("");
+	float * floatPtr = AssociateSlider(floatPtrName);
+
+	newSlider = new GUISlider(position,boxSection, thumbSection, (GUISlider::TYPE)type, floatPtr, nullptr);
+
+	newSlider->ObjectID = object_tiled_id;
+	newSlider->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
+	newSlider->interactable = propertiesNode.find_child_by_attribute("name", "interactable").attribute("value").as_bool(true);
+	newSlider->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
+	newSlider->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+	guiElems.add(newSlider);
 
 
 	return ret;
@@ -984,6 +1049,14 @@ void j1Gui::AssociateLabel(p2SString & objectName, GUIText * label) {
 	else if (objectName == "time_label") {
 		App->scene->timeText = label;
 	}
+}
+
+float * j1Gui::AssociateSlider(p2SString name)
+{
+	if (name == "volume") {
+		return &App->scene->volumeMultiplier;
+	}
+	return nullptr;
 }
 
 bool j1Gui::LoadGUIImage(pugi::xml_node& node)
