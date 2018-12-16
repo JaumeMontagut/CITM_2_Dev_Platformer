@@ -399,19 +399,15 @@ void j1Gui::GetNextGUIElement(GUIElement * &focusedElement)
 				}
 			}
 		}
-		else if (iterator->data->GetGlobalPos().y == focusedElement->GetGlobalPos().y) {
+		else if (iterator->data->GetGlobalPos().y == focusedElement->GetGlobalPos().y && iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x) {
 			if (bestElement == nullptr) {
-				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x) {
-					bestElement = iterator->data;
-				}
+				bestElement = iterator->data;
 			}
 			else if (iterator->data->GetGlobalPos().y < bestElement->GetGlobalPos().y) {
-				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x) {
-					bestElement = iterator->data;
-				}
+				bestElement = iterator->data;
 			}
 			else if (iterator->data->GetGlobalPos().y == bestElement->GetGlobalPos().y) {
-				if (iterator->data->GetGlobalPos().x > focusedElement->GetGlobalPos().x && iterator->data->GetGlobalPos().x < bestElement->GetGlobalPos().x) {
+				if (iterator->data->GetGlobalPos().x < bestElement->GetGlobalPos().x) {
 					bestElement = iterator->data;
 				}
 			}
