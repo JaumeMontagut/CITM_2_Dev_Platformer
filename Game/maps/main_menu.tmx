@@ -152,6 +152,65 @@
  <tileset firstgid="1672" name="GlassTexture" tilewidth="8" tileheight="8" tilecount="15" columns="5">
   <image source="../textures/GlassTexture.png" width="40" height="24"/>
  </tileset>
+ <tileset firstgid="1687" name="straight-pipe" tilewidth="16" tileheight="16" tilecount="8" columns="8">
+  <image source="../textures/pipes/straight-pipe.png" width="128" height="16"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="1695" name="corner-pipe" tilewidth="16" tileheight="16" tilecount="7" columns="7">
+  <image source="../textures/pipes/corner-pipe.png" width="112" height="16"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="1702" name="start-pipe" tilewidth="16" tileheight="16" tilecount="8" columns="8">
+  <image source="../textures/pipes/start-pipe.png" width="128" height="16"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="1710" name="end-pipe" tilewidth="16" tileheight="16" tilecount="8" columns="8">
+  <image source="../textures/pipes/end-pipe.png" width="128" height="16"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+    <frame tileid="2" duration="100"/>
+    <frame tileid="3" duration="100"/>
+    <frame tileid="4" duration="100"/>
+    <frame tileid="5" duration="100"/>
+    <frame tileid="6" duration="100"/>
+    <frame tileid="7" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
  <layer name="background" width="150" height="100">
   <properties>
    <property name="parallaxSpeed" type="float" value="0.8"/>
@@ -32581,11 +32640,17 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1687"/>
    <tile/>
+   <tile gid="1687"/>
    <tile/>
+   <tile gid="1687"/>
    <tile/>
+   <tile gid="1687"/>
    <tile/>
+   <tile gid="1687"/>
    <tile/>
+   <tile gid="1695"/>
    <tile/>
    <tile/>
    <tile/>
@@ -32885,6 +32950,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -33034,6 +33100,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -33183,6 +33250,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -33332,6 +33400,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -33481,6 +33550,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -33630,6 +33700,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -33779,6 +33850,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -33928,20 +34000,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -34091,7 +34150,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -34241,6 +34300,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -34273,8 +34333,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1403"/>
    <tile/>
    <tile gid="601"/>
    <tile gid="570"/>
@@ -34391,7 +34450,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -34541,7 +34600,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -34691,7 +34750,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -34841,7 +34900,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -34991,7 +35050,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -35141,6 +35200,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -35290,6 +35350,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -35439,6 +35500,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -35588,6 +35650,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -35737,6 +35800,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -35886,12 +35950,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -36040,11 +36099,11 @@
    <tile gid="529"/>
    <tile gid="530"/>
    <tile gid="530"/>
+   <tile gid="462"/>
+   <tile gid="1702"/>
+   <tile/>
+   <tile gid="459"/>
    <tile gid="460"/>
-   <tile gid="460"/>
-   <tile gid="460"/>
-   <tile gid="530"/>
-   <tile gid="530"/>
    <tile gid="530"/>
    <tile gid="460"/>
    <tile gid="530"/>
@@ -36189,12 +36248,12 @@
    <tile/>
    <tile gid="565"/>
    <tile gid="606"/>
-   <tile gid="497"/>
-   <tile gid="602"/>
-   <tile gid="605"/>
-   <tile gid="676"/>
-   <tile gid="605"/>
-   <tile gid="602"/>
+   <tile gid="566"/>
+   <tile gid="678"/>
+   <tile gid="1702"/>
+   <tile/>
+   <tile gid="565"/>
+   <tile gid="640"/>
    <tile gid="676"/>
    <tile gid="603"/>
    <tile gid="640"/>
@@ -36339,12 +36398,12 @@
    <tile/>
    <tile gid="711"/>
    <tile gid="712"/>
-   <tile gid="713"/>
-   <tile gid="713"/>
-   <tile gid="713"/>
    <tile gid="712"/>
-   <tile gid="713"/>
-   <tile gid="643"/>
+   <tile gid="714"/>
+   <tile gid="1702"/>
+   <tile/>
+   <tile gid="711"/>
+   <tile gid="638"/>
    <tile gid="643"/>
    <tile gid="713"/>
    <tile gid="638"/>
@@ -36491,6 +36550,7 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -36640,8 +36700,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="1702"/>
    <tile/>
    <tile/>
    <tile/>
@@ -45170,7 +45229,7 @@
    <tile/>
   </data>
  </layer>
- <layer name="navigationLayer" width="150" height="100">
+ <layer name="topForeground" width="150" height="100">
   <properties>
    <property name="Navigation" type="bool" value="true"/>
   </properties>
@@ -49879,7 +49938,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="1297"/>
    <tile/>
    <tile/>
    <tile/>
@@ -60216,7 +60275,7 @@
      <property name="id1" type="int" value="70"/>
     </properties>
    </object>
-   <object id="73" name="Trigger" type="standard" x="163.834" y="309.333" width="14" height="3">
+   <object id="73" name="Trigger" type="standard" x="159.5" y="309" width="14" height="3">
     <properties>
      <property name="id0" type="int" value="66"/>
      <property name="id1" type="int" value="0"/>
@@ -60232,7 +60291,7 @@
    </object>
   </objectgroup>
   <objectgroup name="GameObjects">
-   <object id="66" name="normalBox" x="160.667" y="209.667" width="16" height="16"/>
+   <object id="66" name="normalBox" x="159" y="209.667" width="16" height="16"/>
    <object id="67" name="Door" x="427.584" y="261.167" width="16" height="53"/>
    <object id="68" name="flyingEnemy" x="138.5" y="158.667" width="16" height="16"/>
    <object id="69" name="landEnemy" x="352" y="285.667" width="16" height="24"/>
