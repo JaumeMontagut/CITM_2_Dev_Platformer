@@ -41,6 +41,7 @@ void ExitGame() {
 }
 
 void ResumeGame() {
+	App->gui->ToggleElementVisibility("returnGame");
 	App->pause = false;
 	App->transition = true;
 }
@@ -54,6 +55,9 @@ void OpenMainMenu() {
 	// Load level 001 (It's the second one since the first one is the main menu screen)
 	p2List_item<Levels*>* levelData = App->map->data.levels.start;
 	App->fade_to_black->FadeToBlack(levelData->data->name.GetString(), 1.0f);
+	// check if the game is in pause state
+	if (App->pause)
+		App->pause = false;
 }
 
 void OpenSettings() {
