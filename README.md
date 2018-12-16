@@ -69,6 +69,7 @@ sauer2: https://opengameart.org/content/oldschool-win-and-die-jump-and-run-sound
 - When you swap with an object you also exchange velocities.
 - 13 levels!
 - Added gui element templates on an xml to easlily create similar elements.
+- All GUI elements are loaded from tmx edited on tiled, and gets all properties from there.
 
 ## Member contributions to assignment 2
 Jose Antonio Prieto
