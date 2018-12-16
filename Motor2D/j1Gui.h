@@ -256,6 +256,8 @@ private:
 	std::map<std::string, GUIText**> labelMap;//During creation, if it finds a label with a custom property in this map, it will associate them
 	iPoint lastMousePos = { 0, 0 };
 	GUIElement * focusedElement = nullptr;
+	bool dragging = false;
+	iPoint dragOffset = { 0, 0 };
 };
 
 #endif // __j1GUI_H__

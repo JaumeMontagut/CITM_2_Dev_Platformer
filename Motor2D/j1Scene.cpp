@@ -121,10 +121,6 @@ bool j1Scene::Start()
 			LOG("failed to establish a family");
 		}
 	}
-	if (App->object->player != nullptr) {
-		App->object->player->UpdateLives();
-		App->object->player->UpdateScore();
-	}
 	//TODO: Make it get from the name, instead of the ID (currently name is being used to get the type of GUIElement)
 
 	// GUI elements creation example ---------------------------------------------------

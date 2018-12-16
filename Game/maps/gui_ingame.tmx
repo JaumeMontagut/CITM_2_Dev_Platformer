@@ -77,9 +77,13 @@
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="97" name="image" x="24" y="24" width="64" height="56">
+  <object id="97" name="image" x="24" y="24" width="64" height="64">
    <properties>
-    <property name="draggable" type="bool" value="false"/>
+    <property name="bounds_h" value="48"/>
+    <property name="bounds_w" value="48"/>
+    <property name="bounds_x" value="-5"/>
+    <property name="bounds_y" value="-8"/>
+    <property name="draggable" type="bool" value="true"/>
     <property name="interactable" type="bool" value="false"/>
     <property name="parentID" type="int" value="-1"/>
     <property name="section_rect_h" type="int" value="16"/>

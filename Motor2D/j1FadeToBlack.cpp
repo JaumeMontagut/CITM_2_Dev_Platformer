@@ -77,6 +77,8 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 					{
 						App->object->player->lives = lives;
 						App->object->player->score = score;
+						App->object->player->UpdateLives();
+						App->object->player->UpdateScore();
 					}
 				}
 			}

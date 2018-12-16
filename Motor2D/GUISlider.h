@@ -15,16 +15,17 @@ class GUISlider : public GUIElement {
 	//Variables
 private:
 	//Slider limits
-	bool limitX = false;
-	bool limitY = false;
+	int * xLimit = nullptr;
+	int * yLimit = nullptr;
 	float * xPerCent = nullptr;
 	float * yPerCent = nullptr;
 	GUIImage * childThumb = nullptr;
 	GUIImage * childBox = nullptr;
 	//Methods
 private:
-	GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect* thumbSection, GUISlider::TYPE sliderType, float * multiplier1, float * multiplier2);
+	GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect* thumbSection, GUISlider::TYPE sliderType, float * multiplier1 = nullptr, float * multiplier2 = nullptr);
 	bool PreUpdate() override;
+	bool CleanUp() override;
 };
 
 #endif

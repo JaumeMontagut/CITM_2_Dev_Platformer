@@ -332,43 +332,86 @@ bool j1Gui::PreUpdate()
 		debugGUI = !debugGUI;
 	}
 
-	//- Get mouse position
-	iPoint mousePos;
-	App->input->GetMousePosition(mousePos.x, mousePos.y);
-	mousePos *= (int)App->win->GetScale();
 	//- Sort a list with the elements in a generational order
 	p2List<GUIElement*> elems;
 	elems.add(guiScreen);
 	GetGenerationalList(elems);
-	//- Check if the mouse has been moved
-	if (mousePos != lastMousePos) {
-		//- Force focus with the mouse
-		p2List_item<GUIElement*>* iterator = elems.end;
-		for (; iterator != nullptr; iterator = iterator->prev) {
-			//- Find which is the last element with the mouse above it
-			if (iterator->data->CheckBounds(mousePos.x, mousePos.y) && iterator->data->interactable) {
-				focusedElement = iterator->data;
-				break;
-			}
+
+	//Set drag and focus
+	if (dragging) {
+		if (App->input->GetMouseButton(SDL_SCANCODE_LEFT) == KEY_UP) {
+			dragging = false;
 		}
-		//- If it goes through all the list and it doesn't find any element with the mouse above it
-		if (iterator == nullptr) {
-			focusedElement = nullptr;
-		}
-		lastMousePos = mousePos;
+		//- Get mouse position
+		iPoint mousePos;
+		App->input->GetMousePosition(mousePos.x, mousePos.y);
+		mousePos *= (int)App->win->GetScale();
+
+		focusedElement->localPos = mousePos + dragOffset - (focusedElement->GetGlobalPos() - focusedElement->localPos);
 	}
 	else {
-		//Check if the tab has been pressed
-		if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN) {
-			//If no object has focus, give it to the one nearest to the top left
-			if (focusedElement == nullptr) {
-				GetTopGUIElement(focusedElement);
+		if (App->input->GetMouseButton(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+			//Searches through all the elements
+			//Sees if it finds one that is draggable
+			//- Get mouse position
+			iPoint mousePos;
+			App->input->GetMousePosition(mousePos.x, mousePos.y);
+			mousePos *= (int)App->win->GetScale();
+			//- Force focus with the mouse
+			p2List_item<GUIElement*>* iterator = elems.end;
+			for (; iterator != nullptr; iterator = iterator->prev) {
+				//- Find which is the last element with the mouse above it
+				if (iterator->data->CheckBounds(mousePos.x, mousePos.y) && iterator->data->interactable) {
+					focusedElement = iterator->data;
+					break;
+				}
 			}
-			else {
-				//Searches to the right
-				GetNextGUIElement(focusedElement);
+			//- If it goes through all the list and it doesn't find any element with the mouse above it
+			if (iterator == nullptr) {
+				focusedElement = nullptr;
+			}
+			if (focusedElement != nullptr && focusedElement->draggable) {
+				dragging = true;
+				dragOffset = focusedElement->GetGlobalPos() - mousePos;
 			}
 		}
+		else {
+			//- Get mouse position
+			iPoint mousePos;
+			App->input->GetMousePosition(mousePos.x, mousePos.y);
+			mousePos *= (int)App->win->GetScale();
+			//- Check if the mouse has been moved
+			if (mousePos != lastMousePos) {
+				//- Force focus with the mouse
+				p2List_item<GUIElement*>* iterator = elems.end;
+				for (; iterator != nullptr; iterator = iterator->prev) {
+					//- Find which is the last element with the mouse above it
+					if (iterator->data->CheckBounds(mousePos.x, mousePos.y) && iterator->data->interactable) {
+						focusedElement = iterator->data;
+						break;
+					}
+				}
+				//- If it goes through all the list and it doesn't find any element with the mouse above it
+				if (iterator == nullptr) {
+					focusedElement = nullptr;
+				}
+				lastMousePos = mousePos;
+			}
+			else {
+				//Check if the tab has been pressed
+				if (App->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN) {
+					//If no object has focus, give it to the one nearest to the top left
+					if (focusedElement == nullptr) {
+						GetTopGUIElement(focusedElement);
+					}
+					else {
+						//Searches to the right
+						GetNextGUIElement(focusedElement);
+					}
+				}
+			}
+
+		}		
 	}
 	//- Set the state of all the elements
 	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
@@ -969,6 +1012,12 @@ bool j1Gui::LoadGUIImage(pugi::xml_node& node)
 		section.w = propertiesNode.find_child_by_attribute("name", "section_rect_w").attribute("value").as_int();
 		section.h = propertiesNode.find_child_by_attribute("name", "section_rect_h").attribute("value").as_int();
 
+		SDL_Rect boundsSection;
+		boundsSection.x = propertiesNode.find_child_by_attribute("name", "bounds_x").attribute("value").as_int(0);
+		boundsSection.y = propertiesNode.find_child_by_attribute("name", "bounds_y").attribute("value").as_int(0);
+		boundsSection.w = propertiesNode.find_child_by_attribute("name", "bounds_w").attribute("value").as_int(0);
+		boundsSection.h = propertiesNode.find_child_by_attribute("name", "bounds_h").attribute("value").as_int(0);
+
 		newImage = new GUIImage(position, section);
 
 		// assign the rest of extra properties
@@ -977,6 +1026,7 @@ bool j1Gui::LoadGUIImage(pugi::xml_node& node)
 		newImage->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
 		newImage->ObjectID = object_tiled_id;
 		newImage->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+		newImage->bounds = boundsSection;
 
 		//Associate the label with the corresponding pointer
 		p2SString objectName = propertiesNode.find_child_by_attribute("name", "object_name").attribute("value").as_string("\0");
