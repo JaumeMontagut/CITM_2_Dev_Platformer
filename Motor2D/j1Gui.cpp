@@ -9,6 +9,7 @@
 #include "j1Audio.h"
 #include "j1Window.h"
 #include "j1Input.h"
+#include "j1Scene.h"
 #include "Brofiler/Brofiler.h"
 #include "ButtonFunctions.h"
 #include <map>
@@ -49,7 +50,8 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
 		ret = false;
 
-	FillFunctionsList();
+	FillFunctionsMap();
+	FillLabelsMap();
 
 	return ret;
 }
@@ -201,7 +203,7 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 	return ret;
 }
 
-void j1Gui::FillFunctionsList()
+void j1Gui::FillFunctionsMap()
 {
 	functionMap["SayHelloButton"] = &SayHelloButton;
 	//functionMap["PlayGame"] = &PlayGame;
@@ -211,6 +213,12 @@ void j1Gui::FillFunctionsList()
 	//functionMap["OpenMainMenu"] = &OpenMainMenu;
 	//functionMap["OpenSettings"] = &OpenSettings;
 	//functionMap["OpenCredits"] = &OpenCredits;
+}
+
+void j1Gui::FillLabelsMap()
+{
+	labelMap["coins_label"] = App->scene->coinsText;
+	labelMap["lives_label"] = App->scene->livesText;
 }
 
 void (*j1Gui::GetButtonFunction(p2SString functionName))() {
@@ -895,6 +903,12 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	// adds it to gui elements list
 	guiElems.add(newText);
 	
+	//Associate the label with the corresponding pointer
+	p2SString objectName = propertiesNode.find_child_by_attribute("name", "object_name").attribute("value").as_string("\0");
+	
+	if (labelMap.find(objectName.GetString()) != labelMap.end()) {
+		labelMap[objectName.GetString()] = newText;
+	}
 
 	return ret;
 }
