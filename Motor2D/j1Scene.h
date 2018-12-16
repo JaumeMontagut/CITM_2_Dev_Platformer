@@ -5,6 +5,7 @@
 #include "p2DynArray.h"
 
 struct SDL_Texture;
+class GUIText;
 
 class j1Scene : public j1Module
 {
@@ -45,6 +46,10 @@ private:
 	p2DynArray<iPoint> last_path = NULL;
 	void CopyLastGeneratedPath();
 
+public:
+	GUIText * coinsText = nullptr;
+	GUIText * livesText = nullptr;
+
 private:
 	fPoint cameraPos = { 0,0 };
 	bool firstStart = true;
@@ -56,7 +61,6 @@ private:
 	float	cameraFallMultiplier = 0.0f;//When falling
 	float	horizontalScreenDivision = 0.0f;
 	float	verticalScreenDivision = 0.0f;
-
 };
 
 #endif // __j1SCENE_H__
