@@ -32,6 +32,7 @@ private:
 	uint animTileWidth = 0u;
 	uint animTileHeight = 0u;
 	float gravity = 0.0f;
+	bool bigbox = false;
 };
 
 #endif

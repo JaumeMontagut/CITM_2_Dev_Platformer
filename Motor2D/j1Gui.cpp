@@ -323,9 +323,9 @@ bool j1Gui::Start()
 	if (!LoadElementTemplate(buttonType2, gui_node.child("gui_element_templates").child("buttons").child("button_type_2")))
 		ret = false;
 	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
-		ret = false;
+		ret = false;*/
 
-	FillFunctionsList();*/
+	//FillFunctionsList();
 	return ret;
 }
 
