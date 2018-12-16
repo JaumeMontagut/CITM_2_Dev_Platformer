@@ -83,7 +83,7 @@ public:
 	//General invormation
 	FOCUS state = FOCUS::OUT_OF_FOCUS;
 	bool active = true;
-	bool interactable = false;
+	bool interactable = false;//Determines if the object can be interactuated with (clicked, dragged, etc). Focus only selects objects that are interactable.
 	bool draggable = false;
 	//Tree structure
 	GUIElement * parent = nullptr;

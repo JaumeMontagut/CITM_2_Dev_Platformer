@@ -339,7 +339,7 @@ bool j1Gui::PreUpdate()
 
 	//Set drag and focus
 	if (dragging) {
-		if (App->input->GetMouseButton(SDL_SCANCODE_LEFT) == KEY_UP) {
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
 			dragging = false;
 		}
 		//- Get mouse position
@@ -350,7 +350,7 @@ bool j1Gui::PreUpdate()
 		focusedElement->localPos = mousePos + dragOffset - (focusedElement->GetGlobalPos() - focusedElement->localPos);
 	}
 	else {
-		if (App->input->GetMouseButton(SDL_SCANCODE_LEFT) == KEY_DOWN) {
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
 			//Searches through all the elements
 			//Sees if it finds one that is draggable
 			//- Get mouse position
@@ -534,8 +534,7 @@ bool j1Gui::PostUpdate()
 			}
 		}
 	}
-
-	LOG("elems count %i", guiElems.Count());
+	//LOG("elems count %i", guiElems.Count());
 	return true;
 }
 

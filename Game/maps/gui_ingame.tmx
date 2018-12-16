@@ -84,7 +84,7 @@
     <property name="bounds_x" value="-5"/>
     <property name="bounds_y" value="-8"/>
     <property name="draggable" type="bool" value="true"/>
-    <property name="interactable" type="bool" value="false"/>
+    <property name="interactable" type="bool" value="true"/>
     <property name="parentID" type="int" value="-1"/>
     <property name="section_rect_h" type="int" value="16"/>
     <property name="section_rect_w" type="int" value="20"/>
@@ -125,19 +125,6 @@
     <property name="interactable" type="bool" value="false"/>
     <property name="parentID" value="75"/>
     <property name="text" value="VOLUME:"/>
-    <property name="visible" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="101" name="image" x="0" y="0" width="1024" height="768">
-   <properties>
-    <property name="draggable" type="bool" value="false"/>
-    <property name="interactable" type="bool" value="false"/>
-    <property name="object_name" value="InGameGUI"/>
-    <property name="parentID" type="int" value="-1"/>
-    <property name="section_rect_h" type="int" value="385"/>
-    <property name="section_rect_w" type="int" value="513"/>
-    <property name="section_rect_x" type="int" value="133"/>
-    <property name="section_rect_y" type="int" value="385"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
