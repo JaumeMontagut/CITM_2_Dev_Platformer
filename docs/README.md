@@ -1,4 +1,4 @@
-﻿# CITM_2_Dev_Platformer
+﻿# Swap game
 Swap game is a puzzle-action-platformer where you must overcome a series of challenges using your intelligence and reflexes!
 This game was made as part of the development subject by 2 students in CITM (UPC). We've programmed the game from scratch in C++ and used free artwork.
 
@@ -46,7 +46,9 @@ Jose Antonio Prieto
 - Added gamepad hotplug functionality
 - Implemented trigger import(from tiled map editor)/ functionality
 - Added new object trigger events to entity system
-- Added new object doors
+- Added new object door
+- Get objects from Tiled xml
+
 Jaume Montagut Guix
 - Walking enemy
 - A*
@@ -57,6 +59,7 @@ Jaume Montagut Guix
 - implement camera draw limits and its debug functionality
 - designed some new cool levels!
 - multitude of fixes/improvements
+- Added GUI slider
 
 ## How to play:
 ### Controller:
