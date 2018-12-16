@@ -15,11 +15,16 @@ ObjEnemy::ObjEnemy(fPoint & position, int index) : GameObject(position, index)
 
 bool ObjEnemy::IsPlayerInTileRange(const uint range) const
 {
-	// translate to map coords
-	iPoint thisPos = App->map->WorldToMap((int)position.x, (int)position.y);
-	iPoint playerPos = App->map->WorldToMap((int)App->object->player->position.x, (int)App->object->player->position.y);
+	if (App->object->player != nullptr)
+	{
+		// translate to map coords
+		iPoint thisPos = App->map->WorldToMap((int)position.x, (int)position.y);
+		iPoint playerPos = App->map->WorldToMap((int)App->object->player->position.x, (int)App->object->player->position.y);
 
-	return (thisPos.DistanceManhattan(playerPos) < range);
+		return (thisPos.DistanceManhattan(playerPos) < range);
+	}
+
+	return false;
 }
 
 // not used for now

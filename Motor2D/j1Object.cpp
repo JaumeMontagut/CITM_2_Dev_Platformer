@@ -48,11 +48,11 @@ bool j1Object::Start() {
 	laserActiveTex = App->tex->LoadTexture(object_node.child("door").child("laser_active_texture").text().as_string());
 	laserTurnOnTex = App->tex->LoadTexture(object_node.child("door").child("laser_turn_on_texture").text().as_string());
 	laserTurnOffTex = App->tex->LoadTexture(object_node.child("door").child("laser_turn_off_texture").text().as_string());
-	//Add objects
-	fPoint playerStartPos;
-	playerStartPos.x = App->map->playerData.x;
-	playerStartPos.y = App->map->playerData.y;
-	player = App->object->AddObjPlayer(playerStartPos);
+	////Add objects
+	//fPoint playerStartPos;
+	//playerStartPos.x = App->map->playerData.x;
+	//playerStartPos.y = App->map->playerData.y;
+	//player = App->object->AddObjPlayer(playerStartPos);
 
 	// load general sfx for objects
 	impactBoxSFX = App->audio->LoadFx(object_node.child("projectile").find_child_by_attribute("name", "impact").attribute("value").as_string());
@@ -119,10 +119,10 @@ bool j1Object::CleanUp() {
 	App->tex->UnloadTexture(laserTurnOnTex);
 	App->tex->UnloadTexture(laserTurnOffTex);
 	// unload sfx
-	App->audio->UnloadDesiredSFX(impactBoxSFX); // unload a desired sfx
-	App->audio->UnloadDesiredSFX(pickPizzaSFX);
-	App->audio->UnloadDesiredSFX(pickNutCoinSFX);
-	//App->audio->UnloadSFX(); // unload all sfx on audio sfx list
+	//App->audio->UnloadDesiredSFX(impactBoxSFX); // unload a desired sfx
+	//App->audio->UnloadDesiredSFX(pickPizzaSFX);
+	//App->audio->UnloadDesiredSFX(pickNutCoinSFX);
+	App->audio->UnloadSFX(); // unload all sfx on audio sfx list
 
 	// "disable" the module
 	active = false;

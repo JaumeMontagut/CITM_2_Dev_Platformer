@@ -63,6 +63,25 @@ bool j1Scene::Start()
 	// TODO, search a workaround to reload player info
 	if (!App->object->IsEnabled()) { App->object->Enable(); }
 
+	// check if we are on mainMenu screen and deactivates player
+	if (App->map->data.loadedLevel == "main_menu.tmx")
+	{
+		LOG("currently on mainScreen");
+		//App->object->DeleteObject(App->object->player);
+		onMainScreen = true;
+	}
+	else // adds player
+	{
+		onMainScreen = false;
+		//Add objects
+		fPoint playerStartPos;
+		playerStartPos.x = App->map->playerData.x;
+		playerStartPos.y = App->map->playerData.y;
+		App->object->player = App->object->AddObjPlayer(playerStartPos);
+	}
+		
+
+
 	// create walkability map
 	if (App->map->map_loaded)
 	{
@@ -192,7 +211,7 @@ bool j1Scene::PreUpdate() {
 bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("SCENE UPDATE", Profiler::Color::DeepSkyBlue);
-	if (!App->render->cameraDebug) {
+	if (!App->render->cameraDebug && !onMainScreen) {
 		CameraLogic(dt);
 	}
 
