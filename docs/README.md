@@ -32,6 +32,8 @@ This game was made as part of the development subject by 2 students in CITM (UPC
 ##Video
 [![Watch the video](https://youtu.be/gLZghKCW6RY)](https://youtu.be/gLZghKCW6RY)
 
+<iframe width="854" height="480" src="https://youtu.be/gLZghKCW6RY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 ## Member contributions
 Jose Antonio Prieto
 - Flying enemy
