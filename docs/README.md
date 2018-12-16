@@ -28,6 +28,7 @@ This game was made as part of the development subject by 2 students in CITM (UPC
 - Loaded elements gui elements from Tiled.
 
 ##Release
+https://github.com/JaumeMontagut/CITM_2_Dev_Platformer/releases/tag/v1.5
 
 ##Video
 [![Watch the video](https://youtu.be/gLZghKCW6RY)](https://youtu.be/gLZghKCW6RY)
