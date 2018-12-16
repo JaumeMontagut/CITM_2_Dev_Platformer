@@ -6,6 +6,8 @@
 class GUIImage;
 
 class GUISlider : public GUIElement {
+
+public:
 	enum class TYPE{
 		HORIZONTAL,
 		VERTICAL,
@@ -22,7 +24,7 @@ private:
 	GUIImage * childThumb = nullptr;
 	GUIImage * childBox = nullptr;
 	//Methods
-private:
+public:
 	GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect* thumbSection, GUISlider::TYPE sliderType, float * multiplier1 = nullptr, float * multiplier2 = nullptr);
 	bool PreUpdate() override;
 	bool CleanUp() override;

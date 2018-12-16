@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="128" height="96" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="104">
  <objectgroup id="1" name="GUI objects">
-  <object id="71" name="button" type="templateType1" x="392" y="312" width="240" height="80">
+  <object id="71" name="slider" type="templateType1" x="392" y="328" width="240" height="24">
    <properties>
+    <property name="box_h" value="6"/>
+    <property name="box_w" value="174"/>
+    <property name="box_x" value="133"/>
+    <property name="box_y" value="770"/>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="true"/>
-    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
-    <property name="text" value="ADJUST VOLUME (SLIDER)"/>
+    <property name="thumb_h" value="6"/>
+    <property name="thumb_w" value="14"/>
+    <property name="thumb_x" value="133"/>
+    <property name="thumb_y" value="776"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
@@ -85,7 +90,7 @@
     <property name="bounds_w" value="48"/>
     <property name="bounds_x" value="-5"/>
     <property name="bounds_y" value="-8"/>
-    <property name="draggable" type="bool" value="true"/>
+    <property name="draggable" type="bool" value="false"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="parentID" type="int" value="-1"/>
     <property name="section_rect_h" type="int" value="16"/>

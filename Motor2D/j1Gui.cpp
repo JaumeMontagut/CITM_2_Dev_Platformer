@@ -21,6 +21,7 @@
 #include "GUIButton.h"
 #include "GUICheckbox.h"
 #include "GUIInputText.h"
+#include "GUISlider.h"
 
 j1Gui::j1Gui() : j1Module()
 {
@@ -333,69 +334,36 @@ bool j1Gui::PreUpdate()
 	}
 
 	//- Sort a list with the elements in a generational order
-	p2List<GUIElement*> elems;
-	elems.add(guiScreen);
-	GetGenerationalList(elems);
+	p2List<GUIElement*> generationalList;
+	generationalList.add(guiScreen);
+	GetGenerationalList(generationalList);
+
+	//- Get mouse position
+	iPoint mousePos;
+	App->input->GetMousePosition(mousePos.x, mousePos.y);
+	mousePos *= (int)App->win->GetScale();
 
 	//Set drag and focus
 	if (dragging) {
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
 			dragging = false;
 		}
-		//- Get mouse position
-		iPoint mousePos;
-		App->input->GetMousePosition(mousePos.x, mousePos.y);
-		mousePos *= (int)App->win->GetScale();
-
 		focusedElement->localPos = mousePos + dragOffset - (focusedElement->GetGlobalPos() - focusedElement->localPos);
+		
 	}
 	else {
 		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
-			//Searches through all the elements
-			//Sees if it finds one that is draggable
-			//- Get mouse position
-			iPoint mousePos;
-			App->input->GetMousePosition(mousePos.x, mousePos.y);
-			mousePos *= (int)App->win->GetScale();
-			//- Force focus with the mouse
-			p2List_item<GUIElement*>* iterator = elems.end;
-			for (; iterator != nullptr; iterator = iterator->prev) {
-				//- Find which is the last element with the mouse above it
-				if (iterator->data->CheckBounds(mousePos.x, mousePos.y) && iterator->data->interactable) {
-					focusedElement = iterator->data;
-					break;
-				}
-			}
-			//- If it goes through all the list and it doesn't find any element with the mouse above it
-			if (iterator == nullptr) {
-				focusedElement = nullptr;
-			}
+			//- Searches through all the elements and sees if it finds one that is draggable
+			MouseFocus(generationalList, mousePos);
 			if (focusedElement != nullptr && focusedElement->draggable) {
 				dragging = true;
 				dragOffset = focusedElement->GetGlobalPos() - mousePos;
 			}
 		}
 		else {
-			//- Get mouse position
-			iPoint mousePos;
-			App->input->GetMousePosition(mousePos.x, mousePos.y);
-			mousePos *= (int)App->win->GetScale();
 			//- Check if the mouse has been moved
 			if (mousePos != lastMousePos) {
-				//- Force focus with the mouse
-				p2List_item<GUIElement*>* iterator = elems.end;
-				for (; iterator != nullptr; iterator = iterator->prev) {
-					//- Find which is the last element with the mouse above it
-					if (iterator->data->CheckBounds(mousePos.x, mousePos.y) && iterator->data->interactable) {
-						focusedElement = iterator->data;
-						break;
-					}
-				}
-				//- If it goes through all the list and it doesn't find any element with the mouse above it
-				if (iterator == nullptr) {
-					focusedElement = nullptr;
-				}
-				lastMousePos = mousePos;
+				MouseFocus(generationalList, mousePos);
 			}
 			else {
 				//Check if the tab has been pressed
@@ -413,8 +381,9 @@ bool j1Gui::PreUpdate()
 
 		}		
 	}
+	lastMousePos = mousePos;
 	//- Set the state of all the elements
-	for (p2List_item<GUIElement*>* iterator = elems.start; iterator != nullptr; iterator = iterator->next) {
+	for (p2List_item<GUIElement*>* iterator = generationalList.start; iterator != nullptr; iterator = iterator->next) {
 		if (iterator->data == focusedElement) {
 			iterator->data->SetFocus(true);
 		}
@@ -425,6 +394,22 @@ bool j1Gui::PreUpdate()
 	}
 
 	return true;
+}
+
+void j1Gui::MouseFocus(p2List<GUIElement *> &generationalList, iPoint &mousePos)
+{
+	p2List_item<GUIElement*>* iterator = generationalList.end;
+	for (; iterator != nullptr; iterator = iterator->prev) {
+		//- Find which is the last element with the mouse above it
+		if (iterator->data->CheckBounds(mousePos.x, mousePos.y) && iterator->data->interactable) {
+			focusedElement = iterator->data;
+			break;
+		}
+	}
+	//- If it goes through all the list and it doesn't find any element with the mouse above it
+	if (iterator == nullptr) {
+		focusedElement = nullptr;
+	}
 }
 
 void j1Gui::GetGenerationalList(p2List<GUIElement *> &elems)
@@ -671,6 +656,15 @@ GUIInputText* j1Gui::CreateInputText(const iPoint& position, const SDL_Rect &bou
 //guiElems.PushBack(guiElem);
 //guiElem->SetFamily(parent);
 return guiElem;
+}
+
+GUISlider * j1Gui::CreateSlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect * thumbSection, int sliderType, float * multiplier1, float * multiplier2, GUIElement * parent)
+{
+	GUISlider* guiElem = nullptr;
+	guiElem = new GUISlider(pos, boxSection, thumbSection, (GUISlider::TYPE)sliderType, multiplier1, multiplier2);
+	guiElems.add(guiElem);
+	guiElem->SetParent(parent);
+	return guiElem;
 }
 
 GUIButton* j1Gui::CreateButton(const iPoint & position, const SDL_Rect & bounds, p2SString functionName, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx, GUIElement * parent)

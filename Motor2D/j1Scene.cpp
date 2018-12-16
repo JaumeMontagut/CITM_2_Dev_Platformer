@@ -165,8 +165,12 @@ bool j1Scene::Start()
 
 	//App->gui->CreateCheckbox({ 0,0 }, App->gui->checkboxType1, "blabla check", &App->collision->debug);
 
-	SDL_Rect boxRect();
-	SDL_Rect thumbRect();
+	//Slider example
+
+	SDL_Rect thumbRect(133, 776, 14, 6);
+	SDL_Rect boxRect(133, 770, 174, 6);
+
+	App->gui->CreateSlider(iPoint(0, 0), &boxRect, &thumbRect, 0, nullptr, nullptr);
 
 
 	return true;

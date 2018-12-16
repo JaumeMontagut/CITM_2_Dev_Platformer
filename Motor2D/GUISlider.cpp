@@ -8,15 +8,20 @@ GUISlider::GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect * thumbSection,
 {
 	if (boxSection != nullptr) {
 		childBox = App->gui->CreateImage(iPoint(0,0), *boxSection, this);
+		childBox->bounds = *boxSection;
 	}
 	if (thumbSection != nullptr){
 		iPoint boxCenter(0, 0);
 		if (boxSection != nullptr) {
-			boxCenter.x = boxSection->x * 0.5f;
+			boxCenter.x = boxSection->x;
 			boxCenter.y = boxSection->y;
 		}
 		childThumb = App->gui->CreateImage(boxCenter, *thumbSection, this);
 		childThumb->draggable = true;
+		childThumb->interactable = true;
+		SDL_Rect thumbBounds(0, 0, thumbSection->w * 2, thumbSection->h * 2);
+		childThumb->bounds = thumbBounds;
+		//bounds
 	}
 	switch (sliderType) {
 	case GUISlider::TYPE::HORIZONTAL:
@@ -35,8 +40,6 @@ GUISlider::GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect * thumbSection,
 
 bool GUISlider::PreUpdate()
 {
-
-
 	if (xLimit != nullptr) {
 		childThumb->localPos.x = *xLimit;
 	}

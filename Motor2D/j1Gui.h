@@ -21,6 +21,7 @@ class GUIText;
 class GUIButton;
 class GUICheckbox;
 class GUIInputText;
+class GUISlider;
 struct _TTF_Font;
 
 enum class FOCUS
@@ -160,6 +161,8 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	void MouseFocus(p2List<GUIElement *> &generationalList, iPoint &mousePos);
+
 	void GetGenerationalList(p2List<GUIElement *> &elems);
 
 	void GetNextGUIElement(GUIElement * &focusedElement);
@@ -200,6 +203,7 @@ public:
 	GUICheckbox* CreateCheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr = nullptr, const char * text = nullptr, const SDL_Rect * outUncheckSection = nullptr, const SDL_Rect * inUncheckSection = nullptr, const SDL_Rect * clickUncheckSection = nullptr, const SDL_Rect * outCheckSection = nullptr, const SDL_Rect * inCheckSection = nullptr, const SDL_Rect * clickCheckSection = nullptr, uint clickSFX = 0u, GUIElement * parent = nullptr);
 	GUICheckbox* CreateCheckbox(const iPoint& position, CheckboxTemplates& templateType, const char* text = nullptr, bool* boolPtr = nullptr, GUIElement* parent = nullptr);
 	GUIInputText* CreateInputText(const iPoint & position, const SDL_Rect & bounds, const char* text = nullptr, SDL_Color color = WHITE, uint size = DEFAULT_TEXT_SIZE, GUIElement * parent = nullptr);
+	GUISlider* CreateSlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect * thumbSection, int sliderType = 0, float * multiplier1 = nullptr, float * multiplier2 = nullptr, GUIElement * parent = nullptr);
 
 	SDL_Texture* GetAtlas() const;
 
