@@ -27,10 +27,10 @@ This game was made as part of the development subject by 2 students in CITM (UPC
 - Added gui element templates on an xml to easlily create similar elements.
 - Loaded elements gui elements from Tiled.
 
-##Release
+## Release
 https://github.com/JaumeMontagut/CITM_2_Dev_Platformer/releases/tag/v1.5
 
-##Video
+## Video
 [![Watch the video](https://youtu.be/gLZghKCW6RY)](https://youtu.be/gLZghKCW6RY)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/gLZghKCW6RY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
