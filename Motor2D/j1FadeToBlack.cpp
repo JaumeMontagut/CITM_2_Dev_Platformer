@@ -8,6 +8,7 @@
 #include "j1Map.h"
 #include "j1Scene.h"
 #include "ObjPlayer.h"
+#include "j1Gui.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
 #include "Brofiler/Brofiler.h"
@@ -55,6 +56,7 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 			// .................................................................................
 			//Change scenes
 			App->scene->Disable();
+			App->gui->Disable();
 			if (App->map->Reset())
 			{
 				//If the fade to black is called for loading
@@ -63,6 +65,7 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 				}
 				if (App->map->Load(lvl_to_load)) {
 					App->scene->Enable();
+					App->gui->Enable();
 
 					// restores lives and score for player data
 					if (App->object->player != nullptr)

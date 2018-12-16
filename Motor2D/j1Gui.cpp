@@ -472,6 +472,8 @@ bool j1Gui::PostUpdate()
 			}
 		}
 	}
+
+	LOG("elems count %i", guiElems.Count());
 	return true;
 }
 
