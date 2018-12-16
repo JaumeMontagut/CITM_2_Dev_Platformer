@@ -305,7 +305,7 @@ void j1Scene::CameraLogic(float dt)
 		App->fade_to_black->FadeToBlack(App->map->data.loadedLevel.GetString(), 1.0f);
 
 	// switch between levels
-	if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
 		p2List_item<Levels*>* levelData = App->map->data.levels.start;
 

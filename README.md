@@ -70,9 +70,6 @@ sauer2: https://opengameart.org/content/oldschool-win-and-die-jump-and-run-sound
 - 13 levels!
 - Added gui element templates on an xml to easlily create similar elements.
 
-## Important notes.
-- First enemies appear in level 007. Use Enter to go to the next level.
-
 ## Member contributions to assignment 2
 Jose Antonio Prieto
 - Flying enemy
@@ -98,6 +95,7 @@ Jaume Montagut Guix
 ## Debug functionality:
 - F1 ​Start from the very first level
 - F2 ​Start from the beginning of the current level
+- F3 Go to the next level
 - F5 ​Save the current state
 - F6 ​Load the previous state (even across levels)
 - F7 Show navigation layer

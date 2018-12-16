@@ -7,6 +7,7 @@
 #include "p2Log.h"
 #include "j1Fonts.h"
 #include "GUIText.h"
+#include "SDL/include/SDL_scancode.h"
 
 GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, p2SString functionName, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) :
 	clickSfx(clickSfx), GUIElement(position) {
@@ -59,7 +60,7 @@ bool GUIButton::CleanUp() {
 
 bool GUIButton::PreUpdate()
 {
-	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
 		if (clickSection != nullptr && childImage != nullptr && &childImage->section != clickSection) {
 			childImage->section = *clickSection;
 		}
@@ -78,7 +79,7 @@ bool GUIButton::PreUpdate()
 		}
 		App->audio->PlayFx(hoverSfx);
 	}
-	else if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
+	else if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}

@@ -8,6 +8,7 @@
 #include "p2Log.h"
 #include "j1Render.h"
 #include "j1Fonts.h"
+#include "SDL/include/SDL_scancode.h"
 
 GUICheckbox::GUICheckbox(const iPoint & position, const SDL_Rect & bounds, bool * boolPtr, const char * text, const SDL_Rect * outUncheckSection, const SDL_Rect * inUncheckSection, const SDL_Rect * clickUncheckSection, const SDL_Rect * outCheckSection, const SDL_Rect * inCheckSection, const SDL_Rect * clickCheckSection, uint clickSfx) : boolPtr(boolPtr), clickSfx(clickSfx), GUIElement(position) {
 	//Create child image
@@ -85,12 +86,12 @@ GUICheckbox::GUICheckbox(const iPoint& position, CheckboxTemplates& templateType
 
 bool GUICheckbox::PreUpdate()
 {
-	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN) {
+	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
 		*boolPtr = !(*boolPtr);
 		SetSection(CB_STATES::CB_CLICK);
 		App->audio->PlayFx(clickSfx);
 	}
-	else if (state == FOCUS::GET_FOCUS || (state == FOCUS::ON_FOCUS && App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP)) {
+	else if (state == FOCUS::GET_FOCUS || (state == FOCUS::ON_FOCUS && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP))) {
 		SetSection(CB_STATES::CB_IN);
 	}
 	else if (state == FOCUS::LOSE_FOCUS) {
