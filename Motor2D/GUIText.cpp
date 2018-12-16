@@ -32,16 +32,21 @@ bool GUIText::PostUpdate()
 		for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
 			globalPos += iterator->localPos;
 		}
+
 		clippingRect.x = globalPos.x;
 		clippingRect.y = globalPos.y;
-		clippingRect.h = 256;
+		clippingRect.h = 225 * 2;
 
-		App->render->SetViewPort(clippingRect);
+		SDL_Rect test = {globalPos.x / 2, globalPos.y / 2, clippingRect.w * 2, clippingRect.h };
 
-		App->render->BlitGUI(texture, globalPos.x, globalPos.y, NULL);
+		App->render->SetViewPort(test);
+
+		App->render->BlitGUI(texture, test.x, test.y, NULL);
 
 		App->render->ResetViewPort();
+
 		
+	
 		return true;
 	}
 
