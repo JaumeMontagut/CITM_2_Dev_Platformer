@@ -39,17 +39,17 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = gui_node.child("atlas").attribute("file").as_string("");
 
-	//// load general sfx from gui_config.xml
-	//LoadGUISfx(gui_node);
+	// load general sfx from gui_config.xml
+	LoadGUISfx(gui_node);
 
-	//if (!LoadElementTemplate(buttonType1, gui_node.child("gui_element_templates").child("buttons").child("button_type_1")))
-	//	ret = false;
-	//if (!LoadElementTemplate(buttonType2, gui_node.child("gui_element_templates").child("buttons").child("button_type_2")))
-	//	ret = false;
-	//if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
-	//	ret = false;
+	if (!LoadElementTemplate(buttonType1, gui_node.child("gui_element_templates").child("buttons").child("button_type_1")))
+		ret = false;
+	if (!LoadElementTemplate(buttonType2, gui_node.child("gui_element_templates").child("buttons").child("button_type_2")))
+		ret = false;
+	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
+		ret = false;
 
-	//FillFunctionsList();
+	FillFunctionsList();
 
 	return ret;
 }
@@ -307,7 +307,7 @@ bool j1Gui::Start()
 	//SDL_SetTextureBlendMode(checkbox_highlight_texture, SDL_BLENDMODE_ADD);
 
 	// load general sfx from gui_config.xml
-	LoadGUISfx(gui_node);
+	/*LoadGUISfx(gui_node);
 
 	if (!LoadElementTemplate(buttonType1, gui_node.child("gui_element_templates").child("buttons").child("button_type_1")))
 		ret = false;
@@ -316,7 +316,7 @@ bool j1Gui::Start()
 	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
 		ret = false;
 
-	FillFunctionsList();
+	FillFunctionsList();*/
 
 	return ret;
 }
