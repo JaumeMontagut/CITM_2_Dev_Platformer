@@ -2,6 +2,7 @@
 #include "GUIImage.h"
 #include "j1Gui.h"
 #include "j1App.h"
+#include "p2Log.h"
 
 GUISlider::GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect * thumbSection, GUISlider::TYPE sliderType, float * multiplier1, float * multiplier2) :
 	GUIElement(pos)
@@ -26,14 +27,18 @@ GUISlider::GUISlider(iPoint pos, SDL_Rect * boxSection, SDL_Rect * thumbSection,
 	}
 	switch (sliderType) {
 	case GUISlider::TYPE::HORIZONTAL:
+		xPerCent = multiplier1;
 		yLimit = new int;
 		*yLimit = pos.y;
 		break;
 	case GUISlider::TYPE::VERTICAL:
+		yPerCent = multiplier1;
 		xLimit = new int;
 		*xLimit = pos.x;
 		break;
 	case GUISlider::TYPE::FREE:
+		xPerCent = multiplier1;
+		yPerCent = multiplier2;
 		//No limits
 		break;
 	}
@@ -57,7 +62,14 @@ bool GUISlider::PreUpdate()
 		}
 	}
 
-	//TODO: Give the percent
+	if (xPerCent != nullptr) {
+		*xPerCent = (float)(childThumb->localPos.x - childBox->localPos.x) / (float)(childBox->bounds.w - childThumb->bounds.w);
+	}
+	if (yPerCent != nullptr) {
+		*yPerCent = (float)(childThumb->localPos.y - childBox->localPos.y) / (float)(childBox->bounds.h - childThumb->bounds.h);
+	}
+	
+
 	//TODO: global pos instead of local pos
 
 	if (xLimit != nullptr) {

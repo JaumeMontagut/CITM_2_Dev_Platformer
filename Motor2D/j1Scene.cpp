@@ -170,7 +170,7 @@ bool j1Scene::Start()
 	SDL_Rect thumbRect(133, 776, 14, 6);
 	SDL_Rect boxRect(133, 770, 174, 6);
 
-	App->gui->CreateSlider(iPoint(0, 0), &boxRect, &thumbRect, (int)GUISlider::TYPE::HORIZONTAL, nullptr, nullptr);
+	App->gui->CreateSlider(iPoint(0, 0), &boxRect, &thumbRect, (int)GUISlider::TYPE::HORIZONTAL, &testMultiplier, nullptr);
 
 
 	return true;
@@ -203,6 +203,8 @@ bool j1Scene::PreUpdate() {
 	//	}
 	//}
 	// // ---------------------------------
+
+	LOG("%f", testMultiplier);
 
 	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 		App->map->showNavLayer = !App->map->showNavLayer;

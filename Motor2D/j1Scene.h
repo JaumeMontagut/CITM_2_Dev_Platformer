@@ -65,6 +65,7 @@ private:
 
 	//
 	bool onMainScreen = false;
+	float testMultiplier = 0.0f;
 };
 
 #endif // __j1SCENE_H__
