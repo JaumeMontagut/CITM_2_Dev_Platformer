@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="107">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="150" height="100" tilewidth="8" tileheight="8" infinite="0" nextobjectid="108">
  <objectgroup name="GUI objects" visible="0">
   <object id="71" name="button" type="templateType1" x="416.833" y="223.333" width="240" height="80">
    <properties>
@@ -108,6 +108,7 @@
     <property name="fontSize" type="int" value="32"/>
     <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="false"/>
+    <property name="object_name" value="credits_text"/>
     <property name="parentID" value="104"/>
     <property name="text" value="GNU GPLv3 -Swap Game- (Provisional name)          Copyright (C) 2018  Jaume Montagut / Jose Antonio Prieto                                             This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or       (at your option) any later version.                          This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.                          You should have received a copy of the GNU General Public License  along with this program.  If not, see &lt;https://www.gnu.org/licenses/&gt;.                     See the license here: https://github.com/JaumeMontagut/CITM_2_Dev_Platformer/blob/master/LICENSE"/>
     <property name="visible" type="bool" value="true"/>

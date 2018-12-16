@@ -51,6 +51,7 @@ public:
 	GUIText * livesText = nullptr;
 	GUIText * timeText = nullptr;
 	float volumeMultiplier = 0.0f;
+	GUIText * creditsText = nullptr;
 
 private:
 	fPoint cameraPos = { 0,0 };
