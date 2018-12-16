@@ -206,7 +206,7 @@ public:
 private:
 	bool LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& node);
 	void FillFunctionsMap();
-	void FillLabelsMap();
+	void AssociateLabel(p2SString & objectName, GUIText * label);
 
 public:
 	// TODO: maybe adds a structure to pack all needed textures for specific button type
@@ -253,7 +253,7 @@ private:
 	//p2SString checkbox_check_locked_filename;
 	p2List<GUIElement*> guiElems;
 	std::map<std::string, void(*)()> functionMap;
-	std::map<std::string, GUIText*> labelMap;//During creation, if it finds a label with a custom property in this map, it will associate them
+	std::map<std::string, GUIText**> labelMap;//During creation, if it finds a label with a custom property in this map, it will associate them
 	iPoint lastMousePos = { 0, 0 };
 	GUIElement * focusedElement = nullptr;
 };

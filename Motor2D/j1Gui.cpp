@@ -51,7 +51,6 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 		ret = false;
 
 	FillFunctionsMap();
-	FillLabelsMap();
 
 	return ret;
 }
@@ -214,12 +213,6 @@ void j1Gui::FillFunctionsMap()
 	functionMap["OpenSettings"] = &OpenSettings;
 	functionMap["CloseSettings"] = &CloseSettings;
 	//functionMap["OpenCredits"] = &OpenCredits;
-}
-
-void j1Gui::FillLabelsMap()
-{
-	labelMap["coins_label"] = App->scene->coinsText;
-	labelMap["lives_label"] = App->scene->livesText;
 }
 
 void (*j1Gui::GetButtonFunction(p2SString functionName))() {
@@ -930,12 +923,18 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	p2SString objectName = propertiesNode.find_child_by_attribute("name", "object_name").attribute("value").as_string("\0");
 	// sets gui element object name to further checks
 	newText->object_name = objectName;
-	
-	if (labelMap.find(objectName.GetString()) != labelMap.end()) {
-		labelMap[objectName.GetString()] = newText;
-	}
+	AssociateLabel(objectName, newText);
 
 	return ret;
+}
+
+void j1Gui::AssociateLabel(p2SString & objectName, GUIText * label) {
+	if (objectName == "coins_label") {
+		App->scene->coinsText = label;
+	}
+	else if (objectName == "lives_label") {
+		App->scene->livesText = label;
+	}
 }
 
 bool j1Gui::LoadGUIImage(pugi::xml_node& node)
