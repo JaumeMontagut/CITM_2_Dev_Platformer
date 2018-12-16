@@ -13,10 +13,10 @@ public:
 
 public:
 	bool PostUpdate();
-	void SetText(SDL_Texture * texture);
+	void SetText(const char * text);
 
-private:
-	SDL_Texture* texture = nullptr;
+public:
+	SDL_Texture * texture = nullptr;
 };
 
 

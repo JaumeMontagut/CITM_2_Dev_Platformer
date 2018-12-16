@@ -370,7 +370,7 @@ void ObjPlayer::AddScore(int score)
 {
 	this->score += score;
 	if (App->scene->coinsText != nullptr) {
-		//App->scene->coinsText = App->font->Print();//TODO: Make a public var color in text and access it so we don't change the text color
+		App->scene->coinsText->SetText(App->font->NumToString(score).GetString());//TODO: Make a public var color in text and access it so we don't change the text color
 	}
 }
 
