@@ -95,7 +95,7 @@
   </object>
  </objectgroup>
  <objectgroup name="Credits">
-  <object id="102" name="label" x="542.5" y="524.333" width="389" height="286">
+  <object id="102" name="label" x="526.5" y="517.333" width="389" height="336">
    <properties>
     <property name="color" type="color" value="#ffff557f"/>
     <property name="color_a" type="int" value="0"/>
