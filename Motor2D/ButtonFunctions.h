@@ -57,7 +57,12 @@ void OpenMainMenu() {
 }
 
 void OpenSettings() {
+	//p2List<GUIElement*>* elementsData = App->gui->SetParentOff(();
+	App->gui->ToggleElementVisibility("OpenSettings"); // search for element with name OpenSettings and toggle the visibility of custom properties
+}
 
+void CloseSettings() {
+	App->gui->ToggleElementVisibility("CloseSettings");
 }
 
 void OpenCredits() {

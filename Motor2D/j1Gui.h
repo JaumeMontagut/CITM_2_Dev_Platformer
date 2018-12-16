@@ -92,6 +92,9 @@ public:
 	SDL_Rect bounds = { 0, 0, 0, 0 }; // stores "general" boundaries for mouse checking
 	int ObjectID = -1; // associated with object id from basic property from tiled
 	int ParentID = -1; // sets the parent of object tmx id
+	p2SString object_name;
+	int disableElementID = -1;
+	int enableElementID = -1;
 
 public:
 	GUIElement(const iPoint& position);
@@ -183,6 +186,10 @@ public:
 	bool LoadGUILabel(pugi::xml_node & node);
 	bool LoadGUIImage(pugi::xml_node & node);
 	bool LoadGUICheckbox(pugi::xml_node & node);
+	//
+	//bool SetGUIElementOff(p2SString name);
+	//bool SetGUIElementOn(p2SString name);
+	bool ToggleElementVisibility(const char* name = nullptr);//p2SString name);
 	
 	//Create GUI Objects
 	GUIElement* CreateScreen();

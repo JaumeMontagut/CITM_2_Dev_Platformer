@@ -208,10 +208,11 @@ void j1Gui::FillFunctionsMap()
 	functionMap["SayHelloButton"] = &SayHelloButton;
 	functionMap["PlayGame"] = &PlayGame;
 	functionMap["ContinueGame"] = &ContinueGame;
-	//functionMap["ExitGame"] = &ExitGame;
+	functionMap["ExitGame"] = &ExitGame;
 	//functionMap["ResumeGame"] = &ResumeGame;
 	//functionMap["OpenMainMenu"] = &OpenMainMenu;
-	//functionMap["OpenSettings"] = &OpenSettings;
+	functionMap["OpenSettings"] = &OpenSettings;
+	functionMap["CloseSettings"] = &CloseSettings;
 	//functionMap["OpenCredits"] = &OpenCredits;
 }
 
@@ -927,6 +928,8 @@ bool j1Gui::LoadGUILabel(pugi::xml_node& node)
 	
 	//Associate the label with the corresponding pointer
 	p2SString objectName = propertiesNode.find_child_by_attribute("name", "object_name").attribute("value").as_string("\0");
+	// sets gui element object name to further checks
+	newText->object_name = objectName;
 	
 	if (labelMap.find(objectName.GetString()) != labelMap.end()) {
 		labelMap[objectName.GetString()] = newText;
@@ -971,6 +974,14 @@ bool j1Gui::LoadGUIImage(pugi::xml_node& node)
 		newImage->active = propertiesNode.find_child_by_attribute("name", "visible").attribute("value").as_bool(true);
 		newImage->ObjectID = object_tiled_id;
 		newImage->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
+
+		//Associate the label with the corresponding pointer
+		p2SString objectName = propertiesNode.find_child_by_attribute("name", "object_name").attribute("value").as_string("\0");
+		// sets gui element object name to further checks
+		newImage->object_name = objectName;
+		// sets "linked" ids of object to enable/disable when function click map
+		newImage->disableElementID = propertiesNode.find_child_by_attribute("name", "disableElementID").attribute("value").as_int(-1);
+		newImage->enableElementID = propertiesNode.find_child_by_attribute("name", "enableElementID").attribute("value").as_int(-1);
 
 		//newImage->SetParent(nullptr);
 		guiElems.add(newImage);
@@ -1050,6 +1061,13 @@ bool j1Gui::LoadGUIButton(pugi::xml_node& node)
 	newButton->ParentID = propertiesNode.find_child_by_attribute("name", "parentID").attribute("value").as_int(-1);
 	// ... if we are more needed properties for something
 	// ...
+	//Associate the label with the corresponding pointer
+	p2SString objectName = propertiesNode.find_child_by_attribute("name", "object_name").attribute("value").as_string("\0");
+	// sets gui element object name to further checks
+	newButton->object_name = objectName;
+	// sets "linked" ids of object to enable/disable when function click map
+	newButton->disableElementID = propertiesNode.find_child_by_attribute("name", "disableElementID").attribute("value").as_int(-1);
+	newButton->enableElementID = propertiesNode.find_child_by_attribute("name", "enableElementID").attribute("value").as_int(-1);
 	
 	// adds default parent (screen)
 	// default parent are added when all gui objects are loaded
@@ -1088,4 +1106,32 @@ bool j1Gui::AssociateParentsID()
 	}
 
 	return ret;
+}
+
+bool j1Gui::ToggleElementVisibility(const char* name)//p2SString name)
+{
+	p2List_item<GUIElement*>* element = guiElems.start;
+	while (element && name != nullptr)
+	{
+		if (element->data->object_name == name) // if we found the object itself
+		{
+			// updates object state
+			//element->data->state = FOCUS::OUT_OF_FOCUS;
+			int enableID = element->data->enableElementID;
+			int disableID = element->data->disableElementID;
+			// search for enable/disable data
+			for (p2List_item<GUIElement*>* iterator = guiElems.start; iterator; iterator = iterator->next)
+			{
+				if ((iterator->data->ObjectID == enableID || iterator->data->ObjectID == disableID) && iterator->data->ObjectID != -1)
+				{
+					iterator->data->active = !iterator->data->active;
+				}
+				LOG("object id: %i", iterator->data->ObjectID);
+			}
+			break;
+		}
+		element = element->next;
+	}
+
+	return true;
 }
