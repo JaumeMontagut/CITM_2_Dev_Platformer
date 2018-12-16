@@ -613,10 +613,10 @@ GUIImage* j1Gui::CreateImage(const iPoint& position, const SDL_Rect & section, G
 	return guiElem;
 }
 
-GUIText* j1Gui::CreateText(const iPoint& position, const char* text, SDL_Color color, _TTF_Font* font, GUIElement * parent)
+GUIText* j1Gui::CreateText(const iPoint& centerPos, const char* text, SDL_Color color, _TTF_Font* font, GUIElement * parent)
 {
 	GUIText* guiElem = nullptr;
-	guiElem = new GUIText(position, text, color, font);
+	guiElem = new GUIText(centerPos, text, color, font);
 	guiElems.add(guiElem);
 	guiElem->SetParent(parent);
 	return guiElem;

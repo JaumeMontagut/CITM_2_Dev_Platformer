@@ -45,7 +45,8 @@ GUIButton::GUIButton(const iPoint& position, ButtonTemplates& templateType, p2SS
 		childImage = App->gui->CreateImage(position, *outSection, this);
 	}	
 	if (text != nullptr) {
-		childText = App->gui->CreateText(position, text, templateType.fontColor, templateType.font, this);
+		iPoint centerPos(bounds.x + position.x + bounds.w * 0.5f, bounds.y + position.y + bounds.h * 0.4f);
+		childText = App->gui->CreateText(centerPos, text, templateType.fontColor, templateType.font, this);
 	}
 	clickFunction = App->gui->GetButtonFunction(functionName);
 	interactable = true;

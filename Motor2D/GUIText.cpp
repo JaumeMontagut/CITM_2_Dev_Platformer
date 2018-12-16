@@ -3,12 +3,16 @@
 #include "j1Fonts.h"
 #include "j1Render.h"
 
-GUIText::GUIText(const iPoint& position, const char* text, SDL_Color color, _TTF_Font* font) :
-	color(color), font(font), GUIElement(position)
+GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, _TTF_Font* font) :
+	color(color), font(font), GUIElement(centerPos)
 {
 	if (text != nullptr)
 	{
 		texture = App->font->Print(text, color, font);
+		int texWidth, textHeight;
+		SDL_QueryTexture(texture, NULL, NULL, &texWidth, &textHeight);
+		localPos.x -= texWidth * 0.5f;
+		localPos.y -= textHeight * 0.5f;
 	}
 	interactable = false;
 }
