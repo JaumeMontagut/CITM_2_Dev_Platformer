@@ -221,16 +221,9 @@ bool j1Scene::Update(float dt)
 	// checks for debug input
 	DebugInput();
 	// ----------------------
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) {
-		//&& we're on a level or we have in game menu
-		if (App->pause) {
-			//Hide in game menu
-			App->pause = false;
-		}
-		else {
-			//Show in game menu
-			App->pause = true;
-		}
+
+	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && App->gui->ToggleElementVisibility("InGameGUI")) {
+		App->pause = !App->pause;
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN && !App->fade_to_black->IsFading()) {

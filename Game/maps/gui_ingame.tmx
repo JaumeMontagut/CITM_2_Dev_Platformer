@@ -1,59 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="128" height="96" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="99">
+<map version="1.2" tiledversion="1.2.0" orientation="orthogonal" renderorder="right-down" width="128" height="96" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="102">
  <objectgroup id="1" name="GUI objects">
-  <object id="71" name="button" type="templateType1" x="390.5" y="234" width="240" height="80">
+  <object id="71" name="button" type="templateType1" x="392" y="312" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
     <property name="function" value="SayHelloButton"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
-    <property name="text" value="Hello gui tmx"/>
+    <property name="text" value="ADJUST VOLUME (SLIDER)"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="75" name="image" x="328" y="184" width="374" height="509">
+  <object id="75" name="image" x="216" y="192" width="600" height="432">
    <properties>
     <property name="draggable" type="bool" value="false"/>
     <property name="interactable" type="bool" value="false"/>
+    <property name="object_name" value="InGameGUI"/>
     <property name="parentID" type="int" value="-1"/>
-    <property name="section_rect_h" type="int" value="256"/>
-    <property name="section_rect_w" type="int" value="210"/>
+    <property name="section_rect_h" type="int" value="216"/>
+    <property name="section_rect_w" type="int" value="300"/>
     <property name="section_rect_x" type="int" value="133"/>
     <property name="section_rect_y" type="int" value="0"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="85" name="button" type="templateType1" x="390" y="321" width="240" height="80">
+  <object id="86" name="button" type="templateType1" x="256" y="504" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="SayHelloButton"/>
+    <property name="function" value="OpenMainMenu"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
-    <property name="text" value="ELEMENTS"/>
+    <property name="text" value="MAIN MENU"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="86" name="button" type="templateType1" x="390" y="409" width="240" height="80">
+  <object id="88" name="button" type="templateType1" x="536" y="504" width="240" height="80">
    <properties>
     <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="SayHelloButton"/>
+    <property name="function" value="ResumeGame"/>
     <property name="interactable" type="bool" value="true"/>
     <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
     <property name="parentID" value="75"/>
-    <property name="text" value="importer"/>
-    <property name="visible" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="88" name="button" type="templateType1" x="391.5" y="573" width="240" height="80">
-   <properties>
-    <property name="draggable" type="bool" value="false"/>
-    <property name="function" value="SayHelloButton"/>
-    <property name="interactable" type="bool" value="true"/>
-    <property name="maybe_color_too(or preserves color template)" type="color" value="#ffff7e15"/>
-    <property name="parentID" value="-1"/>
-    <property name="text" value="not parented to panel"/>
+    <property name="text" value="RESUME"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>
@@ -114,6 +104,36 @@
     <property name="object_name" value="lives_label"/>
     <property name="parentID" value="-1"/>
     <property name="text" value="0"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="99" name="label" x="440" y="232" width="152" height="56">
+   <properties>
+    <property name="color" type="color" value="#ffff557f"/>
+    <property name="color_a" type="int" value="255"/>
+    <property name="color_b" type="int" value="127"/>
+    <property name="color_g" type="int" value="85"/>
+    <property name="color_r" type="int" value="255"/>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="fontName" value="digiffiti"/>
+    <property name="fontPath" value="fonts/digiffiti.ttf"/>
+    <property name="fontSize" type="int" value="48"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="parentID" value="75"/>
+    <property name="text" value="VOLUME:"/>
+    <property name="visible" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="101" name="image" x="0" y="0" width="1024" height="768">
+   <properties>
+    <property name="draggable" type="bool" value="false"/>
+    <property name="interactable" type="bool" value="false"/>
+    <property name="object_name" value="InGameGUI"/>
+    <property name="parentID" type="int" value="-1"/>
+    <property name="section_rect_h" type="int" value="385"/>
+    <property name="section_rect_w" type="int" value="513"/>
+    <property name="section_rect_x" type="int" value="133"/>
+    <property name="section_rect_y" type="int" value="385"/>
     <property name="visible" type="bool" value="true"/>
    </properties>
   </object>

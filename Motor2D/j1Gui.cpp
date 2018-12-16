@@ -210,8 +210,8 @@ void j1Gui::FillFunctionsMap()
 	functionMap["PlayGame"] = &PlayGame;
 	functionMap["ContinueGame"] = &ContinueGame;
 	functionMap["ExitGame"] = &ExitGame;
-	//functionMap["ResumeGame"] = &ResumeGame;
-	//functionMap["OpenMainMenu"] = &OpenMainMenu;
+	functionMap["ResumeGame"] = &ResumeGame;
+	functionMap["OpenMainMenu"] = &OpenMainMenu;
 	functionMap["OpenSettings"] = &OpenSettings;
 	functionMap["CloseSettings"] = &CloseSettings;
 	//functionMap["OpenCredits"] = &OpenCredits;
@@ -1108,10 +1108,15 @@ bool j1Gui::AssociateParentsID()
 	return ret;
 }
 
+//Returns true when it can find the specified gui element
 bool j1Gui::ToggleElementVisibility(const char* name)//p2SString name)
 {
-	p2List_item<GUIElement*>* element = guiElems.start;
-	while (element && name != nullptr)
+	if (name == nullptr) {
+		return false;
+	}
+	
+	bool ret = false;
+	for (p2List_item<GUIElement*>* element = guiElems.start; element != nullptr; element = element->next)
 	{
 		if (element->data->object_name == name) // if we found the object itself
 		{
@@ -1128,10 +1133,9 @@ bool j1Gui::ToggleElementVisibility(const char* name)//p2SString name)
 				}
 				LOG("object id: %i", iterator->data->ObjectID);
 			}
+			ret = true;
 			break;
 		}
-		element = element->next;
 	}
-
-	return true;
+	return ret;
 }
