@@ -15,6 +15,7 @@
 #include "ObjPlayer.h"
 #include "j1Pathfinding.h"
 #include "Brofiler/Brofiler.h"
+#include "SDL_mixer/include/SDL_mixer.h"
 
 #include "j1Particles.h"
 #include "j1Gui.h"
@@ -167,10 +168,9 @@ bool j1Scene::Start()
 
 	//Slider example
 
-	SDL_Rect thumbRect(133, 776, 14, 6);
-	SDL_Rect boxRect(133, 770, 174, 6);
-
-	App->gui->CreateSlider(iPoint(0, 0), &boxRect, &thumbRect, (int)GUISlider::TYPE::HORIZONTAL, &testMultiplier, nullptr);
+	//SDL_Rect thumbRect(133, 776, 14, 6);
+	//SDL_Rect boxRect(133, 770, 174, 6);
+	//App->gui->CreateSlider(iPoint(0, 0), &boxRect, &thumbRect, (int)GUISlider::TYPE::HORIZONTAL, &testMultiplier, nullptr);
 
 
 	return true;
@@ -204,11 +204,13 @@ bool j1Scene::PreUpdate() {
 	//}
 	// // ---------------------------------
 
-	LOG("%f", testMultiplier);
-
 	if (App->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
 		App->map->showNavLayer = !App->map->showNavLayer;
 	}
+
+	LOG("%f", volumeMultiplier);
+
+	Mix_VolumeMusic(MIX_MAX_VOLUME * volumeMultiplier);
 
 	return true;
 }

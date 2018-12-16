@@ -50,7 +50,7 @@ public:
 	GUIText * coinsText = nullptr;
 	GUIText * livesText = nullptr;
 	GUIText * timeText = nullptr;
-	float volumeMultiplier = 0.0f;
+	float volumeMultiplier = 0.5f;
 	GUIText * creditsText = nullptr;
 	int creditsStartPosition = -1;
 
@@ -68,7 +68,6 @@ private:
 
 	//
 	bool onMainScreen = false;
-	float testMultiplier = 0.0f;
 };
 
 #endif // __j1SCENE_H__
