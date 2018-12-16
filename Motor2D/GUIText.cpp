@@ -27,7 +27,7 @@ bool GUIText::PostUpdate()
 	return false;
 }
 
-void GUIText::SetText(SDL_Texture * texture)
+void GUIText::SetText(const char * text)
 {
-
+	texture = App->font->Print(text);
 }
