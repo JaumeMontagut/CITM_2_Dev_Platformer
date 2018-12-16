@@ -868,7 +868,7 @@ bool j1Gui::LoadGUISlider(pugi::xml_node& node)
 	p2SString floatPtrName = propertiesNode.find_child_by_attribute("name", "float_ptr").attribute("value").as_string("");
 	float * floatPtr = AssociateSlider(floatPtrName);
 
-	newSlider = new GUISlider(position,boxSection, thumbSection, (GUISlider::TYPE)type, floatPtr, nullptr);
+	//newSlider = new GUISlider(position,boxSection, thumbSection, (GUISlider::TYPE)type, floatPtr, nullptr);
 
 	newSlider->ObjectID = object_tiled_id;
 	newSlider->draggable = propertiesNode.find_child_by_attribute("name", "draggable").attribute("value").as_bool(true);
