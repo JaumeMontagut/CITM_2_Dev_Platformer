@@ -298,6 +298,8 @@ pugi::xml_node j1Gui::LoadConfig(pugi::xml_document& config_file) const
 // Called before the first frame
 bool j1Gui::Start()
 {
+	bool ret = true;
+
 	atlas = App->tex->LoadTexture(atlas_file_name.GetString());
 	//// buttons
 	//buttonup_texture = App->tex->LoadTexture(buttonup_filename.GetString());
@@ -312,7 +314,19 @@ bool j1Gui::Start()
 	//checkbox_check_texture = App->tex->LoadTexture(checkbox_check_filename.GetString());
 	//SDL_SetTextureBlendMode(checkbox_highlight_texture, SDL_BLENDMODE_ADD);
 
-	return true;
+	// load general sfx from gui_config.xml
+	/*LoadGUISfx(gui_node);
+
+	if (!LoadElementTemplate(buttonType1, gui_node.child("gui_element_templates").child("buttons").child("button_type_1")))
+		ret = false;
+	if (!LoadElementTemplate(buttonType2, gui_node.child("gui_element_templates").child("buttons").child("button_type_2")))
+		ret = false;
+	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
+		ret = false;
+
+	FillFunctionsList();*/
+
+	return ret;
 }
 
 // Update all guis
@@ -499,12 +513,13 @@ bool j1Gui::CleanUp()
 	fonts.clear(); // free all guifonts
 
 	// unload only gui sfx (just in case)
-	p2List_item<GUISfx>* item = sfx.start;
+	/*p2List_item<GUISfx>* item = sfx.start;
 	while (item != NULL)
 	{
 		App->audio->UnloadDesiredSFX(item->data.fx);
 		item = item->next;
-	}
+	}*/
+	App->audio->UnloadSFX();
 	sfx.clear();
 
 	return true;
