@@ -72,6 +72,56 @@ TTF_Font* const j1Fonts::Load(const char* path, int size)
 	return font;
 }
 
+p2SString j1Fonts::NumToString(int num) {
+
+	enum numPositions {
+		thousands = 0,
+		tens,
+		ones,
+		max
+	};
+	p2SString string;
+	int nums[max];
+	//nums[thousands] = num -;
+	nums[tens] = num % 100;
+	nums[ones] = num % 10;
+	for (int i = ones; i < max; ++i) {
+		switch (nums[i]) {
+		case 0:
+			string += "0";
+			break;
+		case 1:
+			string += "1";
+			break;
+		case 2:
+			string += "2";
+			break;
+		case 3:
+			string += "3";
+			break;
+		case 4:
+			string += "4";
+			break;
+		case 5:
+			string += "5";
+			break;
+		case 6:
+			string += "6";
+			break;
+		case 7:
+			string += "7";
+			break;
+		case 8:
+			string += "8";
+			break;
+		case 9:
+			string += "9";
+			break;
+		}
+	}
+	return string;
+}
+
 // Print text using font
 SDL_Texture* j1Fonts::Print(const char* text, SDL_Color color, TTF_Font* font)
 {

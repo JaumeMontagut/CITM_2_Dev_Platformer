@@ -16,8 +16,11 @@
 #include "ObjBox.h"
 #include "j1Audio.h"
 #include "j1Map.h"
+#include "j1Scene.h"
+#include "j1Fonts.h"
 #include "j1FadeToBlack.h"
 #include "j1Particles.h"
+#include "GUIText.h"
 
 ObjPlayer::ObjPlayer(pugi::xml_node & playerNode, fPoint &position, int index) : GameObject(position, index) {
 
@@ -81,6 +84,7 @@ bool ObjPlayer::OnDestroy() {
 }
 
 bool ObjPlayer::PreUpdate() {
+	p2SString myString = App->font->NumToString(110);
 	ToggleGodMode();
 	if (!godMode) {
 		StandardControls();
@@ -360,6 +364,14 @@ void ObjPlayer::SolveCollision(Collider * c2) {
 void ObjPlayer::Die() {
 	App->audio->PlayFx(death);
 	App->fade_to_black->FadeToBlack(App->map->data.loadedLevel.GetString(), 1.0f);
+}
+
+void ObjPlayer::AddScore(int score)
+{
+	this->score += score;
+	if (App->scene->coinsText != nullptr) {
+		//App->scene->coinsText = App->font->Print();//TODO: Make a public var color in text and access it so we don't change the text color
+	}
 }
 
 void ObjPlayer::CollideWinZone() {

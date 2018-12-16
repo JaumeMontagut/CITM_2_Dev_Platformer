@@ -183,7 +183,7 @@ void ObjNutCoins::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c2->type == COLLIDER_PLAYER)
 	{
-		App->object->player->score += score;
+		App->object->player->AddScore(score);
 		App->object->DeleteObject(this);
 	}
 }

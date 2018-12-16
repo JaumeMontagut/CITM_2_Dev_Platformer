@@ -35,6 +35,7 @@ public:
 	void DestroyProjectile();
 	void Die();
 
+	void AddScore(int score);
 	//// score and lives
 	//void IncreaseScore(uint increaseAmount);
 	//void IncreaseLives(int increaseAmount);

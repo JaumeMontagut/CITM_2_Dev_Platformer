@@ -579,7 +579,12 @@ void GUIElement::SetActive(bool active)
 
 bool GUIElement::IsActive()
 {
-	return active;
+	for (GUIElement * iterator = this; iterator != nullptr; iterator = iterator->parent) {
+		if (iterator->active == false) {
+			return false;
+		}
+	}
+	return true;
 }
 
 p2List<GUIElement*>* GUIElement::GetChilds()
