@@ -29,7 +29,7 @@
 					 font with exactly the same size and skips.
 					 And prints with other color -->
 				<font name="digiffiti" size="32" path="fonts/digiffiti.ttf"/>
-				<font_color r="255" g="255" b="255" a="0"/>
+				<font_color r="255" g="0" b="255" a="0"/>
         <move_text_down amount ="20"/>
 			</button_type_2>
 		</buttons>
@@ -37,13 +37,13 @@
 			<checkbox_type_1>
 				<up x="16" y="125" w="16" h="16"/>
 				<hover x="0" y="125" w="16" h="16"/>
-				<down x="32" y="125" w="16" h="0"/>
+				<down x="32" y="125" w="16" h="16"/>
 				<upCheck x="16" y="141" w="16" h="16"/>
 				<hoverCheck x="0" y="141" w="16" h="16"/>
 				<downCheck x="32" y="141" w="16" h="16"/>
 				<bounds x="0" y="0" w="32" h="32"/>
 				<font name="digiffiti" size="32" path="fonts/digiffiti.ttf"/>
-				<font_color r="255" g="255" b="255" a="0"/>
+				<font_color r="50" g="50" b="255" a="0"/>
 				<sfx click="standardClick" hover="standardHover"/>
 			</checkbox_type_1>
 		</checkboxes>
