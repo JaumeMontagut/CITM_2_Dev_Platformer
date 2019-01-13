@@ -74,7 +74,7 @@ struct MapLayer
 
 	~MapLayer()
 	{
-		RELEASE(tileArray);
+		RELEASE_ARRAY(tileArray);
 	}
 
 	inline uint GetArrayPos(int column, int row) const
