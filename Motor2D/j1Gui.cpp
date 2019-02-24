@@ -455,6 +455,23 @@ void j1Gui::GetNextGUIElement(GUIElement * &focusedElement)
 		if (!iterator->data->interactable || iterator->data == focusedElement) {
 			continue;
 		}
+
+		// check parents state ------------------
+		p2List_item<GUIElement*> parentIt = iterator->data->parent;
+		bool inActive = false;
+		while(parentIt.data != NULL)
+		{
+			if (!parentIt.data->active)
+			{
+				inActive = true;
+				break;
+			}
+			else
+				parentIt = parentIt.data->parent;
+		}
+		if (inActive) continue;
+		// ---------------------------------------
+
 		if (iterator->data->GetGlobalPos().y > focusedElement->GetGlobalPos().y) {
 			if (bestElement == nullptr) {
 				bestElement = iterator->data;
