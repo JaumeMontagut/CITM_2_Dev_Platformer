@@ -10,7 +10,7 @@
 #include "SDL/include/SDL_scancode.h"
 
 GUIButton::GUIButton(const iPoint & position, const SDL_Rect & bounds, p2SString functionName, const char * text, const SDL_Rect * out_section, const SDL_Rect * in_section, const SDL_Rect * click_section, uint clickSfx) :
-	clickSfx(clickSfx), GUIElement(position) {
+	clickSfx(&clickSfx), GUIElement(position) {
 	//Child image
 	if (out_section != nullptr) {
 		this->outSection = new SDL_Rect(out_section->x, out_section->y, out_section->w, out_section->h);
@@ -69,13 +69,15 @@ bool GUIButton::PreUpdate()
 			childText->localPos.y += moveTextDown;
 			textMoved = true;
 		}
-		App->audio->PlayFx(clickSfx);
+		if(clickSfx != nullptr)
+			App->audio->PlayFx(*clickSfx);
 	}
 	else if (state == FOCUS::GET_FOCUS) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}
-		App->audio->PlayFx(hoverSfx);
+		if(hoverSfx != nullptr)
+			App->audio->PlayFx(*hoverSfx);
 	}
 	else if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {

@@ -36,8 +36,8 @@ private:
 	bool clickable = true;
 	bool *boolPtr = nullptr;//A pointer to the bool that's going to be changed
 	GUIImage* childImage;
-	uint clickSfx = 0u;
-	uint hoverSfx = 0u;
+	uint* clickSfx = nullptr;
+	uint* hoverSfx = nullptr;
 	//Sprites
 	SDL_Rect * sections[(uint)CB_STATES::CB_MAX][(uint)CHECK::MAX];
 };

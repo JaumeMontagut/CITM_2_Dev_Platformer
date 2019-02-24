@@ -11,8 +11,8 @@ class GUIButton : public GUIElement
 private:
 	//function pointer
 	void(*clickFunction)() = nullptr;	//A pointer to the function that's going to be called when we click the button
-	uint clickSfx = 0u;
-	uint hoverSfx = 0u;
+	uint* clickSfx = nullptr;//0u;
+	uint* hoverSfx = nullptr;// 0u;
 	//Child image
 	GUIImage * childImage = nullptr;
 	GUIText * childText = nullptr;

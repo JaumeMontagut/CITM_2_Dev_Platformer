@@ -75,8 +75,8 @@ bool j1FadeToBlack::PostUpdate()//float dt)
 					// restores lives and score for player data
 					if (App->object->player != nullptr)
 					{
-						if (lives == 0) lives = App->object->player->lives;
-						if (score == 0) score = App->object->player->score;
+						if (lives == 0) lives = App->object->player->lives; // TODO: lives/nuts error is for this zone (inside fade to black step)
+						if (score == 0) score = App->object->player->score; // 
 						App->object->player->lives = lives;
 						App->object->player->score = score;
 						App->object->player->UpdateLives();

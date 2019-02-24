@@ -46,6 +46,7 @@ struct GUISfx
 {
 	uint fx = 0u;
 	p2SString fx_name;
+	p2SString path;
 };
 
 struct ButtonTemplates
@@ -61,10 +62,12 @@ struct ButtonTemplates
 	_TTF_Font* font = nullptr;
 	int fontSize = 0;
 	SDL_Color fontColor;
-	uint clickSfx = 0u;
-	uint hoverSfx = 0u;
+	uint* clickSfx = nullptr;
+	uint* hoverSfx = nullptr;
 	int moveTextDown = 0; // used for text/image displacement on y coord.
-
+	//
+	/*p2SString clickSfxPath;
+	p2SString hoverSfxPath;*/
 };
 
 struct CheckboxTemplates : public ButtonTemplates
@@ -191,6 +194,7 @@ public:
 	bool LoadGUIImage(pugi::xml_node & node);
 	bool LoadGUICheckbox(pugi::xml_node & node);
 	bool LoadGUISlider(pugi::xml_node & node);
+	void ReloadTemplatesSFX();
 	//
 	//bool SetGUIElementOff(p2SString name);
 	//bool SetGUIElementOn(p2SString name);

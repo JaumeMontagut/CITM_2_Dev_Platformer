@@ -63,7 +63,8 @@ void j1Gui::LoadGUISfx(pugi::xml_node& node)
 	for (pugi::xml_node sfx_node = node.child("general_sfx").child("sfx"); sfx_node; sfx_node = sfx_node.next_sibling("sfx"))
 	{
 		GUISfx fx;
-		fx.fx = App->audio->LoadFx(sfx_node.attribute("path").as_string());
+		fx.path.create(sfx_node.attribute("path").as_string());
+		fx.fx = App->audio->LoadFx(fx.path.GetString());
 		fx.fx_name.create(sfx_node.attribute("name").as_string());
 		sfx.add(fx);
 	}
@@ -189,11 +190,11 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 			{
 				if (clickSfxName == item->data.fx_name)
 				{
-					templateType.clickSfx = item->data.fx;
+					templateType.clickSfx = &item->data.fx;
 				}
 				if (hoverSfxName == item->data.fx_name)
 				{
-					templateType.hoverSfx = item->data.fx;
+					templateType.hoverSfx = &item->data.fx;
 				}
 
 				item = item->next;
@@ -203,6 +204,20 @@ bool j1Gui::LoadElementTemplate(ButtonTemplates& templateType, pugi::xml_node& n
 		ret = true;
 	}
 	return ret;
+}
+
+void j1Gui::ReloadTemplatesSFX()
+{
+
+	p2List_item<GUISfx>* item = sfx.start;
+
+	while (item != NULL)
+	{
+		item->data.fx = App->audio->LoadFx(item->data.path.GetString());
+
+		item = item->next;
+	}
+
 }
 
 void j1Gui::FillFunctionsMap()
@@ -302,6 +317,9 @@ bool j1Gui::Start()
 	bool ret = true;
 
 	atlas = App->tex->LoadTexture(atlas_file_name.GetString());
+
+	ReloadTemplatesSFX();
+	
 	//// buttons
 	//buttonup_texture = App->tex->LoadTexture(buttonup_filename.GetString());
 	//buttondown_texture = App->tex->LoadTexture(buttondown_filename.GetString());
@@ -323,9 +341,9 @@ bool j1Gui::Start()
 	if (!LoadElementTemplate(buttonType2, gui_node.child("gui_element_templates").child("buttons").child("button_type_2")))
 		ret = false;
 	if (!LoadElementTemplate(checkboxType1, gui_node.child("gui_element_templates").child("checkboxes").child("checkbox_type_1")))
-		ret = false;*/
+		ret = false;
 
-	//FillFunctionsList();
+	FillFunctionsMap();*/
 	return ret;
 }
 
@@ -548,7 +566,7 @@ bool j1Gui::CleanUp()
 		item = item->next;
 	}*/
 	App->audio->UnloadSFX();
-	sfx.clear();
+	//sfx.clear();
 
 	return true;
 }
