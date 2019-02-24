@@ -41,15 +41,15 @@ void ObjTrigger::OnCollision(Collider * c1, Collider * c2) {
 		timer.Start();
 		if (!activated)
 		{
-			switch (c2->type)
-			{
-				case COLLIDER_PLAYER:
-					LOG("player triggered");
-					break;
-				case COLLIDER_BOX:
-					LOG("collider box triggered");
-					break;
-			}
+			//switch (c2->type)
+			//{
+			//	case COLLIDER_PLAYER:
+			//		LOG("player triggered");
+			//		break;
+			//	case COLLIDER_BOX:
+			//		LOG("collider box triggered");
+			//		break;
+			//}
 			activated = true;
 			currentState = animState::active;
 			App->object->OnTriggerEnter(this);

@@ -1265,7 +1265,7 @@ bool j1Gui::ToggleElementVisibility(const char* name)//p2SString name)
 				{
 					iterator->data->active = !iterator->data->active;
 				}
-				LOG("object id: %i", iterator->data->ObjectID);
+				//LOG("object id: %i", iterator->data->ObjectID);
 			}
 			ret = true;
 			break;

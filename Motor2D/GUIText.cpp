@@ -23,10 +23,6 @@ GUIText::GUIText(const iPoint& centerPos, const char* text, SDL_Color color, int
 
 bool GUIText::PostUpdate()
 {
-	if (ObjectID == 102) {
-		LOG("102");
-	}
-
 	if (texture != nullptr) {
 		//Iteration
 		iPoint globalPos(0, 0);

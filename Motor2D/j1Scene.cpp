@@ -210,8 +210,6 @@ bool j1Scene::PreUpdate() {
 		App->map->showNavLayer = !App->map->showNavLayer;
 	}
 
-	LOG("%f", volumeMultiplier);
-
 	Mix_VolumeMusic(MIX_MAX_VOLUME * volumeMultiplier);
 
 	return true;
@@ -255,26 +253,29 @@ bool j1Scene::Update(float dt)
 	{
 		if (creditsStartPosition == -1) // saves credits start y position to further reposition
 		{
-			creditsStartPosition = creditsText->localPos.y;
+			creditsStartPosition = creditsYPos = creditsText->localPos.y;
 		}
-
-		// sets max scroll amount
-		uint width, height = 0;
+		uint width, height = 0u;
 		App->tex->GetSize(creditsText->texture, width, height);
 		float h = (float)height;
-		if (creditsText->localPos.y >= -h * 0.4f) // *0.4 because how the buttons/elements are centering currently its y offset
+		// sets max scroll amount
+		if (creditsText->localPos.y >= -h * 0.4f && App->input->GetKey(SDL_SCANCODE_S) == KEY_IDLE) // *0.4 because how the buttons/elements are centering currently its y offset
 		{
 			// automatic scroll
-			creditsText->localPos.y -= 1;
+			creditsYPos -= creditsScrollSpeed * dt;
 			// user speed input
 			if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 			{
-				creditsText->localPos.y -= 2;
+				creditsYPos -= creditsScrollSpeed * 2 * dt;
 			}
 		}
 		// always scroll down the text
-		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
-			creditsText->localPos.y += 3;
+		//TODO: We should add a maximum amount of scroll down
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
+			creditsYPos += creditsScrollSpeed * 2 * dt;
+		}
+
+		creditsText->localPos.y = (int)creditsYPos;
 	}
 	else if(creditsText != nullptr && creditsStartPosition != -1)
 	{

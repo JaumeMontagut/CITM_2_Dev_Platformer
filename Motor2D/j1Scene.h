@@ -55,6 +55,9 @@ public:
 	int creditsStartPosition = -1;
 
 private:
+	int creditsScrollSpeed = 40;
+	float creditsYPos;//Can't have smooth transition only with ints
+
 	fPoint cameraPos = { 0,0 };
 	bool firstStart = true;
 	bool teleport = false; // testing var, must to be player relative
