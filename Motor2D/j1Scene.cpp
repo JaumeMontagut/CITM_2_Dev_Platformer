@@ -277,10 +277,10 @@ bool j1Scene::Update(float dt)
 
 		creditsText->localPos.y = (int)creditsYPos;
 	}
-	else if(creditsText != nullptr && creditsStartPosition != -1)
+	else if(creditsText != nullptr && creditsStartPosition != -1 && creditsText->localPos.y != creditsStartPosition)
 	{
-		if(creditsText->localPos.y != creditsStartPosition)
-			creditsText->localPos.y = creditsStartPosition;
+		creditsYPos = creditsStartPosition;
+		creditsText->localPos.y = (int)creditsYPos;
 	}
 
 	//// Debug pathfinding ------------------------------
