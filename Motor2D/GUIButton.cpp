@@ -69,9 +69,6 @@ bool GUIButton::PreUpdate()
 			childText->localPos.y += moveTextDown;
 			textMoved = true;
 		}
-		if (clickFunction != nullptr) {
-			clickFunction();//Call function pointer
-		}
 		App->audio->PlayFx(clickSfx);
 	}
 	else if (state == FOCUS::GET_FOCUS) {
@@ -87,6 +84,9 @@ bool GUIButton::PreUpdate()
 		if (textMoved && childText != nullptr) {
 			childText->localPos.y -= moveTextDown;
 			textMoved = false;
+		}
+		if (clickFunction != nullptr) {
+			clickFunction();//Call function pointer
 		}
 	}
 	else if (state == FOCUS::LOSE_FOCUS) {
