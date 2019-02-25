@@ -399,6 +399,12 @@ bool j1Gui::PreUpdate()
 						GetNextGUIElement(focusedElement);
 					}
 				}
+
+				// check gamepad input
+				/*Sint16 yAxis = App->input->GetControllerAxis(SDL_CONTROLLER_AXIS_LEFTY);
+				if(yAxis > 0)*/ // TODO: if we want axis input, put cadence timer here
+				if(App->input->GetControllerButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN) == KEY_DOWN)
+					GetNextGUIElement(focusedElement);
 			}
 
 		}		

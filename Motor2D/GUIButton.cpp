@@ -61,7 +61,7 @@ bool GUIButton::CleanUp() {
 
 bool GUIButton::PreUpdate()
 {
-	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)) {
+	if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN || (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN || App->input->GetControllerButton(SDL_CONTROLLER_BUTTON_A) == KEY_DOWN))) {
 		if (clickSection != nullptr && childImage != nullptr && &childImage->section != clickSection) {
 			childImage->section = *clickSection;
 		}
@@ -79,7 +79,7 @@ bool GUIButton::PreUpdate()
 		if(hoverSfx != nullptr)
 			App->audio->PlayFx(*hoverSfx);
 	}
-	else if ((state == FOCUS::GET_FOCUS || state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP || App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP)) {
+	else if ((state == FOCUS::GET_FOCUS || (state == FOCUS::ON_FOCUS) && (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP || (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_UP) || App->input->GetControllerButton(SDL_CONTROLLER_BUTTON_A) == KEY_UP))) {
 		if (inSection != nullptr  && childImage != nullptr && &childImage->section != inSection) {
 			childImage->section = *inSection;
 		}

@@ -227,7 +227,7 @@ bool j1Scene::Update(float dt)
 	DebugInput();
 	// ----------------------
 
-	if (App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN && App->gui->ToggleElementVisibility("InGameGUI")) {
+	if ((App->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN || App->input->GetControllerButton(SDL_CONTROLLER_BUTTON_START) == KEY_DOWN) && App->gui->ToggleElementVisibility("InGameGUI")) {
 		App->gui->ToggleElementVisibility("InGameGUICanvas");
 		App->pause = !App->pause;
 	}
