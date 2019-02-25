@@ -1296,7 +1296,10 @@ bool j1Gui::ToggleElementVisibility(const char* name)//p2SString name)
 		if (element->data->object_name == name) // if we found the object itself
 		{
 			// updates object state
-			//element->data->state = FOCUS::OUT_OF_FOCUS;
+			element->data->state = FOCUS::LOSE_FOCUS;
+			// force element state and linked images to update before deactivates
+			element->data->PreUpdate();
+
 			int enableID = element->data->enableElementID;
 			int disableID = element->data->disableElementID;
 			// search for enable/disable data
