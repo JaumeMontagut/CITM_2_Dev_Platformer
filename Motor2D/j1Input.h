@@ -62,11 +62,11 @@ public:
 		return mouse_buttons[id - 1];
 	}
 
-	//Sint16 GetControllerAxis(SDL_GameControllerAxis axis);
+	Sint16 GetControllerAxis(SDL_GameControllerAxis axis);
 
-	//j1KeyState GetControllerButton(int id) const {
-	//	return controller[id];
-	//}
+	j1KeyState GetControllerButton(int id) const {
+		return controller[id];
+	}
 
 	// Get mouse / axis position
 	void GetMousePosition(int &x, int &y);
@@ -76,13 +76,13 @@ private:
 	bool		windowEvents[WE_COUNT];
 	j1KeyState*	keyboard = nullptr;
 	j1KeyState*	mouse_buttons = nullptr;
-	//j1KeyState*	controller = nullptr;
+	j1KeyState*	controller = nullptr;
 	int			mouse_motion_x;
 	int			mouse_motion_y;
 	int			mouse_x;
 	int			mouse_y;
 
-	//SDL_GameController * gamepad1 = nullptr;
+	SDL_GameController * gamepad1 = nullptr;
 };
 
 #endif // __j1INPUT_H__
