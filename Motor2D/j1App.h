@@ -143,7 +143,7 @@ private:
 	uint32				capTime = 0;
 	float				framerateCap = 0.0f;
 	float				dt = 0.0f;
-	bool				capFrames = true;
+	bool				capFrames = false;
 	float				seconds_since_startup = 0.0f;
 };
 
