@@ -32,9 +32,9 @@ This game was made as part of the development subject by 2 students in CITM (UPC
 
 
 ## Video
-[![Watch the video](https://youtu.be/gLZghKCW6RY)](https://youtu.be/gLZghKCW6RY)
+[![Watch the video](https://www.youtube.com/watch?v=QE5P8YfVCxM)](https://www.youtube.com/watch?v=QE5P8YfVCxM)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/gLZghKCW6RY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QE5P8YfVCxM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Member contributions
 Jose Antonio Prieto
