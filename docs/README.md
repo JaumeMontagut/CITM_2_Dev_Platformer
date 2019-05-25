@@ -2,11 +2,11 @@
 Swap game is a puzzle-action-platformer where you must overcome a series of challenges using your intelligence and reflexes!
 This game was made as part of the development subject by 2 students in CITM (UPC). We've programmed the game from scratch in C++ and used free artwork.
 
-[![Watch the video](https://www.youtube.com/watch?v=QE5P8YfVCxM)](https://www.youtube.com/watch?v=QE5P8YfVCxM)
-
 <iframe width="560" height="315" src="https://www.youtube.com/embed/QE5P8YfVCxM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-[Download game](https://github.com/JaumeMontagut/CITM_2_Dev_Platformer/releases/tag/v1.5)
+[Watch the trailer](https://www.youtube.com/watch?v=QE5P8YfVCxM)
+
+[Download the game](https://github.com/JaumeMontagut/CITM_2_Dev_Platformer/releases/tag/v1.5)
 
 ## Credits
 - Programming: Jose Antonio Prieto
