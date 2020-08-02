@@ -82,6 +82,7 @@ Jose Antonio Prieto
 - Implemented trigger import(from tiled map editor)/ functionality
 - Added new object trigger events to entity system
 - Added new object doors
+
 Jaume Montagut Guix
 - Walking enemy
 - A*
